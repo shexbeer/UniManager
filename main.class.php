@@ -1,6 +1,7 @@
 <?php 
 // V. 0.1
 // Config Vars
+// auslagerbar in eine Datei wenn nštig!
 define(stylesheet, "css/style1.css");
 define(PO_dir, "process_objects/");
 define(VO_dir, "visible_objects/");
@@ -64,8 +65,18 @@ class UniManager
 		{
 			require_once($this->cwd["Path"] . PO_dir . prefix_PO . $site . ".php");
 			$tmp_require_once_name = prefix_PO . $site;
+			$this->VisualObject = new $tmp_require_once_name();
+		}
+		
+		// Visuelles objekt der Seite laden
+		if(is_file($this->cwd["Path"] . VO_dir . prefix_VO . $site . ".php"))
+		{
+			require_once($this->cwd["Path"] . VO_dir . prefix_VO . $site . ".php");
+			$tmp_require_once_name = prefix_VO . $site;
 			$this->ProcessObject = new $tmp_require_once_name();
 		}
+		
+		
 
 	}
 	function get_cwd()
