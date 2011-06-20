@@ -1,0 +1,342 @@
+
+/*
+
+<!--- lowRes is false, width is null -->
+*/
+
+
+body { 
+font-family: Verdana, Arial, Helvetica, sans-serif; 
+font-size: 11px; 
+background: #FFFFFF;
+/*background-image: url(images/bgleftborder.gif);*/
+scrollbar-base-color: #F2F2F2;
+scrollbar-face-color: white;
+scrollbar-arrow-color: gray;
+scrollbar-track-color: #F2F2F2;
+margin-top: 10px;
+}
+
+body.logo { 
+font-family: Verdana, Arial, Helvetica, sans-serif; 
+font-size: 11px; 
+background: #FFFFFF;
+scrollbar-base-color: #F2F2F2;
+scrollbar-face-color: white;
+scrollbar-arrow-color: gray;
+scrollbar-track-color: #F2F2F2;
+margin: 0px;
+}
+
+
+
+/*----------------- LINK STYLES---------------------- */
+
+a { color:#0033cc;text-decoration:none}
+a:hover { color: #FF0000}
+:link { color:#0033cc;text-decoration:none}
+:visited { color:#0033cc;text-decoration:none}
+:link:hover, :visited:hover { color:#FF0000;text-decoration:none}
+
+.menu_link{
+	text-decoration: none;
+	font-weight: bold;
+	color: #000000;
+	font-size:10px;
+}
+a.menu_link:link {color: #00000 }
+a.menu_link:hover {    color: #FF0000}
+a.menu_link:visited {    color: #000000}
+a.menu_link:visited:hover {   font-weight: bold;  color: #FF0000}
+
+.lists { background-color: #FFFFFF}
+
+/*Links for text links and hightlighted text */
+
+.bigger { font-size: 14px }
+
+/*This style should be used to denote an action - ie "Add User", "Vote"*/
+.biggerLink { 
+	font-size:10px;
+	font-weight:bold;
+}
+
+.emphatic_text {  color: red }
+
+.disabled_link {  color: grey }
+
+.catHiLight { 
+	font-size: 11px;
+	font-style: italic;
+}
+
+/* ---------------HEADING STYLES-------------------- */
+
+h4 {
+	font-family: "Arial Rounded MT Bold" , Arial, Helvetica, sans-serif; 
+	/*text-shadow: 3px 5px red;*/
+	text-align:center;
+	font-size: 16px;
+	/*color: white;*/
+	color: #808080; 
+	/*font-weight: normal;*/
+	/*border: 1px groove #000000;*/
+	margin-top: 0px
+}
+
+
+h5 {  
+	font-family: "Arial Rounded MT Bold" , Arial, Helvetica, sans-serif;
+	font-size: 12px; 
+	padding-left: 5px;
+	background-color: #999999;
+	 color: white;
+} 
+
+h6 {  
+	font-family: "Arial Rounded MT Bold" , Arial, Helvetica, sans-serif;
+	font-size: 12px; 
+	padding-left: 5px;
+	background-color: #999999;
+    color: white;
+	cursor: pointer;
+} 
+
+A.newsHeader {   
+	color: #000000;
+	font: 100% 9px Arial, sans-serif;
+	font-weight: bold;
+}
+A.newsHeader:visited {color: #999999}
+
+.newsContent {padding-left: 8px;}
+
+.errorMsg {
+    font-size: 12px; 
+     color: red; font-weight: bold
+}
+
+/* STYLE TO HIGHLIGHT CONFIDENTIAL COMMENTS ADDED TO A REQUEST OR PROPOSAL */
+
+.shadowedConf {  background-color: #FF9966 }
+
+/*TABLE DEFAULTS 
+* Table cells ignore the BODY definition for font size, so it needs re-stating here
+*/
+
+td 
+{ 
+	padding: 3px;
+	font-size: 11px;
+}
+
+/*TREE CELLS NEED TO BE COMPACT */
+
+TD.tree{
+	padding:0px;
+}
+
+/*----------------LIST TABLE STYLES---------------------- */
+
+.stdCell {  
+	background-color: #FFFFFF;
+}
+.stdCellConf {  background-color: #FFFFFF;  color: #FF0000; }
+
+/* USED AS COLUMN OR ROW HEADER DEFINITION (E0E0E0)*/
+.stdCell2 {  background-color: #E0E0E0;}
+
+/*Row or Column Header Cells*/
+
+.headerTD{
+
+	background-color: #E0E0E0;
+	font-weight: bold;
+	font-size: 10px;
+
+}
+
+.lightStdCell {  background-color: #DFDFDF; }
+
+.stdTable {  
+	background-color: #CCCCCC; 
+}
+
+/*------------------SIDE MENU NAVIGATION STYLES----------------*/
+
+TABLE.sidemenu {
+	background-color: #CCCCCC;  
+	border:0px solid;
+	padding:0px;
+	width:150px;
+}
+TD.sidemenu {
+	background-color: #FFFFFF;
+	padding:1px;
+	padding-left: 10px;
+}
+
+TH.sidemenu{
+
+	background-color: #999999;
+	font-size:10px;
+	font-weight:bold;
+	color:#FFFFFF;
+
+}
+
+/*-------------TOP NAVIGATION BAR MENU STYLES--------------------*/
+
+
+.topNavPlaceHolder{
+	width: 100%;
+	border-width: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+
+.topmenu {
+	text-align: center;
+	margin: 0px;
+	border-width: 0px;
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 11px; 
+	font-weight: bold;
+	color: #000000; 
+	text-decoration: none;
+    white-space: nowrap;
+}
+a.topmenu { color: #000000; }
+
+
+TABLE.topmenu {
+	background-color:  #FFFFFF; 
+	width: 100%;
+	border-width:0px;
+}
+TD.topmenu {
+	padding: 0px;
+	background-color: #E0E0E0;
+	text-align: center;
+/*	width: 20%;*/
+}
+TD.topmenubg {
+	padding: 0px;
+}
+
+TD.topmenu_selected {
+	background-color: #white;
+	text-align: center;
+	padding: 0px;
+/*	width: 20%;
+	margin-bottom: 0px;
+	border: 1px solid grey;*/
+}
+
+
+.sub_topmenu{
+	text-align: center;
+	background-color: white;
+	padding: 0px;
+	border-width:0px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px; 
+	font-weight: bold; 
+	margin-top: 10px;
+	margin-bottom: 50px;
+}
+
+.sub_topmenu_edge{
+	background-color: white;
+	background-image: url(images/bgleftborder.gif);
+	padding: 0px;
+	border-width:0px;
+	padding-right: 10px;
+}
+
+
+TABLE.sub_topmenu{
+/*	background-color: #CCCCCC;*/
+}
+TD.sub_topmenu{
+/*	background-color: #F2F2F2;
+	padding-left: 5px;*/
+	padding-right: 10px;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 50px;
+	font-weight: bold; 
+}
+
+TD.underLine {
+	background-color: #A3A2A2;
+	padding: 0px;
+}
+TD.underLine_selected {
+	background-color: #white;
+	padding: 0px;
+}
+
+
+/*--------------VOTE TABLE STYLES --------------------*/
+
+.voteCell{
+	background-color: pink;
+}
+
+/*-------------STYLES FOR THE SECTION HEADINGS IN ITEMS DETAILS----------*/
+
+.showHideHeader 
+{ 
+	background-color: #999999; 
+	color: white; 
+	font-weight:bold; 
+	height: 14px; 
+	cursor: pointer;
+}
+.hide_able 
+{
+	padding-left: 8; 
+	padding-top: 4;
+}
+
+/*-----------------FORM ELEMENT STYLES--------------*/
+
+select {  
+	font-size:10px;
+	border: 1px solid #793C03; 
+	background-color: #F2F2F2; 
+	background: #F2F2F2; 
+}
+textarea {  
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size:11px;
+	border: 1px solid #793C03; 
+	background-color: #F2F2F2 
+}
+
+.sidemenuText{
+    width:110px;
+}
+
+input {
+	font-size:11px;
+	/*border: 1px solid #793C03*/
+	background-color: #F2F2F2;
+	padding: 0px;
+}
+
+option {
+	background-color: #F2F2F2;
+}
+/*
+* MUST BE APPLIED TO ALL CHECKBOXES AND RADIO BUTTONS, 
+* OTHERWISE A BORDER APPEARS AROUND THEM
+*/
+.check_radio{
+	background-color: transparent;
+}
+option.eventType {
+	background-color: #F2F2F2;
+	font-weight: bold;
+}

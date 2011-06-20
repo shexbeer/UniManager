@@ -1,0 +1,108 @@
+/* IK - Version 2 */
+
+body {
+	background-color: #FFFFFF;
+	font-family: Verdana;
+	font-size: 11px;
+	line-height: 19px;
+}
+a {
+	font-weight: bold;
+	text-decoration: none;
+	color: #777777;
+}
+a:hover {
+	color: #999999;
+}
+td {
+	font-family: Verdana;
+	font-size: 11px;
+	line-height: 19px;
+}
+h1 {
+	font-size: 15px;
+	color: #666666;
+	font-weight: bold;
+}
+input, textarea, select {
+	font-family: Verdana;
+	font-size: 11px;
+}
+
+/*body {
+	background-color: #FFFFFF;
+	font-family: Verdana;
+	font-size: 8pt;
+	line-height: 14pt;
+}
+
+a {
+	text-decoration: none;
+	font-weight: bold;
+	color: #777777;
+}
+
+a:hover {
+	color: #999999;
+}
+
+td {
+	font-family: Verdana;
+	font-size: 8pt;
+	line-height: 14pt;
+}
+
+h1 {
+	font-size: 12pt;
+	font-weight: bold;
+	color: #666666;
+}
+
+input, textarea, select {
+	font-family: Verdana;
+	font-size: 8pt;
+} */
+
+#admin-post {
+	font-size: 8pt;
+	font-weight: bold; 
+/*       background-color: #E0E0E0; */
+         background-color: #F0F0F0;
+         color: red; 
+}
+#admin-show-post {
+		font-size: 8pt;
+		font-weight: bold;
+		background-color: #F0F0F0;
+		color: red; 
+}
+/* Main Seite --> Angriff --> Tabelle */
+
+#main-angriff {
+	background-color: #E0E0E0;
+}
+
+
+
+/* ALTERNATIV STYLING
+
+body {background-color: #ffffff; color: #000000;}
+body, td, th, h1, h2 {font-family: sans-serif;}
+pre {margin: 0px; font-family: monospace;}
+a:link {color: #000099; text-decoration: none; background-color: #ffffff;}
+a:hover {text-decoration: underline;}
+table {border-collapse: collapse;}
+.center {text-align: center;}
+.center table { margin-left: auto; margin-right: auto; text-align: left;}
+.center th { text-align: center !important; }
+td, th { border: 1px solid #000000; font-size: 75%; vertical-align: baseline;}
+h1 {font-size: 150%;}
+h2 {font-size: 125%;}
+.p {text-align: left;}
+.e {background-color: #ccccff; font-weight: bold; color: #000000;}
+.h {background-color: #9999cc; font-weight: bold; color: #000000;}
+.v {background-color: #cccccc; color: #000000;}
+i {color: #666666; background-color: #cccccc;}
+img {float: right; border: 0px;}
+hr {width: 600px; background-color: #cccccc; border: 0px; height: 1px; color: #000000;}
+                      */
