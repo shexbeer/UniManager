@@ -8,7 +8,7 @@ define(VO_dir, "visible_objects/");
 define(prefix_PO, "PO_");
 define(prefix_VO, "VO_");
 define(template_dir, "templates");
-// end Config Vars
+// end Config Varsassadsa
 session_start();
 
 class UniManager
