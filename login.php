@@ -12,6 +12,7 @@ $UM = new UniManager();
 // ##
 // Falls irgendwas nicht übergeben wurde, sofort ausloggen!
 // ##
+var_dump($HTTP_POST_VARS);
 if(!$HTTP_POST_VARS['user'] || !$HTTP_POST_VARS['password'] || !$HTTP_POST_VARS['submit'])
 {
 	$UM->trigger_error("1", NULL, false, false);

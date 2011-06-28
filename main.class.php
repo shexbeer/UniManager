@@ -10,6 +10,8 @@ define('template_dir', "templates");
 // end Config Vars sadasdasdsad
 session_start();
 
+$HTTP_POST_VARS = $_POST;
+
 class UniManager
 {
 	function UniManager($site = '', $sub = '')
@@ -38,7 +40,7 @@ class UniManager
 
 
 		// Deprecated Nachrichten unterdrücken FIXME:
-		//error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
+		error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
 		
 		// Experimenteller Cache
 		/**
