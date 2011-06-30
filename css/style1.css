@@ -82,7 +82,14 @@ input, textarea, select {
 	background-color: #E0E0E0;
 }
 
-
+#ueberschrift_seite {
+	font-size: 15px;
+	color: #666666;
+	font-weight: bold;
+}
+#ueberschrift_zelle {
+	vertical-align:bottom;
+}
 
 /* ALTERNATIV STYLING
 

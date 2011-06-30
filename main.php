@@ -12,7 +12,7 @@ if(!$_SESSION["user_loginname"])
 
 $UM->showheader($seite);
 
-// Code fŸr die diese Seite
+// sonstiger Code
 
 $UM->showfooter();
 $UM->tpl->display("main.tpl", session_id());

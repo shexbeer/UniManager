@@ -3,14 +3,18 @@
 // Config Vars
 define('stylesheet', "css/style1.css");
 define('PO_dir', "process_objects/");
-define('VO_dir', "visible_objects/");
+define('VO_dir', "visual_objects/");
 define('prefix_PO', "PO_");
 define('prefix_VO', "VO_");
 define('template_dir', "templates");
-// end Config Vars sadasdasdsad
+// end Config Vars
 session_start();
 
-$HTTP_POST_VARS = $_POST;
+// including Managers
+include_once("managers/Modul_Management.php");
+
+// Fixing PHP4->5 transition
+$HTTP_POST_VARS = $_POST;	// FIXME: cleaner fix!
 
 class UniManager
 {
@@ -66,7 +70,14 @@ class UniManager
 		{
 			require_once($this->cwd["Path"] . PO_dir . prefix_PO . $site . ".php");
 			$tmp_require_once_name = prefix_PO . $site;
-			$this->ProcessObject = new $tmp_require_once_name();
+			$this->ProcessObject = new $tmp_require_once_name($this);
+		}
+		// Visuelles Objekt der Seite laden
+		if(is_file($this->cwd["Path"] . VO_dir . prefix_VO . $site . ".php"))
+		{
+			require_once($this->cwd["Path"] . VO_dir . prefix_VO . $site . ".php");
+			$tmp_require_once_name = prefix_VO . $site;
+			$this->VisualObject = new $tmp_require_once_name($this);
 		}
 
 	}
