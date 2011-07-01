@@ -34,7 +34,8 @@ class PO_LN_create
 		
 		// füge die Infos sinnvoll zusammen
 		// FIXME: Speed!
-		for($i = 0; $i < count($LNListe); $i++) {
+		$numRows = count($LNListe);
+		for($i = 0; $i < $numRows; $i++) {
 			$LN[$i]['ln_datum'] = $LNListe[$i]['ln_datum'];
 			$LN[$i]['ln_pruefer'] = $LNListe[$i]['ln_pruefer'];
 			$LN[$i]['ln_raum'] = $LNListe[$i]['ln_raum'];

@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.8, created on 2011-06-30 23:06:03
+<?php /* Smarty version Smarty-3.0.8, created on 2011-07-01 00:14:45
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/UniManager/templates/footer.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1685208234e0d015b7b3da1-20146492%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:3961535154e0d117584ed12-66988886%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '5964e54307e41021a914e76d50f2068c9e6172f7' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/UniManager/templates/footer.tpl',
-      1 => 1309474663,
+      1 => 1309479076,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1685208234e0d015b7b3da1-20146492',
+  'nocache_hash' => '3961535154e0d117584ed12-66988886',
   'function' => 
   array (
   ),
@@ -22,8 +22,9 @@ $_smarty_tpl->decodeProperties(array (
 <tr>
 	<td colspan="2">
 		<hr width='800' align='left'>
-		<br><br><?php echo $_smarty_tpl->getVariable('parse_dauer')->value;?>
-
+		<br>
+		Parse Dauer: <?php echo $_smarty_tpl->getVariable('parse_dauer')->value;?>
+sec.
 	</td>
 </tr>
 </table>

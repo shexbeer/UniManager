@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.8, created on 2011-06-30 23:06:03
+<?php /* Smarty version Smarty-3.0.8, created on 2011-07-01 00:14:45
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/UniManager/templates/header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:17609255234e0d015b6dc603-69953091%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:7842698894e0d117576ed98-08721132%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'c584d8d3ae285e04cc3808c4ec0c35f9c8ab3014' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/UniManager/templates/header.tpl',
-      1 => 1309474535,
+      1 => 1309479284,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '17609255234e0d015b6dc603-69953091',
+  'nocache_hash' => '7842698894e0d117576ed98-08721132',
   'function' => 
   array (
   ),
@@ -28,9 +28,9 @@ js/lib.js'></script>
 	<body>
 <table>
 <tr>
-	<td>		
+	<td width="200">		
 		<img src="<?php echo $_smarty_tpl->getVariable('rootDir')->value;?>
-img/logo.gif">
+img/logo.gif" width="100%">
 	</td>
 	<td id="ueberschrift_zelle">
 		<div id="ueberschrift_seite"><?php echo $_smarty_tpl->getVariable('seite')->value;?>
@@ -40,7 +40,7 @@ img/logo.gif">
 <hr width='800' align='left'>
 <table>
 <tr> 
-	<td rowspan="2">
+	<td rowspan="2" width="200">
 		<center>
 		<?php $_template = new Smarty_Internal_Template("navigation_right.tpl", $_smarty_tpl->smarty, $_smarty_tpl, $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null);
 $_template->assign('title',"navigation"); echo $_template->getRenderedTemplate(); $_template->rendered_content = null;?><?php unset($_template);?>
@@ -54,6 +54,7 @@ $_template->assign('title',"navigation"); echo $_template->getRenderedTemplate()
 admin.php'>Admin</a>
 		<?php }?>
 		 | Herzlich Willkommen <b><?php echo $_smarty_tpl->getVariable('user_vorname')->value;?>
+ <?php echo $_smarty_tpl->getVariable('user_nachname')->value;?>
 </b>,
 		<br>
 	</td>

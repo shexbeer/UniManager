@@ -6,8 +6,8 @@
 	<body>
 <table>
 <tr>
-	<td>		
-		<img src="{$rootDir}img/logo.gif">
+	<td width="200">		
+		<img src="{$rootDir}img/logo.gif" width="100%">
 	</td>
 	<td id="ueberschrift_zelle">
 		<div id="ueberschrift_seite">{$seite}</div>
@@ -16,7 +16,7 @@
 <hr width='800' align='left'>
 <table>
 <tr> 
-	<td rowspan="2">
+	<td rowspan="2" width="200">
 		<center>
 		{include file="navigation_right.tpl" title="navigation"}
 		</center>
@@ -26,7 +26,7 @@
 		{if $admin}
 		 | <a href='{$rootDir}admin.php'>Admin</a>
 		{/if}
-		 | Herzlich Willkommen <b>{$user_vorname}</b>,
+		 | Herzlich Willkommen <b>{$user_vorname} {$user_nachname}</b>,
 		<br>
 	</td>
 <tr>
