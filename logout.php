@@ -9,6 +9,8 @@ $UM = new UniManager();
 */
 session_unset();
 session_destroy();
-$UM->trigger_error("0", "<a href='index.php'>Hier</a> koennen sie sich neu einloggen.", false, false);
+
+//$UM->trigger_error("0", "<a href='index.php'>Hier</a> koennen sie sich neu einloggen.", false, false);
+header("Location: " . $UM->cwd["rootDir"] . "index.php");
 
 ?>
