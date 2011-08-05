@@ -8,7 +8,7 @@ class Modul_Management {
 	
 	#Abrufen aller Module in der Datenbank
 	function getModullist(){
-		$sql = "SELECT name, modul_id FROM modul ORDER BY name";
+		$sql = "SELECT modul_name, modul_id FROM modul ORDER BY modul_name";
 		$res = mysql_query($sql);# false wenn Entity oder Attribut nicht existiert
 		if(!$res){
 			$rows[0]['name']="Fehlende DB-Struktur";
@@ -24,7 +24,7 @@ class Modul_Management {
 			for($i=0;$i<$rnum;$i++){
 			// €nderung von shexbeer: Array wird nun nach Modul ID referenziert in unterster Ebene
 				$mod_id = mysql_result($res,$i,"modul_id");
-				$rows[$mod_id]['name']=mysql_result($res,$i,"name");
+				$rows[$mod_id]['name']=mysql_result($res,$i,"modul_name");
 				$rows[$mod_id]['id']=$mod_id;
 			}
 		return $rows; # 2dim array
@@ -32,7 +32,7 @@ class Modul_Management {
 	
 	#Abrufen aller Module in der Datenbank samt Details
 	function getModuldetails(){
-		$sql = "SELECT * FROM modul ORDER BY name";
+		$sql = "SELECT * FROM modul ORDER BY modul_name";
 		$res = mysql_query($sql);# false wenn Entity oder Attribut nicht existiert
 		if(!$res){
 			$rows[0][0]="Fehlende DB-Struktur";
