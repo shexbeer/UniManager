@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Erstellungszeit: 05. August 2011 um 16:34
+-- Erstellungszeit: 05. August 2011 um 16:43
 -- Server Version: 5.5.8
 -- PHP-Version: 5.3.5
 
@@ -18,6 +18,26 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Datenbank: `unimanager`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `leistungsnachweis`
+--
+
+CREATE TABLE IF NOT EXISTS `leistungsnachweis` (
+  `ln_id` int(5) NOT NULL AUTO_INCREMENT,
+  `ln_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ln_requirement` varchar(50) NOT NULL,
+  `ln_examiner` int(5) NOT NULL,
+  `ln_modul_id` int(5) NOT NULL,
+  PRIMARY KEY (`ln_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Daten für Tabelle `leistungsnachweis`
+--
+
 
 -- --------------------------------------------------------
 
@@ -80,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `modulaufstellung` (
 
 INSERT INTO `modulaufstellung` (`mauf_rowid`, `mauf_modul_id`, `mauf_sg_id`, `mauf_plansemester`, `mauf_typ`) VALUES
 (1, 1, 1, 1, 'Bachelor'),
-(2, 2, 1, 2, 'Bachelor');
+(2, 2, 1, 4, 'Bachelor');
 
 -- --------------------------------------------------------
 
