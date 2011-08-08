@@ -1,6 +1,6 @@
 <?php
-    class PO_Modul_IE_Controller {
-        function PO_Modul_IE_Controller($UM)
+    class PO_Modul_IE {
+        function PO_Modul_IE($UM)
         {
             $this->UM= $UM;
             //instanzierte Klasse Unimanager klassenweit verfuegbar machen
@@ -13,12 +13,8 @@
             //Modulliste beschaffen
             $mDetails = $MM->getModuldetails();
             //Moduldetails beschaffen
-            $this->UM->tpl->assign("modullist",$mList);
-            //Liste zum Template assignen
-            $this->UM->tpl->assign("modetails",$mDetails);
-            //Details zum Template assignen
-            $this->UM->VisualObject->showmodullist($mList);
-            $this->UM->VisualObject->showmoduldetails($mDetails);
+
+            $this->UM->VisualObject->showModulList($mList, $mDetails);
             //VO zur Abfrage aufrufen
         }
         function changemodul()
