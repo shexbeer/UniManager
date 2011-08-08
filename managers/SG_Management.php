@@ -30,17 +30,17 @@ class SG_Management {
 	function getSGlist(){
 		$sql = "SELECT sg_name, sg_id FROM studiengang ORDER BY sg_name";
 		$res = mysql_query($sql);# false wenn Entity oder Attribut nicht existiert
-		$rows[result]=
-		if(!$res)$rows[result]=false; //dient aktuell zur Fehlererkennung
+		if(!$res)$rows['result']=false; //dient aktuell zur Fehlererkennung
 		else{
-			$rows[result]=true;
+			$rows['result']=true;
+			$rnum=mysql_num_rows($res);# 0 wenn kein Treffer gefunden wurde
 			for($i=0;$i<$rnum;$i++){
 				$mod_id = mysql_result($res,$i,"sg_id");
 				$rows[$mod_id]['name']=mysql_result($res,$i,"sg_name");
 				$rows[$mod_id]['id']=$mod_id;
 			}
 		}
-		return $row
+		return $rows;
 	}
 	
 	//Inhalt ist mir nicht ganz klar --Diskusionsbedarf--

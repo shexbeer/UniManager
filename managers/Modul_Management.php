@@ -1,12 +1,8 @@
 <?php
 ### Bitte auf die Funktionsparameterbeschreibung achten ###
 class Modul_Management {
-	//Constructor zum seperatem debuggen
-	// function Modul_Management(){
-		// require_once("UniManager/db.mysql.php");
-	// }
 	
-	#Abrufen aller Module in der Datenbank
+	#Abrufen aller Module in der Datenbank mit Name und ID
 	function getModullist(){
 		$sql = "SELECT modul_name,modul_id FROM modul ORDER BY modul_name";
 		$res = mysql_query($sql);# false wenn Entity oder Attribut nicht existiert
@@ -25,12 +21,19 @@ class Modul_Management {
 		return $rows; # 2dim array
 	}
 	
-	#Ruft Moduldetails ab
-	#getModuldetails() --Deatils für alle Module im Table
- 	#getModuldetails($type, $id[,$plansemester]) --liefert die Details entsprechend der id -- type sagt aus ob modul oder SG id 
-	#wenn type="sg" dann ist Paramter Plansemester möglich um die richtige Modulaufstellung zu ermitteln
-	#liefert false falls Pramater falsch;
-	function getModuldetails(){
+	/**
+	* Ruft Moduldetails ab
+	* getModuldetails() --alle Module des Tables
+	* getModuldetails($type, $id[,$semestertype,$semester]) --bestimmte Module des Tables
+	* @param string $type Art der ID
+	* @param int $id die Id selbst
+	* @param int $plansemseter des sg optional möglich wenn type 'sg'
+	* @return mixed array mit DB-Resultaten
+		['result'] enthält false bei DB-Fehler
+		array[modulID][attribut] geordnet dem attribut Namen nach
+		false wenn Parameter falsch
+	*/
+	function getModuldetails($type,$id,$semestertype,$semester){
 		if(func_num_args()==0){
 			$sql = "SELECT * FROM modul ORDER BY modul_name";
 			$res = mysql_query($sql);# false wenn Entity oder Attribut nicht existiert
@@ -40,10 +43,13 @@ class Modul_Management {
 				$rnum = mysql_num_rows($res);# 0 wenn kein Treffer gefunden wurde
 				$fnum = mysql_num_fields($res);
 				#liest alle Attribute dynamisch aus --> Anpassungen der Datenbankstruktur möglich
-				for($i=0;$i<$rnum;$i++)
-					for($j=0;$j<$fnum;$j++) $rows[$i][$j]=mysql_result($res,$i,$j);
+				for($i=0;$i<$rnum;$i++){
+					$mod_id = mysql_result($res,$i,"modul_id");
+					for($j=0;$j<$fnum;$j++) $rows[$mod_id][$j]=mysql_result($res,$i,$j);
+				}
 			}
-			return $rows; # 2dim array
+			//2dim array array[modulID][attribut] id ist in den attributen ebenfalls vorhanden 
+			return $rows;
 		}
 		else{ //wenn Parameter vorhanden ab hier Auswertung
 			$type=func_get_arg(0);
@@ -59,6 +65,7 @@ class Modul_Management {
 						$fnum = mysql_num_fields($res);
 						var_dump($fnum);
 						#liest alle Attribute dynamisch aus --> Anpassungen der Datenbankstruktur möglich
+						
 						for($j=0;$j<$fnum;$j++) $rows[$j]=mysql_result($res,0,$j);
 					}
 					return $rows;
@@ -73,8 +80,10 @@ class Modul_Management {
 						$rnum = mysql_num_rows($res);# 0 wenn kein Treffer gefunden wurde
 						$fnum = mysql_num_fields($res);
 						#liest alle Attribute dynamisch aus --> Anpassungen der Datenbankstruktur möglich
-						for($i=0;$i<$rnum;$i++)
-							for($j=0;$j<$fnum;$j++) $rows[$i][$j]=mysql_result($res,$i,$j);
+						for($i=0;$i<$rnum;$i++){
+							$mod_id = mysql_result($res,$i,"modul_id");
+							for($j=0;$j<$fnum;$j++) $rows[$mod_id][$j]=mysql_result($res,$i,$j);
+						}
 					}
 					return $rows;
 				default:
