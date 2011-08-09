@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.8, created on 2011-08-08 16:32:50
+<?php /* Smarty version Smarty-3.0.8, created on 2011-08-09 13:14:51
          compiled from "/Applications/XAMPP/xamppfiles/htdocs/UniManager/templates/navigation_right.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:6844254334e400fb21d6712-86533036%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:16287740234e4132cbd32ac8-55923425%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '792a05d01fb2c62e49b0c17e14918880d59de3f7' => 
     array (
       0 => '/Applications/XAMPP/xamppfiles/htdocs/UniManager/templates/navigation_right.tpl',
-      1 => 1312821159,
+      1 => 1312821617,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '6844254334e400fb21d6712-86533036',
+  'nocache_hash' => '16287740234e4132cbd32ac8-55923425',
   'function' => 
   array (
   ),
@@ -22,9 +22,9 @@ main.php'>Startseite</a> <br>
 <a href='<?php echo $_smarty_tpl->getVariable('rootDir')->value;?>
 LN_create.php'>Leistungsnachweis anmelden</a> <br>
 <a href='<?php echo $_smarty_tpl->getVariable('rootDir')->value;?>
-Modul_IE.php#'>Modulinhalte erstellen</a> <br>
+Modul_IE.php'>Modulinhalte erstellen</a> <br>
 <a href='<?php echo $_smarty_tpl->getVariable('rootDir')->value;?>
-#'>Menu3</a> <br>
+MA_create.php'>Modulangebot erstellen</a> <br>
 <a href='<?php echo $_smarty_tpl->getVariable('rootDir')->value;?>
 #'>Menu4</a> <br>
 <a href='<?php echo $_smarty_tpl->getVariable('rootDir')->value;?>

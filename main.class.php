@@ -12,6 +12,7 @@ session_start();
 
 // including Managers
 include_once("managers/Modul_Management.php");
+include_once("managers/SG_Management.php");
 
 // Fixing PHP4->5 transition
 $HTTP_POST_VARS = $_POST;	// FIXME: cleaner fix!

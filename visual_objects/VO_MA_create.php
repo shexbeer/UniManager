@@ -6,10 +6,11 @@ class VO_MA_create
 		// instanzierte UniManager Klasse, klassenweit verfügbar machen
 		$this->UM = $UM;
 	}
-	function showSGList()
+	function showSGList($sg)
 	{
 		$this->UM->showfooter();
 		$this->UM->showheader($this->UM->seite);
+		$this->UM->tpl->assign("SG", $sg);
 		$this->UM->tpl->display("MA_create_SGList.tpl", session_id());
 	}
 	function showMAedit()

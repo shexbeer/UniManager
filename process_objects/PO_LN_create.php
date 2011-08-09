@@ -1,8 +1,6 @@
 <?php
 class PO_LN_create
 {
-	// Properties
-	//	public $test;
 	function PO_LN_create($UM)
 	{
 		// instanzierte UniManager Klasse, klassenweit verfügbar machen
@@ -43,17 +41,13 @@ class PO_LN_create
 			$LN[$i]['modul_name'] = $modulliste[$LNListe[$i]['modul_id']]['name'];
 			$LN[$i]['ln_id'] = $LNListe[$i]['ln_id'];
 		}
-		$this->UM->tpl->assign("LN", $LN);
-		$this->UM->VisualObject->showALL_LN_ForALLModul();
+		//$this->UM->tpl->assign("LN", $LN); Gehört in das VO!
+		$this->UM->VisualObject->showALL_LN_ForALLModul($LN);
 	}
 	// 1. Argument: Leistungsnachweis ID für die der User angemeldet werden soll
 	function createLNA($LN_id)
 	{
 		// do some things
-	}
-	function testClass()
-	{
-		$this->UM->VisualObject->testClass();
 	}
 }
 ?>
