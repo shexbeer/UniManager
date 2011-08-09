@@ -176,6 +176,9 @@ class UniManager
 	 * Usage: $res = $this->UM->checkManagerResults($sg, "id", "Studiengaenge");
 	 * Falls nun der Manager einen Fehler meldet wird dieser ausgegeben, ansonsten kšnnen die Resultate dann ausgegeben werden
 	 * Example: PO_MA_create.php
+	 * der 1. parameter is quasi das resultat der manager klasse was ŸberprŸft werden soll
+	 * der 2. parameter is der name des index feldes anhand dessen dann die resultate neu zusammengebaut werden
+ 	 * der 3. parameter ist eine ein string der beschreibt was bei der Abfrage denn abgefragt wurde um den User ne einigerma§en sinnvolle fehlermeldung auszugeben, der is aber optional
 	 */
 	function checkManagerResults($results, $index_description_in_results, $error_description = '')
 	{
@@ -187,7 +190,7 @@ class UniManager
 					if($error_description == '') {
 						$extra_error = '';
 					} else {
-						$extra_error = 'Abfrage der '.$error_description;
+						$extra_error = 'Fehler ist Aufgetreten bei der Abfrage der '.$error_description;
 					}
 					$this->trigger_error(3, $extra_error , true, true);
 				}

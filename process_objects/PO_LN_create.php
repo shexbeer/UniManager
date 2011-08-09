@@ -13,6 +13,7 @@ class PO_LN_create
 		
 		// holt alle Module und die Namen dazu
 		$modulliste = $ModulM->getModullist();
+		$modlist = $this->UM->checkManagerResults($modulliste, "modul_id", "Module");
 		// holt alle LN
 		//$LNliste = $LNM->getLNList();
 		
@@ -38,7 +39,7 @@ class PO_LN_create
 			$LN[$i]['ln_pruefer'] = $LNListe[$i]['ln_pruefer'];
 			$LN[$i]['ln_raum'] = $LNListe[$i]['ln_raum'];
 			$LN[$i]['ln_vorraussetzungen'] = $LNListe[$i]['ln_vorraussetzung'];
-			$LN[$i]['modul_name'] = $modulliste[$LNListe[$i]['modul_id']]['modul_name'];
+			$LN[$i]['modul_name'] = $modlist[$LNListe[$i]['modul_id']]['modul_name'];
 			$LN[$i]['ln_id'] = $LNListe[$i]['ln_id'];
 		}
 		//$this->UM->tpl->assign("LN", $LN); Gehört in das VO!
