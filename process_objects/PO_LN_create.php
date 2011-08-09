@@ -26,9 +26,9 @@ class PO_LN_create
 		$LNListe[1]['modul_id'] = 2;		// gehört zu Modul ID
 		$LNListe[1]['ln_id'] = 2;
 		$LNListe[1]['ln_datum'] = "28.12.2017";
-		$LNListe[1]['ln_vorraussetzung'] = "HM2";
+		$LNListe[1]['ln_vorraussetzung'] = "GDI";
 		$LNListe[1]['ln_raum'] = "RAM-2181";
-		$LNListe[1]['ln_pruefer'] = "Prof. Ludwig";
+		$LNListe[1]['ln_pruefer'] = "Prof. Jung";
 		
 		// füge die Infos sinnvoll zusammen
 		// FIXME: Speed!
@@ -38,7 +38,7 @@ class PO_LN_create
 			$LN[$i]['ln_pruefer'] = $LNListe[$i]['ln_pruefer'];
 			$LN[$i]['ln_raum'] = $LNListe[$i]['ln_raum'];
 			$LN[$i]['ln_vorraussetzungen'] = $LNListe[$i]['ln_vorraussetzung'];
-			$LN[$i]['modul_name'] = $modulliste[$LNListe[$i]['modul_id']]['name'];
+			$LN[$i]['modul_name'] = $modulliste[$LNListe[$i]['modul_id']]['modul_name'];
 			$LN[$i]['ln_id'] = $LNListe[$i]['ln_id'];
 		}
 		//$this->UM->tpl->assign("LN", $LN); Gehört in das VO!

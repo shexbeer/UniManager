@@ -95,7 +95,8 @@ class UniManager
 	{
 		$error_codes = array("0" => "Sie sind nicht/nicht mehr eingeloggt!",
 			"1" => "Unvollstaendige GET/POST Uebergabe",
-			"2" => "Falscher Benutzername oder Passwort");
+			"2" => "Falscher Benutzername oder Passwort",
+			"3" => "Fehler beim Abfragen aus der Datenbank");
 
 		$this->showHeader("Error! Code: " . $code);
 		$this->tpl->assign("showHeaders", $showHeaders);
@@ -168,5 +169,33 @@ class UniManager
 				return false;
 			}
 		}
+	}
+	/* PrŸft RŸckgaben von ManagerKlassen auf mšgliche Fehlermeldungen und gibt diese, falls vorhanden, aus
+	 * return: Gibt die Resultate zurŸck, allerdings ohne die Meldung des Managers ob die Abfrage erfolgreich war
+	 *
+	 * Usage: $res = $this->UM->checkManagerResults($sg, "id", "Studiengaenge");
+	 * Falls nun der Manager einen Fehler meldet wird dieser ausgegeben, ansonsten kšnnen die Resultate dann ausgegeben werden
+	 * Example: PO_MA_create.php
+	 */
+	function checkManagerResults($results, $index_description_in_results, $error_description = '')
+	{
+		foreach($results as $var) {
+			// Wenn Ergebniss kein Array, dann ist es die Result Meldung des Managers
+			if(!is_array($var)) {
+				if(!$var) {
+					// Ein Fehler ist aufgetreten
+					if($error_description == '') {
+						$extra_error = '';
+					} else {
+						$extra_error = 'Abfrage der '.$error_description;
+					}
+					$this->trigger_error(3, $extra_error , true, true);
+				}
+			} else {
+				// Wenn $var Array ist, dann ist es teil des results
+				$results_edited[$var[$index_description_in_results]] = $var;
+			}
+		}
+		return $results_edited;
 	}
 }
