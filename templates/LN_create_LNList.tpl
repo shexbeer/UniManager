@@ -17,7 +17,12 @@ Es werden hier alle Leistungsnachweise angezeigt, zu denen sie sich anmelden k&o
 	<td>{$var.ln_date}</td>
 	<td>{$var.ln_examiner}</td>
 	<td style="text-align: center;">{$var.ln_requirement}</td>
-	<td><a href="{$rootDir}LN_create.php?forid={$var.ln_id}">anmelden</a></td>
+	{if $var.angemeldet == true}
+		<td style="color: red; font-weight: bold;">X</td>
+	{else}
+		<td><a href="{$rootDir}LN_create.php?forid={$var.ln_id}">anmelden</a></td>
+	{/if}
+	
 </tr>
 {/foreach}
 </table>
