@@ -9,38 +9,37 @@ class PO_LN_create
 	function initForm()
 	{
 		$ModulM = new Modul_Management();
-		//$LNM = new LN_Management();
+		$LNM = new LN_Management();
+		$PM = new Person_Management();
 		
 		// holt alle Module und die Namen dazu
-		$modulliste = $ModulM->getModullist();
-		$modlist = $this->UM->checkManagerResults($modulliste, "modul_id", "Module");
+		$res = $ModulM->getModullist();
+		$modlist = $this->UM->checkManagerResults($res, "modul_id", "Module");
 		// holt alle LN
-		//$LNliste = $LNM->getLNList();
-		
-		// Testvariablen da Manager noch nicht vorhanden
-		$LNListe[0]['modul_id'] = 1;		// gehört zu Modul ID
-		$LNListe[0]['ln_id'] = 1;
-		$LNListe[0]['ln_datum'] = "14.12.2017";
-		$LNListe[0]['ln_vorraussetzung'] = NULL;
-		$LNListe[0]['ln_raum'] = "KKB-2012";
-		$LNListe[0]['ln_pruefer'] = "Prof. Jasper";
-		$LNListe[1]['modul_id'] = 2;		// gehört zu Modul ID
-		$LNListe[1]['ln_id'] = 2;
-		$LNListe[1]['ln_datum'] = "28.12.2017";
-		$LNListe[1]['ln_vorraussetzung'] = "GDI";
-		$LNListe[1]['ln_raum'] = "RAM-2181";
-		$LNListe[1]['ln_pruefer'] = "Prof. Jung";
-		
+		$res = $LNM->getLNList();
+		$lnlist = $this->UM->checkManagerResults($res, "ln_id", "Leistungsnachweise");
+
 		// füge die Infos sinnvoll zusammen
-		// FIXME: Speed!
-		$numRows = count($LNListe);
-		for($i = 0; $i < $numRows; $i++) {
-			$LN[$i]['ln_datum'] = $LNListe[$i]['ln_datum'];
-			$LN[$i]['ln_pruefer'] = $LNListe[$i]['ln_pruefer'];
-			$LN[$i]['ln_raum'] = $LNListe[$i]['ln_raum'];
-			$LN[$i]['ln_vorraussetzungen'] = $LNListe[$i]['ln_vorraussetzung'];
-			$LN[$i]['modul_name'] = $modlist[$LNListe[$i]['modul_id']]['modul_name'];
-			$LN[$i]['ln_id'] = $LNListe[$i]['ln_id'];
+		foreach($lnlist as $var) {
+			// LN_Examiner ist einer Personen-ID deswegen muss diese ausgetauscht werden!
+			$id = $var['ln_examiner'];
+			$res = $PM->getNameForID($id);
+            $person = $this->UM->checkManagerResults($res, "id", "Personen");
+			$LN[$var["ln_id"]]['ln_examiner'] = $person[$id]["vorname"]." ".$person[$id]["name"];
+			
+			// Falls es Vorraussetzungen gibt sind diese Modul-ID's und müssen daher ersetzt werden!
+			if($var['ln_requirement']) {
+				$LN[$var["ln_id"]]['ln_requirement'] = $modlist[$var["ln_requirement"]]["modul_name"];
+			} else {
+				$LN[$var["ln_id"]]['ln_requirement'] = "";
+			}
+			// Der Modulname wird in ein Neues Feld gespeichert
+			$LN[$var["ln_id"]]['ln_modul_name'] = $modlist[$var['ln_modul_id']]['modul_name'];
+			// Und zur sicherheit noch in das vorhandene ln_modul_id Feld damit der VO macher sich bei der Ausgabe ganz nach der Tabelle richten kann!
+			// Nur das alle Daten magischer weise von der PO schon umgwandelt worden sind ;)
+			$LN[$var["ln_id"]]['ln_modul_id'] = $modlist[$var['ln_modul_id']]['modul_name'];
+			$LN[$var["ln_id"]]['ln_date'] = $var["ln_date"];
+			$LN[$var["ln_id"]]['ln_id'] = $var['ln_id'];
 		}
 		//$this->UM->tpl->assign("LN", $LN); Gehört in das VO!
 		$this->UM->VisualObject->showALL_LN_ForALLModul($LN);

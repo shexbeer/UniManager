@@ -13,10 +13,10 @@ Es werden hier alle Leistungsnachweise angezeigt, zu denen sie sich anmelden k&o
 
 {foreach from=$LN item=var}
 <tr>
-	<td>{$var.modul_name}</td>
-	<td>{$var.ln_datum}</td>
-	<td>{$var.ln_pruefer}</td>
-	<td style="text-align: center;">{$var.ln_vorraussetzungen}</td>
+	<td>{$var.ln_modul_name}</td>
+	<td>{$var.ln_date}</td>
+	<td>{$var.ln_examiner}</td>
+	<td style="text-align: center;">{$var.ln_requirement}</td>
 	<td><a href="{$rootDir}LN_create.php?forid={$var.ln_id}">anmelden</a></td>
 </tr>
 {/foreach}

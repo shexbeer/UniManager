@@ -8,6 +8,8 @@ class Person_Management
 	///getter///
 	
 	//Holt den Vorname Nachnamen einer Person, es wird die Standart Manager Fehlerausgabe genutzt!
+	// vorname ist unter $result[personen_id]["vorname"] zu finden
+	// nachname ist unter $result[personen_id]["name"] zu finden
 	function getNameForID($id)
 	{
 		$sql = "SELECT person_name, person_vorname, person_id FROM person WHERE person_id = '".$id."'";
