@@ -12,9 +12,7 @@ if(!$_SESSION["user_loginname"])
 
 if(!$_GET && !$_POST)
 {
+	//$UM->showheader($seite);
 	$UM->ProcessObject->initForm();
-}
-if($_GET["forid"]) {
-	$UM->ProcessObject->createLNA($_GET["forid"]);
 }
 ?>

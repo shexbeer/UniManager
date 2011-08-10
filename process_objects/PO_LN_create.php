@@ -18,10 +18,6 @@ class PO_LN_create
 		// holt alle LN
 		$res = $LNM->getLNList();
 		$lnlist = $this->UM->checkManagerResults($res, "ln_id", "Leistungsnachweise");
-		
-		// hole alle Anmeldungen zu Leistungsnachweisen um Fehlerhafte Anmeldungen im vorfeld zu verhindern
-		$res = $LNM->getLNA($_SESSION["user_id"]);
-		$lna = $this->UM->checkManagerResults($res, "lna_ln_id", "Leistungsnachweisanmeldungen");
 
 		// füge die Infos sinnvoll zusammen
 		foreach($lnlist as $var) {
@@ -44,27 +40,14 @@ class PO_LN_create
 			$LN[$var["ln_id"]]['ln_modul_id'] = $modlist[$var['ln_modul_id']]['modul_name'];
 			$LN[$var["ln_id"]]['ln_date'] = $var["ln_date"];
 			$LN[$var["ln_id"]]['ln_id'] = $var['ln_id'];
-			if(is_array($lna[$var["ln_id"]]))
-			{
-				$LN[$var["ln_id"]]["angemeldet"] = true; // bitte im VO auslesen und anmeldung dann verhindern
-			}
 		}
+		//$this->UM->tpl->assign("LN", $LN); Gehört in das VO!
 		$this->UM->VisualObject->showALL_LN_ForALLModul($LN);
 	}
 	// 1. Argument: Leistungsnachweis ID für die der User angemeldet werden soll
 	function createLNA($LN_id)
 	{
-		$LNM = new LN_Management();
-		
-		$person_id = $_SESSION["user_id"];		
-		// 1. Pruefen ob der Nutzer zu dieser LN schon eine Anmeldung hat!
-		$res = $LNM->checkLNAforPersonID($person_id, $LN_id);
-		if($res == true) {
-			$this->UM->VisualObject->showResult(true, "Bereits zum Leistungsnachweis angemeldet");
-		} else {
-			$LNM->setLNA($person_id, $LN_id);
-			$this->UM->VisualObject->showResult(false, "");			
-		}
+		// do some things
 	}
 }
 ?>

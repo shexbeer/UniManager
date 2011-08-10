@@ -90,11 +90,6 @@ input, textarea, select {
 #ueberschrift_zelle {
 	vertical-align:bottom;
 }
-#systemfehler {
-	font-size: 14px;
-	color: red;
-	font-weight: bold;
-}
 
 /* ALTERNATIV STYLING
 

@@ -26,6 +26,8 @@ class Person_Management
 				$result[$id]["vorname"] = $row->person_vorname;
 				$result[$id]["name"] = $row->person_name;
 				$result[$id]["id"] = $row->person_id;
+			} else {
+				$result["result"] = false;
 			}
 		}
 		return $result;
