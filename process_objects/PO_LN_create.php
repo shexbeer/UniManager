@@ -28,7 +28,7 @@ class PO_LN_create
 			// LN_Examiner ist einer Personen-ID deswegen muss diese ausgetauscht werden!
 			$id = $var['ln_examiner'];
 			$res = $PM->getNameForID($id);
-            $person = $this->UM->checkManagerResults($res, "id", "Personen");
+			$person = $this->UM->checkManagerResults($res, "id", "Personen");
 			$LN[$var["ln_id"]]['ln_examiner'] = $person[$id]["vorname"]." ".$person[$id]["name"];
 			
 			// Falls es Vorraussetzungen gibt sind diese Modul-ID's und müssen daher ersetzt werden!
