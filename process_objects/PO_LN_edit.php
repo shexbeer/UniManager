@@ -43,7 +43,7 @@
           $list= $this->UM->checkManagerResults($list_unchecked,"lna_id","Leistungsnachweise");
           //Liste aller angemeldeten Studenten zu dem entsprechenden Modul zusammenstellen Spaltenreihenfolge: Matrikelnummer, Anmeldedatum, Note
           foreach($list as $var){
-              //Matrikelnummer des Studenten zu den Results hinzufügen
+              //Matrikelnummer,Anmeldedatum und Note des Studenten zu den Results hinzufügen
               $result[$var["lna_id"]]["Matrikelnummer"]=$LM->getStudentDetails($var["lna_student_id"]);
               $result[$var["lna_id"]]["Anmeldedatum"]=$var["lna_registrationdate"];
               $result[$var["lna_id"]]["Note"]=$var["lna_mark"];
@@ -53,8 +53,11 @@
       
       function enterList($lna_id,$student_id,$lna_mark)
       {
+        //Manager initialisiern
         $LM= new LN_Management();
-        $result=$LM->setLNAGrade($lna_id,$student_id,$lna_mark);  
+        //Daten an Manager weiterleiten
+        $result=$LM->setLNAGrade($lna_id,$student_id,$lna_mark); 
+        //Erfolg oder Misserfolg melden 
         $this->UM->VisualObject->showResult($result);    
       }
   }
