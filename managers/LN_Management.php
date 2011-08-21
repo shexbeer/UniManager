@@ -82,7 +82,15 @@ class LN_Management {
     		return true;
     	}
     }
+    //Holt eine Liste aller Leistungsnachweise zu einer bestimmten Modul-ID inklusive der eingetragenen Noten , nichtvorhandene Noten bekommen nen leerzeichen oder so 
+    function getLNAs($modul_id){}
     
+    //Holt die Matrikelnummer zum Studenten
+    function getStudentDetails($student_personid){}
+    
+    
+    //setzt die Note für einen bestimmten Studenten in einem bestimmten Leistungsnachweis
+    function setLNAGrade($lna_id,$student_id,$lna_mark){}
     
     
     
