@@ -3,7 +3,8 @@
 class SG_Management {
 
 	///setter/// ohne Funktion weil noch keine Übergaben bekannt
-	function createSG (){
+	function createSG ($sgname,$sg_po,$sg_so,$sgmhb,$sgdekan){
+        //hab mal die Übergabevariablen eingefügt Sebastian
 	}
 	
 	function setSGdetails (){
@@ -47,22 +48,18 @@ class SG_Management {
 			
 			//2dim array array[modulID][attribut] id ist in den attributen ebenfalls vorhanden 
 			return $this->buildResult($res,"sg_id");
-			}*/
-		}		
-	}
+		}
+	}		
 	
-	/**
-	*/
+
 	function getSO(){
 	}
 	
-	/**
-	*/
+
 	function getPO(){
 	}
 	
-	/**
-	*/
+
 	function getSIDListSG(){
 	}
 	

@@ -30,6 +30,35 @@ class Person_Management
 		}
 		return $result;
 	}
+    /**
+        * holt die Personen_ID zu der Dekan_ID aus der Dekantabelle getDekanPID($id)
+        * @param int $id Dekan-ID des Dekans zu dem die PID gesucht wird
+        * @return int Personen-ID des Dekans
+        */
+    function getDekanPID($id)
+    {
+        
+    }
+    /**
+        * holt die Personen_ID zu dem Vornamen und Namen der Person oder gibt ein false zurück falls die Person nicht existiert getPIDForName($person)
+        * @param string Array mit den Feldern vorname und name
+        * @return mixed array mit den Feldern pid (personenId) und dem Feld result mit dem Wert true für Person gefunden oder false für Person nicht gefunden
+        */
+    function getPIDForName($person)
+    {
+        
+    }
+    
+    /**
+        * holt die Dekan_ID zu der Personen-ID aus der Dekantabelle getDekanID($pid)
+        * @param int $pid Personen-ID der Person zu der die Dekan-ID gesucht wird
+        * @return mixed array mit den Feldern dekan_id und dem Feld result mit dem Wert true für Person in der Dekantabelle gefunden oder false für Person nicht in der Dekantabelle gefunden
+        */
+    
+    function getDekanID($pid)
+    {
+        
+    }
 }
 
 ?>
