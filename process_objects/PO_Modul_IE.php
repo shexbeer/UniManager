@@ -6,7 +6,7 @@
             $this->UM= $UM;
         }
         /**
-        * Beschafft eine Liste aller existierender Module inklusive Details und ersetzt Personen-IDs durch Namen initform()
+        * Beschafft eine Liste aller existierender Module inklusive Details und ersetzt Personen-IDs durch Namen
         */
         function initform()
         {
@@ -34,7 +34,7 @@
             $this->UM->VisualObject->showModulList($result);
         }
         /**
-        * Ruft Details zu einem speziellen Modul ab und ersetzt PersonenIDs durch Namen, danach schickt sie die Daten an das VO changemodul($modul_id)
+        * Ruft Details zu einem speziellen Modul ab und ersetzt PersonenIDs durch Namen, danach schickt sie die Daten an das VO 
         * @param int $modul_id ID des Moduls das aufgerufen werden soll
         */
         function changemodul($modul_id)
@@ -59,7 +59,7 @@
              
         }
         /**
-        * Aendert den Status eines bestimmten Moduls setmodulstatus($modul_id,$status)
+        * Aendert den Status eines bestimmten Moduls
         * @param int $modul_id ID des Moduls dessen Status geaendert werden soll
         * @param string $status zukuenftiger Status des Moduls laut Konventionen: Bearbeitet, Erstellt, Genehmigt
         */

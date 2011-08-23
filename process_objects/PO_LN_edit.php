@@ -5,7 +5,7 @@
           $this->UM= $UM;
       }
       /**
-        * Ruft eine Liste aller existierender Leistungsnachweise ab und ersetzt Modul-IDs durch Modulnamen und Personen-IDs durch Personennamen initform()
+        * Ruft eine Liste aller existierender Leistungsnachweise ab und ersetzt Modul-IDs durch Modulnamen und Personen-IDs durch Personennamen
         ACHTUNG: Das am Ende übergebene Array hat die drei Spalten Modulname; Datum; Verantwortlicher; Modul-ID (nur zur Auswahl nötig, nicht mit anzeigen)
         */
       function initform()
@@ -36,7 +36,7 @@
           $this->UM->VisualObject->showModulList($result);          
       }
       /**
-        * Ruft eine Liste aller Teilnehmer eines Leistungsnachweises eines bestimmten Moduls ab und ersetzt die StudentenID durch Matrikelnummern getTeilnehmerList($modul_id)
+        * Ruft eine Liste aller Teilnehmer eines Leistungsnachweises eines bestimmten Moduls ab und ersetzt die StudentenID durch Matrikelnummern
         Achtung: Spaltenreihenfolge: Matrikelnummer, Anmeldedatum, Note   
         * @param int $modul_id ID des Moduls für das die Teilnehmer abgerufen werden sollen
         */
@@ -59,7 +59,7 @@
           $this->UM->VisualObject->showLNAList($result);
       }
       /**
-        * Ändert eine Note eines Studenten zu einem bestimmten Leistungsnachweis enterList($lna_id,$student_id,$lna_mark)
+        * Ändert eine Note eines Studenten zu einem bestimmten Leistungsnachweis
         ACHTUNG: Alle 3 Parameter muessen angegeben werden, es erfolgt keine Pruefung auf Sinn; muss bei der Eingabe gemacht werden
         * @param int $lna_id ID des Leistungsnachweises zu dem eine Note geaendert werden soll
         * @param int $student_id ID des Studenten dessen Note geaendert werden soll

@@ -6,22 +6,39 @@ class SG_Management {
 	function createSG ($sgname,$sg_po,$sg_so,$sgmhb,$sgdekan){
         //hab mal die Übergabevariablen eingefügt Sebastian
 	}
-	
-	function setSGdetails (){
+    
+    
+	/**
+    * Diese Funktion schreibt die Details zu einem Studiengang in die Datenbank
+    * @param mixed $sgdetails ein Array mit den Feldern sg_id,sg_name;sg_po;sg_so;sg_modulhandbuch;sg_dekan
+    * @return bool true fuer Erfolg und false fuer Misserfolg beim Eintragen in die Datenbank
+    */
+   	function setSGdetails ($sgdetails){
+        //Param. und Erklaerung hinzugefügt Seb.
 	}
 	
-	function setPO (){
+	function setPO ($sg_id){
+        //Param. hinzugefügt Seb.
 	}
 	
-	function setSO (){
+	function setSO ($sg_id){
+        //Param. hinzugefügt Seb.
 	}
 	
 	function setDateForSG(){
 	}
 	
-	function setModullisteForSG(){
+    /**
+    * Speichert in der Datenbank ab, welche Module zu einem bestimmten Studiengang gehoeren
+    * @param int $sg_id ID des Studienganges dessen Liste geaendert werden soll
+    * @param mixed $modul_ID_list  Array mit den Feldern count und  modul_id das nacheinander alle zu dem Studiengang gehoerigen Module_IDs enthaelt
+    * @return bool true fuer Erfolg und false fuer Misserfolg beim Eintragen in die Datenbank
+    */
+	function setModullisteForSG($sg_id,$modul_ID_list){
+        //Parameter und Erkl. hinzugefuegt Seb.
 	}
 	
+    
 	function setSGstatus(){
 	}
 	
@@ -52,11 +69,13 @@ class SG_Management {
 	}		
 	
 
-	function getSO(){
+	function getSO($sg_id){
+        //Parameter hinzugefügt Seb.
 	}
 	
 
-	function getPO(){
+	function getPO($sg_id){
+        //Parameter hinzugefügt Seb.
 	}
 	
 
@@ -86,11 +105,16 @@ class SG_Management {
 			case 0: return $this->getModul("studiengang.*");
 			case 1: return $this->getModul("studiengang.*",func_get_arg(0));
 			default: return false;
-	}
+	    }
+    }
 	
 	
 	//Inhalt ist mir nicht ganz klar --Diskusionsbedarf--
 	function getTamplate(){
+        /*Soll die Vorlage für eine Studienordnung und eine Prüfungsordnung aus der Datenbank abrufen und zurückgeben; die Vorlagen müssen noch in der SQL Datenbank erstellt werden
+        Zweck ist es bei der Erstellung auf ein schon vorgefertigtes Dokument zurückgreifen zu können, damit der Ersteller nicht soviel schreiben muss sondern nur noch die relevanten Informationen ersetzen muss
+        Sebastian*/
+        
 	}
 	
 	///Helper///

@@ -152,5 +152,4 @@ class Modul_Management{
 		#folgt wenn Übergabeinhalt bekannt
 	}
 	
-	
 }
