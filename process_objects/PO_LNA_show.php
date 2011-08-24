@@ -16,7 +16,7 @@
         	$res = $LNM->getLNlist();
         	$ln = $this->UM->checkManagerResults($res, "ln_id", "Leistungsnachweise");
 			
-			$res = $ModM->getModulList();
+			$res = $ModM->getModulList(true);
 			$mod = $this->UM->checkManagerResults($res, "modul_id", "Module");
 			
 			foreach($lna as $var) {

@@ -31,7 +31,7 @@ class SG_Management {
     /**
     * Speichert in der Datenbank ab, welche Module zu einem bestimmten Studiengang gehoeren
     * @param int $sg_id ID des Studienganges dessen Liste gesetzt werden soll
-    * @param mixed $modul_ID_list  Array mit den Feldern count, modul_id und plansemester das nacheinander alle zu dem Studiengang gehoerigen Module_IDs und die jewaligen Plansemester enthaelt
+    * @param mixed $modul_ID_list  2 dim Array mit den Feldern [count],[modul_id,plansemester] das nacheinander alle zu dem Studiengang gehoerigen Module_IDs und die jewaligen Plansemester enthaelt
     * @return bool true fuer Erfolg und false fuer Misserfolg beim Eintragen in die Datenbank
     */
 	function setModullisteForSG($sg_id,$modul_ID_list){

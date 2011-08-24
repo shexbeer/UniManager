@@ -13,7 +13,7 @@ class PO_LN_create
 		$PM = new Person_Management();
 		
 		// holt alle Module und die Namen dazu
-		$res = $ModulM->getModullist();
+		$res = $ModulM->getModullist(true);
 		$modlist = $this->UM->checkManagerResults($res, "modul_id", "Module");
 		// holt alle LN
 		$res = $LNM->getLNList();

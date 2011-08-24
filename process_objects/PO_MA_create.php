@@ -42,15 +42,22 @@ class PO_MA_create
     /**
     * Schickt die Modulaufstellung für einen Studiengang an den Manager
     * @param int $sg_id  ID des Studienganges
-    * @param mixed $modul_aufstellung Array mit der Modulaufstellung enthaelt die Felder count,modul_id,plansemester
+    * @param mixed $modul_aufstellung 2 dim. Array mit der Modulaufstellung enthaelt die Felder [ccunt],[modul_id,plansemester]
+    * @param string $typ Art des Studiums z.B. "Bachelor","Master"
     */
     
-	function setMA($sg_id,$modul_aufstellung)
+	function setMA($sg_id,$modul_aufstellung,$typ)
 	{
         //Manager initialisieren
-        $SG=new SG_Management();
+        $MA=new Modulaufstellung_Management();
+        //zusätzliche spalten hinzufügen damit manager es nur noch eintragen muss in DB
+        foreach($modul_aufstellung as &$var)
+        {
+            $var["mauf_sg_id"]=$sg_id;
+            $var["mauf_typ"]=$typ;
+        }
         //Modulaufstellung an Manager senden
-        $result=$SG->setModullisteForSG($sg_id,$modul_aufstellung);
+        $result=$MA->setModulaufstellung($sg_id,$modul_aufstellung);
         //Erfolg oder Misserfolg an VO melden
         $this->UM->VisualObject->showResult($result);
 	}

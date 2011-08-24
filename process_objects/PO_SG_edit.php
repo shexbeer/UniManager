@@ -23,12 +23,13 @@
           foreach($sglist as $var)
           {
               $result[$var["sg_id"]]=$var;
-              $dekan=$PM->getNameForID($PM->getDekanPID($var["sg_dekan"]));
+              $pid_unchecked=$PM->getDekanPID($var["sg_dekan"]);
+              $pid=$this->UM->checkManagerResults($pid_unchecked,"pid","PersonenID");
+              $dekan_unchecked=$PM->getNameForID($pid);
+              $dekan=$this->UM->checkManagerResults($dekan_unchecked,"id","Namensabfrage");
               $result[$var["sg_id"]]["sg_dekan"]=$dekan["vorname"]." ".$dekan["name"];
           }
           $this->UM->VisualObject->showSGList($result);
-          
-         
       }
       
       /**
@@ -165,7 +166,7 @@
       /**
       * Sendet neue Studiengangdetails an den SG_Manager und bei Bedarf eine neue Modulliste fuer diesen Studiengang an den Modulmanager
       * @param mixed $sgdetails  Array mit den Studiengangdetails: enthaelt die Felder: sg_id,sg_name,sg_po,sg_so,sg_modulhandbuch,verantw_vorname,verantw_name
-      * @param mixed $modul_id_list Array das alle Module enthaelt die zu dem Studiengang gehoeren, enthaelt die felder count,modul_id und plansemester
+      * @param mixed $modul_id_list 2 dim Array das alle Module enthaelt die zu dem Studiengang gehoeren, enthaelt die felder [count],[modul_id,plansemester]
       */
       function setSGStatus($sgdetails,$modul_id_list=false)
       {
