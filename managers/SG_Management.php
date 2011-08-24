@@ -10,7 +10,7 @@ class SG_Management {
     
 	/**
     * Diese Funktion schreibt die Details zu einem Studiengang in die Datenbank
-    * @param mixed $sgdetails ein Array mit den Feldern sg_id,sg_name;sg_po;sg_so;sg_modulhandbuch;sg_dekan
+    * @param mixed $sgdetails ein Array mit den Feldern sg_id, sg_name, sg_po, sg_so, sg_modulhandbuch, sg_dekan
     * @return bool true fuer Erfolg und false fuer Misserfolg beim Eintragen in die Datenbank
     */
    	function setSGdetails ($sgdetails){
@@ -30,7 +30,7 @@ class SG_Management {
 	
     /**
     * Speichert in der Datenbank ab, welche Module zu einem bestimmten Studiengang gehoeren
-    * @param int $sg_id ID des Studienganges dessen Liste geaendert werden soll
+    * @param int $sg_id ID des Studienganges dessen Liste gesetzt werden soll
     * @param mixed $modul_ID_list  Array mit den Feldern count und  modul_id das nacheinander alle zu dem Studiengang gehoerigen Module_IDs enthaelt
     * @return bool true fuer Erfolg und false fuer Misserfolg beim Eintragen in die Datenbank
     */
@@ -44,68 +44,66 @@ class SG_Management {
 	
 	///getter///
 	
+	
+	
 	/**
-	* Achtung sollte nicht direkt aufegrufen werden!! Ruft bestimmte atributte eines SG ab (Vorlage aus Modul_Management) getSG($attr,$id)
-	  stark vereinfacht, da nach Sequenzdiagramm immer nur die allgemeine Liste oder ein bestimmter SG abgerufen wird --> keine JOINTS nötig
-	* @param string $attr die gesuchten Attribute als String mit Komma getrennt
-	* @param string $id 
-	* @return mixed array mit DB-Resultaten, ['result'] enthält false bei DB-Fehler, array[modulID][attribut] das atribut heißt gleich dem DB-namen geordnet dem Attributnamen nach,false wenn Parameter falsch
+	* Ruft ruft SO eines SG ab 
+	* @param int $id ID des SG
+	* @return mixed array mit DB-Resultaten, ['result'] enthält false bei DB-Fehler, array[sg_id][sg_so]
 	*/
-	private function getSG($attr){
-		if(func_num_args()==1){
-			$sql = "SELECT ".$attr." FROM studiengang ORDER BY sg_name";
-			$res = mysql_query($sql);# false wenn Entity oder Attribut nicht existiert
-			//2dim array array[sg_id][attribut] id ist in den attributen ebenfalls vorhanden 
-			return $this->buildResult($res,"sg_id");
-		}
-		else{ //wenn Parameter vorhanden ab hier Auswertung
-			$id=func_get_arg(1);
-			$sql = "SELECT ".$attr." FROM modul WHERE sg_id=".$id;
-			$res = mysql_query($sql);# false wenn Entity oder Attribut nicht existiert
-			
-			//2dim array array[modulID][attribut] id ist in den attributen ebenfalls vorhanden 
-			return $this->buildResult($res,"sg_id");
-		}
-	}		
-	
-
-	function getSO($sg_id){
-        //Parameter hinzugefügt Seb.
+	function getSO($id){
+        $attr[0]="sg_id";
+		$attr[1]="sg_id";
+		$attr[2]="sg_so";
+		return $this->getSG(false,$attr,$id);
 	}
 	
 
-	function getPO($sg_id){
-        //Parameter hinzugefügt Seb.
+	/**
+	* Ruft ruft PO eines SG ab 
+	* @param int $id ID des SG
+	* @return mixed array mit DB-Resultaten, ['result'] enthält false bei DB-Fehler, array[sg_id][sg_po]
+	*/
+	function getPO($id){
+        $attr[0]="sg_id";
+		$attr[1]="sg_id";
+		$attr[2]="sg_po";
+		return $this->getSG(false,$attr,$id);
 	}
 	
-
+	/// ?????? was soll die holen?
 	function getSIDListSG(){
 	}
 	
 	
 	/**
-	*Ruft Liste aller SG ab
-	 Ruft Name und ID ab aller passender Module ab getModullist([$id],[$status])
-	* @param int $id die SG_ID
-	* @param string $status optional für um nur SG mit einem bestimmten Status zu wählen  
-	* @return mixed array mit DB-Resultaten, ['result'] enthält false bei DB-Fehler, array[sg_id][sg_name] das atribut heißt gleich dem DB-namen geordnet dem attribut Namen nach,false wenn Parameter falsch
+	* Ruft Name, ID und Status aller SG ab 
+	* @param string $paramtype optional "status" um SGs nach status zu filtern oder "id" um einen bestimmten SG zu wählen
+	* @param mixed $param int: bei id, string: bei status ('kreiert','konstruiert','beschlossen','abgestimmt','bestätigt')
+	* @return mixed array mit DB-Resultaten, ['result'] enthält false bei DB-Fehler, array[sg_id][Attribut] das Attribut heißt gleich dem DB-namen
 	*/
-	function getSGList(){
-		switch(func_num_args()){
-			case 0: return $this->getSG("sg_name,sg_id");
-			case 1: return $this->getSG("sg_name,sg_id",func_get_arg(0));
-			default: return false;
-		}
+	function getSGlist($paramtype=false,$param=false){
+		$attr[0]="sg_id";
+		$attr[1]="sg_id";
+		$attr[2]="sg_name";
+		$attr[3]="sg_status";
+		if(!$paramtype)return $this->getSG(false,$attr);
+		if($paramtype=="status")return $this->getSG($param,$attr);
+		if($paramtype=="id")return $this->getSG(false,$attr,$param);
 	}
 	
 	/**
+	* Ruft alle Details aller oder eines bestimmten SG ab 
+	* @param string $paramtype optional "status" um SGs nach status zu filtern oder "id" um einen bestimmten SG zu wählen
+	* @param mixed $param int: bei id, string: bei status ('kreiert','konstruiert','beschlossen','abgestimmt','bestätigt')
+	* @return mixed array mit DB-Resultaten, ['result'] enthält false bei DB-Fehler, array[sg_id][Attribut] das Attribut heißt gleich dem DB-namen
 	*/
-	function getSGDetails(){
-		switch(func_num_args()){
-			case 0: return $this->getModul("studiengang.*");
-			case 1: return $this->getModul("studiengang.*",func_get_arg(0));
-			default: return false;
-	    }
+	function getSGdetails($paramtype=false,$param=false){
+		$attr[0]="sg_id";
+		$attr[1]="studiengang.*";
+		if(!$paramtype)return $this->getSG(false,$attr);
+		if($paramtype=="status")return $this->getSG($param,$attr);
+		if($paramtype=="id")return $this->getSG(false,$attr,$param);
     }
 	
 	
@@ -121,24 +119,53 @@ class SG_Management {
 	
 	/**
 	* Erneut die buildResult aus Modul_Management, Füllt die DB-Resultate in eine array um (array[modulID][attribut])
+	  setzt Eintrag "sg_so" auf false falls SO und PO in ein un der selben Datei liegen kann rausgenommen werden falls wir nur die Strings speichern
 	* @param mySql-Rsourcedatei $res
-	* @return  array ['result'] enthält false bei DB-Fehler, array[modulID][attribut] das attribut heißt gleich dem DB-fieldnamen
+	* @return array ['result'] enthält false bei DB-Fehler, array[modulID][attribut] das attribut heißt gleich dem DB-fieldnamen
 	*/
 	private function buildResult($res,$keyvalue){
 		if(!$res)$rows['result']=false;//Fehlererkennung
 		else{
 			$rows['result']=true;
 			$rnum=mysql_num_rows($res);# 0 wenn kein Treffer gefunden wurde
-			$fnum = mysql_num_fields($res);
+			$fnum=mysql_num_fields($res);
 			for($i=0;$i<$rnum;$i++){
-					$mod_id = mysql_result($res,$i,$keyvalue);
-					for($j=0;$j<$fnum;$j++) $rows[$mod_id][mysql_field_name($res,$j)]=mysql_result($res,$i,$j);
+				$key = mysql_result($res,$i,$keyvalue);
+				for($j=0;$j<$fnum;$j++)$rows[$key][mysql_field_name($res,$j)]=mysql_result($res,$i,$j);
 			}
 		}
 		return $rows;
 	}
 	
-	
+	/**
+	* Achtung sollte nicht direkt aufegrufen werden!! Ruft bestimmte atributte eines SG ab (Vorlage aus Modul_Management)
+	  stark vereinfacht, da nach Sequenzdiagramm immer nur die allgemeine Liste oder ein bestimmter SG abgerufen wird --> keine JOINTS nötig
+	* @param string $status der Status des SG 
+	* @param string $attr die gesuchten Attribute als String mit Komma getrennt
+	* @param string $id die SG-id wenn bestimmer SG gesucht wird.
+	* @return mixed array mit DB-Resultaten, ['result'] enthält false bei DB-Fehler, array[modulID][attribut] das atribut heißt gleich dem DB-namen geordnet dem Attributnamen nach,false wenn Parameter falsch
+	*/
+	private function getSG($status,$attr,$id=false){
+		$where="";
+		$str="";
+		for($i=1;$i<count($attr)-1;$i++)$str=$str.$attr[$i].",";
+		$str=$str.$attr[count($attr)-1];
+		if(!$status)$where="sg_status IS NOT NULL";
+		else $where="sg_status='".$status."'";
+		if(!$id){
+			$sql = "SELECT ".$str." FROM studiengang WHERE ".$where;
+			$res = mysql_query($sql);# false wenn Entity oder Attribut nicht existiert
+			//2dim array array[sg_id][attribut] id ist in den attributen ebenfalls vorhanden 
+			return $this->buildResult($res,$attr[0]);
+		}
+		else{ //wenn Parameter vorhanden ab hier Auswertung
+			$sql = "SELECT ".$str." FROM studiengang WHERE ".$attr[0]."=".$id." AND ".$where;
+			$res = mysql_query($sql);# false wenn Entity oder Attribut nicht existiert
+			
+			//2dim array array[sg_id][attribut] id ist in den attributen ebenfalls vorhanden 
+			return $this->buildResult($res,$attr[0]);
+		}
+	}		
 }
 
 ?>
