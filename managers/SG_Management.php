@@ -17,11 +17,11 @@ class SG_Management {
         //Param. und Erklaerung hinzugefügt Seb.
 	}
 	
-	function setPO ($sg_id){
+	function setPO ($sg_id,$po){
         //Param. hinzugefügt Seb.
 	}
 	
-	function setSO ($sg_id){
+	function setSO ($sg_id,$so){
         //Param. hinzugefügt Seb.
 	}
 	
@@ -31,7 +31,7 @@ class SG_Management {
     /**
     * Speichert in der Datenbank ab, welche Module zu einem bestimmten Studiengang gehoeren
     * @param int $sg_id ID des Studienganges dessen Liste gesetzt werden soll
-    * @param mixed $modul_ID_list  Array mit den Feldern count und  modul_id das nacheinander alle zu dem Studiengang gehoerigen Module_IDs enthaelt
+    * @param mixed $modul_ID_list  Array mit den Feldern count, modul_id und plansemester das nacheinander alle zu dem Studiengang gehoerigen Module_IDs und die jewaligen Plansemester enthaelt
     * @return bool true fuer Erfolg und false fuer Misserfolg beim Eintragen in die Datenbank
     */
 	function setModullisteForSG($sg_id,$modul_ID_list){

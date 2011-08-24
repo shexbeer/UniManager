@@ -13,7 +13,7 @@
         */
       function initform()
       {
-          //SG-Manager initialisieren
+          //Manager initialisieren
           $SG= new SG_Management();
           $PM= new Person_Management();
           //Studiengangliste holen und ueberpruefen
@@ -165,7 +165,7 @@
       /**
       * Sendet neue Studiengangdetails an den SG_Manager und bei Bedarf eine neue Modulliste fuer diesen Studiengang an den Modulmanager
       * @param mixed $sgdetails  Array mit den Studiengangdetails: enthaelt die Felder: sg_id,sg_name,sg_po,sg_so,sg_modulhandbuch,verantw_vorname,verantw_name
-      * @param mixed $modul_id_list Array das alle Module enthaelt die zu dem Studiengang gehoeren, enthaelt die felder count,modul_id
+      * @param mixed $modul_id_list Array das alle Module enthaelt die zu dem Studiengang gehoeren, enthaelt die felder count,modul_id und plansemester
       */
       function setSGStatus($sgdetails,$modul_id_list=false)
       {

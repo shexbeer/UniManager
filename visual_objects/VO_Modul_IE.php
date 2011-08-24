@@ -33,8 +33,9 @@ class VO_Modul_IE
 		$this->UM->tpl->assign("modDetails", $mDetails);
 		$this->UM->tpl->display("Modul_IE_ModulDetails.tpl", session_id());
 	}
-function showCreateModul()
-/*	Wahrscheinlich Fehlerhaft im Klassendiagramm
+//function showCreateModul()
+
+/*	Wahrscheinlich Fehlerhaft im Klassendiagramm  -> stimmt, habs auch in keinem Sequenzdiagramm gefunden; Sebastian
  *
  *	function showModulDetails() 
  *	{
