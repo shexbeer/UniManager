@@ -25,7 +25,7 @@ class VO_Modul_IE
 		// Zeige das Template für diese Ausgabe an
 		$this->UM->tpl->display("Modul_IE_Modullist.tpl", session_id());
 	}
-	 function showModulDetails() 
+	 function showModulDetails($mDetails) 
 	{
 		$this->UM->showfooter();
 		$this->UM->showheader($this->UM->seite);
