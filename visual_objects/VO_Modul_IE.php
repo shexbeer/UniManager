@@ -6,7 +6,7 @@ class VO_Modul_IE
 		// instanzierte UniManager Klasse, klassenweit verfügbar machen
 		$this->UM = $UM;
 	}
-	function showResult()
+	function showResult($error_occurred, $extra_message)
 	{
 		$this->UM->tpl->assign("error", $error_occurred);
                 $this->UM->tpl->assign("extra_msg", $extra_message);
