@@ -5,6 +5,10 @@ Die Liste
 
 <table>
 <tr>
+<th colspan=9> Details den ausgewälten Studiengänge
+</th>
+</tr>
+<tr>
 <th>Studiengangname</th>
 <th>Studiengang_ID</th>
 <th>Name des Dekans</th>
@@ -18,7 +22,7 @@ Die Liste
 <th></th>
 </tr>
 
-{foreach from=$SGDetails item=var}
+{foreach from=$sgdetail item=var}
 <tr>
 <td>{$var.sg_name}</td>
 <td>{$var.sg_id}</td>
