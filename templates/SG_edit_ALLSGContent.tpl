@@ -83,7 +83,7 @@
 <th>Arbeitsaufwand</th>
 </tr>
 
-{foreach from=$$modullist item=var}
+{foreach from=$modullist item=var}
 <tr>
 <td>{$var.modul_content}</td>
 <td>{$var.modul_literature}</td>
