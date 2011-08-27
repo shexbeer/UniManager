@@ -1,6 +1,6 @@
 {include file="header.tpl" title=foo}
 
-Die Liste 
+ 
 <br><br>
 
 <table>
@@ -35,6 +35,129 @@ Die Liste
 <td>{$var.sg_status}</td>
 </tr>
 {/foreach}
+
+
+{if $modullist==true}
+<tr>
+<th colspan=9> Liste aller Module dieses SG inklusive Details 
+</th>
+</tr>
+
+<tr>
+<th>Modulname</th>
+<th>Modul-ID</th>
+<th>Name von Verantwortlicher</th>
+<th>Vorname von Verantwortlicher</th>
+<th>Modulstatus</th>
+<th>letzte Aederung</th>
+<th>Institut</th>
+<th>Dauer</th>
+<th>Qualifikationsziel</th>
+
+<th></th>
+</tr>
+
+{foreach from=$modullist item=var}
+<tr>
+<td>{$var.modul_name}</td>
+<td>{$var.modul_id}</td>
+<td>{$var.verantw_name}</td>
+<td>{$var.verantw_vorname}</td>
+<td>{$var.modul_status}</td>
+<td>{$var.modul_last_cha}</td>
+<td>{$var.modul_institut}</td>
+<td>{$var.modul_duration}</td>
+<td>{$var.modul_qualifytarget}</td>
+</tr>
+{/foreach}
+
+<tr>
+<th>Inhalt</th>
+<th>Fachliteratur</th>
+<th>Lehrformen</th>
+<th>Vorraussetzungen</th>
+<th>Hauefigkeit</th>
+<th>Verwendbarkeit</th>
+<th>Leistungspunkte</th>
+<th>Vorraussetzung fuer Leistungsnachweis</th>
+<th>Arbeitsaufwand</th>
+</tr>
+
+{foreach from=$$modullist item=var}
+<tr>
+<td>{$var.modul_content}</td>
+<td>{$var.modul_literature}</td>
+<td>{$var.modul_teachform}</td>
+<td>{$var.modul_required}</td>
+<td>{$var.modul_frequency}</td>
+<td>{$var.modul_usability}</td>
+<td>{$var.modul_lp}</td>
+<td>{$var.modul_conditionforln}</td>
+<td>{$var.modul_effort}</td>
+</tr>
+{/foreach}
+
+
+<tr>
+<th colspan=9> Liste aller Module inklusive Details
+</th>
+</tr>
+
+<tr>
+<th>Modulname</th>
+<th>Modul-ID</th>
+<th>Name von Verantwortlicher</th>
+<th>Vorname von Verantwortlicher</th>
+<th>Modulstatus</th>
+<th>letzte Aederung</th>
+<th>Institut</th>
+<th>Dauer</th>
+<th>Qualifikationsziel</th>
+
+<th></th>
+</tr>
+
+{foreach from=$list_all_moduls item=var}
+<tr>
+<td>{$var.modul_name}</td>
+<td>{$var.modul_id}</td>
+<td>{$var.verantw_name}</td>
+<td>{$var.verantw_vorname}</td>
+<td>{$var.modul_status}</td>
+<td>{$var.modul_last_cha}</td>
+<td>{$var.modul_institut}</td>
+<td>{$var.modul_duration}</td>
+<td>{$var.modul_qualifytarget}</td>
+</tr>
+{/foreach}
+
+<tr>
+<th>Inhalt</th>
+<th>Fachliteratur</th>
+<th>Lehrformen</th>
+<th>Vorraussetzungen</th>
+<th>Hauefigkeit</th>
+<th>Verwendbarkeit</th>
+<th>Leistungspunkte</th>
+<th>Vorraussetzung fuer Leistungsnachweis</th>
+<th>Arbeitsaufwand</th>
+</tr>
+
+{foreach from=$list_all_moduls item=var}
+<tr>
+<td>{$var.modul_content}</td>
+<td>{$var.modul_literature}</td>
+<td>{$var.modul_teachform}</td>
+<td>{$var.modul_required}</td>
+<td>{$var.modul_frequency}</td>
+<td>{$var.modul_usability}</td>
+<td>{$var.modul_lp}</td>
+<td>{$var.modul_conditionforln}</td>
+<td>{$var.modul_effort}</td>
+</tr>
+{/foreach}
+{/if}
+
 </table>
 
 {include file="footer.tpl" title=foo}
