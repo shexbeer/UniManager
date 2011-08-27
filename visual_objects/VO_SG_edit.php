@@ -22,7 +22,7 @@ $this->UM->showheader($this->UM->seite);
 
 // Setze Variable mit Daten in eine Template Variable um
 $this->UM->tpl->assign("SGList", $result);
-// Zeige das Template f¶Ër diese Ausgabe an
+// Zeige das Template fï¿½ï¿½r diese Ausgabe an
 $this->UM->tpl->display("SG_edit_SGList.tpl", session_id());
 }
 
@@ -40,8 +40,6 @@ function showALLSGContent($sgdetail,$modullist,$list_all_moduls)
 {
 $this->UM->showfooter();
 $this->UM->showheader($this->UM->seite);
-
-$this->UM->tpl->assign("SGDetails", $detail);
 $this->UM->tpl->display("SG_edit_ALLSGContent.tpl", session_id());
 }
 
