@@ -9,7 +9,7 @@ class Modul_Management{
 	* @param bool $status ob Änderung(false) oder fertiges Modul(true)
 	* @param string $type Art der ID ['sg','modul']
 	* @param int $id die Id selbst
-	* @param string $semtype ['total'--kalendarisches Semester,'plan'--kalendarisches Semester]
+	* @param string $semtype ['total'--kalendarisches Semester,'plan'--Plansemester]
 	* @param mixed $sem int für Plansemester, string zB 'SS2011' für kalendarisches Semester
 	* @return mixed array mit DB-Resultaten, ['result'] enthält false bei DB-Fehler, array[modulID][attribut] das atribut heißt gleich dem DB-namen unsortiert,false wenn Parameter falsch
 	*/
@@ -43,12 +43,14 @@ class Modul_Management{
 		if($status){
 			$table="modul";
 			$attr[0]="modul_id";
-			$attr[1]="modul.*";
+			$attr[1]="modul_id";
+			$attr[2]="modul.*";
 		}
 		else{
 			$table="aenderung";
 			$attr[0]="aenderung_id";
-			$attr[1]="aenderung.*";
+			$attr[1]="aenderung_mid";
+			$attr[2]="aenderung.*";
 		}
 		return $this->getModul($table,$attr,$type,$id,$semtype,$sem);
 	}
@@ -85,7 +87,7 @@ class Modul_Management{
 					return $this->buildResult($res,$attr[0]);
 				case "sg":
 					if(!$semtype){
-						$sql = "SELECT ".$str." FROM ".$table." INNER JOIN (studiengang INNER JOIN modulaufstellung ON sg_id=".$id.")ON mauf_modul_id=".$attr[0];
+						$sql = "SELECT ".$str.",mauf_plansemester FROM ".$table." INNER JOIN (studiengang INNER JOIN modulaufstellung ON sg_id=".$id.")ON mauf_modul_id=".$attr[1];
 						$res = mysql_query($sql);
 						//2dim array array[modulID][attribut] id ist in den attributen ebenfalls vorhanden 
 						return $this->buildResult($res,$attr[0]);
@@ -95,12 +97,12 @@ class Modul_Management{
 						$sem=func_get_arg(5);
 						switch($semtype){
 							case "plan":
-								$sql = "SELECT ".$str." FROM ".$table." INNER JOIN (studiengang INNER JOIN modulaufstellung ON sg_id=".$id." AND mauf_plansemester=".$sem." )ON mauf_modul_id=".$attr[0];
+								$sql = "SELECT ".$str.",mauf_plansemester FROM ".$table." INNER JOIN (studiengang INNER JOIN modulaufstellung ON sg_id=".$id." AND mauf_plansemester=".$sem." AND sg_id=mauf_sg_id)ON mauf_modul_id=".$attr[1];
 								$res = mysql_query($sql);
 								//2dim array array[modulID][attribut] id ist in den attributen ebenfalls vorhanden 
 								return $this->buildResult($res,$attr[0]);
 							case "total":
-								$sql = "SELECT ".$str." FROM ".$table." INNER JOIN (studiengang INNER JOIN modulangebot ON sg_id=".$id." AND ma_semester=".$sem." )ON mauf_modul_id=".$attr[0];
+								$sql = "SELECT ".$str.",mauf_plansemester FROM ".$table." INNER JOIN ((studiengang INNER JOIN modulangebot ON sg_id=".$id." AND ma_semester=".$sem." AND sg_id=ma_sg) INNER JOIN modulaufstellung ON sg_id = mauf_sg_id) ON ma_modul=".$attr[1];
 								$res = mysql_query($sql);
 								//2dim array array[modulID][attribut] id ist in den attributen ebenfalls vorhanden 
 								return $this->buildResult($res,$attr[0]);
