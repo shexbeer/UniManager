@@ -40,7 +40,7 @@ class LN_Management {
 					$result[$row->ln_id]["ln_modul_id"] = $row->ln_modul_id;
 					$result[$row->ln_id]["ln_date"] = $row->ln_date;
 					$result[$row->ln_id]["ln_id"] = $row->ln_id;
-					$result[$row->ln_id]["ln_examiner"] = $row->ln_examiner;
+					$result[$row->ln_id]["ln_examiner"] = $row->ln_examiner_pid;
 					$result[$row->ln_id]["ln_requirement"] = $row->ln_requirement;
 				}
 			}
@@ -82,45 +82,62 @@ class LN_Management {
     		return true;
     	}
     }
-    //Holt eine Liste aller Leistungsnachweise zu einer bestimmten Modul-ID inklusive der eingetragenen Noten , nichtvorhandene Noten bekommen nen leerzeichen oder so 
-    function getLNAs($modul_id){}
     
+    
+    // Noteneintagen
+    function editLNA($lna_id, $mark){
+        $sql = "UPDATE leistungsnachweisanmeldung SET lna_mark='".$mark."' WHERE lna_id='".$lna_id."'";
+        // oder `UniManager`.`leistungsnachweisanmeldung`
+    	$res = mysql_query($sql);
+    }
+    
+   /* 
+    function getLNA($lna_id)
+    {
+    	$sql = "SELECT * FROM leistungsnachweisanmeldung WHERE lna_id = '".$lna_id."'";
+    	$res = mysql_query($sql);
+		return $this->buildResult($res, "lna_id");
+    }
+    */
+    
+    //gibt alle LNA eines Studenten aus
+    //gibt nur die entscheidenden Daten zurück
+    //NEW
+     function getMarksByStudent($student_id)
+    {
+    	$sql = "SELECT ln_name, lna_mark, ln_date FROM leistungsnachweisanmeldung, leistungsnachweis WHERE lna_ln_id = ln_id AND lna_person_id ='".$student_id."'"  ;
+    	$res = mysql_query($sql);
+		return $this->buildResult($res, "ln_name");
+    }
+        
+    //alle LNAs zu einem LN
+    //gibt nur die person_id und die Note (person_id eventuell durch Matrikelnummer ersetzen
+    //NEW
+    function getMarksByLn($ln_id){
+        $sql = "SELECT lna_person_id, lna_mark FROM leistungsnachweisanmeldung WHERE lna_ln_id='".$ln_id."'";
+        $res = mysql_query($sql);
+		return $this->buildResult($res, "lna_person_id");
+    }
+    
+    
+    //alle LNAs zu einem Modul (auch alle vergangenen Semester)
+    //gibt nur die person_id und die Note
+    //NEW
+    function getMarksByModul($modul_id){
+        $sql = "SELECT ln_date, lna_person_id, lna_mark FROM leistungsnachweisanmeldung, leistungsnachweis WHERE lna_ln_id=ln_id AND ln_modul_id='".$modul_id."'" ;
+        $res = mysql_query($sql);
+		return $this->buildResult($res, "ln_date");
+    }
+    
+    
+    function getroomplan(){}
+    
+    function setLN(){}
+    
+   
     //Holt die Matrikelnummer zum Studenten
     function getStudentDetails($student_personid){}
-    
-    
-    //setzt die Note für einen bestimmten Studenten in einem bestimmten Leistungsnachweis
-    function setLNAGrade($lna_id,$student_id,$lna_mark){}
-    
-    
-    
-// Rest vom Marcus's Schuetzenfest .... kein Kommentar
-    /* für Eingabe verschiedener Parameter, die gleich die gewünschte Tabelle ausspuckt
-    
-    parameter: Liste der Modul_ids, welche Spalten sollen übergeben werden
-        (1): nur id, name, datum und modul
-        (2): zusätzlich prüfer und dauer
-        (3): zusätzlich voraussetzung => alles
-    
-    function getLN() {
-        $type = func_get_arg(1);
-        $mod_id = func_get_arg(0);
-        switch ($type){
-            case "1": $add = '';
-            case "2": $add = ", ln_examiner, ln_duration";
-            case "3": $add = ", ln_examiner, ln_duration, ln_requirement";
-            default: $add = ", ln_examiner, ln_duration, ln_requirement";
-		}	    
-        $sql = "SELECT ln_id, ln_name, ln_date, ln_modul_id".$add." FROM leistungsnachweis WHERE ln_modul_id=".$mod_id;
-        return mysql_query($sql);
-
-    }
-*/	
-    
-    #LN müssten auch irgendwie erstellt und gelöscht werden können, bis jetzt in der Dokumentation nicht vorgesehen
-    #wird ein Modul gelöscht, sollten die zugehörigen LN auch gelöscht werden
-    // shex: das kann man immer noch spŠter tun, eh wir sachen zum lšschen bauen an die bisher nicht mal der 
-    // Prof. Jasper bzw wir gedacht haben, sollten wir erstmal das machen woran wir gedacht haben!
+  
 }
 
 ?>
