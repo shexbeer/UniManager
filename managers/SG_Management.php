@@ -2,19 +2,48 @@
 
 class SG_Management {
 
-	///setter/// ohne Funktion weil noch keine Übergaben bekannt
-	function createSG ($sgname,$sg_po,$sg_so,$sgmhb,$sgdekan){
-        //hab mal die Übergabevariablen eingefügt Sebastian
+	/**
+	* Erstellt neuen Studiengang mit den gegebenen Startwerten
+	  es wird nur eine leere Hülse erstellt mit dem nötigsten, das wirklich da sein muss
+	  der Status wird automatisch auf kreiert gesetzt sowie das Erstellungsdatum festgelegt
+	* @param string $sgname Name des Studiengangs
+	* @param int $sgdekan ID des Studiendekans für den neuen Studiengang
+	* @return mixed die ID des SG als int wenn Erfolg, sonst false
+	*/
+	function createSG ($sgname,$sgdekan){
+		//Überprüfen ob der Name für den SG schon verwendet wird
+		$sql = "SELECT `sg_name` FROM `studiengang` WHERE `sg_name` = '".$sgname."';";
+		$res = mysql_query($sql);
+		if(mysql_fetch_row($res))return false; //false falls der Namen schon vorhanden
+		//Einfügen einer Zeile mit dem neuen Studiengang
+		$sql = "INSERT INTO  `UniManager`.`studiengang` (`sg_name` ,`sg_dekan`, `sg_createdate`, `sg_status`) VALUES ('".$sgname."', '".$sgdekan."', CURDATE(), 'kreiert');";
+		if(mysql_query($sql)){
+			$sql = "SELECT LAST_INSERT_ID();"; //SG-ID für Rückgabe ermitteln
+			$res = mysql_query($sql);
+			$row = mysql_fetch_row($res);
+			return $row[0];
+		}
+		else return false; //Fehler beim Ausführen des SQLquery
 	}
     
-    
 	/**
-    * Diese Funktion schreibt die Details zu einem Studiengang in die Datenbank
+    * Mit dieser Funktion werden die Details gestezt oder upgedatet
     * @param mixed $sgdetails ein Array mit den Feldern sg_id, sg_name, sg_po, sg_so, sg_modulhandbuch, sg_dekan
+	  falls ein Feld nicht verändert werden soll darf es nicht gestezt werden.
     * @return bool true fuer Erfolg und false fuer Misserfolg beim Eintragen in die Datenbank
     */
    	function setSGdetails ($sgdetails){
-        //Param. und Erklaerung hinzugefügt Seb.
+		$arr=array();
+		$sg_id=$sgdetails['sg_id'];
+		unset($sgdetails['sg_id']);
+		foreach($sgdetails as $k => $v)
+		{
+			$arr[]="`".$k."`='".$v."'";
+		}
+		$sql = "UPDATE `studiengang` SET ";
+		$sql = $sql.join(",",$arr);
+		$sql = $sql." WHERE `sg_id`=".$sg_id.";";
+		return mysql_query($sql);
 	}
 	
 	function setPO ($sg_id,$po){
