@@ -28,14 +28,19 @@ class SG_Management {
     
 	/**
     * Mit dieser Funktion werden die Details gestezt oder upgedatet
-    * @param mixed $sgdetails ein Array mit den Feldern sg_id, sg_name, sg_po, sg_so, sg_modulhandbuch, sg_dekan
-	  falls ein Feld nicht verändert werden soll darf es nicht gestezt werden.
+    * @param mixed $sgdetails ein Array mit den Feldern sg_id, sg_name, sg_po, sg_so, sg_modulhandbuch, sg_dekan, sg_status
+	  falls ein Feld nicht verändert werden soll darf es nicht gestezt werden --> sg_id ist das einzigste Pflichtfeld
     * @return bool true fuer Erfolg und false fuer Misserfolg beim Eintragen in die Datenbank
     */
    	function setSGdetails ($sgdetails){
 		$arr=array();
-		$sg_id=$sgdetails['sg_id'];
-		unset($sgdetails['sg_id']);
+		//Prüfen ob sg_id vorhanden
+		if(isset ($sgdetails['sg_id']))
+		{
+			$sg_id=$sgdetails['sg_id'];
+			unset($sgdetails['sg_id']);
+		}
+		else return false;
 		foreach($sgdetails as $k => $v)
 		{
 			$arr[]="`".$k."`='".$v."'";
@@ -46,29 +51,105 @@ class SG_Management {
 		return mysql_query($sql);
 	}
 	
+	/**
+    * ermöglicht das bequeme setzen der PO ohne array
+	  beutzt die setSGdetails, kann also auch dadurch ersetzt werden 	
+	* @param int $sg_id ID des SG
+	* @param string $po Prüfungsordnung
+	* @return bool true fuer Erfolg und false fuer Misserfolg beim Eintragen in die Datenbank
+    */
 	function setPO ($sg_id,$po){
-        //Param. hinzugefügt Seb.
+        $arr['sg_id']=$sg_id;
+		$arr['sg_po']=$po;
+		return $this->setSGdetails($arr);
 	}
 	
+	/**
+    * ermöglicht das bequeme setzen der SO ohne array
+	  beutzt die setSGdetails, kann also auch dadurch ersetzt werden 	
+	* @param int $sg_id ID des SG
+	* @param string $so Prüfungsordnung
+	* @return bool true fuer Erfolg und false fuer Misserfolg beim Eintragen in die Datenbank
+    */
 	function setSO ($sg_id,$so){
-        //Param. hinzugefügt Seb.
+        $arr['sg_id']=$sg_id;
+		$arr['sg_so']=$so;
+		return $this->setSGdetails($arr);
 	}
 	
+	/* Dürfte eigentlich nicht notwendig sein, da Datum automatisch bei erstellung gesetzt
 	function setDateForSG(){
 	}
+	*/
 	
     /**
     * Speichert in der Datenbank ab, welche Module zu einem bestimmten Studiengang gehoeren
+	  ACHTUNG!!! Liste muss immer komplett angegeben werden alte Daten werden gelöscht.
     * @param int $sg_id ID des Studienganges dessen Liste gesetzt werden soll
-    * @param mixed $modul_ID_list  2 dim Array mit den Feldern [count],[modul_id,plansemester] das nacheinander alle zu dem Studiengang gehoerigen Module_IDs und die jewaligen Plansemester enthaelt
+	* @param string $typ Typ des Studiengangs Bachelor, Master, Diplom
+    * @param mixed $modul_ID_list  2 dim Array mit den Feldern [count],[modul_id,plansemester,typ] das nacheinander alle zu dem Studiengang gehoerigen Module_IDs, Plansemester und den Typ enthaelt
     * @return bool true fuer Erfolg und false fuer Misserfolg beim Eintragen in die Datenbank
     */
-	function setModullisteForSG($sg_id,$modul_ID_list){
-        //Parameter und Erkl. hinzugefuegt Seb.
+	function setModullisteForSG($sg_id,$typ,$modul_ID_list){
+		//ermitteln und speicher alter Modulaufstellung
+        $sqlselect="SELECT `mauf_rowid` FROM `unimanager`.`modulaufstellung` WHERE `mauf_sg_id`='".$sg_id."';";
+		$res = mysql_query($sqlselect); 
+		if(!$res)return false; //DB-Fehler
+		
+		//Aufbauen des WHERE-Statements für den späteren DELET query
+		$DelArrOld;
+		$isold=false;
+		while($row=mysql_fetch_row($res))
+		{
+			$DelArrOld[]="`mauf_rowid`='".$row[0]."'";
+			$isold=true; //mindestens ein Treffer und somit alte Aufstellung vorhanden
+		}
+		$isset=true;
+		//setzen der neuen modulaufstellung
+		$DelArrNew;
+		foreach ($modul_ID_list as $modul)
+		{
+			if (!isset($modul['modul_id'])||!isset($modul['plansemester'])) return false;
+			$sqlinsert="INSERT INTO `unimanager`.`modulaufstellung` (`mauf_modul_id`, `mauf_sg_id`, `mauf_plansemester`, `mauf_typ`) VALUE ('".$modul['modul_id']."', '".$sg_id."', '".$modul['plansemester']."', '".$typ."');";
+			if(mysql_query($sqlinsert))
+			{
+				$row = mysql_fetch_row(mysql_query("SELECT LAST_INSERT_ID();"));
+				$DelArrNew[]="`mauf_rowid`='".$row[0]."'"; //speichern der ID für möglichen Rollback
+			}
+			else
+			{
+				$isset=false;
+				break;
+			}
+		}
+		//löschen der alten aufstellung wenn vorhanden und neue erfoglreich gestzt wurde
+		if($isset&&$isold)
+		{
+			$DelWhere=join(" OR ",$DelArrOld);
+			$sqldelete="DELETE FROM `unimanager`.`modulaufstellung` WHERE ".$DelWhere.";";
+			return mysql_query($sqldelete);
+		}
+		//Rollback der neuen Aufstellung da nicht vollständig
+		if(!$isset)
+		{
+			$DelWhere=join(" OR ",$DelArrNew);
+			$sqldelete="DELETE FROM `unimanager`.`modulaufstellung` WHERE ".$DelWhere.";";
+			return mysql_query($sqldelete);
+		}
+		return $isset;
 	}
 	
-    
-	function setSGstatus(){
+    /**
+    * ermöglicht das bequeme setzen der SO ohne array
+	  beutzt die setSGdetails, kann also auch dadurch ersetzt werden 	
+	* @param int $sg_id ID des SG
+	* @param string $status Status des SG ('kreiert','konstruiert','beschlossen','abgestimmt','bestätigt')
+	* @return bool true fuer Erfolg und false fuer Misserfolg beim Eintragen in die Datenbank
+    */
+	function setSGstatus($sg_id,$status){
+		$arr['sg_id']=$sg_id;
+		$arr['sg_status']=$status;
+		return $this->setSGdetails($arr);
 	}
 	
 	///getter///
@@ -99,11 +180,6 @@ class SG_Management {
 		$attr[2]="sg_po";
 		return $this->getSG(false,$attr,$id);
 	}
-	
-	/// ?????? was soll die holen?
-	function getSIDListSG(){
-	}
-	
 	
 	/**
 	* Ruft Name, ID und Status aller SG ab 
