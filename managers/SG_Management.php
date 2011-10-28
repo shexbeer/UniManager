@@ -192,6 +192,7 @@ class SG_Management {
 		$attr[1]="sg_id";
 		$attr[2]="sg_name";
 		$attr[3]="sg_status";
+		$attr[4]="sg_dekan";
 		if(!$paramtype)return $this->getSG(false,$attr);
 		if($paramtype=="status")return $this->getSG($param,$attr);
 		if($paramtype=="id")return $this->getSG(false,$attr,$param);

@@ -60,9 +60,11 @@ class Person_Management
         * @param int $id Dekan-ID des Dekans zu dem die PID gesucht wird
         * @return mixed array mit den Feldern pid (Personen-ID des Dekans) und result mit dem Wert true fuer alles ok oder false fuer Fehler bei der Abfrage
         */
-    function getDekanPID($id)
+    function getDekanDetails($dekan_id)
     {
-        
+        $sql = "SELECT * FROM studiendekan AS s INNER JOIN person as p ON p.person_id=s.studiendekan_persid WHERE s.studiendekan_id = '".$dekan_id."'";
+        $res = mysql_query($sql);
+        return $this->buildResult($res, "studiendekan_id");
     }
     /**
         * holt die Personen_ID zu dem Vornamen und Namen der Person oder gibt ein false zurück, falls die Person nicht existiert
@@ -84,6 +86,31 @@ class Person_Management
     {
         
     }
+    
+    // HELPER
+    
+    /**
+	* Erneut die buildResult aus Modul_Management, Füllt die DB-Resultate in eine array um (array[modulID][attribut])
+	  setzt Eintrag "sg_so" auf false falls SO und PO in ein un der selben Datei liegen kann rausgenommen werden falls wir nur die Strings speichern
+	* @param mySql-Rsourcedatei $res
+	* @return array ['result'] enthält false bei DB-Fehler, array[modulID][attribut] das attribut heißt gleich dem DB-fieldnamen
+	*/
+	// Daniel's geniale Funktion =)
+	// baut die Resultate nach den Tabellennamen in ein 2 Dimensionales Array um
+	// der 2. Parameter muss angegeben werden nach welchem Spaltennamen in erster Dimension das Array zusammengebaut wird, es empfielt sich den PRIMARY KEY der Tabelle zu verwenden
+	private function buildResult($res, $first_index){
+		if(!$res)$rows['result']=false;//Fehlererkennung
+		else{
+			$rows['result']=true;
+			$rnum=mysql_num_rows($res);# 0 wenn kein Treffer gefunden wurde
+			$fnum = mysql_num_fields($res);
+			for($i=0;$i<$rnum;$i++){
+					$mod_id = mysql_result($res,$i,$first_index);
+					for($j=0;$j<$fnum;$j++) $rows[$mod_id][mysql_field_name($res,$j)]=mysql_result($res,$i,$j);
+			}
+		}
+		return $rows;
+	}
 }
 
 ?>

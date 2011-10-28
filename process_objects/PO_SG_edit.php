@@ -23,12 +23,13 @@
           foreach($sglist as $var)
           {
               $result[$var["sg_id"]]=$var;
-              $pid_unchecked=$PM->getDekanPID($var["sg_dekan"]);
-              $pid=$this->UM->checkManagerResults($pid_unchecked,"pid","PersonenID");
-              $dekan_unchecked=$PM->getNameForID($pid);
-              $dekan=$this->UM->checkManagerResults($dekan_unchecked,"id","Namensabfrage");
-              $result[$var["sg_id"]]["sg_dekan"]=$dekan["vorname"]." ".$dekan["name"];
+              $dekan_unchecked=$PM->getDekanDetails($var["sg_dekan"]);
+              $dekan_id = $var["sg_dekan"];
+              $dekan=$this->UM->checkManagerResults($dekan_unchecked,"studiendekan_id","Dekanabfrage");
+              //var_dump($dekan);
+              $result[$var["sg_id"]]["sg_dekan"]=$dekan[$dekan_id]["person_vorname"]." ".$dekan[$dekan_id]["person_name"];
           }
+          //var_dump($result);
           $this->UM->VisualObject->showSGList($result);
       }
       
@@ -104,13 +105,11 @@
           $sgdetail_unchecked=$SG->getSGDetails($sg_id);
           $sgdetail=$this->UM->checkManagerResults($sgdetail_unchecked,"sg_id","Studiengangdetails");
           //Dekannamen zur DekanID heraussuchen und ueberpruefen
-          $pid_unchecked=$PM->getDekanPID($sgdetail["sg_dekan"]);
-          $pid=$this->UM->checkManagerResults($pid_unchecked,"pid","PersonenID");
-          $dekan_unchecked=$PM->getNameForID($pid);
-          $dekan=$this->UM->checkManagerResults($pid_unchecked,"id","Namensabfrage");
+          $dekan_unchecked=$PM->getDekanDetails($sgdetail["sg_dekan"]);
+          $dekan=$this->UM->checkManagerResults($dekan_unchecked,"studiendekan_id","Namensabfrage");
           //Dekanname und Vorname zum Array hinzufügen
-          $sgdetail["dekanvorname"]=$dekan["vorname"];
-          $sgdetail["dekanname"]=$dekan["name"];
+          $sgdetail["dekanvorname"]=$dekan["person_vorname"];
+          $sgdetail["dekanname"]=$dekan["person_name"];
           /* nicht noetig da PO und SO in den Details enthalten sein sollten
           //Prüfungsordnung und Studienordnung holen und ueberpruefen
           $po_unchecked=$SG->getPO($sg_id);

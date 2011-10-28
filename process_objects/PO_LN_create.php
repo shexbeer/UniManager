@@ -20,7 +20,7 @@ class PO_LN_create
 		//var_dump($res);
 		$lnlist = $this->UM->checkManagerResults($res, "ln_id", "Leistungsnachweise");
 		// hole alle Anmeldungen zu Leistungsnachweisen um Fehlerhafte Anmeldungen im vorfeld zu verhindern
-		$res = $LNM->getLNA($_SESSION["user_id"]);
+		$res = $LNM->getLNA_Person($_SESSION["user_id"]);
 		$lna = $this->UM->checkManagerResults($res, "lna_ln_id", "Leistungsnachweisanmeldungen");
 
 		// füge die Infos sinnvoll zusammen
@@ -47,7 +47,7 @@ class PO_LN_create
 			$LN[$var["ln_id"]]['ln_date'] = $var["ln_date"];
 			$LN[$var["ln_id"]]['ln_id'] = $var['ln_id'];
 			if(is_array($lna[$var["ln_id"]]))
-			{
+			{			
 				$LN[$var["ln_id"]]["angemeldet"] = true; // bitte im VO auslesen und anmeldung dann verhindern
 			}
 		}
