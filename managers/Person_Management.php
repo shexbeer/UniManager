@@ -32,6 +32,29 @@ class Person_Management
 		}
 		return $result;
 	}
+	
+    //Holt die Matrikelnummer zum Studenten
+    function getStudentDetails($student_personid){
+    	$sql = "SELECT * FROM student WHERE student_personenid = '".$student_personid."'";
+    	//echo $sql;
+    	$res = mysql_query($sql);
+    	if(!$res)
+		{	
+			$result["result"] = false;
+		} else {
+			$rnum=mysql_num_rows($res);
+			if($rnum != 0)
+			{
+				$result["result"] = true;
+				$row = mysql_fetch_object($res);
+				$result["student_personenid"] = $row->student_personenid;
+				$result["student_matnr"] = $row->student_matnr;
+				$result["student_sg_id"] = $row->student_sg_id;
+				$result["student_fakrat"] = $row->student_fakrat;
+			}
+		}
+		return $result;
+    }
     /**
         * holt die Personen_ID zu der Dekan_ID aus der Dekantabelle 
         * @param int $id Dekan-ID des Dekans zu dem die PID gesucht wird

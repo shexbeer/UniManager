@@ -184,6 +184,7 @@ class UniManager
 	 */
 	function checkManagerResults($results, $index_description_in_results, $error_description = '')
 	{
+		//var_dump($results);
 		foreach($results as $var) {
 			// Wenn Ergebniss kein Array, dann ist es die Result Meldung des Managers
 			if(!is_array($var)) {

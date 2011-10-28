@@ -19,6 +19,7 @@ class Modul_Management{
 			$attr[0]="modul_id";
 			$attr[1]="modul_id";
 			$attr[2]="modul_name";
+			$attr[3]="modul_person_id";
 			}
 		else{
 			$table="aenderung";

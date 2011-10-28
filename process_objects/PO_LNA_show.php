@@ -10,7 +10,7 @@
         	$LNM = new LN_Management();
         	$ModM = new Modul_Management();
         	
-        	$res = $LNM->getLNA($_SESSION["user_id"]);
+        	$res = $LNM->getLNA_Person($_SESSION["user_id"]);
         	$lna = $this->UM->checkManagerResults($res,"lna_ln_id", "Leistungsnachweisanmeldungen");
         	
         	$res = $LNM->getLNlist();

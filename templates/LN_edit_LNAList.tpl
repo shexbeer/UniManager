@@ -1,7 +1,8 @@
 {include file="header.tpl" title=foo}
 
-Die Liste zeigt alle existierender Leistungsnachweise durch Modulnamen, Personen-IDs und Datum
+Alle Anmeldungen zum ausgewaehlten Leistungsnachweis
 <br><br>
+<form action="LN_edit.php" method="POST">
 
 <table>
 <tr>
@@ -15,9 +16,14 @@ Die Liste zeigt alle existierender Leistungsnachweise durch Modulnamen, Personen
 <tr>
 <td>{$var.Matrikelnummer}</td>
 <td>{$var.Anmeldedatum}</td>
-<td>{$var.Note}</td>
+	<td>
+		<input type="text" name="{$var.lna_id}" value="{$var.Note}" size="3">
+	</td>
 </tr>
 {/foreach}
 </table>
+
+<input type="submit" value="Speichern">
+</form>
 
 {include file="footer.tpl" title=foo}

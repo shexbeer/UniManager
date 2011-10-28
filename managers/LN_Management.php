@@ -62,11 +62,19 @@ class LN_Management {
     	$res = mysql_query($sql);
     }
     // Holt eine Liste aller LN-Anmeldungen zu einer bestimmten Personen-ID
-    function getLNA($person_id)
+    function getLNA_Person($person_id)
     {
     	$sql = "SELECT * FROM leistungsnachweisanmeldung WHERE lna_person_id = '".$person_id."'";
     	$res = mysql_query($sql);
 		return $this->buildResult($res, "lna_ln_id");
+    }
+    // Holt eine Liste aller LN-Anmeldungen zu einem bestimmten Leistungsnachweis
+    function getLNA($ln_id)
+    {
+    	$sql = "SELECT * FROM leistungsnachweisanmeldung WHERE lna_ln_id = '".$ln_id."'";
+    	//echo $sql;
+    	$res = mysql_query($sql);
+		return $this->buildResult($res, "lna_id");
     }
     // Überprüft ob eine bestimmte Person schon eine Anmeldung zu einem Bestimmten Leistungsnachweis hat
     // return: bool
@@ -89,6 +97,7 @@ class LN_Management {
         $sql = "UPDATE leistungsnachweisanmeldung SET lna_mark='".$mark."' WHERE lna_id='".$lna_id."'";
         // oder `UniManager`.`leistungsnachweisanmeldung`
     	$res = mysql_query($sql);
+    	return $res;
     }
     
    /* 
@@ -133,10 +142,6 @@ class LN_Management {
     function getroomplan(){}
     
     function setLN(){}
-    
-   
-    //Holt die Matrikelnummer zum Studenten
-    function getStudentDetails($student_personid){}
   
 }
 

@@ -17,8 +17,8 @@ class PO_LN_create
 		$modlist = $this->UM->checkManagerResults($res, "modul_id", "Module");
 		// holt alle LN
 		$res = $LNM->getLNList();
+		//var_dump($res);
 		$lnlist = $this->UM->checkManagerResults($res, "ln_id", "Leistungsnachweise");
-		
 		// hole alle Anmeldungen zu Leistungsnachweisen um Fehlerhafte Anmeldungen im vorfeld zu verhindern
 		$res = $LNM->getLNA($_SESSION["user_id"]);
 		$lna = $this->UM->checkManagerResults($res, "lna_ln_id", "Leistungsnachweisanmeldungen");
@@ -27,15 +27,17 @@ class PO_LN_create
 		foreach($lnlist as $var) {
 			// LN_Examiner ist einer Personen-ID deswegen muss diese ausgetauscht werden!
 			$id = $var['ln_examiner'];
+
 			$res = $PM->getNameForID($id);
+			
 			$person = $this->UM->checkManagerResults($res, "id", "Personen");
 			$LN[$var["ln_id"]]['ln_examiner'] = $person[$id]["vorname"]." ".$person[$id]["name"];
 			
 			// Falls es Vorraussetzungen gibt sind diese Modul-ID's und müssen daher ersetzt werden!
-			if($var['ln_requirement']) {
+			if($var['ln_requirement'] && is_numeric($var['ln_requirement'])) {
 				$LN[$var["ln_id"]]['ln_requirement'] = $modlist[$var["ln_requirement"]]["modul_name"];
 			} else {
-				$LN[$var["ln_id"]]['ln_requirement'] = "";
+				$LN[$var["ln_id"]]['ln_requirement'] = $var['ln_requirement'];
 			}
 			// Der Modulname wird in ein Neues Feld gespeichert
 			$LN[$var["ln_id"]]['ln_modul_name'] = $modlist[$var['ln_modul_id']]['modul_name'];

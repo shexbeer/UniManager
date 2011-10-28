@@ -13,6 +13,7 @@ class PO_MA_create
 		$SG_M = new SG_Management();
 		// Hole alle Studiengänge zum anzeigen
 		$sg = $SG_M->getSGList();
+		var_dump($sg);
 		$sg_edited = $this->UM->checkManagerResults($sg, "id", "Studiengaenge");
 		$this->UM->VisualObject->showSGList($sg_edited);
 	}
