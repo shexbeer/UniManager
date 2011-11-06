@@ -30,8 +30,8 @@ class PO_LN_create
 
 			$res = $PM->getNameForID($id);
 			
-			$person = $this->UM->checkManagerResults($res, "id", "Personen");
-			$LN[$var["ln_id"]]['ln_examiner'] = $person[$id]["vorname"]." ".$person[$id]["name"];
+			$person = $res; //$this->UM->checkManagerResults($res, "id", "Personen");
+			$LN[$var["ln_id"]]['ln_examiner'] = $person["vorname"]." ".$person["name"];
 			
 			// Falls es Vorraussetzungen gibt sind diese Modul-ID's und müssen daher ersetzt werden!
 			if($var['ln_requirement'] && is_numeric($var['ln_requirement'])) {

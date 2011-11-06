@@ -7,6 +7,12 @@ define('VO_dir', "visual_objects/");
 define('prefix_PO', "PO_");
 define('prefix_VO', "VO_");
 define('template_dir', "templates");
+
+
+define('PDF_POSO_DIR', 'pdf/poso/');
+define('PDF_Modulhandbuch_DIR', 'pdf/modul/');
+define('PDF_Creator', 'pdf/pdf_create.php');
+	// Zuweisung zu template Variablen in showheader() Funktion
 // end Config Vars
 session_start();
 
@@ -132,6 +138,10 @@ class UniManager
 		
 		//$admin = $this->checkAccesslvl("admin.php");
 		//$this->tpl->assign("admin", $admin);
+		
+		$this->tpl->assign("pdf_poso_dir", PDF_POSO_DIR);
+		$this->tpl->assign("pdf_modulhandbuch_dir", PDF_Modulhandbuch_DIR);
+		$this->tpl->assign("pdf_creator", PDF_Creator);
 	}
 	function showfooter()
 	{

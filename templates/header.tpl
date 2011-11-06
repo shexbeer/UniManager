@@ -2,6 +2,7 @@
 <head>
 <link rel='stylesheet' type='text/css' href='{$rootDir}{$css_datei}'>
 <script type='text/javascript' src='{$rootDir}js/lib.js'></script>
+<script type='text/javascript' src='{$rootDir}js/pdfobject.js'></script>
 </head>
 	<body>
 <table>

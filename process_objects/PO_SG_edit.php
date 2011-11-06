@@ -97,19 +97,22 @@
         */
       function editSG($posoedit,$sg_id)
       {
+      //print $sg_id;
           //Manager initialisieren
           $MM=new Modul_Management();
           $SG=new SG_Management();
           $PM=new Person_Management();
           //Studiengangdetails abrufen und ueberpruefen
-          $sgdetail_unchecked=$SG->getSGDetails($sg_id);
+          $sgdetail_unchecked=$SG->getSGDetails("id",$sg_id);
           $sgdetail=$this->UM->checkManagerResults($sgdetail_unchecked,"sg_id","Studiengangdetails");
           //Dekannamen zur DekanID heraussuchen und ueberpruefen
-          $dekan_unchecked=$PM->getDekanDetails($sgdetail["sg_dekan"]);
+          $dekan_unchecked=$PM->getDekanDetails($sgdetail[$sg_id]["sg_dekan"]);
           $dekan=$this->UM->checkManagerResults($dekan_unchecked,"studiendekan_id","Namensabfrage");
+          $dekan_id = $sgdetail[$sg_id]["sg_dekan"];
+          $sgdetail = $sgdetail[$sg_id];
           //Dekanname und Vorname zum Array hinzufügen
-          $sgdetail["dekanvorname"]=$dekan["person_vorname"];
-          $sgdetail["dekanname"]=$dekan["person_name"];
+          $sgdetail["dekanvorname"]=$dekan[$dekan_id]["person_vorname"];
+          $sgdetail["dekanname"]=$dekan[$dekan_id]["person_name"];
           /* nicht noetig da PO und SO in den Details enthalten sein sollten
           //Prüfungsordnung und Studienordnung holen und ueberpruefen
           $po_unchecked=$SG->getPO($sg_id);

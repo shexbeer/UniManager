@@ -1,41 +1,105 @@
 {include file="header.tpl" title=foo}
 
- 
+<form action="SG_edit.php" method="POST">
+Details des ausgew&auml;lten Studiengangs
 <br><br>
-
-<table>
+<table width=500>
 <tr>
-<th colspan=9> Details den ausgewälten Studiengänge
-</th>
+	<td width=150>
+		Studiengang_ID
+	</td>
+	<td width=250 align=left>
+		<input type="text" name="sg_name" value="{$sg.sg_id}" disabled=true>
+	</td>
 </tr>
 <tr>
-<th>Studiengangname</th>
-<th>Studiengang_ID</th>
-<th>Name des Dekans</th>
-<th>Vorname des Dekans</th>
-<th>Pruefungsordnung</th>
-<th>Studiensordnung</th>
-<th>Erstellungsdatum</th>
-<th>Modulhandbuch</th>
-<th>Status des Studiengangs</th>
-
-<th></th>
+	<td width=150>
+		Studiengangname
+	</td>
+	<td width=350 align=left>
+		<input type="text" name="sg_name" value="{$sg.sg_name}" size="30">
+	</td>
 </tr>
-
-{foreach from=$sgdetail item=var}
 <tr>
-<td>{$var.sg_name}</td>
-<td>{$var.sg_id}</td>
-<td>{$var.dekanname}</td>
-<td>{$var.dekanvorname}</td>
-<td>{$var.sg_po}</td>
-<td>{$var.sg_so}</td>
-<td>{$var.sg_createdate}</td>
-<td>{$var.sg_modulhandbuch}</td>
-<td>{$var.sg_status}</td>
+	<td width=150>
+		Vorname und Nachname des Dekans
+	</td>
+	<td width=250 align=left>
+		<input type="text" name="sg_name" value="{$sg.dekanvorname} {$sg.dekanname}">
+	</td>
 </tr>
-{/foreach}
-
+<tr>
+	<td width=150>
+		Pruefungs und Studiumsordnung
+	</td>
+	{if $sg.sg_po}
+	<td width=250 align=left>
+		<object data="{$pdf_poso_dir}{$sg.sg_po}" type="application/pdf" width="800" height="300">
+ 
+		  <p>It appears you don't have a PDF plugin for this browser.
+ 			 No biggie... you can <a href="{$pdf_poso_dir}{$sg.sg_po}">click here to
+ 			 download the PDF file.</a></p>
+		</object>
+	</td>
+	{else}
+	<td width=250 align=left>
+		zur Zeit kein PDF zum Anzeigen
+	</td>
+	{/if}
+</tr>
+<!--
+<tr>
+	<td width=150>
+		Studiensordnung
+	</td>
+	<td width=250 align=left>
+		<input type="text" name="sg_name" value="{$sg.sg_so}">
+	</td>
+</tr>
+-->
+<tr>
+	<td width=150>
+		Erstellungsdatum
+	</td>
+	<td width=250 align=left>
+		<input type="text" name="sg_name" disabled=true value="{$sg.sg_createdate}">
+	</td>
+</tr>
+<tr>
+	{if $sg.moulhandbuch}
+	<td width=150>
+		Modulhandbuch
+	</td>
+	<td width=250 align=left>
+		<object data="{$pdf_modulhandbuch_dir}{$sg.modulhandbuch}" type="application/pdf" width="800" height="300">
+ 
+		  <p>It appears you don't have a PDF plugin for this browser.
+ 			 No biggie... you can <a href="{$pdf_modulhandbuch_dir}{$sg.modulhandbuch}">click here to
+ 			 download the PDF file.</a></p>
+		</object>
+	</td>
+	{else}
+	<td width=150>
+		Modulhandbuch
+	</td>
+	<td width=250 align=left>
+		zur Zeit kein PDF zum Anzeigen
+	</td>
+	{/if}
+</tr>
+<tr>
+	<td width=150>
+		Status des Studiengangs
+	</td>
+	<td width=250 align=left>
+		<input type="radio" name="sg_status" value="kreiert"{if $sg.sg_status==kreiert} checked="checked"{/if}> kreiert<br>
+		<input type="radio" name="sg_status" value="konstruiert"{if $sg.sg_status==konstruiert} checked="checked"{/if}> konstruiert<br>
+		<input type="radio" name="sg_status" value="beschlossen"{if $sg.sg_status==beschlossen} checked="checked"{/if}> beschlossen<br>
+		<input type="radio" name="sg_status" value="abgestimmt"{if $sg.sg_status==abgestimmt} checked="checked"{/if}> abgestimmt<br>
+		<input type="radio" name="sg_status" value="bestaetigt"{if $sg.sg_status==bestaetigt} checked="checked"{/if}> best&auml;tigt
+	</td>
+</tr>
+</table>
 
 {if $modullist==true}
 <tr>
@@ -156,8 +220,17 @@
 <td>{$var.modul_effort}</td>
 </tr>
 {/foreach}
+</table>
 {/if}
 
+<table width=500>
+<tr>
+	<td width=200 align=left>
+	</td>
+	<td width=300 align=right>
+		<input type="submit" value="Senden" name="submit">
+	</td>
+</tr>
 </table>
-
+</form>
 {include file="footer.tpl" title=foo}

@@ -38,7 +38,7 @@ class VO_SG_edit
 	{
 		$this->UM->showfooter();
 		$this->UM->showheader($this->UM->seite);
-		$this->UM->tpl->assign("SGDetails", $sgdetail);
+		$this->UM->tpl->assign("sg", $sgdetail);
 		
 		$this->UM->tpl->display("SG_edit_ALLSGContent.tpl", session_id());
 	}
