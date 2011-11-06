@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Erstellungszeit: 06. November 2011 um 21:15
+-- Erstellungszeit: 06. November 2011 um 21:40
 -- Server Version: 5.1.44
 -- PHP-Version: 5.3.1
 
@@ -443,8 +443,8 @@ CREATE TABLE IF NOT EXISTS `studiengang` (
 --
 
 INSERT INTO `studiengang` (`sg_id`, `sg_name`, `sg_po`, `sg_so`, `sg_createdate`, `sg_modulhandbuch`, `sg_dekan`, `sg_status`) VALUES
-(1, 'Bachelor Network Computing', 'POSOBNC.pdf', 'POSOBNC.pdf', '1999-10-01', '', 1, 'kreiert'),
-(2, 'Diplom Maschinenbau', '', '', '2011-08-01', '', 1, 'bestaetigt');
+(1, 'Bachelor Network Computing', 'POSOBNC.pdf', 'POSOBNC.pdf', '1999-10-01', 'Modul_1.pdf', 1, 'kreiert'),
+(2, 'Diplom Maschinenbau', '', '', '2011-08-01', 'Modul_2.pdf', 1, 'bestaetigt');
 
 --
 -- Constraints der exportierten Tabellen

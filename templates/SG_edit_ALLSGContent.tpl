@@ -66,15 +66,15 @@ Details des ausgew&auml;lten Studiengangs
 	</td>
 </tr>
 <tr>
-	{if $sg.moulhandbuch}
+	{if $sg.sg_modulhandbuch}
 	<td width=150>
 		Modulhandbuch
 	</td>
 	<td width=250 align=left>
-		<object data="{$pdf_modulhandbuch_dir}{$sg.modulhandbuch}" type="application/pdf" width="800" height="300">
+		<object data="{$pdf_modulhandbuch_dir}{$sg.sg_modulhandbuch}" type="application/pdf" width="800" height="300">
  
 		  <p>It appears you don't have a PDF plugin for this browser.
- 			 No biggie... you can <a href="{$pdf_modulhandbuch_dir}{$sg.modulhandbuch}">click here to
+ 			 No biggie... you can <a href="{$pdf_modulhandbuch_dir}{$sg.sg_modulhandbuch}">click here to
  			 download the PDF file.</a></p>
 		</object>
 	</td>
