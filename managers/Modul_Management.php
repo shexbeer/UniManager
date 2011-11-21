@@ -40,14 +40,17 @@ class Modul_Management{
 	* @param mixed $sem int für Plansemester, string zB 'SS2011' für kalendarisches Semester
 	* @return mixed array mit DB-Resultaten, ['result'] enthält false bei DB-Fehler, array[modulID][attribut] das atribut heißt gleich dem DB-namen unsortiert,false wenn Parameter falsch
 	*/
-	function getModuldetails($status,$type=false,$id=false,$semtype=false,$sem=false){
-		if($status){
+	function getModuldetails($status,$type=false,$id=false,$semtype=false,$sem=false)
+	{
+		if($status)
+		{
 			$table="modul";
 			$attr[0]="modul_id";
 			$attr[1]="modul_id";
 			$attr[2]="modul.*";
 		}
-		else{
+		else
+	{
 			$table="aenderung";
 			$attr[0]="aenderung_id";
 			$attr[1]="aenderung_mid";
@@ -88,7 +91,7 @@ class Modul_Management{
 					return $this->buildResult($res,$attr[0]);
 				case "sg":
 					if(!$semtype){
-						$sql = "SELECT ".$str.",mauf_plansemester FROM ".$table." INNER JOIN (studiengang INNER JOIN modulaufstellung ON sg_id=".$id.")ON mauf_modul_id=".$attr[1];
+						$sql = "SELECT ".$str.",mauf_plansemester FROM ".$table." INNER JOIN (studiengang INNER JOIN modulaufstellung ON sg_id=mauf_sg_id)ON mauf_modul_id=".$attr[1]." WHERE sg_id=".$id;
 						$res = mysql_query($sql);
 						//2dim array array[modulID][attribut] id ist in den attributen ebenfalls vorhanden 
 						return $this->buildResult($res,$attr[0]);
