@@ -89,12 +89,6 @@ class Person_Management
     
     // HELPER
     
-    /**
-	* Erneut die buildResult aus Modul_Management, Füllt die DB-Resultate in eine array um (array[modulID][attribut])
-	  setzt Eintrag "sg_so" auf false falls SO und PO in ein un der selben Datei liegen kann rausgenommen werden falls wir nur die Strings speichern
-	* @param mySql-Rsourcedatei $res
-	* @return array ['result'] enthält false bei DB-Fehler, array[modulID][attribut] das attribut heißt gleich dem DB-fieldnamen
-	*/
 	// Daniel's geniale Funktion =)
 	// baut die Resultate nach den Tabellennamen in ein 2 Dimensionales Array um
 	// der 2. Parameter muss angegeben werden nach welchem Spaltennamen in erster Dimension das Array zusammengebaut wird, es empfielt sich den PRIMARY KEY der Tabelle zu verwenden

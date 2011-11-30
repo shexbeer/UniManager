@@ -28,7 +28,7 @@ class Modulaufstellung_Manegement{
 	* Ruft den status für ein Modulangebot bzgl. Jahr und Studiengang
 	* @param string $sem kalendarisches Semester
 	* @param int $id ID des SG
-	* @return array mit Zustänen pro SG und Hinweis falls Unterschiede vorhanden [count][[ma_status]/[ma_sg]]
+	* @return array mit Zuständen pro SG und Hinweis falls Unterschiede vorhanden [count][[ma_status]/[ma_sg]]
 	  ['result']enthält false bei DB-Fehler
 	  ['diff']enthält true wenn Zustandsunterschiede vorhanden
 	*/

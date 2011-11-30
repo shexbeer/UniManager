@@ -140,7 +140,7 @@ class SG_Management {
 	}
 	
     /**
-    * ermöglicht das bequeme setzen der SO ohne array
+    * ermöglicht das bequeme setzen des Status ohne array
 	  beutzt die setSGdetails, kann also auch dadurch ersetzt werden 	
 	* @param int $sg_id ID des SG
 	* @param string $status Status des SG ('kreiert','konstruiert','beschlossen','abgestimmt','bestätigt')
