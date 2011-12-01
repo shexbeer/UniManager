@@ -17,17 +17,60 @@ class Modulangebot_Management{
 	* Ruft Modulangebot zu einem SG für ein bestimmtes kalendarisches Semester ab
 	* @param int $id Die id des Studiengangs
 	* @param string $sem das kalendarische semester Syntax SS2011 oder WS2011
-	* @return mixed array mit DB-Resultaten, ['result'] enthält false bei DB-Fehler, array[modulID][attribut] das atribut heißt gleich dem DB-namen unsortiert,false wenn Parameter falsch
-	  attribut mauf_plansemester enthält das plan Semester bzgl. des Studiengangssomit kann in der ausgabe das entsprechend sotiert werden (z.B: was in dem Angebot für WS2011 bei BNC ist für BNC 1.Sem oder was BNC 3.Sem)
+	* @return mixed array mit DB-Resultaten false falls etwas schiefgelaufen ist, sonst:
+			$result['result'] bool ob erfolgreich oder nicht
+			$result[count]['status'] der Status jedes Eintrags
+			$result[count]['sg'] die Studiengang-ID nochmal gespeichert
+			$result[count]['event'] Die restdaten in Eventform für mögliche set-Aktionen (für Struktur siehe weiter unten)
 	*/
 	function getModulangebot($id,$sem)
 	{
-		#TODO: NEED CHANGE
+		$sql = "SELECT * FROM `modulangebot` WHERE `ma_semester`='".$sem."' AND `ma_sg`='".$id."';";
+		$res = mysql_query($sql);
+		return $this->buildResultEvent($res);
 	}
 	
+	/**
+	* Ruft Modulangebot für ein komplettes bestimmtes kalendarisches Semester ab
+	* @param int $id Die id des Studiengangs
+	* @param string $sem das kalendarische semester Syntax SS2011 oder WS2011
+	* @return mixed array mit DB-Resultaten false falls etwas schiefgelaufen ist, sonst:
+			$result['result'] bool ob erfolgreich oder nicht
+			$result[count]['status'] der Status jedes Eintrags
+			$result[count]['sg'] die Studiengang-ID nochmal gespeichert
+			$result[count]['event'] Die restdaten in Eventform für mögliche set-Aktionen (für Struktur siehe weiter unten)
+	*/
 	function getModulangebotForSem($sem)
 	{
+		$sql = "SELECT * FROM `modulangebot` WHERE `ma_semester`='".$sem."';";
+		$res = mysql_query($sql);
+		return $this->buildResultEvent($res);
+	}
 	
+	/**
+	* Helper zum Umbauen der DB-resourcen damit ein gültiger Eventeintrag entsteht
+	*/
+	function buildResultEvent($res)
+	{
+		if(!$res)$rows['result']=false;//Fehlererkennung
+		else{
+			$rows['result']=true;
+			$rnum = mysql_num_rows($res);# 0 wenn kein Treffer gefunden wurde
+			for($i=0;$i<$rnum;$i++)
+			{
+				$newevent['semester']=mysql_result($res,$i,'ma_semester');
+				$newevent['time']=mysql_result($res,$i,'ma_time');
+				$newevent['weekday']=mysql_result($res,$i,'ma_weekday');
+				$newevent['week']=mysql_result($res,$i,'ma_week');
+				$newevent['modul']=mysql_result($res,$i,'ma_modul');
+				$newevent['lb']=mysql_result($res,$i,'ma_lb');
+				$index = mysql_result($res,$i,'ma_count');
+				$rows[$index]['status']=mysql_result($res,$i,'ma_status');
+				$rows[$index]['sg']=mysql_result($res,$i,'ma_sg');
+				$rows[$index]['event']=$newevent;
+			}
+		}
+		return $rows;
 	}
 	
 	/**
@@ -53,12 +96,32 @@ class Modulangebot_Management{
 		Diese setzen sich wie folgt zusammen und wird wie ein eigener Typ behandelt
 		Die get Funktionen sollten Die Informationen in genau der Form zurück geben
 		$arr['semester'] das kalendarische Semester (zB WS2001)
-		$arr['time'] die Uhrzeit der Veranstaltung (sql_TIME)
+		$arr['time'] die Uhrzeit der Veranstaltung (sql_TIME 'hh:mm:ss')
 		$arr['weekday'] der Wochentag (enum zB 'Dienstag')
 		$arr['week'] die Woche als int(jede oder gerade oder ungerade)
 		$arr['modul'] die modul id als int
 		$arr['lb'] die Lehrbeauftragter id als int
 	*/
+	
+	/**
+	* Setzt den Status für das komplette Modulangebot eines Semesters oder nur für einen SG in einem Semester
+	* @param string $status der Status auf den gestezt werden soll
+	* @param string $sem das betroffene kalendarische Semester
+	* @param int $id falls nicht false die id des SG für den der Status gestzt werden soll 
+	* @return bool ob erfolgreich oder nicht
+	*/
+	function setModulangebotStatus($status, $sem, $id=false)
+	{
+		$where = "WHERE `ma_semester`='".$sem."'";
+		if( !$id )
+			$where = $where.";";
+		else
+			$where = $where." AND `ma_sg`='".$id."';";
+		$sql = "UPDATE `modulangebot` SET `ma_status`='".$status."' ".$where;
+		if( !mysql_query($sql) )
+			return false; // Fehlschlag
+		return true;
+	}
 	
 	/**
 	* überprüft ein Event auf gültigen Aufbau
@@ -166,7 +229,7 @@ class Modulangebot_Management{
 		foreach( $offer as $event )
 		{
 			if( !$this->checkEvent($event) )
-				return 88; //Event ist falsch
+				return false; //Event ist falsch
 			if( !$diffsem )
 			{
 				if($sem==NULL)
@@ -175,7 +238,6 @@ class Modulangebot_Management{
 					return false; //Semster sind unterschiedlich aber flag nicht gestezt
 			}
 		}
-		
 		// Überprüfen ob einige Events schon vorhanden sind vorhandene ignorieren
 		foreach( $offer as $index => $event )
 		{
@@ -184,7 +246,7 @@ class Modulangebot_Management{
 			{
 				$arr[]="`ma_".$key."`='".$value."'";
 			}
-			$sql = "SELECT `ma_count` FROM `modulangebot` WHERE ".join($arr," AND ").";";
+			$sql = "SELECT `ma_count` FROM `modulangebot` WHERE ".join($arr," AND ")." AND `ma_sg`='".$id."';";
 			$res = mysql_query($sql);
 			if( mysql_fetch_row($res) )
 				unset($offer[$index]);
