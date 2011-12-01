@@ -139,13 +139,43 @@ class Modul_Management{
 		return $rows;
 	}
 	
-	#Löschen eines Moduls nach ID
-	function deleteModul($id){
-		$sql = "DELETE FROM modul WHERE modul_id=" . $id;
-		$res = mysql_query($sql);# false wenn Löschen fehlschlägt
-		# weitere DELETE/UPDATE notwendig in anderen Tables 
-		# Test ob gelöscht werden darf nötig
-		return $res; # bool
+	/**
+	* Löscht ein Modul nach ID ist warning gesetzt wird nur gelöscht wenn keine Fremdkeys mehr vorhanden
+	  ansonsten werden auch alle verknüpfungen gelöscht die mit dem modul zusammen hängen also VORSICHT!!!
+	* @param int $id Id des Moduls das gelöscht werden soll
+	* @param bool $warning ob gewarnt werden soll vor mitlöschen gebundener anderer Einträge
+	* @return mixed array[0] = bool true wenn gelöscht und false wenn nicht
+	  array[1] = string Grund für false
+	*/
+	function deleteModul( $id,$warning=true )
+	{
+		if( $warning )
+		{
+			$sql = "SELECT * FROM `leistungsnachweis`, `modulangebot`, `modulaufstellung` WHERE `ln_modul_id`='".$id."' OR `ma_modul`='".$id."' OR `mauf_modul_id`='".$id."';";
+			$res = mysql_query($sql);
+			if( mysql_fetch_row($res) )
+			{
+				$arr[0]=false;
+				$arr[1]="WARNING";
+				return $arr;
+			}
+		}			
+		$sql = "DELETE FROM `modul` WHERE `modul_id`='".$id."';";
+		if( !$res = mysql_query($sql) )
+		{
+			$arr[0]=false;
+			$arr[1]="FAILURE";
+			return $arr;
+		}
+		if( mysql_affected_rows()==0 )
+		{
+			$arr[0]=false;
+			$arr[1]="NOMATCH";
+			return $arr;
+		}
+		$arr[0]=true;
+		$arr[1]="OK";
+		return $arr;
 	}
 	
 	
