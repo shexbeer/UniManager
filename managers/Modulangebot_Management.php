@@ -25,6 +25,11 @@ class Modulangebot_Management{
 		#TODO: NEED CHANGE
 	}
 	
+	function getModulangebotForSem($sem)
+	{
+	
+	}
+	
 	/**
 	* Ruft den status für ein Modulangebot bzgl. Jahr und Studiengang
 	* @param string $sem kalendarisches Semester
@@ -42,9 +47,6 @@ class Modulangebot_Management{
 		return $this->buildResultforStatus($res);
 	}
 	
-	function getModulangebotForSem($sem)
-	{
-	}
 	
 	/*
 		Die Basis des Modulangebots sind Veranstaltungen bzw events.
@@ -283,7 +285,53 @@ class Modulangebot_Management{
 		return true;
 	}
 	
+	function removeSGfromEvent($sgid, $event)
+	{
+		// Check event
+		if( !$this->checkEvent($event) )
+			return false; // Event ungültig
+		$arr=array();
+		foreach( $event as $key => $value )
+		{
+			$arr[]="`ma_".$key."`='".$value."'";
+		}
+		$sql = "DELETE FROM `modulangebot` WHERE ".join($arr," AND ")." AND `ma_sg`='".$sgid."'";
+		if( !mysql_query($sql) )
+			return false; // Löschen gescheitert
+		return true;
+	}
 	
+	/**
+	* Funtion zum ersetzen der Daten eines alten durch ein neues Event (zB um Uhrzeit oder Tag zu ändern)
+	* @param $oldevent
+	* @param $newevent
+	* @return bool ob erfolgreich oder nicht
+	*/
+	function updateEvent( $oldevent, $newevent)
+	{
+		if( !$this->checkEvent($newevent) )
+			return false; // neues Event ungültig	
+		if( !$this->checkEvent($oldevent) )
+			return false; // altes Event ungültig (wenn Prozess Modell logisch korrekt dann sollte das nie false werden)
+		
+		$oldarr=array();
+		$newarr=array();
+		foreach( $oldevent as $key => $value )
+		{
+			$oldarr[]="`ma_".$key."`='".$value."'";
+		}
+		foreach( $newevent as $key => $value )
+		{
+			$newarr[]="`ma_".$key."`='".$value."'";
+		}
+		
+		$sql = "UPDATE `modulangebot` SET ".join($newarr,", ")." WHERE ".join($oldarr," AND ").";";
+		if( !mysql_query($sql) )
+			return $sql; // Update fehlgeschlagen
+		return true;
+	}
+	
+	//HELPER
 	private function buildResultforStatus($res)
 	{
 		$mod_id=NULL;
