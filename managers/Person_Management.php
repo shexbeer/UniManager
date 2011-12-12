@@ -32,9 +32,9 @@ class Person_Management
 		return $result;
 	}
 	
-    //Holt die Matrikelnummer zum Studenten
+    //Holt Studentendetails
     function getStudentDetails($student_personid){
-    	$sql = "SELECT * FROM student WHERE student_personenid = '".$student_personid."'";
+    	$sql = "SELECT * FROM student WHERE student_personenid = '".$student_personid."';";
     	//echo $sql;
     	$res = mysql_query($sql);
     	if(!$res)
@@ -54,10 +54,11 @@ class Person_Management
 		}
 		return $result;
     }
+	
     /**
 	* holt die Personendetails zu der Dekan_ID aus der Dekantabelle 
 	* @param int $id Dekan-ID des Dekans zu dem die PID gesucht wird
-	* @return mixed array mit den Feldern pid (Personen-ID des Dekans) und result mit dem Wert true fuer alles ok oder false fuer Fehler bei der Abfrage
+	* @return mixed array mit den Details-feldern und result mit dem Wert true fuer alles ok oder false fuer Fehler bei der Abfrage
 	*/
     function getDekanDetails($dekan_id)
     {
@@ -65,25 +66,120 @@ class Person_Management
         $res = mysql_query($sql);
         return $this->buildResult($res, "studiendekan_id");
     }
+	
+	/**!!
+	* holt die Personendetails zu einem Lehrenden 
+	* @param int $lid ID des Lehrenden
+	* @return mixed array mit den Details-feldern und result mit dem Wert true fuer alles ok oder false fuer Fehler bei der Abfrage
+	*/
+    function getLehrenderDetails($lid)
+    {
+        $sql = "SELECT * FROM lehrende AS l INNER JOIN person as p ON p.person_id=l.lehrende_personenid WHERE l.lehrende_id = '".$lid."';";
+        $res = mysql_query($sql);
+        return $this->buildResult($res, "lehrende_id");
+    }
+	
+	/**!!
+	* holt die Personendetails zu einem Lehrbeauftragtem
+	* @param int $id ID des Lehrbeauftragtem
+	* @return mixed array mit den Details-feldern und result mit dem Wert true fuer alles ok oder false fuer Fehler bei der Abfrage
+	*/
+    function getLehrbeauftrDetails($bid)
+    {
+        $sql = "SELECT * FROM lehrbeauftragter AS b INNER JOIN person as p ON p.person_id=b.lehrbeauftr_personenid WHERE b.lehrbeauftr_id = '".$bid."'";
+        $res = mysql_query($sql);
+        return $this->buildResult($res, "lehrbeauftr_id");
+    }
+	
     /**
 	* holt die Personen_ID zu dem Vornamen und Namen der Person oder gibt ein false zurück, falls die Person nicht existiert
-	* @param string Array mit den Feldern vorname und name
-	* @return mixed array mit den Feldern pid (personenId) und dem Feld result mit dem Wert true fuer Person gefunden oder false fuer Person nicht gefunden
+	* @param string $name Nachname der Person
+	* @param string $vorname Vorname der Person
+	* @return mixed bool::false wenn Fehler ; int::array::ID array mit allen IDs die den Namen enthalten
 	*/
-    function getPIDForName($person)
+    function getPIDForName($name, $vorname)
     {
-        
+        $sql = "SELECT `person_id` FROM `person` WHERE `person_name`='".$name."' AND `person_vorname`='".$vorname."';";
+		$res = mysql_query($sql);
+		if(!$res)
+			return false; //Fehler im query
+		$result=array();
+		while(true)
+		{
+			$row = mysql_fetch_row($res);
+			if(!$row)
+				break; //kein weiterer Eintrag
+			$result[]=$row[0];//ID  
+		}
+		return $result;
+    }
+	
+	/**
+	* holt die Lehrenden-ID zu der Personen-ID aus Lehrenden-Table
+	* @param int $pid Personen-ID der Person
+	* @return mixed bool::false falls Fehler/kein Eintrag oder int::gesuchte-ID falls Eintrag gefunden
+	*/
+	function getLehrbeauftrID($pid)
+    {
+		$sql = "SELECT `lehrbeauftr_id` FROM `lehrbeauftragter` WHERE `lehrbeauftr_personenid`='".$pid."'";
+		$res = mysql_query($sql);
+		if(!$res)
+			return false; //Fehler im query
+		$row = mysql_fetch_row($res);
+		if(!$row)
+			return false; //kein Eintrag
+		return $row[0];//ID    
+    }
+	
+	/**
+	* holt die Lehrenden-ID zu der Personen-ID aus Lehrenden-Table
+	* @param int $pid Personen-ID der Person
+	* @return mixed bool::false falls Fehler/kein Eintrag oder int::gesuchte-ID falls Eintrag gefunden
+	*/
+	function getLehrendenID($pid)
+    {
+		$sql = "SELECT `lehrende_id` FROM `lehrende` WHERE `lehrende_personenid`='".$pid."'";
+		$res = mysql_query($sql);
+		if(!$res)
+			return false; //Fehler im query
+		$row = mysql_fetch_row($res);
+		if(!$row)
+			return false; //kein Eintrag
+		return $row[0];//ID    
+    }
+	
+	/**
+	* holt die Lehrenden-ID zu der Personen-ID aus Lehrenden-Table
+	* @param int $pid Personen-ID der Person
+	* @return mixed bool::false falls Fehler/kein Eintrag oder int::gesuchte-ID falls Eintrag gefunden
+	*/
+	function getFakID($name)
+    {
+		$sql = "SELECT `fak_id` FROM `fakultaet` WHERE `fak_name`='".$name."'";
+		$res = mysql_query($sql);
+		if(!$res)
+			return false; //Fehler im query
+		$row = mysql_fetch_row($res);
+		if(!$row)
+			return false; //kein Eintrag
+		return $row[0];//ID    
     }
     
     /**
 	* holt die Dekan_ID zu der Personen-ID aus der Dekantabelle
 	* @param int $pid Personen-ID der Person zu der die Dekan-ID gesucht wird
-	* @return mixed false falls Fehler oder int for id falls gefunden
+	* @return mixed bool::false falls Fehler/kein Eintrag oder int::DekanID falls Eintrag gefunden
 	*/
-    
-    function getDekanID($pid)
+	function getDekanID($pid)
     {
-        
+		$sql = "SELECT `studiendekan_id` FROM `studiendekan` WHERE `studiendekan_persid`='".$pid."'";
+		$res = mysql_query($sql);
+		if(!$res)
+			return false; //Fehler im query
+		$row = mysql_fetch_row($res);
+		if(!$row)
+			return false; //kein Eintrag
+		return $row[0];//ID    
     }
 	
 	/// SETTER ///
@@ -418,6 +514,47 @@ class Person_Management
 			return true;
 		else
 			return false;
+	}
+	
+	/**
+	* Erstellt eine Fakultät
+	* @param string $name Der Name der neuen Fakultät
+	* @return mixed false oder die neue Fak_id
+	*/
+	function createFak($name)
+	{
+		// Prüfen ob Fakname schon verwendet
+		$sql="SELECT `faki_id` FROM `unimanager`.`fakultaet` WHERE `fak_name`='".$name."';";
+		$res = mysql_query($sql);
+		if(!$res)
+			return false;
+		if( mysql_fetch_row($res) )
+			return false;
+		// Erstellen eines neuen Eintrags im Fakultät-table
+		$sql="INSERT INTO `unimanager`.`fakultaet` (`fak_name`) VALUE ('".$name."');";
+		if( !mysql_query($sql) )
+			return false;
+		else
+		{
+			$sql = "SELECT LAST_INSERT_ID();";
+			$res = mysql_query($sql);
+			$row = mysql_fetch_row($res);
+			return $row[0];
+		}
+	}
+	
+	/**
+	* Ändert den Namen einer Fakultät
+	* @param int $fid ID der zu ändernden Fakultät
+	* @param string $name der neu Name der Fakultät
+	* @return bool ob erfolgreich oder nicht
+	*/
+	function updateFak($fid, $name)
+	{
+		$sql="UPDATE `fakultaet` SET `fak_namet`='".$name."' WHERE `fak_id`='".$fid."';";
+		if( !mysql_query($sql) )
+			return false;
+		return true;
 	}
 	
 	
