@@ -3,9 +3,8 @@
 class Person_Management
 {
 
-	///setter/// 
 
-	///getter///
+	///GETTER///
 	
 	/**
     * holt den Vor- und Nachnamen einer Person zu einer bestimmten Personen-ID aus der Datenbank
@@ -56,10 +55,10 @@ class Person_Management
 		return $result;
     }
     /**
-        * holt die Personen_ID zu der Dekan_ID aus der Dekantabelle 
-        * @param int $id Dekan-ID des Dekans zu dem die PID gesucht wird
-        * @return mixed array mit den Feldern pid (Personen-ID des Dekans) und result mit dem Wert true fuer alles ok oder false fuer Fehler bei der Abfrage
-        */
+	* holt die Personen_ID zu der Dekan_ID aus der Dekantabelle 
+	* @param int $id Dekan-ID des Dekans zu dem die PID gesucht wird
+	* @return mixed array mit den Feldern pid (Personen-ID des Dekans) und result mit dem Wert true fuer alles ok oder false fuer Fehler bei der Abfrage
+	*/
     function getDekanDetails($dekan_id)
     {
         $sql = "SELECT * FROM studiendekan AS s INNER JOIN person as p ON p.person_id=s.studiendekan_persid WHERE s.studiendekan_id = '".$dekan_id."'";
@@ -67,25 +66,160 @@ class Person_Management
         return $this->buildResult($res, "studiendekan_id");
     }
     /**
-        * holt die Personen_ID zu dem Vornamen und Namen der Person oder gibt ein false zurück, falls die Person nicht existiert
-        * @param string Array mit den Feldern vorname und name
-        * @return mixed array mit den Feldern pid (personenId) und dem Feld result mit dem Wert true fuer Person gefunden oder false fuer Person nicht gefunden
-        */
+	* holt die Personen_ID zu dem Vornamen und Namen der Person oder gibt ein false zurück, falls die Person nicht existiert
+	* @param string Array mit den Feldern vorname und name
+	* @return mixed array mit den Feldern pid (personenId) und dem Feld result mit dem Wert true fuer Person gefunden oder false fuer Person nicht gefunden
+	*/
     function getPIDForName($person)
     {
         
     }
     
     /**
-        * holt die Dekan_ID zu der Personen-ID aus der Dekantabelle
-        * @param int $pid Personen-ID der Person zu der die Dekan-ID gesucht wird
-        * @return mixed array mit den Feldern dekan_id und dem Feld result mit dem Wert true fuer Person in der Dekantabelle gefunden oder false fuer Person nicht in der Dekantabelle gefunden
-        */
+	* holt die Dekan_ID zu der Personen-ID aus der Dekantabelle
+	* @param int $pid Personen-ID der Person zu der die Dekan-ID gesucht wird
+	* @return mixed array mit den Feldern dekan_id und dem Feld result mit dem Wert true fuer Person in der Dekantabelle gefunden oder false fuer Person nicht in der Dekantabelle gefunden
+	*/
     
     function getDekanID($pid)
     {
         
     }
+	
+	/// SETTER
+	/**
+	* Erstellt einen Personeneintrag
+	  die Personen id wird selbständig kreiert,
+	  email ist optional,
+	  zugriffsrecht wird nur als seperater Parameter zu gelassen !!sicherheitsrelevant!!
+	  alle anderen Daten müssen vorhanden sein sonst ungültig
+	* @param mixed $pdetails ein Array mit entsprechenden Schlüsselnamen und Inhalt 
+	  array['name']
+	  array['vorname']
+	  array['gebdat'] string mit der Form "year-month-day" z.B.:"2011-2-26"
+	  array['anschrift_plz'] ACHTUNG beachtet den umgang von ints bei php die PLZ muss entweder als string mit '' angegeben werden oder man lässte die führenden nullen weg
+	  array['anschrift_stadt']
+	  array['anschrift_strasse']
+	  array['anschrift_hausnummer']
+	  array['loginname']
+	  array['kennwort']
+	  array['fak']
+	  (array['email'] optional)
+	  das redundante 'person_' muss wetggelassen werden
+	* @param int $seclevel Zugriffsrecht der default-Wert sollte der niedrigst mögliche sein
+	* @return false oder neue Personen-ID
+	*/
+	function createPerson($pdetails, $seclevel=100)
+	{
+		//überprüfen ob Daten vollständig
+		if( !isset( $pdetails['vorname'] ) )
+			return false;
+		
+		if( !isset( $pdetails['name'] ) )
+			return false;
+		
+		if( !isset( $pdetails['gebdat'] ) )
+			return false;
+		
+		if( !isset( $pdetails['anschrift_plz'] ) )
+			return false;
+		if( !isset( $pdetails['anschrift_stadt'] ) )
+			return false;
+		
+		if( !isset( $pdetails['anschrift_strasse'] ) )
+			return false;
+		
+		if( !isset( $pdetails['anschrift_hausnummer'] ) )
+			return false;
+		
+		if( !isset( $pdetails['loginname'] ) )
+			return false;
+		
+		if( !isset( $pdetails['kennwort'] ) )
+			return false;
+		
+		if( !isset( $pdetails['fak'] ) )
+			return false;
+		
+		if( isset( $pdetails['zugriffsrecht'] ) )
+			unset( $pdetails['zugriffsrecht'] );
+			
+		if( isset( $pdetails['id'] ) )
+			unset( $pdetails['id'] );
+		
+		$keys = array();
+		$values = array ();
+		foreach($pdetails as $key => $value)
+		{
+			$keys[]="`person_".$key."`";
+			if($key=="kennwort")
+				$values[]="MD5('".$value."')";
+			else
+				$values[]="'".$value."'";
+		}
+		$keys[]="`person_zugriffsrecht`";
+		$values[]="'".$seclevel."'";
+		$sql="INSERT INTO `unimanager`.`person` (".join($keys,", ").") VALUES (".join($values,", ").");";
+		if( !mysql_query($sql) )
+			return false; //Fehler bei mysql-Auswertung
+		else
+		{
+			$sql = "SELECT LAST_INSERT_ID();";
+			$res = mysql_query($sql);
+			$row = mysql_fetch_row($res);
+			return $row[0];
+		}
+	}
+	/**
+	* Funktion zum löschen eines Personendatensatz
+	  nur der Vollständigkeit halber sollte in der Praxis nur im äußersten Notfall verwendet werden
+	* @param int $pid
+	* @return bool ob erfolgreich oder nicht 
+	*/
+	function deletePerson($pid)
+	{
+		$sql="DELETE FROM `person` WHERE `person_id`='".$pid."';";
+		if( mysql_query($sql) )
+			return true;
+		else
+			return false;
+	}
+	
+	/**
+	* Verändert Daten zu einer Person
+	  nicht verändert können hier zugriffsrecht, gebdat, id, loginname
+	  bis auf zugriffsrecht sollten diese sich nie wieder ändern das Zugriffsrecht wird in einer eigenen Funktion gesetzt aus Sicherheitsgründen
+	  diese Felder werden daher ignoriert wenn gesetzt
+	* @param int $pid Personen-ID
+	* @param array $pdetails Die zu setzenden Details
+	  die Arraystruktur ist die selbe wie bei createPerson()
+	* @return bool ob gelungen oder nicht
+	*/
+	function updatePerson($pid, $pdetails)
+	{
+		//aussieben der unveränderlichen
+		if( isset( $pdetails['zugriffsrecht'] ) )
+			unset( $pdetails['zugriffsrecht'] );
+		if( isset( $pdetails['id'] ) )
+			unset( $pdetails['id'] );
+		if( isset( $pdetails['gebdat'] ) )
+			unset( $pdetails['gebdat'] );
+		if( isset( $pdetails['loginname'] ) )
+			unset( $pdetails['loginname'] );
+		
+		$values=array();
+		foreach( $pdetails as $key => $value )
+		{
+			if( $key=="kennwort" )
+				$values[]="`person_".$key."`=MD5('".$value."')";
+			else
+				$values[]="`person_".$key."`='".$value."'";
+		}
+		$sql = "UPDATE `person` SET ".join($values,", ")." WHERE `person_id`='".$pid."';";
+		if( !mysql_query($sql) )
+			return $sql; // Update fehlgeschlagen
+		return true;
+	}
     
     // HELPER
     

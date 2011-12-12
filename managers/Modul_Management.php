@@ -206,9 +206,9 @@ class Modul_Management{
 			$modul_id = $row[0];
 		}
 		else return false; //Fehler beim Ausführen des INSERT
-		return $this->setModuldetails($modul_id, $moduldetails, 'Erstellt');
+		if( $this->setModuldetails($modul_id, $moduldetails, 'Erstellt') )
 			return $modul_id;
-		//else 
+		else 
 			return false; //Fehler beim setzen der Attribute
 	}
 	
