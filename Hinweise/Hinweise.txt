@@ -26,3 +26,10 @@ benötigte Objekte:
 	- VO_LN_edit_View		-> Fei
 	-> alle coolen Manager 		-> Daniel
 	-> sachen die Christians Klassen brauchen -> Christian
+	
+	
+Auf Grund einiger Systemveränderunegen sind bei mir die Git-Commitnamen etwas durcheinander gekommen:
+Daniels commitnamen sind:
+	Daniel Rzehak
+	unknown
+	pc124educon
