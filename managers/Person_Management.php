@@ -55,7 +55,7 @@ class Person_Management
 		return $result;
     }
     /**
-	* holt die Personen_ID zu der Dekan_ID aus der Dekantabelle 
+	* holt die Personendetails zu der Dekan_ID aus der Dekantabelle 
 	* @param int $id Dekan-ID des Dekans zu dem die PID gesucht wird
 	* @return mixed array mit den Feldern pid (Personen-ID des Dekans) und result mit dem Wert true fuer alles ok oder false fuer Fehler bei der Abfrage
 	*/
@@ -286,6 +286,7 @@ class Person_Management
 	/**
 	* Löscht einen Studenteneintrag (nicht die Person)
 	* @param int $matnr die Matrikelnummer des zu löschenden Studenten.
+	* @return bool ob erfolgreich oder nicht
 	*/
 	function removeStudent($matnr)
     {
@@ -296,8 +297,43 @@ class Person_Management
 			return false;
 	}
 	
+	/**
+	* Setzt eine Person als Lehrenden
+	* @param int $pid Die Personen-ID die als Lehrender gestzt werden soll
+	* @return bool ob erfolgreich oder nicht
+	*/
+	function addLehrender($pid)
+	{
+		// Prüfen ob Person schon gestzt als Lehrender
+		$sql="SELECT `lehrende_id` FROM `unimanager`.`lehrende` WHERE `lehrende_personenid`='".$pid."';";
+		$res = mysql_query($sql);
+		if(!$res)
+			return false;
+		if( mysql_fetch_row($res) )
+			return false;
+		// Erstellen eines neuen Eintrags im Lehrender-Table
+		$sql="INSERT INTO `unimanager`.`lehrende` (`lehrende_personenid`) VALUE ('".$pid."');";
+		if( !mysql_query($sql) )
+			return false;
+		return true;
+	}
 	
-    // HELPER
+	/**
+	* Degradiert einen Lehrenden (löscht Lehrendeneintrag)
+	* @param int $lid Lehrende-ID des zu löschenden Eintrags
+	* @return bool ob erfolgreich oder nicht
+	*/
+	function removeLehrender($lid)
+	{
+		$sql="DELETE FROM `lehrende` WHERE `lehrende_id`='".$lid."';";
+		if( mysql_query($sql) )
+			return true;
+		else
+			return false;
+	}
+	
+	
+    /// HELPER ///
     
 	// Daniel's geniale Funktion =)
 	// baut die Resultate nach den Tabellennamen in ein 2 Dimensionales Array um
