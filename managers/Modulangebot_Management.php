@@ -389,7 +389,7 @@ class Modulangebot_Management{
 		
 		$sql = "UPDATE `modulangebot` SET ".join($newarr,", ")." WHERE ".join($oldarr," AND ").";";
 		if( !mysql_query($sql) )
-			return $sql; // Update fehlgeschlagen
+			return false; // Update fehlgeschlagen
 		return true;
 	}
 	

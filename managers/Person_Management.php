@@ -86,7 +86,9 @@ class Person_Management
         
     }
 	
-	/// SETTER
+	/// SETTER ///
+	
+	
 	/**
 	* Erstellt einen Personeneintrag
 	  die Personen id wird selbständig kreiert,
@@ -172,7 +174,7 @@ class Person_Management
 	}
 	/**
 	* Funktion zum löschen eines Personendatensatz
-	  nur der Vollständigkeit halber sollte in der Praxis nur im äußersten Notfall verwendet werden
+	  nur der Vollständigkeit halber, sollte in der Praxis nur im äußersten Notfall verwendet werden
 	* @param int $pid
 	* @return bool ob erfolgreich oder nicht 
 	*/
@@ -217,10 +219,84 @@ class Person_Management
 		}
 		$sql = "UPDATE `person` SET ".join($values,", ")." WHERE `person_id`='".$pid."';";
 		if( !mysql_query($sql) )
-			return $sql; // Update fehlgeschlagen
+			return false; // Update fehlgeschlagen
 		return true;
 	}
-    
+	
+	/**
+	* Erstellt einen neuen Studenten aus einer Person
+	* @param int $pid Personen-ID aus dem Personentable
+	* @param int $sgid Studiengang-ID des SG in dem der Student studiert
+	* @param int $matnr Matrikelnummer zur eindeutigen Identifizierung des Studenten an der Uni (und in der DB)
+	* @param bool $fakrat ob Mitglied im Fakrat oder nicht
+	* @return bool ob erfolgreich oder nicht
+	*/
+	function addStudent($pid, $sgid, $matnr, $fakrat=false)
+	{
+		$bool;
+		if($fakrat)
+			$bool=1;
+		else
+			$bool=0;
+		$sql="SELECT `student_matnr` FROM `unimanager`.`student` WHERE `student_personenid`='".$pid."';";
+		$res = mysql_query($sql);
+		if(!$res)
+			return false;
+		if( mysql_fetch_row($res) )
+			return false;
+		$sql="INSERT INTO `unimanager`.`student` (`student_personenid`, `student_matnr`, `student_sg_id`, `student_fakrat`) VALUE( '".$pid."', '".$matnr."', '".$sgid."', b'".$bool."' );";
+		if( !mysql_query($sql) )
+			return false;
+		return true;
+	}
+	
+	/**
+	* Ändert den Sg eines Studenten
+	* @param int $matnr Matrikelnummer des Studenten
+	* @param int $sgid Studiengang-ID des neuen SG's
+	* @return bool ob erfolgreich oder nicht
+	*/
+	function updateStudentSG($matnr, $sgid)
+	{
+		$sql="UPDATE `student` SET `student_sg_id`='".$sgid."' WHERE `student_matnr`='".$matnr."';";
+		if( !mysql_query($sql) )
+			return false;
+		return true;
+	}
+	
+	/**
+	* Setzt ob der Student Mitglied im Fakrat ist oder nicht
+	* @param int $matnr Matrikelnummer des Studenten
+	* @param bool $fakrat 
+	* @return bool ob erfolgreich oder nicht
+	*/
+	function updateStudentFakrat($matnr, $fakrat)
+	{
+		$bool;
+		if($fakrat)
+			$bool=1;
+		else
+			$bool=0;
+		$sql="UPDATE `student` SET `student_fakrat`=b'".$bool."' WHERE `student_matnr`='".$matnr."';";
+		if( !mysql_query($sql) )
+			return false;
+		return true;
+	}
+	
+	/**
+	* Löscht einen Studenteneintrag (nicht die Person)
+	* @param int $matnr die Matrikelnummer des zu löschenden Studenten.
+	*/
+	function removeStudent($matnr)
+    {
+		$sql="DELETE FROM `student` WHERE `student_matnr`='".$matnr."';";
+		if( mysql_query($sql) )
+			return true;
+		else
+			return false;
+	}
+	
+	
     // HELPER
     
 	// Daniel's geniale Funktion =)
