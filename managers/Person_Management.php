@@ -78,7 +78,7 @@ class Person_Management
     /**
 	* holt die Dekan_ID zu der Personen-ID aus der Dekantabelle
 	* @param int $pid Personen-ID der Person zu der die Dekan-ID gesucht wird
-	* @return mixed array mit den Feldern dekan_id und dem Feld result mit dem Wert true fuer Person in der Dekantabelle gefunden oder false fuer Person nicht in der Dekantabelle gefunden
+	* @return mixed false falls Fehler oder int for id falls gefunden
 	*/
     
     function getDekanID($pid)
@@ -300,7 +300,7 @@ class Person_Management
 	/**
 	* Setzt eine Person als Lehrenden
 	* @param int $pid Die Personen-ID die als Lehrender gestzt werden soll
-	* @return bool ob erfolgreich oder nicht
+	* @return mixed false falls Fheler auftrat oder int als Lehrender-ID
 	*/
 	function addLehrender($pid)
 	{
@@ -315,7 +315,13 @@ class Person_Management
 		$sql="INSERT INTO `unimanager`.`lehrende` (`lehrende_personenid`) VALUE ('".$pid."');";
 		if( !mysql_query($sql) )
 			return false;
-		return true;
+		else
+		{
+			$sql = "SELECT LAST_INSERT_ID();";
+			$res = mysql_query($sql);
+			$row = mysql_fetch_row($res);
+			return $row[0];
+		}
 	}
 	
 	/**
@@ -326,6 +332,88 @@ class Person_Management
 	function removeLehrender($lid)
 	{
 		$sql="DELETE FROM `lehrende` WHERE `lehrende_id`='".$lid."';";
+		if( mysql_query($sql) )
+			return true;
+		else
+			return false;
+	}
+	
+	/**
+	* Setzt eine Person als Lehrbeauftragten
+	* @param int $pid Die Personen-ID die als Lehrbeauftragter gestzt werden soll
+	* @return mixed false falls Fehler auftrat oder int als Lehrbeauftragter-ID
+	*/
+	function addLehrbeauf($pid)
+	{
+		// Prüfen ob Person schon gestzt als Lehrender
+		$sql="SELECT `lehrbeauftr_id` FROM `unimanager`.`lehrbeauftragter` WHERE `lehrbeauftr_personenid`='".$pid."';";
+		$res = mysql_query($sql);
+		if(!$res)
+			return false;
+		if( mysql_fetch_row($res) )
+			return false;
+		// Erstellen eines neuen Eintrags im Lehrender-Table
+		$sql="INSERT INTO `unimanager`.`lehrbeauftragter` (`lehrbeauftr_personenid`) VALUE ('".$pid."');";
+		if( !mysql_query($sql) )
+			return false;
+		else
+		{
+			$sql = "SELECT LAST_INSERT_ID();";
+			$res = mysql_query($sql);
+			$row = mysql_fetch_row($res);
+			return $row[0];
+		}
+	}
+	
+	/**
+	* Degradiert einen Lehrbauftragten (löscht Lehrbeauftragten-Eintrag)
+	* @param int $bid Lehrv-ID des zu löschenden Eintrags
+	* @return bool ob erfolgreich oder nicht
+	*/
+	function removeLehrbeauf($bid)
+	{
+		$sql="DELETE FROM `lehrbeauftragter` WHERE `lehrbeauftr_id`='".$bid."';";
+		if( mysql_query($sql) )
+			return true;
+		else
+			return false;
+	}
+	
+	/**
+	* Setzt eine Person als Studiendekan
+	* @param int $pid Die Personen-ID die als Lehrbeauftragter gestzt werden soll
+	* @return mixed false falls Fehler auftrat oder int als Lehrbeauftragter-ID
+	*/
+	function addSDekan($pid)
+	{
+		// Prüfen ob Person schon gestzt als Lehrender
+		$sql="SELECT `studiendekan_id` FROM `unimanager`.`studiendekan` WHERE `studiendekan_persid`='".$pid."';";
+		$res = mysql_query($sql);
+		if(!$res)
+			return false;
+		if( mysql_fetch_row($res) )
+			return false;
+		// Erstellen eines neuen Eintrags im Lehrender-Table
+		$sql="INSERT INTO `unimanager`.`studiendekan` (`studiendekan_persid`) VALUE ('".$pid."');";
+		if( !mysql_query($sql) )
+			return false;
+		else
+		{
+			$sql = "SELECT LAST_INSERT_ID();";
+			$res = mysql_query($sql);
+			$row = mysql_fetch_row($res);
+			return $row[0];
+		}
+	}
+	
+	/**
+	* Degradiert einen Studiendekan (löscht SDekan-Eintrag)
+	* @param int $did Dekan-ID des zu löschenden Eintrags
+	* @return bool ob erfolgreich oder nicht
+	*/
+	function removeSDekan($did)
+	{
+		$sql="DELETE FROM `studiendekan` WHERE `studiendekan_id`='".$did."';";
 		if( mysql_query($sql) )
 			return true;
 		else
