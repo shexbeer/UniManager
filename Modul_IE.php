@@ -4,7 +4,7 @@ require_once("main.class.php");
 
 $UM = new UniManager("Modul_IE");
 $UM->seite = $seite;
-// wangfei
+
 if(!$_SESSION["user_loginname"])
 {
 	$UM->SessionEnd();
