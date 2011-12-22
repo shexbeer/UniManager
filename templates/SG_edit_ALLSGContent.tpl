@@ -3,34 +3,38 @@
 <form action="SG_edit.php" method="POST">
 Details des ausgew&auml;lten Studiengangs
 <br><br>
-<table width=500>
+<table width=500><table cellspacing="40">
 <tr>
-	<td width=150>
+	<td width=150><font size="4" >
 		Studiengang_ID
+	</font>
 	</td>
 	<td width=250 align=left>
 		<input type="text" name="sg_name" value="{$sg.sg_id}" disabled=true>
 	</td>
 </tr>
 <tr>
-	<td width=150>
+	<td width=150><font size="4" >
 		Studiengangname
+	</font>
 	</td>
 	<td width=350 align=left>
 		<input type="text" name="sg_name" value="{$sg.sg_name}" size="30">
 	</td>
 </tr>
 <tr>
-	<td width=150>
+	<td width=150><font size="4" >
 		Vorname und Nachname des Dekans
+	</font>
 	</td>
 	<td width=250 align=left>
 		<input type="text" name="sg_name" value="{$sg.dekanvorname} {$sg.dekanname}">
 	</td>
 </tr>
 <tr>
-	<td width=150>
+	<td width=150><font size="4" >
 		Pruefungs und Studiumsordnung
+	</font>
 	</td>
 	{if $sg.sg_po}
 	<td width=250 align=left>
@@ -49,8 +53,9 @@ Details des ausgew&auml;lten Studiengangs
 </tr>
 <!--
 <tr>
-	<td width=150>
+	<td width=150><font size="4" >
 		Studiensordnung
+	</font>
 	</td>
 	<td width=250 align=left>
 		<input type="text" name="sg_name" value="{$sg.sg_so}">
@@ -58,8 +63,9 @@ Details des ausgew&auml;lten Studiengangs
 </tr>
 -->
 <tr>
-	<td width=150>
+	<td width=150><font size="4" >
 		Erstellungsdatum
+	</font>
 	</td>
 	<td width=250 align=left>
 		<input type="text" name="sg_name" disabled=true value="{$sg.sg_createdate}">
@@ -67,8 +73,10 @@ Details des ausgew&auml;lten Studiengangs
 </tr>
 <tr>
 	{if $sg.sg_modulhandbuch}
-	<td width=150>
+	<td width=150><font size="4" >
+	
 		Modulhandbuch
+	</font>
 	</td>
 	<td width=250 align=left>
 		<object data="{$pdf_modulhandbuch_dir}{$sg.sg_modulhandbuch}" type="application/pdf" width="800" height="300">
