@@ -3,7 +3,7 @@
 <form action="SG_edit.php" method="POST">
 Details des ausgew&auml;lten Studiengangs
 <br><br>
-<table width=500><table cellspacing="40">
+<table width=500><table cellspacing="20">
 <tr>
 	<td width=150><font size="4" >
 		Studiengang_ID
