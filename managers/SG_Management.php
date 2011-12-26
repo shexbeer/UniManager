@@ -25,7 +25,21 @@ class SG_Management {
 		}
 		else return false; //Fehler beim Ausführen des SQLquery
 	}
-    
+    /**
+	* Funktion zum lšschen eines SG
+	  nur der Vollständigkeit halber, sollte in der Praxis nur im äußersten Notfall verwendet werden
+	* @param int $sgid
+	* @return bool ob erfolgreich oder nicht 
+	*/
+	function deleteSG($sgid)
+	{
+		$sql="DELETE FROM `studiengang` WHERE `sg_id`='".$sgid."';";
+		if( mysql_query($sql) )
+			return true;
+		else
+			return false;
+	}
+	
 	/**
     * Mit dieser Funktion werden die Details gestezt oder upgedatet
     * @param mixed $sgdetails ein Array mit den Feldern sg_id, sg_name, sg_po, sg_so, sg_modulhandbuch, sg_dekan, sg_status

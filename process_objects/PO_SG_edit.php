@@ -20,6 +20,7 @@
           $sglist_unchecked=$SG->getSGList();
           $sglist=$this->UM->checkManagerResults($sglist_unchecked,"sg_id","Studiengangliste");
           //Jeden Studiengang in das Result schieben und die DekanID durch einen Namen substituieren
+          
           foreach($sglist as $var)
           {
               $result[$var["sg_id"]]=$var;
@@ -34,33 +35,20 @@
       }
       
       /**
-        * Wandelt Vor und Nachnamen des Dekans in eine Dekan-ID um und schickt saemtliche erhaltenen Daten an den SG-Manager damit sie in die DB eingetragen werden createSG($sgname,$sg_po,$sg_so,$sgmhb,$dekanvn,$dekanname)
-        Achtung: Dekanvor- und nachnamen getrennt eingeben!!
+        * Erstellung eines Studiengangs
         @param string $sgname Name des Studiengangs
-        @param string $sg_po Pruefungsordnung des Studienganges
-        @param string $sg_so Studienordnung des Studienganges
-        @param string $sgmhb Modulhandbuch des Studienganges
-        @param string $dekanvn Vorname des Dekans des Studienganges
-        @param string $dekanname Nachname des Dekans des Studienganges
+        @param string $dekan_id Dekan ID des SG
         */
         
-      function createSG($sgname,$sg_po,$sg_so,$sgmhb,$dekanvn,$dekanname)
+      function createSG($sgname,$dekan_id)
       {
           //Manager initialisieren
           $SG=new SG_Management();
-          $PM=new Person_Management();
-          //Dekannamen und vornamen in ein Array packen
-          $person["vorname"]=$dekanvn;
-          $person["name"]=$dekanname;
-          //Personen-ID zum Namen raussuchen und Ergebnis ueberpruefen
-          $pid_unchecked=$PM->getPIDForName($person);
-          $pid=$this->UM->checkManagerResults($pid_unchecked,"pid","Personen-ID");
-          //Dekan-ID zur Personen-ID raussuchen und Ergebnis ueberpruefen
-          $dekan_unchecked=$PM->getDekanID($pid);
-          $dekan=$this->UM->checkManagerResults($dekan_unchecked,"dekan_id","Dekan-ID");
-          //Daten an den SG-Manager weiterleiten und Ergebnis zum VO schicken
-          $result=$SG->createSG($sgname,$sg_po,$sg_so,$sgmhb,$dekan);
-          $this->UM->VisualObject->showResult($result);                   
+          
+          $result=$SG->createSG($sgname, $dekan_id);
+          // Evtl. hier nochmal FehlerŸberprŸfung
+          //var_dump($result);
+          $this->UM->VisualObject->showResult($result, "");                   
       }
   
       
@@ -69,25 +57,37 @@
         Achtung: Dekanvor- und nachname seperat abgelegt; DekanID ist nur zum vergleichen und kann ignoriert werden.
         * @param int $sg_id ID des Studiengangs dessen Details aufgerufen werden sollen.
         */
-      function getCreateSGForm($sg_id)
+      
+      function getCreateSGForm()
       {
           //Manager initialisieren
-          $SG= new SG_Management();
+          //$SG= new SG_Management();
           $PM= new Person_Management();
           //Studiengangdetails abfragen und ueberpruefen
-          $detail_unchecked=$SG->getSGDetails($sg_id);
-          $detail=$this->UM->checkManagerResults($detail,"sg_id","Studiengangdetails");
+          //$detail_unchecked=$SG->getSGDetails($sg_id);
+          //$detail=$this->UM->checkManagerResults($detail,"sg_id","Studiengangdetails");
           //Dekan-ID substituieren durch Namen und Vornamen
-          $pid_unchecked=$PM->getDekanPID($detail["sg_dekan"]);
-          $pid=$this->UM->checkManagerResults($pid_unchecked,"pid","PersonenID");
-          $dekan_unchecked=$PM->getNameForID($pid);
-          $dekan=$this->UM->checkManagerResults($dekan_unchecked,"id","Namensabfrage");
-          $detail["dekanvorname"]=$dekan["vorname"];
-          $detail["dekanname"]=$dekan["name"];
+          //$pid_unchecked=$PM->getDekanPID($detail["sg_dekan"]);
+          //$pid=$this->UM->checkManagerResults($pid_unchecked,"pid","PersonenID");
+          //$dekan_unchecked=$PM->getNameForID($pid);
+          //$dekan=$this->UM->checkManagerResults($dekan_unchecked,"id","Namensabfrage");
+          //$detail["dekanvorname"]=$dekan["vorname"];
+          //$detail["dekanname"]=$dekan["name"];
           //Details ans VO schicken
-          $this->UM->VisualObject->ShowCreateSGForm($detail);                     
+          
+          // Es werden nur die mšglichen Dekane benštigt
+          $dekan_unchecked = $PM->getDekans();
+          $dekans = $this->UM->checkManagerResults($dekan_unchecked,"studiendekan_id","Dekanabfrage");
+          
+          $this->UM->VisualObject->ShowCreateSGForm($dekans);                     
       }
+      /*
+      function getCreateSGForm()
+      {
+      	$this->UM->VisualObject->ShowCreateSGForm($detail); 
       
+      }
+      */
       /**
         * Ruft Details zu einem bestimmten Studiengang ab, zum Zweck der Editierung, ergaenzt Dekan_ID durch Namen aus der Datenbank
         * @param bool $posoedit Auswahl, welche Daten abgerufen werden muessen true -> siehe Sequenzdiagramm PO SO oder Aenderungsatzung abstimmen false ->   Studiengang beschliessen/Bestaetigen
@@ -113,6 +113,9 @@
           //Dekanname und Vorname zum Array hinzufügen
           $sgdetail["dekanvorname"]=$dekan[$dekan_id]["person_vorname"];
           $sgdetail["dekanname"]=$dekan[$dekan_id]["person_name"];
+          
+          $dekan_unchecked = $PM->getDekans();
+          $dekans = $this->UM->checkManagerResults($dekan_unchecked,"studiendekan_id","Dekanabfrage");
           /* nicht noetig da PO und SO in den Details enthalten sein sollten
           //Prüfungsordnung und Studienordnung holen und ueberpruefen
           $po_unchecked=$SG->getPO($sg_id);
@@ -141,11 +144,11 @@
                   //Zaehler um 1 erhoehen
                   $count=$count+1;              
               }
-          //Liste aller Module inklusive Details erstellen
-          $list_all_moduls_unchecked=$MM->getModuldetails(true);
-          $list_all_moduls_unchanged=$this->UM->checkManagerResults($list_all_moduls_unchecked,"modul_id","Modulliste");
-          //Verantwortlichen-ID durch Vorname und Name erweitern
-          foreach($list_all_moduls_unchanged as $var)
+          		//Liste aller Module inklusive Details erstellen
+          		$list_all_moduls_unchecked=$MM->getModuldetails(true);
+         		 $list_all_moduls_unchanged=$this->UM->checkManagerResults($list_all_moduls_unchecked,"modul_id","Modulliste");
+          		//Verantwortlichen-ID durch Vorname und Name erweitern
+          		foreach($list_all_moduls_unchanged as $var)
               {
                   //Bisherige Moduldetails in das Endarray schieben
                   $list_all_moduls[$var["modul_id"]]=$var;
@@ -161,7 +164,7 @@
           else
           {
               //Daten an das VO schicken siehe Sequenzdiagramm Studiengang bestaetigen/beschliessen
-              $this->UM->VisualObject->showALLSGContent($sgdetail);
+              $this->UM->VisualObject->showALLSGContent($sgdetail, $dekans);
           }                  
       }
       
@@ -199,6 +202,18 @@
               }                  
           }
           $this->UM->VisualObject->showResult($result);
+      }
+      function deleteSG($sgid) {	
+         // DEBUG: SicherheitsŸberprŸfung
+         
+         //Manager initialisieren
+          $SG=new SG_Management();
+          
+          $result=$SG->deleteSG($sgid);
+          // Evtl. hier nochmal FehlerŸberprŸfung
+          //var_dump($result);
+          $this->UM->VisualObject->showResult($result, ""); 
+         
       }
   }
 ?>

@@ -66,6 +66,17 @@ class Person_Management
         $res = mysql_query($sql);
         return $this->buildResult($res, "studiendekan_id");
     }
+    
+    /***
+    *	holt alle Studiendekane die es in der Datenbank gibt ab
+    *	@return mixed array
+    */
+	function getDekans()
+	{
+		$sql = "SELECT * FROM studiendekan AS s INNER JOIN person as p ON p.person_id=s.studiendekan_persid";
+		$res = mysql_query($sql);
+		return $this->buildResult($res, "studiendekan_id");
+	}
 	
 	/**!!
 	* holt die Personendetails zu einem Lehrenden 

@@ -5,9 +5,9 @@ class VO_SG_edit
 	{
 		$this->UM = $UM;
 	}
-	function showResult($error_occurred, $extra_message)
+	function showResult($result, $extra_message)
 	{
-		$this->UM->tpl->assign("error", $error_occurred);
+		$this->UM->tpl->assign("result", $result);
         $this->UM->tpl->assign("extra_msg", $extra_message);
         $this->UM->showfooter();
         $this->UM->showheader($this->UM->seite);
@@ -25,21 +25,21 @@ class VO_SG_edit
 		$this->UM->tpl->display("SG_edit_SGList.tpl", session_id());
 	}
 
-	function showCreateSGForm($detail)
+	function showCreateSGForm($dekanlist)
 	{
 		$this->UM->showfooter();
 		$this->UM->showheader($this->UM->seite);
-		$this->UM->tpl->assign("SGDetails", $detail);
+		$this->UM->tpl->assign("dekanlist", $dekanlist);
 		$this->UM->tpl->display("SG_edit_CreateSGForm.tpl", session_id());
 	}
 
 
-	function showALLSGContent($sgdetail) //,$modullist)
+	function showALLSGContent($sgdetail ,$dekans)
 	{
 		$this->UM->showfooter();
 		$this->UM->showheader($this->UM->seite);
 		$this->UM->tpl->assign("sg", $sgdetail);
-		
+		$this->UM->tpl->assign("dekanlist", $dekans);
 		$this->UM->tpl->display("SG_edit_ALLSGContent.tpl", session_id());
 	}
 

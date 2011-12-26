@@ -5,57 +5,69 @@ Details des ausgew&auml;lten Studiengangs
 <br><br>
 <table width=500><table cellspacing="20">
 <tr>
-	<td width=150><font size="4" >
+	<td width=150>
 		Studiengang_ID
-	</font>
+	
 	</td>
 	<td width=250 align=left>
 		<input type="text" name="sg_name" value="{$sg.sg_id}" disabled=true>
 	</td>
 </tr>
 <tr>
-	<td width=150><font size="4" >
+	<td width=150>
 		Studiengangname
-	</font>
+	
 	</td>
 	<td width=350 align=left>
 		<input type="text" name="sg_name" value="{$sg.sg_name}" size="30">
 	</td>
 </tr>
 <tr>
-	<td width=150><font size="4" >
-		Vorname und Nachname des Dekans
-	</font>
+	<td width=150>
+		Studiendekan
+	
 	</td>
 	<td width=250 align=left>
+		<!--
 		<input type="text" name="sg_name" value="{$sg.dekanvorname} {$sg.dekanname}">
+		-->
+		{foreach from=$dekanlist item=var}
+			{if $sg.sg_dekan == $var.studiendekan_id}
+				<input checked="checked" type="radio" name="dekan" value="{$var.studiendekan_id}"> {$var.person_vorname} {$var.person_name}<br>
+			{else}
+				<input type="radio" name="dekan" value="{$var.studiendekan_id}"> {$var.person_vorname} {$var.person_name}<br>
+			{/if}
+		{/foreach}
 	</td>
 </tr>
 <tr>
-	<td width=150><font size="4" >
-		Pruefungs und Studiumsordnung
-	</font>
+	<td width=150>
+		Pr&uuml;fungs und Studiumsordnung
+	
 	</td>
-	{if $sg.sg_po}
 	<td width=250 align=left>
+		<!--
 		<object data="{$pdf_poso_dir}{$sg.sg_po}" type="application/pdf" width="800" height="300">
  
 		  <p>It appears you don't have a PDF plugin for this browser.
  			 No biggie... you can <a href="{$pdf_poso_dir}{$sg.sg_po}">click here to
  			 download the PDF file.</a></p>
 		</object>
+		-->
+		{if $sg.sg_po}
+		
+		Studiums und Pr&uuml;fungsordnung vorhanden. <a href="{$pdf_poso_dir}{$sg.sg_po}"> Hier </a>klicken um es anzuzeigen.
+		{else}
+			Keine Studiums und Prüfungsordnung vorhanden...
+		
+		{/if}
 	</td>
-	{else}
-	<td width=250 align=left>
-		zur Zeit kein PDF zum Anzeigen
-	</td>
-	{/if}
 </tr>
 <!--
 <tr>
-	<td width=150><font size="4" >
+	<td width=150>
 		Studiensordnung
-	</font>
+	
 	</td>
 	<td width=250 align=left>
 		<input type="text" name="sg_name" value="{$sg.sg_so}">
@@ -63,37 +75,25 @@ Details des ausgew&auml;lten Studiengangs
 </tr>
 -->
 <tr>
-	<td width=150><font size="4" >
-		Erstellungsdatum
-	</font>
-	</td>
-	<td width=250 align=left>
-		<input type="text" name="sg_name" disabled=true value="{$sg.sg_createdate}">
-	</td>
-</tr>
-<tr>
-	{if $sg.sg_modulhandbuch}
-	<td width=150><font size="4" >
-	
+	<td width=150>
 		Modulhandbuch
-	</font>
+	
 	</td>
 	<td width=250 align=left>
+		<!--
 		<object data="{$pdf_modulhandbuch_dir}{$sg.sg_modulhandbuch}" type="application/pdf" width="800" height="300">
  
 		  <p>It appears you don't have a PDF plugin for this browser.
  			 No biggie... you can <a href="{$pdf_modulhandbuch_dir}{$sg.sg_modulhandbuch}">click here to
  			 download the PDF file.</a></p>
 		</object>
+		-->
+		{if $sg.sg_modulhandbuch}
+			Modulhandbuch vorhanden. <a href="{$pdf_modulhandbuch_dir}{$sg.sg_modulhandbuch}"> Hier </a>klicken um es anzuzeigen.
+		{else}
+			Kein Modulhandbuch vorhanden...
+		{/if}
 	</td>
-	{else}
-	<td width=150>
-		Modulhandbuch
-	</td>
-	<td width=250 align=left>
-		zur Zeit kein PDF zum Anzeigen
-	</td>
-	{/if}
 </tr>
 <tr>
 	<td width=150>
@@ -105,6 +105,15 @@ Details des ausgew&auml;lten Studiengangs
 		<input type="radio" name="sg_status" value="beschlossen"{if $sg.sg_status==beschlossen} checked="checked"{/if}> beschlossen<br>
 		<input type="radio" name="sg_status" value="abgestimmt"{if $sg.sg_status==abgestimmt} checked="checked"{/if}> abgestimmt<br>
 		<input type="radio" name="sg_status" value="bestaetigt"{if $sg.sg_status==bestaetigt} checked="checked"{/if}> best&auml;tigt
+	</td>
+</tr>
+<tr>
+	<td width=150>
+		Erstellungsdatum
+	
+	</td>
+	<td width=250 align=left>
+		<input type="text" name="sg_name" disabled=true value="{$sg.sg_createdate}">
 	</td>
 </tr>
 </table>
