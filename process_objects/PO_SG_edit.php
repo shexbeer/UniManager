@@ -47,33 +47,19 @@
           
           $result=$SG->createSG($sgname, $dekan_id, $sg_typ);
           // Evtl. hier nochmal FehlerŸberprŸfung
-          //var_dump($result);
-          $this->UM->VisualObject->showResult($result, "");                   
+          $this->UM->VisualObject->showResult($result, "Fehler beim Erstellen des Studiengangs");                   
       }
   
       
        /**
         * Ruft Details zu einem speziellen Studiengang ab und ergaenzt die Dekan-ID durch Vor- und Nachname des Dekans getCreateSGForm($sg_id)
-        Achtung: Dekanvor- und nachname seperat abgelegt; DekanID ist nur zum vergleichen und kann ignoriert werden.
-        * @param int $sg_id ID des Studiengangs dessen Details aufgerufen werden sollen.
+        * Achtung: Dekanvor- und nachname seperat abgelegt; DekanID ist nur zum vergleichen und kann ignoriert werden.
         */
       
       function getCreateSGForm()
       {
           //Manager initialisieren
-          //$SG= new SG_Management();
           $PM= new Person_Management();
-          //Studiengangdetails abfragen und ueberpruefen
-          //$detail_unchecked=$SG->getSGDetails($sg_id);
-          //$detail=$this->UM->checkManagerResults($detail,"sg_id","Studiengangdetails");
-          //Dekan-ID substituieren durch Namen und Vornamen
-          //$pid_unchecked=$PM->getDekanPID($detail["sg_dekan"]);
-          //$pid=$this->UM->checkManagerResults($pid_unchecked,"pid","PersonenID");
-          //$dekan_unchecked=$PM->getNameForID($pid);
-          //$dekan=$this->UM->checkManagerResults($dekan_unchecked,"id","Namensabfrage");
-          //$detail["dekanvorname"]=$dekan["vorname"];
-          //$detail["dekanname"]=$dekan["name"];
-          //Details ans VO schicken
           
           // Es werden nur die mšglichen Dekane benštigt
           $dekan_unchecked = $PM->getDekans();
