@@ -6,11 +6,27 @@
           $this->UM=$UM;
       }
       
-      /**
+      
+      function showResult($error_occurred, $extra_message)
+      {
+      $this->UM->tpl->assign("error", $error_occurred);
+            $this->UM->tpl->assign("extra_msg", $extra_message);
+            $this->UM->showfooter();
+            $this->UM->showheader($this->UM->seite);
+            $this->UM->tpl->display("LN_Edit_Result.tpl", session_id());
+            
+      }
+      
+       /**
       * zeigt eine Liste aller Studiengaenge an und ermoeglicht dem Nutzer die Auswahl
       */
-      function showSGList()
+      
+      function showSGList($SG)
       {
+          $this->UM->showfooter();
+          $this->UM->showheader($this->UM->seite);
+          $this->UM->tpl->assign("SG",$SG);
+          $this->UM->tpl->display("POSO_edit_sglist.tpl", session_id());
           
       }
       
