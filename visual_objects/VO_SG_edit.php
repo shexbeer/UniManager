@@ -34,12 +34,13 @@ class VO_SG_edit
 	}
 
 
-	function showALLSGContent($sgdetail ,$dekans)
+	function showALLSGContent($sgdetail ,$dekans, $modullist)
 	{
 		$this->UM->showfooter();
 		$this->UM->showheader($this->UM->seite);
 		$this->UM->tpl->assign("sg", $sgdetail);
 		$this->UM->tpl->assign("dekanlist", $dekans);
+		$this->UM->tpl->assign("modullist", $modullist);
 		$this->UM->tpl->display("SG_edit_ALLSGContent.tpl", session_id());
 	}
 

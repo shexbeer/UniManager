@@ -118,13 +118,16 @@ class SG_Management {
 			$DelArrOld[]="`mauf_rowid`='".$row[0]."'";
 			$isold=true; //mindestens ein Treffer und somit alte Aufstellung vorhanden
 		}
+		
 		$isset=true;
 		//setzen der neuen modulaufstellung
 		$DelArrNew;
+		//var_dump($modul_ID_list);
 		foreach ($modul_ID_list as $modul)
 		{
 			if (!isset($modul['modul_id'])||!isset($modul['plansemester'])) return false;
 			$sqlinsert="INSERT INTO `unimanager`.`modulaufstellung` (`mauf_modul_id`, `mauf_sg_id`, `mauf_plansemester`, `mauf_typ`) VALUE ('".$modul['modul_id']."', '".$sg_id."', '".$modul['plansemester']."', '".$typ."');";
+			
 			if(mysql_query($sqlinsert))
 			{
 				$row = mysql_fetch_row(mysql_query("SELECT LAST_INSERT_ID();"));
@@ -136,11 +139,13 @@ class SG_Management {
 				break;
 			}
 		}
+		
 		//löschen der alten aufstellung wenn vorhanden und neue erfoglreich gestzt wurde
 		if($isset&&$isold)
 		{
 			$DelWhere=join(" OR ",$DelArrOld);
 			$sqldelete="DELETE FROM `unimanager`.`modulaufstellung` WHERE ".$DelWhere.";";
+			
 			return mysql_query($sqldelete);
 		}
 		//Rollback der neuen Aufstellung da nicht vollständig
@@ -207,6 +212,7 @@ class SG_Management {
 		$attr[2]="sg_name";
 		$attr[3]="sg_status";
 		$attr[4]="sg_dekan";
+		$attr[5]="sg_typ";
 		if(!$paramtype)return $this->getSG(false,$attr);
 		if($paramtype=="status")return $this->getSG($param,$attr);
 		if($paramtype=="id")return $this->getSG(false,$attr,$param);
@@ -228,7 +234,7 @@ class SG_Management {
 	
 	
 	//Inhalt ist mir nicht ganz klar --Diskusionsbedarf--
-	function getTamplate(){
+	function getTemplate(){
         /*Soll die Vorlage für eine Studienordnung und eine Prüfungsordnung aus der Datenbank abrufen und zurückgeben; die Vorlagen müssen noch in der SQL Datenbank erstellt werden
         Zweck ist es bei der Erstellung auf ein schon vorgefertigtes Dokument zurückgreifen zu können, damit der Ersteller nicht soviel schreiben muss sondern nur noch die relevanten Informationen ersetzen muss
         Sebastian*/

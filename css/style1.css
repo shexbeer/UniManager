@@ -29,6 +29,26 @@ input, textarea, select {
 	font-size: 11px;
 }
 
+#sg_edit_table_flags_left {
+	border-left-color: black;
+	border-left-width: 1px;
+	border-left-style: solid;
+}
+#sg_edit_table_flags_right {
+	border-right-color: black;
+	border-right-width: 1px;
+	border-right-style: solid;
+}
+#sg_edit_table_flags {
+	border-right-color: black;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-left-color: black;
+	border-left-width: 1px;
+	border-left-style: solid;
+}
+
+
 /*body {
 	background-color: #FFFFFF;
 	font-family: Verdana;

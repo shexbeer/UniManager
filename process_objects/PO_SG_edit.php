@@ -95,7 +95,7 @@
         Achtung: Bei false werden von der Funktion die Studiengangdetails, die PO und die SO zurueckgegeben
         * @param int $sg_id ID des Studiengangs dessen Details aufgerufen werden sollen.
         */
-      function editSG($posoedit,$sg_id)
+      function showEditSG($posoedit,$sg_id)
       {
       //print $sg_id;
           //Manager initialisieren
@@ -116,92 +116,79 @@
           
           $dekan_unchecked = $PM->getDekans();
           $dekans = $this->UM->checkManagerResults($dekan_unchecked,"studiendekan_id","Dekanabfrage");
-          /* nicht noetig da PO und SO in den Details enthalten sein sollten
-          //Pr¸fungsordnung und Studienordnung holen und ueberpruefen
-          $po_unchecked=$SG->getPO($sg_id);
-          $po=$this->UM->checkManagerResults($po_unchecked,"po","Pruefungsordnung");
-          $so_unchecked=$SG->getSO($sg_id);
-          $so=$this->UM->checkManagerResults($so_unchecked,"so","Studienordnung");
-          */
-          //Auswahl treffen, welcher UseCase grad vorliegt, siehe Achtung in der Funktionsbeschreibung
-          if($posoedit)
-          {
-              //Liste aller Module dieses SG inklusive Details abrufen
-              $modullist_unchecked=$MM->getModuldetails(true,"sg",$sg_id);
-              $modullist_unchanged=$this->UM->checkManagerResults($modullist_unchecked,"modul_id","Modulliste+Details");
-              //Zaehler f¸r Modulliste auf 0 setzen
-              $count=0;#
-              //F¸r jedes Modul die Verantwortlichen-ID um den Vornamen und Namen des Verantwortlichen ergaenzen
-              foreach($modullist_unchanged as $var)
-              {
-                  //Bisherige Moduldetails in das Endarray schieben
-                  $modullist[$count]=$var;
-                  //Namen und Vornamen zur PID aus der Datenbank suchen und ueberpruefen und dann ins Array schreiben
-                  $person_unchecked=$PM->getNameForID($var["modul_person_id"]);
-                  $person=$this->UM->checkManagerResults($person_unchecked,"id","Namensabfrage");
-                  $modullist[$count]["verantw_vorname"]=$person["vorname"];
-                  $modullist[$count]["verantw_name"]=$person["name"];
-                  //Zaehler um 1 erhoehen
-                  $count=$count+1;              
-              }
-          		//Liste aller Module inklusive Details erstellen
-          		$list_all_moduls_unchecked=$MM->getModuldetails(true);
-         		 $list_all_moduls_unchanged=$this->UM->checkManagerResults($list_all_moduls_unchecked,"modul_id","Modulliste");
-          		//Verantwortlichen-ID durch Vorname und Name erweitern
-          		foreach($list_all_moduls_unchanged as $var)
-              {
-                  //Bisherige Moduldetails in das Endarray schieben
-                  $list_all_moduls[$var["modul_id"]]=$var;
-                  //Namen und Vornamen zur PID aus der Datenbank suchen und ueberpruefen und dann ins Array schreiben
-                  $person_unchecked=$PM->getNameForID($var["modul_person_id"]);
-                  $person=$this->UM->checkManagerResults($person_unchecked,"id","Namensabfrage");
-                  $list_all_moduls[$var["modul_id"]]["verantw_vorname"]=$person["vorname"];
-                  $list_all_moduls[$var["modul_id"]]["verantw_name"]=$person["name"];
-              }
-          //Daten an das VO schicken siehe Sequenzdiagramm PO,SO und Aenderungssatzung abstimmen
-           $this->UM->VisualObject->showALLSGContent($sgdetail,$modullist,$list_all_moduls);
-          }
-          else
-          {
-              //Daten an das VO schicken siehe Sequenzdiagramm Studiengang bestaetigen/beschliessen
-              $this->UM->VisualObject->showALLSGContent($sgdetail, $dekans);
-          }                  
+          
+          // Modulliste (alle Module)
+          $modul_u = $MM->getModullist(true);
+          $modullist = $this->UM->checkManagerResults($modul_u,"modul_id","Modulabfrage");
+
+		  // Moduliste (Module des SG)
+		  $modul_u = $MM->getModullist(true, "sg", $sg_id);
+		  $modullist_sg = $this->UM->checkManagerResults($modul_u,"modul_id","Modulabfrage");
+		  //var_dump($modullist_sg);
+		  if($modullist_sg) {
+			  foreach($modullist_sg as $var) { // Wenn Modul im SG setze in Modulliste eine Flag
+				$modullist[$var["modul_id"]]["in_SG"] = true;
+				$modullist[$var["modul_id"]]["mauf_plansemester"] = $var["mauf_plansemester"];
+			  }
+		  }
+          $this->UM->VisualObject->showALLSGContent($sgdetail, $dekans, $modullist);                 
       }
-      
-      /**
-      * Sendet neue Studiengangdetails an den SG_Manager und bei Bedarf eine neue Modulliste fuer diesen Studiengang an den Modulmanager
-      * @param mixed $sgdetails  Array mit den Studiengangdetails: enthaelt die Felder: sg_id,sg_name,sg_po,sg_so,sg_modulhandbuch,verantw_vorname,verantw_name
-      * @param mixed $modul_id_list 2 dim Array das alle Module enthaelt die zu dem Studiengang gehoeren, enthaelt die felder [count],[modul_id,plansemester]
-      */
-      function setSGStatus($sgdetails,$modul_id_list=false)
+      function editSG($sgid, $sgname, $sgdekan, $sgtyp, $modul, $modul_semester, $sgstatus, $name=false)
       {
+    		$SG=new SG_Management();
+    		$var = array();
+    		$var["sg_id"] = $sgid;
+    		$var["sg_name"] = $sgname;
+    		
+    		if($name) {
+	    		$var["sg_po"] = $name;
+    			$var["sg_so"] = $name;
+    		}
+    		
+    		$var["sg_modulhandbuch"] = "Modul_".$sgid.".pdf";
+    		$var["sg_dekan"] = $sgdekan;
+    		$var["sg_status"] = $sgstatus;
+    		$var["sg_typ"] = $sgtyp;
+    		//var_dump($var);
+    		$result = $SG->setSGDetails($var);
+    
+    		$new_mods = array();
+    		$counter = 1;
+    		
+    		if($modul) {
+				foreach($modul as $key => $var) {
+					$new_mods[$counter]["modul_id"] = $var;
+					if($modul_semester[$counter]) {
+						$new_mods[$counter]["plansemester"] = $modul_semester[$key+1];
+					} else {
+						$new_mods[$counter]["plansemester"] = "1";
+					}
+					$new_mods[$counter]["typ"] = $sgtyp;
+					$counter++;
+				}
+    		}
+    		// Modulliste Aktualisieren
+    		$result2 = $SG->setModullisteForSG($sgid, $sgtyp, $new_mods);
+    		
+        	$this->UM->VisualObject->showResult($result&&$result2,"&Auml;nderung des Studiengangs nicht erfolgreich.");
+      }
+      /**
+      * Sendet neue Studiengangdetails an den SG_Manager 
+      * @param int Studiengang ID
+      * @param int status 1=beschlossen 2=abgestimmt 3=bestaetigt
+      */
+      function setSGStatus($sgid,$status)
+      {
+       // DEBUG: Sicherheitsüberprüfung
           //Manager initialieren
-          $MM=new Modul_Management();
-          $PM=new Person_Management();
-          $SM=new SG_Management();
-          //Name und vorname des dekans in eine Dekan_ID umwandeln und ueberpruefen
-          $person["vorname"]=$sgdetails["verantw_vorname"];
-          $person["name"]=$sgdetails["verantw_name"];
-          $pid_unchecked=$PM->getPIDForName($person);
-          $pid=$this->UM->checkManagerResults($pid_unchecked,"pid","Personen-ID");
-          $dekan_unchecked=$PM->getDekanID($pid);
-          $dekan=$this->UM->checkManagerResults($dekan_unchecked,"dekan_id","Dekan_ID");
-          //DekanID dem Array hinzufuegen
-          $sgdetails["sg_dekan"]=$dekan;
-          //Pruefen ob Modulliste auch geaendert wurde
-          if(!$modul_id_list)
-          {
-              $result=$SM->setSGdetails($sgdetails);
+          $SG=new SG_Management();
+          switch($status) {
+          	case "1":	$status="beschlossen"; break;
+          	case "2":	$status="abgestimmt"; break;
+          	case "3":	$status="bestaetigt"; break;
           }
-          else
-          {
-              $result=$SM->setSGdetails($sgdetails);
-              if ($result)
-              {
-                  $result=$SM->setModullisteForSG($sgdetails["sg_id"],$modul_id_list);
-              }                  
-          }
-          $this->UM->VisualObject->showResult($result);
+          $SG->setSGStatus($sgid,$status);
+          $this->UM->VisualObject->showResult(!$result,"Status&auml;nderung nicht erfolgreich");
       }
       function deleteSG($sgid) {	
          // DEBUG: Sicherheitsüberprüfung

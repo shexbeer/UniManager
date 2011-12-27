@@ -145,56 +145,62 @@ class PDFCreator
 		$pdf->setWidths(array(50,130));
 		
 		$pdf->SetFont(font,'',size);
-		foreach($ml as $var) {
+		if($ml) {
+			foreach($ml as $var) {
+				$pdf->AddPage();
+				$pdf->setBold();
+				$pdf->Cell(50,7,"Code/Daten",1);
+				$pdf->setNormal();
+				$pdf->Cell(40,7,"ID: ".$var["modul_id"],1);
+				$pdf->Cell(45,7,"Stand: ".$var["modul_last_cha"],1);
+				$pdf->Cell(45,7," ",1);
+				$pdf->Ln();
+				
+				$pdf->setBold();
+				$pdf->Cell(50,7,"Modulname",1);
+				$pdf->setNormal();
+				$pdf->Cell(130,7,utf8_decode($var["modul_name"]),1);
+				$pdf->Ln();
+				
+				$name = $PM->getNameForID($var["modul_person_id"]);
+				
+				$pdf->setBold();
+				$pdf->Cell(50,7,"Verantwortlicher",1);
+				$pdf->Cell(130,7,$name["vorname"]." ".$name["name"],1);
+				$pdf->Ln();
+				$pdf->setNormal();
+				
+				$pdf->setBold();
+				$pdf->Cell(50,7,"Institut",1);
+				$pdf->setNormal();
+				$pdf->Cell(130,7,$var["modul_institut"],"LTR");
+				$pdf->Ln();
+				
+				$pdf->Row(array("Dauer Modul", utf8_decode($var["modul_duration"]." Semester")));
+				
+				$pdf->Row(array("Qualifikationsziele/ Kompetenzen", $var["modul_qualifytarget"]));
+				$pdf->Row(array("Inhalte", $var["modul_content"]));
+				$pdf->Row(array("Typische Fachliteratur", $var["modul_literature"]));
+				$pdf->Row(array("Lehrformen", $var["modul_teachform"]));
+				$pdf->Row(array(utf8_decode("Vorraussetzungen für die Teilnahme"), $var["modul_required"]));
+				$pdf->Row(array("Verwendbarkeit des Moduls", $var["modul_usability"]));
+				
+				$pdf->setBold();
+				$pdf->Cell(50,7,utf8_decode("Häufigkeit"),1);
+				$pdf->setNormal();
+				$pdf->Cell(130,7, $var["modul_frequency"],"LTR");
+				$pdf->Ln();
+				
+				$pdf->Row(array(utf8_decode("Voraussetzung für Vergabe von Leistungspunkte"), $var["modul_conditionforln"]));
+				$pdf->Row(array("Leistungspunkte", $var["modul_lp"]));
+				$pdf->Row(array("Leistungspunkte und Noten", $var["modul_note"]));
+				$pdf->Row(array("Arbeitsaufwand", $var["modul_effort"]));
+				
+			}
+		} else {
 			$pdf->AddPage();
 			$pdf->setBold();
-			$pdf->Cell(50,7,"Code/Daten",1);
-			$pdf->setNormal();
-			$pdf->Cell(40,7,"ID: ".$var["modul_id"],1);
-			$pdf->Cell(45,7,"Stand: ".$var["modul_last_cha"],1);
-			$pdf->Cell(45,7," ",1);
-			$pdf->Ln();
-			
-			$pdf->setBold();
-			$pdf->Cell(50,7,"Modulname",1);
-			$pdf->setNormal();
-			$pdf->Cell(130,7,utf8_decode($var["modul_name"]),1);
-			$pdf->Ln();
-			
-			$name = $PM->getNameForID($var["modul_person_id"]);
-			
-			$pdf->setBold();
-			$pdf->Cell(50,7,"Verantwortlicher",1);
-			$pdf->Cell(130,7,$name["vorname"]." ".$name["name"],1);
-			$pdf->Ln();
-			$pdf->setNormal();
-			
-			$pdf->setBold();
-			$pdf->Cell(50,7,"Institut",1);
-			$pdf->setNormal();
-			$pdf->Cell(130,7,$var["modul_institut"],"LTR");
-			$pdf->Ln();
-			
-			$pdf->Row(array("Dauer Modul", utf8_decode($var["modul_duration"]." Semester")));
-			
-			$pdf->Row(array("Qualifikationsziele/ Kompetenzen", $var["modul_qualifytarget"]));
-			$pdf->Row(array("Inhalte", $var["modul_content"]));
-			$pdf->Row(array("Typische Fachliteratur", $var["modul_literature"]));
-			$pdf->Row(array("Lehrformen", $var["modul_teachform"]));
-			$pdf->Row(array(utf8_decode("Vorraussetzungen für die Teilnahme"), $var["modul_required"]));
-			$pdf->Row(array("Verwendbarkeit des Moduls", $var["modul_usability"]));
-			
-			$pdf->setBold();
-			$pdf->Cell(50,7,utf8_decode("Häufigkeit"),1);
-			$pdf->setNormal();
-			$pdf->Cell(130,7, $var["modul_frequency"],"LTR");
-			$pdf->Ln();
-			
-			$pdf->Row(array(utf8_decode("Voraussetzung für Vergabe von Leistungspunkte"), $var["modul_conditionforln"]));
-			$pdf->Row(array("Leistungspunkte", $var["modul_lp"]));
-			$pdf->Row(array("Leistungspunkte und Noten", $var["modul_note"]));
-			$pdf->Row(array("Arbeitsaufwand", $var["modul_effort"]));
-			
+			$pdf->Write(50, "Keine Module im Studiengang!");
 		}
 		if($display == true) {
 			$pdf->Output();
@@ -203,6 +209,7 @@ class PDFCreator
 			$dest = "../".PDF_Modulhandbuch_DIR;
 		
 			$pdf->Output($dest.$name, "F");
+			header("Location: " . $UM->cwd["rootDir"] . $dest . $name . "?time=".time());
 		}
 	}
 }
