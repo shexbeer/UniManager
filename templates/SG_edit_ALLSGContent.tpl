@@ -1,20 +1,34 @@
 {include file="header.tpl" title=foo}
 
-<form action="SG_edit.php" method="POST">
+<form action="SG_edit.php?editSG=yes&forid={$sg.sg_id}" enctype="multipart/form-data" method="POST">
 Details des ausgew&auml;lten Studiengangs
 <br><br>
 <table width=500><table cellspacing="20">
 <tr>
-	<td width=150>
-		Studiengang_ID
+	<td width=150 id="form_caption">
+		Studiengang Ident
 	
 	</td>
 	<td width=250 align=left>
-		<input type="text" name="sg_name" value="{$sg.sg_id}" disabled=true>
+		<input type="text" name="sg_id" value="{$sg.sg_id}" disabled=true>
 	</td>
 </tr>
 <tr>
-	<td width=150>
+	<td width=150 id="form_caption">
+		Studiengang Typ
+	
+	</td>
+	<td width=250 align=left>
+		<!--<input type="text" name="sg_typ" value="{$sg.sg_typ}" disabled=true>-->
+		<select name="sg_typ" size="1">
+      		<option {if $sg.sg_typ == "Bachelor"}selected{/if}>Bachelor</option>
+      		<option {if $sg.sg_typ == "Master"} selected{/if}>Master</option>
+      		<option {if $sg.sg_typ == "Diplom"} selected{/if}>Diplom</option>
+    	</select>
+	</td>
+</tr>
+<tr>
+	<td width=150 id="form_caption">
 		Studiengangname
 	
 	</td>
@@ -23,7 +37,7 @@ Details des ausgew&auml;lten Studiengangs
 	</td>
 </tr>
 <tr>
-	<td width=150>
+	<td width=150 id="form_caption">
 		Studiendekan
 	
 	</td>
@@ -41,7 +55,7 @@ Details des ausgew&auml;lten Studiengangs
 	</td>
 </tr>
 <tr>
-	<td width=150>
+	<td width=150 id="form_caption">
 		Pr&uuml;fungs und Studiumsordnung
 	
 	</td>
@@ -56,26 +70,18 @@ Details des ausgew&auml;lten Studiengangs
 		-->
 		{if $sg.sg_po}
 		
-		Studiums und Pr&uuml;fungsordnung vorhanden. <a href="{$pdf_poso_dir}{$sg.sg_po}"> Hier </a>klicken um es anzuzeigen.
+		<b>Studiums und Pr&uuml;fungsordnung vorhanden.</b> <a href="{$pdf_poso_dir}{$sg.sg_po}?time={$timestamp}"> Hier </a>klicken um es anzuzeigen.<br>
 		{else}
-			Keine Studiums und Prüfungsordnung vorhanden...
-		
+			<b>Keine Studiums und Pr&uuml;fungsordnung vorhanden.</b><br>
 		{/if}
+		Wollen Sie eine neue hochladen?<br>
+		<input type="hidden" name="max_file_size" value="10000000">
+		<input name="poso_file" type="file">
 	</td>
 </tr>
-<!--
+
 <tr>
-	<td width=150>
-		Studiensordnung
-	
-	</td>
-	<td width=250 align=left>
-		<input type="text" name="sg_name" value="{$sg.sg_so}">
-	</td>
-</tr>
--->
-<tr>
-	<td width=150>
+	<td width=150 id="form_caption">
 		Modulhandbuch
 	
 	</td>
@@ -89,14 +95,16 @@ Details des ausgew&auml;lten Studiengangs
 		</object>
 		-->
 		{if $sg.sg_modulhandbuch}
-			Modulhandbuch vorhanden. <a href="{$pdf_modulhandbuch_dir}{$sg.sg_modulhandbuch}"> Hier </a>klicken um es anzuzeigen.
+			<b>Modulhandbuch vorhanden.</b> <a href="{$pdf_modulhandbuch_dir}{$sg.sg_modulhandbuch}?time={$timestamp}"> Hier </a>klicken um es anzuzeigen.<br>
 		{else}
-			Kein Modulhandbuch vorhanden...
+			<b>Kein Modulhandbuch vorhanden.</b><br>
 		{/if}
+		Wollen Sie ein neues Modulhandbuch 
+		<a href="pdf/pdf_create.php?type=Modulhb&forid={$sg.sg_id}&toFile=yes">generieren</a>? <br>
 	</td>
 </tr>
 <tr>
-	<td width=150>
+	<td width=150 id="form_caption">
 		Status des Studiengangs
 	</td>
 	<td width=250 align=left>
@@ -108,7 +116,7 @@ Details des ausgew&auml;lten Studiengangs
 	</td>
 </tr>
 <tr>
-	<td width=150>
+	<td width=150 id="form_caption">
 		Erstellungsdatum
 	
 	</td>
@@ -116,130 +124,75 @@ Details des ausgew&auml;lten Studiengangs
 		<input type="text" name="sg_name" disabled=true value="{$sg.sg_createdate}">
 	</td>
 </tr>
-</table>
 
-{if $modullist==true}
+
+{if $modullist}
 <tr>
-<th colspan=9> Liste aller Module dieses SG inklusive Details 
-</th>
+	<td width=150 id="form_caption">
+		Module<br>
+		(Name + Plansemester)
+	</td>
+	<td width=800 align=left>
+		<!--
+		<input type="text" name="sg_name" value="{$sg.dekanvorname} {$sg.dekanname}">
+		-->
+		{$counter = 0}
+		{if $sg.sg_typ==Bachelor}
+			{$sems = 6}
+		{else if $sg.sg_typ==Master}
+			{$sems = 4}
+		{else if $sg.sg_typ == Diplom}
+			{$sems = 10}
+		{/if}
+		{foreach from=$modullist item=var}
+			{$counter=$counter+1}
+			
+			<span id="span_{$var.modul_id}">
+			{if $var.in_SG}
+			
+				<input id="chkbox_{$var.modul_id}" onClick="Modul_Checkbox({$var.modul_id},{$sems})" checked="checked" type="checkbox" name="modul[]" value="{$var.modul_id}"> {$var.modul_name}
+				<select id="modul_semester[{$var.modul_id}]" name="modul_semester[{$var.modul_id}]" size="1">
+      			{if $sg.sg_typ==Master}
+					<option {if {$var.mauf_plansemester==1}}selected{/if}>1</option>
+					<option {if {$var.mauf_plansemester==2}}selected{/if}>2</option>
+					<option {if {$var.mauf_plansemester==3}}selected{/if}>3</option>
+					<option {if {$var.mauf_plansemester==4}}selected{/if}>4</option>
+      			{/if}
+      			{if $sg.sg_typ==Bachelor}
+					<option {if {$var.mauf_plansemester==1}}selected{/if}>1</option>
+					<option {if {$var.mauf_plansemester==2}}selected{/if}>2</option>
+					<option {if {$var.mauf_plansemester==3}}selected{/if}>3</option>
+					<option {if {$var.mauf_plansemester==4}}selected{/if}>4</option>
+					<option {if {$var.mauf_plansemester==5}}selected{/if}>5</option>
+					<option {if {$var.mauf_plansemester==6}}selected{/if}>6</option>
+      			{/if}
+      			{if $sg.sg_typ==Diplom}
+					<option {if {$var.mauf_plansemester==1}}selected{/if}>1</option>
+					<option {if {$var.mauf_plansemester==2}}selected{/if}> 2</option>
+					<option {if {$var.mauf_plansemester==3}}selected{/if}> 3</option>
+					<option {if {$var.mauf_plansemester==4}}selected{/if}> 4</option>
+					<option {if {$var.mauf_plansemester==5}}selected{/if}> 5</option>
+					<option {if {$var.mauf_plansemester==6}}selected{/if}> 6</option>
+					<option {if {$var.mauf_plansemester==7}}selected{/if}> 7</option>
+					<option {if {$var.mauf_plansemester==8}}selected{/if}> 8</option>
+					<option {if {$var.mauf_plansemester==9}}selected{/if}> 9</option>
+					<option {if {$var.mauf_plansemester==10}}selected{/if}> 10</option>
+      			{/if}
+    		</select>
+			{else}
+				
+				<input id="chkbox_{$var.modul_id}" type="checkbox" onClick="Modul_Checkbox({$var.modul_id},{$sems})" name="modul[]" value="{$var.modul_id}"> {$var.modul_name}
+			{/if}
+			</span>
+			|
+			{if $counter%4 == 0}
+				<br>
+			{/if}
+		{/foreach}
+	</td>
 </tr>
-
-<tr>
-<th>Modulname</th>
-<th>Modul-ID</th>
-<th>Name von Verantwortlicher</th>
-<th>Vorname von Verantwortlicher</th>
-<th>Modulstatus</th>
-<th>letzte Aederung</th>
-<th>Institut</th>
-<th>Dauer</th>
-<th>Qualifikationsziel</th>
-
-<th></th>
-</tr>
-
-{foreach from=$modullist item=var}
-<tr>
-<td>{$var.modul_name}</td>
-<td>{$var.modul_id}</td>
-<td>{$var.verantw_name}</td>
-<td>{$var.verantw_vorname}</td>
-<td>{$var.modul_status}</td>
-<td>{$var.modul_last_cha}</td>
-<td>{$var.modul_institut}</td>
-<td>{$var.modul_duration}</td>
-<td>{$var.modul_qualifytarget}</td>
-</tr>
-{/foreach}
-
-<tr>
-<th>Inhalt</th>
-<th>Fachliteratur</th>
-<th>Lehrformen</th>
-<th>Vorraussetzungen</th>
-<th>Hauefigkeit</th>
-<th>Verwendbarkeit</th>
-<th>Leistungspunkte</th>
-<th>Vorraussetzung fuer Leistungsnachweis</th>
-<th>Arbeitsaufwand</th>
-</tr>
-
-{foreach from=$modullist item=var}
-<tr>
-<td>{$var.modul_content}</td>
-<td>{$var.modul_literature}</td>
-<td>{$var.modul_teachform}</td>
-<td>{$var.modul_required}</td>
-<td>{$var.modul_frequency}</td>
-<td>{$var.modul_usability}</td>
-<td>{$var.modul_lp}</td>
-<td>{$var.modul_conditionforln}</td>
-<td>{$var.modul_effort}</td>
-</tr>
-{/foreach}
-
-
-<tr>
-<th colspan=9> Liste aller Module inklusive Details
-</th>
-</tr>
-
-<tr>
-<th>Modulname</th>
-<th>Modul-ID</th>
-<th>Name von Verantwortlicher</th>
-<th>Vorname von Verantwortlicher</th>
-<th>Modulstatus</th>
-<th>letzte Aederung</th>
-<th>Institut</th>
-<th>Dauer</th>
-<th>Qualifikationsziel</th>
-
-<th></th>
-</tr>
-
-{foreach from=$list_all_moduls item=var}
-<tr>
-<td>{$var.modul_name}</td>
-<td>{$var.modul_id}</td>
-<td>{$var.verantw_name}</td>
-<td>{$var.verantw_vorname}</td>
-<td>{$var.modul_status}</td>
-<td>{$var.modul_last_cha}</td>
-<td>{$var.modul_institut}</td>
-<td>{$var.modul_duration}</td>
-<td>{$var.modul_qualifytarget}</td>
-</tr>
-{/foreach}
-
-<tr>
-<th>Inhalt</th>
-<th>Fachliteratur</th>
-<th>Lehrformen</th>
-<th>Vorraussetzungen</th>
-<th>Hauefigkeit</th>
-<th>Verwendbarkeit</th>
-<th>Leistungspunkte</th>
-<th>Vorraussetzung fuer Leistungsnachweis</th>
-<th>Arbeitsaufwand</th>
-</tr>
-
-{foreach from=$list_all_moduls item=var}
-<tr>
-<td>{$var.modul_content}</td>
-<td>{$var.modul_literature}</td>
-<td>{$var.modul_teachform}</td>
-<td>{$var.modul_required}</td>
-<td>{$var.modul_frequency}</td>
-<td>{$var.modul_usability}</td>
-<td>{$var.modul_lp}</td>
-<td>{$var.modul_conditionforln}</td>
-<td>{$var.modul_effort}</td>
-</tr>
-{/foreach}
-</table>
 {/if}
-
+</table>
 <table width=500>
 <tr>
 	<td width=200 align=left>

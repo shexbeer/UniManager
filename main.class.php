@@ -128,6 +128,8 @@ class UniManager
 		$datum = date("d.m.Y", $timestamp);
 		$zeit = date("H:i:s", $timestamp);
 		$this->tpl->assign("datum_zeit", $datum . " " . $zeit);
+		$this->tpl->assign("timestamp", $timestamp);
+		
 		$this->tpl->assign("rootDir", $this->cwd["rootDir"]);
 		$this->tpl->assign("css_datei", stylesheet);
 		$this->tpl->assign("seite", $seite);

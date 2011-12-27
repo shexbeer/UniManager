@@ -22,9 +22,9 @@ if($_GET["createnew"] == "yes" && !$_POST)
 }
 if($_GET["createnew"] == "yes" && $_POST) 
 {	// Studiengang kreieren
-	$UM->ProcessObject->createSG($_POST["sg_name"], $_POST["dekan"]);
+	$UM->ProcessObject->createSG($_POST["sg_name"], $_POST["dekan"], $_POST["sg_typ"]);
 }
-if($_GET["setStatus"] && $_GET["forid"] && $_GET["status"]) 
+if($_GET["setStatus"] && $_GET["forid"]) 
 {	// SG Status setzen
 	$UM->ProcessObject->setSGStatus($_GET["forid"], $_GET["setStatus"]);
 }
@@ -32,9 +32,26 @@ if($_GET["deleteid"])
 {	// SG löschen
 	$UM->ProcessObject->deleteSG($_GET["deleteid"]);
 }
-if($_GET["forid"])
-{	// SG editieren
-	$UM->ProcessObject->editSG(false, $_GET["forid"]);
+if($_GET["showEdit"] && $_GET["forid"])
+{	// SG Edit Form
+	$UM->ProcessObject->showEditSG(false, $_GET["forid"]);
+}
+if($_GET["editSG"] && $_GET["forid"] && $_POST)
+{	// Edit SG
+
+	if($_FILES['poso_file']['tmp_name'] != ""){
+		$path = $UM->cwd["Path"] . PDF_POSO_DIR;
+		$name = "POSO_".$_GET["forid"].".pdf";
+		$uri = $path . $name;
+  		if(!move_uploaded_file($_FILES['poso_file']['tmp_name'],$uri)){
+   			// Ups, es passierte ein Fehler beim Kopieren
+   			$UM->VisualObject->showResult(false, "Fehler beim kopieren der Upload-Datei");
+   			die();
+   		}
+   		$UM->ProcessObject->editSG($_GET["forid"], $_POST["sg_name"], $_POST["dekan"],$_POST["sg_typ"],$_POST["modul"],$_POST["modul_semester"], $_POST["sg_status"], $name);
+	}else{
+ 		$UM->ProcessObject->editSG($_GET["forid"], $_POST["sg_name"], $_POST["dekan"],$_POST["sg_typ"],$_POST["modul"],$_POST["modul_semester"], $_POST["sg_status"]);
+	}
 }
 
 ?>
