@@ -5,20 +5,33 @@ Hier k&ouml;nnen sie eine neuen Studiengang kreieren
 <table width=500><table cellspacing="20">
 
 <tr>
-	<td width=150><font size="2" >
+	<td width=150 id="form_caption">
 		Studiengang Ident
-	</font>
+	
 	</td>
 	<td width=250 align=left>
 		(wird automatisch vergeben)
 	</td>
 
 </tr>
-
 <tr>
-	<td width=150><font size="2" >
+	<td width=150 id="form_caption">
+		Studiengang Typ
+	
+	</td>
+	<td width=250 align=left>
+		<!--<input type="text" name="sg_typ" value="{$sg.sg_typ}" disabled=true>-->
+		<select name="sg_typ" size="1">
+      		<option {if $sg.sg_typ == "Bachelor"}selected{/if}>Bachelor</option>
+      		<option {if $sg.sg_typ == "Master"} selected{/if}>Master</option>
+      		<option {if $sg.sg_typ == "Diplom"} selected{/if}>Diplom</option>
+    	</select>
+	</td>
+</tr>
+<tr>
+	<td width=150 id="form_caption">
 		Studiengangname
-	</font>
+	
 	</td>
 	<td width=250 align=left>
 		<input type="text" name="sg_name" size="50" >
@@ -27,9 +40,9 @@ Hier k&ouml;nnen sie eine neuen Studiengang kreieren
 </tr>
 
 <tr>
-	<td width=150><font size="2" >
+	<td width=150 id="form_caption">
 		Dekan ausw&auml;hlen
-	</font>
+	
 	</td>
 	<td width=250 align=left>
 		{foreach from=$dekanlist item=var}
@@ -39,9 +52,9 @@ Hier k&ouml;nnen sie eine neuen Studiengang kreieren
 </tr>
 <!-- 
 <tr>
-	<td width=150><font size="2" >
+	<td width=150>
 		Studiensordnung & Pr&uuml;fungsordnung
-	</font>
+	
 	</td>
 	<td width=250 align=left>
 		<input type="hidden" name="max_file_size" value="10000">
@@ -50,9 +63,9 @@ Hier k&ouml;nnen sie eine neuen Studiengang kreieren
 </tr>
 -->
 <tr>
-	<td width=150><font size="2" >
+	<td width=150 id="form_caption">
 		Modulhandbuch
-	</font>
+	
 	</td>
 	<td width=250 align=left>
 		(wird automatisch aus den ausgew&auml;hlten Modulen erstellt)
@@ -62,9 +75,9 @@ Hier k&ouml;nnen sie eine neuen Studiengang kreieren
 
 
 <tr>
-	<td width=150><font size="2" >
+	<td width=150 id="form_caption">
 		Status des Studiengangs
-	</font>
+	
 	</td>
 	<td width=250 align=left>
 		(wird nach Erstellen auf "kreiert" gesetzt, da weitere Zustimmungen notwendig sind)

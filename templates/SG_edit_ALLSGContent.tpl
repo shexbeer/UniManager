@@ -5,7 +5,7 @@ Details des ausgew&auml;lten Studiengangs
 <br><br>
 <table width=500><table cellspacing="20">
 <tr>
-	<td width=150>
+	<td width=150 id="form_caption">
 		Studiengang Ident
 	
 	</td>
@@ -14,7 +14,7 @@ Details des ausgew&auml;lten Studiengangs
 	</td>
 </tr>
 <tr>
-	<td width=150>
+	<td width=150 id="form_caption">
 		Studiengang Typ
 	
 	</td>
@@ -28,7 +28,7 @@ Details des ausgew&auml;lten Studiengangs
 	</td>
 </tr>
 <tr>
-	<td width=150>
+	<td width=150 id="form_caption">
 		Studiengangname
 	
 	</td>
@@ -37,7 +37,7 @@ Details des ausgew&auml;lten Studiengangs
 	</td>
 </tr>
 <tr>
-	<td width=150>
+	<td width=150 id="form_caption">
 		Studiendekan
 	
 	</td>
@@ -55,7 +55,7 @@ Details des ausgew&auml;lten Studiengangs
 	</td>
 </tr>
 <tr>
-	<td width=150>
+	<td width=150 id="form_caption">
 		Pr&uuml;fungs und Studiumsordnung
 	
 	</td>
@@ -81,7 +81,7 @@ Details des ausgew&auml;lten Studiengangs
 </tr>
 
 <tr>
-	<td width=150>
+	<td width=150 id="form_caption">
 		Modulhandbuch
 	
 	</td>
@@ -104,7 +104,7 @@ Details des ausgew&auml;lten Studiengangs
 	</td>
 </tr>
 <tr>
-	<td width=150>
+	<td width=150 id="form_caption">
 		Status des Studiengangs
 	</td>
 	<td width=250 align=left>
@@ -116,7 +116,7 @@ Details des ausgew&auml;lten Studiengangs
 	</td>
 </tr>
 <tr>
-	<td width=150>
+	<td width=150 id="form_caption">
 		Erstellungsdatum
 	
 	</td>
@@ -128,7 +128,7 @@ Details des ausgew&auml;lten Studiengangs
 
 {if $modullist}
 <tr>
-	<td width=150>
+	<td width=150 id="form_caption">
 		Module<br>
 		(Name + Plansemester)
 	</td>

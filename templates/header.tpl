@@ -17,7 +17,7 @@
 <hr width='800' align='left'>
 <table>
 <tr> 
-	<td rowspan="2" width="200">
+	<td rowspan="2" width="200" style="vertical-align:top;">
 		<center>
 		{include file="navigation_right.tpl" title="navigation"}
 		</center>

@@ -40,12 +40,12 @@
         @param string $dekan_id Dekan ID des SG
         */
         
-      function createSG($sgname,$dekan_id)
+      function createSG($sgname,$dekan_id, $sg_typ)
       {
           //Manager initialisieren
           $SG=new SG_Management();
           
-          $result=$SG->createSG($sgname, $dekan_id);
+          $result=$SG->createSG($sgname, $dekan_id, $sg_typ);
           // Evtl. hier nochmal FehlerŸberprŸfung
           //var_dump($result);
           $this->UM->VisualObject->showResult($result, "");                   

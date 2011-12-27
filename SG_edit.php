@@ -22,7 +22,7 @@ if($_GET["createnew"] == "yes" && !$_POST)
 }
 if($_GET["createnew"] == "yes" && $_POST) 
 {	// Studiengang kreieren
-	$UM->ProcessObject->createSG($_POST["sg_name"], $_POST["dekan"]);
+	$UM->ProcessObject->createSG($_POST["sg_name"], $_POST["dekan"], $_POST["sg_typ"]);
 }
 if($_GET["setStatus"] && $_GET["forid"]) 
 {	// SG Status setzen

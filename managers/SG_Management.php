@@ -8,15 +8,17 @@ class SG_Management {
 	  der Status wird automatisch auf kreiert gesetzt sowie das Erstellungsdatum festgelegt
 	* @param string $sgname Name des Studiengangs
 	* @param int $sgdekan ID des Studiendekans für den neuen Studiengang
+	* @param int $sgtyp Typ des Studiengangs
 	* @return mixed die ID des SG als int wenn Erfolg, sonst false
 	*/
-	function createSG ($sgname,$sgdekan){
+	function createSG ($sgname,$sgdekan, $sgtyp){
 		//Überprüfen ob der Name für den SG schon verwendet wird
 		$sql = "SELECT `sg_name` FROM `studiengang` WHERE `sg_name` = '".$sgname."';";
 		$res = mysql_query($sql);
 		if(mysql_fetch_row($res))return false; //false falls der Namen schon vorhanden
 		//Einfügen einer Zeile mit dem neuen Studiengang
-		$sql = "INSERT INTO  `UniManager`.`studiengang` (`sg_name` ,`sg_dekan`, `sg_createdate`, `sg_status`) VALUES ('".$sgname."', '".$sgdekan."', CURDATE(), 'kreiert');";
+		$sql = "INSERT INTO  `UniManager`.`studiengang` (`sg_name` ,`sg_dekan`, `sg_createdate`, `sg_status` , `sg_typ`) VALUES ('".$sgname."', '".$sgdekan."', CURDATE(), 'kreiert', '".$sgtyp."');";
+		echo $sql;
 		if(mysql_query($sql)){
 			$sql = "SELECT LAST_INSERT_ID();"; //SG-ID für Rückgabe ermitteln
 			$res = mysql_query($sql);
