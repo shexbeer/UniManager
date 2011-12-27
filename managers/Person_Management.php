@@ -67,6 +67,26 @@ class Person_Management
         return $this->buildResult($res, "studiendekan_id");
     }
     
+    
+    /***
+    * Liefert die Personen-ID zu einer Dekan-ID
+    * 
+    * @param mixed $dekan_id  Dekan-ID des Dekans
+    * @return int $pid  Personen-ID des Dekans
+    */
+    
+    function getDekanPID($dekan_id)
+    {
+        $sql = "SELECT 'studiendekan_persid' FROM studiendekan WHERE 'studiendekan_id'='".$dekan_id."'";
+        $res = mysql_query($sql);
+        if(!$res)
+            return false; //Fehler im query
+        $row = mysql_fetch_row($res);
+        if(!$row)
+            return false; //kein Eintrag
+        return $row[0];//ID 
+    }
+    
     /***
     *	holt alle Studiendekane die es in der Datenbank gibt ab
     *	@return mixed array
