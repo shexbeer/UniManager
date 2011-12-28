@@ -19,15 +19,18 @@ Das Ergebnis der Aenderung vom Modul wurd gezeigt
 
 {foreach from=$modDetails item=var}
 <tr>
-<td>{$var.modul_name}</td>
-<td>{$var.modul_id}</td>
-<td style="text-align: center;">{$var.modul_person_id}</td>
-<td>{$var.modul_status}</td>
-<td>{$var.modul_last_cha}</td>
-<td>{$var.modul_institut}</td>
-<td>{$var.modul_duration}</td>
-<td>{$var.modul_qualifytarget}</td>
-<td>{$var.modul_content}</td>
+<td align="center" valign="top">{$var.modul_name}</td>
+<td align="center" valign="top">{$var.modul_id}</td>
+<td align="center" valign="top">{$var.modul_person_id}</td>
+<td align="center" valign="top">{$var.modul_status}</td>
+<td align="center" valign="top">{$var.modul_last_cha}</td>
+<td valign="top">{$var.modul_institut}</td>
+<td align="center" valign="top">{$var.modul_duration}</td>
+<td valign="top">{$var.modul_qualifytarget}</td>
+<td "valign="top">
+    <div style="width:100%; height:80%; overflow:scroll;">
+        {$var.modul_content}</td>
+    </div>
 </tr>
 {/foreach}
 
@@ -44,14 +47,14 @@ Das Ergebnis der Aenderung vom Modul wurd gezeigt
 
 {foreach from=$modDetails item=var}
 <tr>
-<td>{$var.modul_literature}</td>
-<td>{$var.modul_teachform}</td>
-<td>{$var.modul_required}</td>
-<td>{$var.modul_frequency}</td>
-<td>{$var.modul_usability}</td>
-<td>{$var.modul_lp}</td>
-<td>{$var.modul_conditionforln}</td>
-<td>{$var.modul_effort}</td>
+<td valign="top">{$var.modul_literature}</td>
+<td valign="top">{$var.modul_teachform}</td>
+<td valign="top">{$var.modul_required}</td>
+<td align="center" valign="top">{$var.modul_frequency}</td>
+<td valign=top>{$var.modul_usability}</td>
+<td align="center" valign="top">{$var.modul_lp}</td>
+<td valign="top">{$var.modul_conditionforln}</td>
+<td valign="top">{$var.modul_effort}</td>
 </tr>
 {/foreach}
 

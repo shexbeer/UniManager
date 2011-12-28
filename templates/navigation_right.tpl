@@ -5,8 +5,8 @@
 <a href='{$rootDir}LNA_show.php'>Noten einsehen(shex)</a> <br>
 <hr noshade size="1">
 <a href='{$rootDir}SG_edit.php'>Studiengangmanagement(shex)</a> <br>
-<a href='{$rootDir}Modul_IE.php' style="color: red;">Modulinhalte erstellen (Fei)</a> <br>
-<a href='{$rootDir}POSO_edit.php' style="color: red;">PO/SO edit(Sebastian)</a> <br>
+<a href='{$rootDir}Modul_IE.php' style="color: red;">Modulinhalte erstellen (Sebastian)</a> <br>
+<a href='{$rootDir}POSO_edit.php' style="color: red;">PO/SO edit(Fei)</a> <br>
 <hr noshade size="1">
 <a href='{$rootDir}MA_create.php' style="color: red;">Modulangebot erstellen(shex)</a> <br>
 <a href='{$rootDir}MA_edit.php' style="color: red;">Modulangebot edit</a> <br>

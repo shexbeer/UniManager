@@ -14,7 +14,7 @@ class VO_Modul_IE
                 $this->UM->showheader($this->UM->seite);
                 $this->UM->tpl->display("Modul_IE_Result.tpl", session_id());
 	}
-	function showModulList($mDetails)	// shex: fuer Fei, diese Fkt hab ich dir schonmal geschrieben inklusive der Template Datei, versuche was daraus zu lernen
+	function showModulList($mDetails)	
 	{
 		// Setze Variablen für Footer und Header
 		$this->UM->showfooter();
@@ -33,13 +33,6 @@ class VO_Modul_IE
 		$this->UM->tpl->assign("modDetails", $mDetails);
 		$this->UM->tpl->display("Modul_IE_ModulDetails.tpl", session_id());
 	}
-//function showCreateModul()
 
-/*	Wahrscheinlich Fehlerhaft im Klassendiagramm  -> stimmt, habs auch in keinem Sequenzdiagramm gefunden; Sebastian
- *
- *	function showModulDetails() 
- *	{
- *	}
- */
 }
 ?>
