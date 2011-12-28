@@ -19,6 +19,11 @@ W&auml;hlen sie einen Studiengang aus. zu dem die Studien- und Pr&uuml;fungsordn
     <td style="text-align: left;">{$var.sg_name}</td>
     <td>{$var.sg_status}</td>
     <td>{$var.sg_dekan}</td>
+    <td>
+    {if $var.sg.sg_po}
+    <b>Studiums und Pr&uuml;fungsordnung vorhanden.</b>
+       
+    </td>
     </tr>
 {/foreach}
 

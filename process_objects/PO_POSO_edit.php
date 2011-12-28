@@ -21,8 +21,11 @@
           foreach($sglist as $var)
           {
               $result[$var["sg_id"]]=$var;
-              $dekan=$PM->getNameForID($PM->getDekanPID($var["sg_dekan"]));
-              $result[$var["sg_id"]]["sg_dekan"]=$dekan["vorname"]." ".$dekan["name"];
+              $dekan_unchecked=$PM->getDekanDetails($var["sg_dekan"]);
+              $dekan_id = $var["sg_dekan"];
+              $dekan=$this->UM->checkManagerResults($dekan_unchecked,"studiendekan_id","Dekanabfrage");
+              //var_dump($dekan);
+              $result[$var["sg_id"]]["sg_dekan"]=$dekan[$dekan_id]["person_vorname"]." ".$dekan[$dekan_id]["person_name"];
           }
           $this->UM->VisualObject->showSGList($result);  
       }

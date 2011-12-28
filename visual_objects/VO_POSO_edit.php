@@ -31,12 +31,16 @@
       }
       
       /**
-      * Zeigt die Vorlage für die SO und PO dem Nutzer an und ermöglicht sie zu Bearbeiten/Ersetzen
+      * Zeigtdem Nutzer die Studienordnung oder das Modulhandbuch an
       * @param mixed $vorlage array mit den Feldern po und so (wahrscheinlich beides pdf- dateien)
       */
       
       function showPOSOTemplate($vorlage)
       {
+          $this->UM->showfooter();
+          $this->UM->showheader($this->UM->seite);
+          $this->UM->tpl->assign("SG",$SG);
+          $this->UM->tpl->display("POSO_show_template.tpl", session_id());
       }
       
       /**
