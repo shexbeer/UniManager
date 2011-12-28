@@ -15,10 +15,19 @@ class VO_MA_create
 		$this->UM->tpl->assign("next_semester", $this->UM->getNextSemester());
 		$this->UM->tpl->display("MA_create_SGList.tpl", session_id());
 	}
-	function showMAedit($so,$modullist_sg,$modullist_all)        //hab mal die Parameter eingefuegt Sebastian
+	function showMAedit($sg_id,$modullist,$po,$modulhb,$mark_semester)
 	{
+		$curr = $this->UM->getCurrentSemester();
+		$next = $this->UM->getNextSemester();
 		$this->UM->showfooter();
 		$this->UM->showheader($this->UM->seite);
+		$this->UM->tpl->assign("modullist", $modullist);
+		$this->UM->tpl->assign("po", $po);
+		$this->UM->tpl->assign("modulhb", $modulhb);
+		$this->UM->tpl->assign("current_semester", $curr);
+		$this->UM->tpl->assign("next_semester", $next);
+		$this->UM->tpl->assign("mark_semester", $mark_semester);
+		$this->UM->tpl->assign("sg_id", $sg_id);
 		$this->UM->tpl->display("MA_create_MAedit.tpl", session_id());
 	}
 	function showResult()

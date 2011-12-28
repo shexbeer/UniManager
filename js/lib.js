@@ -23,3 +23,29 @@ function Modul_Checkbox(id, sems) {
 		span.removeChild(document.getElementById("modul_semester["+id+"]"));
 	}
 }
+
+function MA_AddButton($id) {
+	confirm("test "+$id);
+}
+
+function isEven(someNumber){
+    return (someNumber%2 == 0) ? true : false;
+};
+
+function MA_changeSemester(sgid, cur, next) {
+	// 1 -> $mark 2-> !$mark
+	var select = document.getElementsByName("ma_semester");
+	var value;
+	select = select[0];
+	
+	for (i = 0; i < select.length; ++i)
+    if (select.options[i].selected == true)
+      value=select.options[i].value;
+      
+    if(value == 1) {
+    	window.location = "MA_create.php?forid="+sgid+"&forSem="+cur;
+    } else {
+    	window.location = "MA_create.php?forid="+sgid+"&forSem="+next;
+    }
+	
+}

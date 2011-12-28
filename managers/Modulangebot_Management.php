@@ -64,6 +64,8 @@ class Modulangebot_Management{
 				$newevent['week']=mysql_result($res,$i,'ma_week');
 				$newevent['modul']=mysql_result($res,$i,'ma_modul');
 				$newevent['lb']=mysql_result($res,$i,'ma_lb');
+				$newevent['id']=mysql_result($res,$i, 'ma_id');
+				$newevent['count']=mysql_result($res,$i, 'ma_count');
 				$index = mysql_result($res,$i,'ma_count');
 				$rows[$index]['status']=mysql_result($res,$i,'ma_status');
 				$rows[$index]['sg']=mysql_result($res,$i,'ma_sg');

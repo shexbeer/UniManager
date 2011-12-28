@@ -201,7 +201,17 @@ class SG_Management {
 		$attr[2]="sg_po";
 		return $this->getSG(false,$attr,$id);
 	}
-	
+	/**
+	* Ruft ruft Modulhandbuch eines SG ab 
+	* @param int $id ID des SG
+	* @return mixed array mit DB-Resultaten, ['result'] enthält false bei DB-Fehler, array[sg_id][sg_po]
+	*/
+	function getModulhandbuch($id){
+        $attr[0]="sg_id";
+		$attr[1]="sg_id";
+		$attr[2]="sg_modulhandbuch";
+		return $this->getSG(false,$attr,$id);
+	}
 	/**
 	* Ruft Name, ID und Status aller SG ab 
 	* @param string $paramtype optional "status" um SGs nach status zu filtern oder "id" um einen bestimmten SG zu wählen

@@ -118,6 +118,7 @@ class Person_Management
     function getLehrbeauftrDetails($bid)
     {
         $sql = "SELECT * FROM lehrbeauftragter AS b INNER JOIN person as p ON p.person_id=b.lehrbeauftr_personenid WHERE b.lehrbeauftr_id = '".$bid."'";
+//        echo $sql;
         $res = mysql_query($sql);
         return $this->buildResult($res, "lehrbeauftr_id");
     }

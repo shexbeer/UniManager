@@ -21,6 +21,7 @@ include_once("managers/Modul_Management.php");
 include_once("managers/SG_Management.php");
 include_once("managers/Person_Management.php");
 include_once("managers/LN_Management.php");
+include_once("managers/Modulangebot_Management.php");
 
 // Fixing PHP4->5 transition
 $HTTP_POST_VARS = $_POST;	// FIXME: cleaner fix!
@@ -209,9 +210,14 @@ class UniManager
 					}
 					$this->trigger_error(3, $extra_error , true, true);
 				}
-			} else {
-				// Wenn $var Array ist, dann ist es teil des results
-				$results_edited[$var[$index_description_in_results]] = $var;
+			} else {// Wenn $var Array ist, dann ist es teil des results
+				// wenn ein event im Result muss es anders aufgebaut sein
+				if(!is_array($var["event"])) {
+					
+					$results_edited[$var[$index_description_in_results]] = $var;
+				} else { 
+					$results_edited[$var["event"][$index_description_in_results]] = $var;
+				}
 			}
 		}
 		return $results_edited;
@@ -243,5 +249,13 @@ class UniManager
 			}
 		}
 		return $semester;
+	}
+	function checkIfOddOrEvenSemester($sem) {
+		if(strncmp($sem, "WS", 2) == 0) // String ist WSXXXX String
+		{
+			return "odd";
+		} else {
+			return "even";
+		}
 	}
 }

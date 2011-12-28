@@ -1,6 +1,6 @@
 {include file="header.tpl" title=foo}
 
-Die Liste zeigt alle existierenden Leistungsnachweise, welche bearbeitet werden können.
+Die Liste zeigt alle existierenden Leistungsnachweise, welche bearbeitet werden k&ouml;nnen.
 <br><br>
 
 <table>

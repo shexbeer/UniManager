@@ -34,21 +34,76 @@ class PO_MA_create
     * @param int $sg_id  ID des Studienganges
     */
     
-	function createMA($sg_id)
+	function createMA($sg_id, $semester)
 	{
+        /* Modul edit???? 
         //Manager initialisieren
-        $SG=new SG_Management();
-        $MM=new Modul_Management();
-        $so=$SG->getSO($sg_id);
+    	$SG=new SG_Management();
+        $MM = new Modul_Management();
+        $MA = new Modulangebot_Management();
+        $PM = new Person_Management();
+        
+        $so=$SG->getPO($sg_id);
         // Fehlt noch ne Fehlerpruefung
         //Modulliste zum Studiengang holen und ueberpruefen
         $modullist_unchecked=$MM->getModullist(true,"sg",$sg_id);
-        $modullist=$this->UM->checkManagerResults($modullist_unchecked,"modul_id","Modulliste");
-        //komplette Modulliste holen und ueberpruefen
-        $modullist_all_unchecked=$MM->getModullist(true);
-        $modullist_all=$this->UM->checkManagerResults($modullist_all_unchecked,"modul_id","Modulliste");
-        //SO und Modulliste zum Studiengang und komplette Modulliste an VO senden
-        $this->UM->VisualObject->showMAedit($so,$modullist,$modullist_all);
+        $modullist=$this->UM->checkManagerResults($modullist_unchecked,"modul_id","Abrufen der Modulliste");
+        
+        //Modulangebot derzeitiges Semester
+        $modulangebot_unchecked = $MA->getModulangebot($sg_id, $this->UM->getCurrentSemester());
+        $modulangebot = $this->UM->checkManagerResults($modulangebot_unchecked,"count", "Abrufen des Modulangebots");
+        
+        
+        foreach($modulangebot as $key => $var) {
+        echo $var["lb"];
+        	$lb_unchecked = $PM->getLehrbeauftrDetails($var["event"]["lb"]);
+        	$lb = $this->UM->checkManagerResults($lb_unchecked, "lehrbeauftr_id", "Abfrage des Lehrbeauftragten");
+        	//var_dump($lb);
+        	//var_dump($lb[$var["event"]["lb"]]["person_vorname"]);
+        	$result[$key]=$var;
+        	$result[$key]["lb_name"] = $lb[$var["event"]["lb"]]["person_vorname"]." ".$lb[$var["event"]["lb"]]["person_name"];
+        	$result[$key]["modul"] = $modullist[$var["event"]["modul"]]["modul_name"];
+        }
+        var_dump($result);
+        */
+		$MM = new Modul_Management();
+		$SG=new SG_Management();
+         //Modulliste zum Studiengang holen und ueberpruefen
+        $modullist_unchecked=$MM->getModullist(true,"sg",$sg_id);
+        $modullist=$this->UM->checkManagerResults($modullist_unchecked,"modul_id","Abrufen der Modulliste");
+        
+        $oddOrEven = $this->UM->checkIfOddOrEvenSemester($semester);
+        $result = array();
+        foreach($modullist as $key => $var) {
+        	if($oddOrEven == "odd") {
+        		if(($var["mauf_plansemester"] % 2) == 0) //odd
+        		{
+        			$result[$key] = $var;
+        		} else { // even
+        		}
+        	} else {
+        		if(($var["mauf_plansemester"] % 2) == 1) //even
+        		{
+        			$result[$key] = $var;
+        		} else { // odd
+        		}
+        	}
+        }
+        $modullist = $result;
+        
+        $po=$SG->getPO($sg_id);
+        
+        $po = $this->UM->checkManagerResults($po, "sg_id", "Abfrage der PO");
+        //var_dump($po);
+        $modulhb = $SG->getModulhandbuch($sg_id);
+        if($semester == $this->UM->getCurrentSemester()) {
+        	$mark_semester = "1";
+        } else {
+        	$mark_semester = "2";
+        }
+        
+        
+        $this->UM->VisualObject->showMAedit($sg_id,$modullist,$po[$sg_id]["sg_po"],$modulhb[$sg_id]["sg_modulhandbuch"], $mark_semester);
     }
     
     /**
