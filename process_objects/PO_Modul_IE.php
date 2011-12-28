@@ -22,13 +22,14 @@
             	$verantwortlicher_id = $var["modul_person_id"];
             	// Abfrage des Richtigen Namens der Verantwortlichen ID und ŸberprŸfen der ManagerDaten auf Fehler
             	$res = $PM->getNameForID($verantwortlicher_id);
-            	$res_cropped = $this->UM->checkManagerResults($res, "id", "Personen");
+            	var_dump($res);
+            	//$res_cropped = $this->UM->checkManagerResults($res, "id", "Personen");
             	   
             	// GrundsŠtzlich ersteinmal alles was in $modDetails drinsteht wieder nach $results rein
             	$result[$var["modul_id"]] = $var;
             	// Vorsichtshalber wird das ID Feld ausgetauscht mit dem Richtigen Namen aber auch ein Neues Feld erstellt um bei den VO Machern jegliche Dummheiten auszuschlie§en ;)
-            	$result[$var["modul_id"]]["verantwortlicher"] = $res_cropped[$verantwortlicher_id]["vorname"]." ".$res_cropped[$verantwortlicher_id]["name"];
-            	$result[$var["modul_id"]]["modul_person_id"] = $res_cropped[$verantwortlicher_id]["vorname"]." ".$res_cropped[$verantwortlicher_id]["name"];
+            	$result[$var["modul_id"]]["verantwortlicher"] = $res["vorname"]." ".$res["name"];
+            	//$result[$var["modul_id"]]["modul_person_id"] = $res_cropped[$verantwortlicher_id]["vorname"]." ".$res_cropped[$verantwortlicher_id]["name"];
             }
 			// Ÿbergebe Ausgabefertige Daten an VO
             $this->UM->VisualObject->showModulList($result);

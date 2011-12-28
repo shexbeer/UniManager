@@ -208,6 +208,7 @@ class PDFCreator
 			$name = "Modul_".$sg_id.".pdf";
 			$dest = "../".PDF_Modulhandbuch_DIR;
 		
+			
 			$pdf->Output($dest.$name, "F");
 			header("Location: " . $UM->cwd["rootDir"] . $dest . $name . "?time=".time());
 		}

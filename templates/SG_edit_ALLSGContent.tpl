@@ -168,15 +168,15 @@ Details des ausgew&auml;lten Studiengangs
       			{/if}
       			{if $sg.sg_typ==Diplom}
 					<option {if {$var.mauf_plansemester==1}}selected{/if}>1</option>
-					<option {if {$var.mauf_plansemester==2}}selected{/if}> 2</option>
-					<option {if {$var.mauf_plansemester==3}}selected{/if}> 3</option>
-					<option {if {$var.mauf_plansemester==4}}selected{/if}> 4</option>
-					<option {if {$var.mauf_plansemester==5}}selected{/if}> 5</option>
-					<option {if {$var.mauf_plansemester==6}}selected{/if}> 6</option>
-					<option {if {$var.mauf_plansemester==7}}selected{/if}> 7</option>
-					<option {if {$var.mauf_plansemester==8}}selected{/if}> 8</option>
-					<option {if {$var.mauf_plansemester==9}}selected{/if}> 9</option>
-					<option {if {$var.mauf_plansemester==10}}selected{/if}> 10</option>
+					<option {if {$var.mauf_plansemester==2}}selected{/if}>2</option>
+					<option {if {$var.mauf_plansemester==3}}selected{/if}>3</option>
+					<option {if {$var.mauf_plansemester==4}}selected{/if}>4</option>
+					<option {if {$var.mauf_plansemester==5}}selected{/if}>5</option>
+					<option {if {$var.mauf_plansemester==6}}selected{/if}>6</option>
+					<option {if {$var.mauf_plansemester==7}}selected{/if}>7</option>
+					<option {if {$var.mauf_plansemester==8}}selected{/if}>8</option>
+					<option {if {$var.mauf_plansemester==9}}selected{/if}>9</option>
+					<option {if {$var.mauf_plansemester==10}}selected{/if}>10</option>
       			{/if}
     		</select>
 			{else}

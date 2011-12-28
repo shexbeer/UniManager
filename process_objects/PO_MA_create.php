@@ -11,11 +11,22 @@ class PO_MA_create
 	function initForm()
 	{
 		$SG_M = new SG_Management();
+		$PM = new Person_Management();
 		// Hole alle StudiengÃ¤nge zum anzeigen
 		$sg = $SG_M->getSGList();
-		var_dump($sg);
-		$sg_edited = $this->UM->checkManagerResults($sg, "id", "Studiengaenge");
-		$this->UM->VisualObject->showSGList($sg_edited);
+		$sglist = $this->UM->checkManagerResults($sg, "sg_id", "Abfrage der Studiengaenge");
+		
+		foreach($sglist as $var)
+        {
+              $result[$var["sg_id"]]=$var;
+              $dekan_unchecked=$PM->getDekanDetails($var["sg_dekan"]);
+              $dekan_id = $var["sg_dekan"];
+              $dekan=$this->UM->checkManagerResults($dekan_unchecked,"studiendekan_id","Dekanabfrage");
+              //var_dump($dekan);
+              $result[$var["sg_id"]]["sg_dekan"]=$dekan[$dekan_id]["person_vorname"]." ".$dekan[$dekan_id]["person_name"];
+        }
+        $semester = $this->UM->getNextSemester();
+		$this->UM->VisualObject->showSGList($result,$semester);
 	}
     
     /**
@@ -52,7 +63,7 @@ class PO_MA_create
         //Manager initialisieren
         $MA=new Modulaufstellung_Management();
         //zusätzliche spalten hinzufügen damit manager es nur noch eintragen muss in DB
-        foreach($modul_aufstellung as &$var)
+        foreach($modul_aufstellung as $var)
         {
             $var["mauf_sg_id"]=$sg_id;
             $var["mauf_typ"]=$typ;

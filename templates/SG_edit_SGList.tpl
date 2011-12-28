@@ -28,7 +28,7 @@ Einen ausw&auml;hlen um ihn zu editieren bzw zu l&ouml;schen oder hier einen neu
 	<th></th>
 	
 	<th id="sg_edit_table_flags" colspan="3">setze</th>
-	<th></th>
+	<!-- <th></th> -->
 	<th></th>
 </tr>
 
@@ -45,7 +45,7 @@ Einen ausw&auml;hlen um ihn zu editieren bzw zu l&ouml;schen oder hier einen neu
 	<td><a  style="color:orange" href="SG_edit.php?setStatus=2&forid={$var.sg_id}"> abgestimmt </a></td>
 	<td><a id="sg_edit_table_flags_right" style="color:green" href="SG_edit.php?setStatus=3&forid={$var.sg_id}"> best&auml;tigt </a></td>
 
-	<td><a href="SG_edit.php?editMauf=yes&forid={$var.sg_id}"> Modulaufstellung </a></td>
+	<!-- <td><a href="SG_edit.php?editMauf=yes&forid={$var.sg_id}"> Modulaufstellung </a></td> -->
 
 	<td><a style="color:red" onClick="send_formular({$var.sg_id})"> l&ouml;schen</a></td>
 </tr>

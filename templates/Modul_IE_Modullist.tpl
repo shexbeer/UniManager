@@ -14,7 +14,7 @@ Die Liste aller Module zu denen &Auml;nderungen vorgenommen werden k&ouml;nnen
 {foreach from=$modDetails item=var}
 <tr>
 <td>{$var.modul_name}</td>
-<td style="text-align: center;">{$var.modul_person_id}</td>
+<td style="text-align: center;">{$var.verantwortlicher}</td>
 <td>{$var.modul_status}</td>
 <td><a href="{$rootDir}Modul_IE.php?forid={$var.modul_id}">ausw&auml;hlen</a></td>
 </tr>

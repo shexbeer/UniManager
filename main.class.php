@@ -216,4 +216,32 @@ class UniManager
 		}
 		return $results_edited;
 	}
+	function getCurrentSemester() {
+		$day = date("j");
+		$month = date("n");
+		$year = date("Y");
+		if($day >= 1 && $day <= 31) {
+			if($month >= 4 && $month <= 9) {
+				$semester = "SS".$year;
+			} else {
+				$semester = "WS".($year+1);
+			}
+		}
+		return $semester;
+	}
+	function getNextSemester() {
+		$currentSemester = $this->getCurrentSemester();
+		$day = date("j");
+		$month = date("n");
+		$year = date("Y");
+		if($day >= 1 && $day <= 31) {
+			if($month >= 4 && $month <= 9) {
+				//$semester = "SS".$year;
+				$semester = "WS".($year+1);
+			} else {
+				$semester = "SS".($year+1);
+			}
+		}
+		return $semester;
+	}
 }
