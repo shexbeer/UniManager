@@ -22,7 +22,7 @@
             	$verantwortlicher_id = $var["modul_person_id"];
             	// Abfrage des Richtigen Namens der Verantwortlichen ID und ŸberprŸfen der ManagerDaten auf Fehler
             	$res = $PM->getNameForID($verantwortlicher_id);
-            	var_dump($res);
+            	//var_dump($res);
             	//$res_cropped = $this->UM->checkManagerResults($res, "id", "Personen");
             	   
             	// GrundsŠtzlich ersteinmal alles was in $modDetails drinsteht wieder nach $results rein
