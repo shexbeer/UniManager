@@ -2,7 +2,8 @@
 
 W&auml;hlen sie einen Studiengang aus, zu dem ein Modulangebot erstellt werden soll.
 <br><br>
-{$semester}
+Derzeitiges Semster: <b>{$current_semester}</b><br>
+N&auml;chstes Semester: <b>{$next_semester}</b><br>
 
 <br><br>
 <table>

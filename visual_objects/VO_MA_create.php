@@ -6,12 +6,13 @@ class VO_MA_create
 		// instanzierte UniManager Klasse, klassenweit verfügbar machen
 		$this->UM = $UM;
 	}
-	function showSGList($sg, $semester)
+	function showSGList($sg)
 	{
 		$this->UM->showfooter();
 		$this->UM->showheader($this->UM->seite);
 		$this->UM->tpl->assign("sglist", $sg);
-		$this->UM->tpl->assign("semester", $semester);
+		$this->UM->tpl->assign("current_semester", $this->UM->getCurrentSemester());
+		$this->UM->tpl->assign("next_semester", $this->UM->getNextSemester());
 		$this->UM->tpl->display("MA_create_SGList.tpl", session_id());
 	}
 	function showMAedit($so,$modullist_sg,$modullist_all)        //hab mal die Parameter eingefuegt Sebastian

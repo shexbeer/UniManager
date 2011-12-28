@@ -25,8 +25,8 @@ class PO_MA_create
               //var_dump($dekan);
               $result[$var["sg_id"]]["sg_dekan"]=$dekan[$dekan_id]["person_vorname"]." ".$dekan[$dekan_id]["person_name"];
         }
-        $semester = $this->UM->getNextSemester();
-		$this->UM->VisualObject->showSGList($result,$semester);
+        
+		$this->UM->VisualObject->showSGList($result);
 	}
     
     /**
