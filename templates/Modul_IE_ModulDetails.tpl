@@ -28,9 +28,9 @@ Das Ergebnis der Aenderung vom Modul wurd gezeigt
 <td align="center" valign="top">{$var.modul_duration}</td>
 <td valign="top">{$var.modul_qualifytarget}</td>
 <td "valign="top">
-    <div style="width:100%; height:80%; overflow:scroll;">
+        <div overflow:scroll;>
         {$var.modul_content}</td>
-    </div>
+        </div>
 </tr>
 {/foreach}
 
@@ -57,7 +57,6 @@ Das Ergebnis der Aenderung vom Modul wurd gezeigt
 <td valign="top">{$var.modul_effort}</td>
 </tr>
 {/foreach}
-
 </table>
 
 {include file="footer.tpl" title=foo}

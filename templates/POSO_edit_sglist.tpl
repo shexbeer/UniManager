@@ -22,7 +22,7 @@ W&auml;hlen sie einen Studiengang aus. zu dem die Studien- und Pr&uuml;fungsordn
     <td>
     {if $var.sg.sg_po}
     <b>Studiums und Pr&uuml;fungsordnung vorhanden.</b>
-       
+    {/if}   
     </td>
     </tr>
 {/foreach}
