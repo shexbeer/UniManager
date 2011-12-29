@@ -19,4 +19,12 @@ if($_GET["forid"])
 {//Moduldetails anzeigen
     $UM->ProcessObject->changemodul($_GET["forid"]);
 }
+
+if($_GET["changedetails"])
+{//Moduldetails editieren
+    
+}
+
+
+
 ?>
