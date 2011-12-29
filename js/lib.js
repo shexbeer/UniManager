@@ -30,7 +30,7 @@ function MA_AddButton($id) {
 
 function isEven(someNumber){
     return (someNumber%2 == 0) ? true : false;
-};
+}
 
 function MA_changeSemester(sgid, cur, next) {
 	// 1 -> $mark 2-> !$mark

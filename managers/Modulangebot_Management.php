@@ -395,6 +395,22 @@ class Modulangebot_Management{
 		return true;
 	}
 	
+	/* Funktion checkt ob es ein Modulangebot für ein bestimmtes Semester eines bestimmten Studiengangs gibt
+	* @param $sg_id	Studiengang
+	* @param $semester, Plansemester ('WS2012')
+	* @return bool ob es einen gibt, oder nicht
+	*/
+	function checkModulangebotForSG($sg_id, $semester)
+	{
+		$sql = "SELECT * FROM `modulangebot`WHERE `ma_sg` = '".$sg_id."' AND `ma_semester` = '".$semester."';";
+		$res = mysql_query($sql);
+		if(mysql_num_rows($res) == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 	//HELPER
 	private function buildResultforStatus($res)
 	{

@@ -12,6 +12,7 @@ class PO_MA_create
 	{
 		$SG_M = new SG_Management();
 		$PM = new Person_Management();
+		$MA = new Modulangebot_Management();
 		// Hole alle Studiengänge zum anzeigen
 		$sg = $SG_M->getSGList();
 		$sglist = $this->UM->checkManagerResults($sg, "sg_id", "Abfrage der Studiengaenge");
@@ -22,8 +23,20 @@ class PO_MA_create
               $dekan_unchecked=$PM->getDekanDetails($var["sg_dekan"]);
               $dekan_id = $var["sg_dekan"];
               $dekan=$this->UM->checkManagerResults($dekan_unchecked,"studiendekan_id","Dekanabfrage");
-              //var_dump($dekan);
               $result[$var["sg_id"]]["sg_dekan"]=$dekan[$dekan_id]["person_vorname"]." ".$dekan[$dekan_id]["person_name"];
+
+              //var_dump($dekan);
+              if($MA->checkModulangebotForSG($var["sg_id"], $this->UM->getCurrentSemester())) 
+              	$result[$var["sg_id"]]["MA_curr"] = true;
+              else
+                $result[$var["sg_id"]]["MA_curr"] = false;
+                
+              if($MA->checkModulangebotForSG($var["sg_id"], $this->UM->getNextSemester())) 
+              	$result[$var["sg_id"]]["MA_next"] = true;
+              else
+                $result[$var["sg_id"]]["MA_next"] = false;
+                
+            
         }
         
 		$this->UM->VisualObject->showSGList($result);

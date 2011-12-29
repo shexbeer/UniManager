@@ -29,8 +29,9 @@
 	</td>
 </tr>
 </table>
-
-<br><br>
+<br>
+<br>
+<hr>
 <h4>Dem Studiengang zugewiesene Module (Modulname + Plansemester),<br>
 die in dem Zeitraum hinzugef&uuml;gt werden k&ouml;nnen</h4>
 <table>
@@ -66,6 +67,8 @@ die in dem Zeitraum hinzugef&uuml;gt werden k&ouml;nnen</h4>
 {/foreach}
 </tr>
 </table>
+<hr>
+<h4>Ausgew&auml;hlte Module f&uuml;r das Modulangebot</h4>
 <!--
 <table>
 <tr>

@@ -11,6 +11,8 @@ N&auml;chstes Semester: <b>{$next_semester}</b><br>
 	<th>Name</th>
 	<th>Dekan</td>
 	<th>Status</th>
+	<th>{$current_semester}</th>
+	<th>{$next_semester}</th>
 	<th></th>
 </tr>
 
@@ -20,6 +22,8 @@ N&auml;chstes Semester: <b>{$next_semester}</b><br>
 	<td>{$var.sg_name}</td>
 	<td>{$var.sg_dekan}</td>
 	<td>{$var.sg_status}</td>
+	<td><span style="color:{if $var.MA_curr}green{else}red{/if}"}><b>X</b></span></td>
+	<td><span style="color:{if $var.MA_next}green{else}red{/if}"}><b>X</b></span></td>
 	<td><a href="{$rootDir}MA_create.php?forid={$var.sg_id}">ausw&auml;hlen</a></td>
 </tr>
 {/foreach}

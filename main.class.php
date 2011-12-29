@@ -236,13 +236,11 @@ class UniManager
 		return $semester;
 	}
 	function getNextSemester() {
-		$currentSemester = $this->getCurrentSemester();
 		$day = date("j");
 		$month = date("n");
 		$year = date("Y");
 		if($day >= 1 && $day <= 31) {
 			if($month >= 4 && $month <= 9) {
-				//$semester = "SS".$year;
 				$semester = "WS".($year+1);
 			} else {
 				$semester = "SS".($year+1);
@@ -250,12 +248,10 @@ class UniManager
 		}
 		return $semester;
 	}
-	function checkIfOddOrEvenSemester($sem) {
+	function checkIfOddOrEvenSemester($sem) { // WS => 1.,3.,5.,7... SS=>2.,4.,6.,8...
 		if(strncmp($sem, "WS", 2) == 0) // String ist WSXXXX String
-		{
 			return "odd";
-		} else {
+		else
 			return "even";
-		}
 	}
 }
