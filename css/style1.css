@@ -40,10 +40,21 @@ th {
 }
 #MA_rightSem {
 	color: green;
+	font-weight: bold;
 }
 #MA_wrongSem {
 	color: gray;
 }
+.MA_inputText {
+	background-color: #FFF; 
+	border:0px 
+	solid #ddd;
+}
+.MA_inputText [disabled='disabled'] {
+	color: black;
+	background-color: black;
+}
+
 #sg_edit_table_flags_left {
 	border-left-color: black;
 	border-left-width: 1px;
@@ -61,6 +72,12 @@ th {
 	border-left-color: black;
 	border-left-width: 1px;
 	border-left-style: solid;
+}
+
+#warning {
+	background-color: red;
+	color: white;
+	text-align: center;
 }
 
 
@@ -130,6 +147,7 @@ input, textarea, select {
 	color: red;
 	font-weight: bold;
 }
+
 
 /* ALTERNATIV STYLING
 

@@ -47,46 +47,15 @@ class PO_MA_create
     * @param int $sg_id  ID des Studienganges
     */
     
-	function createMA($sg_id, $semester)
+	function createMA($sg_id, $semester, $MAs)
 	{
-        /* Modul edit???? 
-        //Manager initialisieren
-    	$SG=new SG_Management();
-        $MM = new Modul_Management();
-        $MA = new Modulangebot_Management();
-        $PM = new Person_Management();
-        
-        $so=$SG->getPO($sg_id);
-        // Fehlt noch ne Fehlerpruefung
-        //Modulliste zum Studiengang holen und ueberpruefen
-        $modullist_unchecked=$MM->getModullist(true,"sg",$sg_id);
-        $modullist=$this->UM->checkManagerResults($modullist_unchecked,"modul_id","Abrufen der Modulliste");
-        
-        //Modulangebot derzeitiges Semester
-        $modulangebot_unchecked = $MA->getModulangebot($sg_id, $this->UM->getCurrentSemester());
-        $modulangebot = $this->UM->checkManagerResults($modulangebot_unchecked,"count", "Abrufen des Modulangebots");
-        
-        
-        foreach($modulangebot as $key => $var) {
-        echo $var["lb"];
-        	$lb_unchecked = $PM->getLehrbeauftrDetails($var["event"]["lb"]);
-        	$lb = $this->UM->checkManagerResults($lb_unchecked, "lehrbeauftr_id", "Abfrage des Lehrbeauftragten");
-        	//var_dump($lb);
-        	//var_dump($lb[$var["event"]["lb"]]["person_vorname"]);
-        	$result[$key]=$var;
-        	$result[$key]["lb_name"] = $lb[$var["event"]["lb"]]["person_vorname"]." ".$lb[$var["event"]["lb"]]["person_name"];
-        	$result[$key]["modul"] = $modullist[$var["event"]["modul"]]["modul_name"];
-        }
-        var_dump($result);
-        */
 		$MM = new Modul_Management();
-		$SG=new SG_Management();
+		$SG = new SG_Management();
+		$PM = new Person_Management();
          //Modulliste zum Studiengang holen und ueberpruefen
         $modullist_unchecked=$MM->getModullist(true,"sg",$sg_id);
         $modullist=$this->UM->checkManagerResults($modullist_unchecked,"modul_id","Abrufen der Modulliste");
-        
         $oddOrEven = $this->UM->checkIfOddOrEvenSemester($semester);
-        $result = array();
         foreach($modullist as $key => $var) {
         	if($oddOrEven == "odd") {
         		if(($var["mauf_plansemester"] % 2) == 0) //odd
@@ -114,9 +83,10 @@ class PO_MA_create
         } else {
         	$mark_semester = "2";
         }
+        $lehrbeauf_unchecked = $PM->getLehrbeauftragte();
+        $lehrbeauf = $this->UM->checkManagerResults($lehrbeauf_unchecked, "lehrbeauftr_id", "Abfrage der Lehrbeauftragten");
         
-        
-        $this->UM->VisualObject->showMAedit($sg_id,$modullist,$po[$sg_id]["sg_po"],$modulhb[$sg_id]["sg_modulhandbuch"], $mark_semester);
+        $this->UM->VisualObject->showMAedit($sg_id,$lehrbeauf, $modullist,$po[$sg_id]["sg_po"],$modulhb[$sg_id]["sg_modulhandbuch"], $mark_semester, $MAs);
     }
     
     /**
@@ -126,20 +96,31 @@ class PO_MA_create
     * @param string $typ Art des Studiums z.B. "Bachelor","Master"
     */
     
-	function setMA($sg_id,$modul_aufstellung,$typ)
+	function setMA($sg_id,$semester,$modulliste, $lb)
 	{
         //Manager initialisieren
-        $MA=new Modulaufstellung_Management();
-        //zusätzliche spalten hinzufügen damit manager es nur noch eintragen muss in DB
-        foreach($modul_aufstellung as $var)
+        $MA=new Modulangebot_Management();
+        
+        // Events zusammenstellen
+        $events = array();
+        foreach($modulliste as $key => $var)
         {
-            $var["mauf_sg_id"]=$sg_id;
-            $var["mauf_typ"]=$typ;
+        	if($semester == 1) $events[$key]["semester"] = $this->UM->getCurrentSemester();
+        	else $events[$key]["semester"] = $this->UM->getNextSemester();
+        	
+            $events[$key]["time"] = "07:30:00";
+            $events[$key]["weekday"] = "Montag";
+			$events[$key]["week"] = "jede";
+            $events[$key]["lb"] = $lb;
+            
+            $id=preg_split(":\::",$var);
+            $id = substr($id[1], 0, -1);
+            $events[$key]["modul"] = $id;
         }
         //Modulaufstellung an Manager senden
-        $result=$MA->setModulaufstellung($sg_id,$modul_aufstellung);
+        $result=$MA->setModulangebotPerSG($sg_id,$events);
         //Erfolg oder Misserfolg an VO melden
-        $this->UM->VisualObject->showResult($result);
+        $this->UM->VisualObject->showResult($result, "Modulangebot setzen war nicht erfolgreich");
 	}
 }
 ?>

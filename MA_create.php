@@ -14,15 +14,24 @@ if(!$_GET && !$_POST)
 {
 	$UM->ProcessObject->initForm();
 }
-
+if($_GET["createMA"] && $_GET["forid"])
+{
+	$UM->ProcessObject->setMA($_GET["forid"], $_POST["ma_semester"], $_POST["ma_text"], $_POST["lb"]);
+	die();
+}
 if($_GET["forid"] && $_GET["forSem"]) 
 {
-	$UM->ProcessObject->createMA($_GET["forid"], $_GET["forSem"]);
+	$MAs = array();
+	$MAs[0] = $_GET["curr"];
+	$MAs[1] = $_GET["next"];
+	$UM->ProcessObject->createMA($_GET["forid"], $_GET["forSem"], $MAs);
 	die();
 }
 if($_GET["forid"]) 
 {
-	$UM->ProcessObject->createMA($_GET["forid"], $UM->getCurrentSemester());
+	$MAs = array();
+	$MAs[0] = $_GET["curr"];
+	$MAs[1] = $_GET["next"];
+	$UM->ProcessObject->createMA($_GET["forid"], $UM->getCurrentSemester(), $MAs);
 }
-
 ?>

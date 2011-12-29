@@ -11,7 +11,37 @@
         */
       function initform()
       {
-          //Manager initialisieren
+        //Manager initialisieren
+         /* Modul edit???? 
+        //Manager initialisieren
+    	$SG=new SG_Management();
+        $MM = new Modul_Management();
+        $MA = new Modulangebot_Management();
+        $PM = new Person_Management();
+        
+        $so=$SG->getPO($sg_id);
+        // Fehlt noch ne Fehlerpruefung
+        //Modulliste zum Studiengang holen und ueberpruefen
+        $modullist_unchecked=$MM->getModullist(true,"sg",$sg_id);
+        $modullist=$this->UM->checkManagerResults($modullist_unchecked,"modul_id","Abrufen der Modulliste");
+        
+        //Modulangebot derzeitiges Semester
+        $modulangebot_unchecked = $MA->getModulangebot($sg_id, $this->UM->getCurrentSemester());
+        $modulangebot = $this->UM->checkManagerResults($modulangebot_unchecked,"count", "Abrufen des Modulangebots");
+        
+        
+        foreach($modulangebot as $key => $var) {
+        echo $var["lb"];
+        	$lb_unchecked = $PM->getLehrbeauftrDetails($var["event"]["lb"]);
+        	$lb = $this->UM->checkManagerResults($lb_unchecked, "lehrbeauftr_id", "Abfrage des Lehrbeauftragten");
+        	//var_dump($lb);
+        	//var_dump($lb[$var["event"]["lb"]]["person_vorname"]);
+        	$result[$key]=$var;
+        	$result[$key]["lb_name"] = $lb[$var["event"]["lb"]]["person_vorname"]." ".$lb[$var["event"]["lb"]]["person_name"];
+        	$result[$key]["modul"] = $modullist[$var["event"]["modul"]]["modul_name"];
+        }
+        var_dump($result);
+        */
           $SG= new SG_Management();
           $PM= new Person_Management();
           //Studiengangliste holen und ueberpruefen

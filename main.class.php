@@ -230,7 +230,11 @@ class UniManager
 			if($month >= 4 && $month <= 9) {
 				$semester = "SS".$year;
 			} else {
-				$semester = "WS".($year+1);
+				if($month > 9) {
+					$semester = "WS".($year);
+				} else {
+					$semester = "WS".($year-1);
+				}
 			}
 		}
 		return $semester;
@@ -241,9 +245,13 @@ class UniManager
 		$year = date("Y");
 		if($day >= 1 && $day <= 31) {
 			if($month >= 4 && $month <= 9) {
-				$semester = "WS".($year+1);
+				$semester = "WS".($year);
 			} else {
-				$semester = "SS".($year+1);
+				if($month > 9) {
+					$semester = "SS".($year+1);
+				} else {
+					$semester = "SS".($year);
+				}
 			}
 		}
 		return $semester;

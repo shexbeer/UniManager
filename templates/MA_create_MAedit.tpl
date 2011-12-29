@@ -1,5 +1,5 @@
 {include file="header.tpl" title=foo}
-<form action="MA_edit.php?createMA=yes" method="POST">
+<form name="ma_create" action="MA_create.php?createMA=yes&forid={$sg_id}" method="POST">
 <table>
 <tr>
 	<td id="form_caption">
@@ -22,13 +22,36 @@
 		Erstelle Modulaufstellung f&uuml;r Semester
 	</td>
 	<td>
-		<select name="ma_semester" size="1" onChange="MA_changeSemester('{$sg_id}','{$current_semester}','{$next_semester}')">
+		<select name="ma_semester" size="1" onChange="MA_changeSemester('{$sg_id}','{$current_semester}','{$next_semester}','{$mas.0}','{$mas.1}')">
 			<option value="1" {if $mark_semester==1}selected{/if}>Dieses Semster: {$current_semester}</option>
 			<option value="2" {if $mark_semester==2}selected{/if}>N&auml;chstes Semster: {$next_semester}</option>
 		</select>
 	</td>
 </tr>
+<tr>
+	<td id="form_caption">
+		Verantwortlicher Lehrbeauftragter
+	</td>
+	<td>
+		{$counter = 0}
+		{foreach from=$lehrbeauflist item=var}
+			<input type="radio" onChange="MA_create_checkIfSelected()" name="lb" onChange="" value="{$var.lehrbeauftr_id}"> {$var.person_vorname} {$var.person_name}
+			{if $counter % 4 == 0}
+				<br>
+			{/if}
+			{$counter = $counter + 1}
+		{/foreach}
+		
+	</td>
+</tr>
 </table>
+{if ($mark_semester == 1 && $mas.0 == 1) || ($mark_semester == 2 && $mas.1 == 1)}
+	<h4 id="warning">
+		Achtung! F&uuml;r das gew&auml;hlte Semester existiert bereits eine Modulaufstellung.<br>
+		Wenn Sie fortfahren wird die existierende Modulaufstellung &uuml;berschrieben.<br>
+		Verwenden Sie zum Editieren diese <a href="{$rootDir}MA_edit.php?forid={$sg_id}">Funktion</a>
+	</h4>
+{/if}
 <br>
 <br>
 <hr>
@@ -39,25 +62,14 @@ die in dem Zeitraum hinzugef&uuml;gt werden k&ouml;nnen</h4>
 {$counter = 1}
 <tr>
 {foreach $modullist as $var}
-	<td>
+	<td id="ma_add_{$var.modul_id}">
+		<span id="ma_add_span_{$var.modul_id}">
 		{$var.modul_name} 
 		<b>
-			{if $mark == odd}
-				{if $var.mauf_plansemester is odd}
-					<span name="MA_rightSem" id="MA_rightSem">{$var.mauf_plansemester}</span>
-				{else} 
-					<span name="MA_wrongSem" id="MA_wrongSem">{$var.mauf_plansemester}</span>
-				{/if}
-			{else}
-				{if $var.mauf_plansemester is even}
-					<span name="MA_rightSem" id="MA_rightSem">{$var.mauf_plansemester}</span>
-				{else} 
-					<span name="MA_wrongSem" id="MA_wrongSem">{$var.mauf_plansemester}</span>
-				{/if}
-			{/if}
-			
+			<span name="MA_rightSem" id="MA_rightSem">{$var.mauf_plansemester}</span>	
 		</b> 
-		<input type="button" value="+" onClick="MA_AddButton({$var.modul_id })">
+		<input type="button" value="+" onClick="MA_AddButton('{$var.modul_id }','{$var.modul_name}','{$var.mauf_plansemester}')">
+		</span>
 	</td>
 {if $counter%4==0}
 </tr>
@@ -69,6 +81,24 @@ die in dem Zeitraum hinzugef&uuml;gt werden k&ouml;nnen</h4>
 </table>
 <hr>
 <h4>Ausgew&auml;hlte Module f&uuml;r das Modulangebot</h4>
+<span id="modulangebot">
+
+</span
+<br><br>
+<table width="600">
+<tr>
+	<td style="text-align: left;">
+		<a href="MA_create.php">Zur&uuml;ck</a>
+	</td>
+	<td  style="text-align: right;">
+		<input type="submit" id="ma_submit" disabled value="Erstellen">
+	</td>
+</tr>
+</table>
+</form>
+
+
+
 <!--
 <table>
 <tr>
@@ -131,8 +161,4 @@ die in dem Zeitraum hinzugef&uuml;gt werden k&ouml;nnen</h4>
 </tr>
 </table>
 -->
-<br><br>
-<a href="MA_create.php">Zur&uuml;ck</a><input type="submit" value="Erstellen">
-</form>
-
 {include file="footer.tpl" title=foo}

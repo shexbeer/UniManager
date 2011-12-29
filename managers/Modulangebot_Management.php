@@ -176,15 +176,9 @@ class Modulangebot_Management{
 			
 		if( isset($event['week']) )
 		{
-			if( is_numeric($event['week']) )
-			{
-				$event['week']=intval($event['week']);
-			}
-			else 
-				return false;
-			if( !(	$event['week']==0 ||
-					$event['week']==1 ||
-					$event['week']==2 ) )
+			if( !(	$event['week']=="jede" ||
+					$event['week']=="ungerade" ||
+					$event['week']=="gerade" ) )
 				return false;
 		}
 		else
@@ -240,7 +234,8 @@ class Modulangebot_Management{
 					return false; //Semster sind unterschiedlich aber flag nicht gestezt
 			}
 		}
-		// Überprüfen ob einige Events schon vorhanden sind vorhandene ignorieren
+		// ALT: Überprüfen ob einige Events schon vorhanden sind vorhandene ignorieren
+		// NEU: (by shex) Alte Events werden komplett rausgeworfen wenn eine neue gesetzt wird
 		foreach( $offer as $index => $event )
 		{
 			$arr=array();
@@ -248,10 +243,11 @@ class Modulangebot_Management{
 			{
 				$arr[]="`ma_".$key."`='".$value."'";
 			}
-			$sql = "SELECT `ma_count` FROM `modulangebot` WHERE ".join($arr," AND ")." AND `ma_sg`='".$id."';";
+			//$sql = "SELECT `ma_count` FROM `modulangebot` WHERE ".join($arr," AND ")." AND `ma_sg`='".$id."';";
+			$sql = "DELETE FROM `modulangebot` WHERE `ma_semester`='".$event["semester"]."' AND `ma_sg`='".$id."';";
 			$res = mysql_query($sql);
-			if( mysql_fetch_row($res) )
-				unset($offer[$index]);
+			//if( mysql_fetch_row($res) )
+			//	unset($offer[$index]);
 		}
 		
 		// Erstellen der Zeilen
@@ -402,7 +398,7 @@ class Modulangebot_Management{
 	*/
 	function checkModulangebotForSG($sg_id, $semester)
 	{
-		$sql = "SELECT * FROM `modulangebot`WHERE `ma_sg` = '".$sg_id."' AND `ma_semester` = '".$semester."';";
+		$sql = "SELECT ma_sg FROM `modulangebot`WHERE `ma_sg` = '".$sg_id."' AND `ma_semester` = '".$semester."';";
 		$res = mysql_query($sql);
 		if(mysql_num_rows($res) == 0) {
 			return false;

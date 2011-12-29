@@ -15,7 +15,7 @@ class VO_MA_create
 		$this->UM->tpl->assign("next_semester", $this->UM->getNextSemester());
 		$this->UM->tpl->display("MA_create_SGList.tpl", session_id());
 	}
-	function showMAedit($sg_id,$modullist,$po,$modulhb,$mark_semester)
+	function showMAedit($sg_id,$lehrbeauftragte,$modullist,$po,$modulhb,$mark_semester, $MAs)
 	{
 		$curr = $this->UM->getCurrentSemester();
 		$next = $this->UM->getNextSemester();
@@ -27,13 +27,19 @@ class VO_MA_create
 		$this->UM->tpl->assign("current_semester", $curr);
 		$this->UM->tpl->assign("next_semester", $next);
 		$this->UM->tpl->assign("mark_semester", $mark_semester);
+		$this->UM->tpl->assign("lehrbeauflist", $lehrbeauftragte);
 		$this->UM->tpl->assign("sg_id", $sg_id);
+		// array of bool.. [0] -> current Semester
+		// [1] -> next Semester (true = MA exists)
+		$this->UM->tpl->assign("mas", $MAs); 
 		$this->UM->tpl->display("MA_create_MAedit.tpl", session_id());
 	}
-	function showResult()
+	function showResult($result, $message)
 	{
 		$this->UM->showfooter();
 		$this->UM->showheader($this->UM->seite);
+		$this->UM->tpl->assign("result", $result);
+		$this->UM->tpl->assign("extra_msg", $message);
 		$this->UM->tpl->display("MA_create_result.tpl", session_id());
 	}
 }

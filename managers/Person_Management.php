@@ -162,7 +162,16 @@ class Person_Management
 			return false; //kein Eintrag
 		return $row[0];//ID    
     }
-	
+	/***
+    *	holt alle Lehrbeauftragten die es in der Datenbank gibt ab
+    *	@return mixed array
+    */
+	function getLehrbeauftragte()
+	{
+		$sql = "SELECT * FROM `lehrbeauftragter` AS s INNER JOIN person as p ON p.person_id=s.lehrbeauftr_id";
+		$res = mysql_query($sql);
+		return $this->buildResult($res, "lehrbeauftr_id");
+	}
 	/**
 	* holt die Lehrenden-ID zu der Personen-ID aus Lehrenden-Table
 	* @param int $pid Personen-ID der Person

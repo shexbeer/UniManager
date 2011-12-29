@@ -91,7 +91,7 @@ class Modul_Management{
 					return $this->buildResult($res,$attr[0]);
 				case "sg":
 					if(!$semtype){
-						$sql = "SELECT ".$str.",mauf_plansemester FROM ".$table." INNER JOIN (studiengang INNER JOIN modulaufstellung ON sg_id=mauf_sg_id)ON mauf_modul_id=".$attr[1]." WHERE sg_id=".$id;
+						$sql = "SELECT ".$str.",mauf_plansemester FROM ".$table." INNER JOIN (studiengang INNER JOIN modulaufstellung ON sg_id=mauf_sg_id)ON mauf_modul_id=".$attr[1]." WHERE sg_id=".$id;	
 						$res = mysql_query($sql);
 						//2dim array array[modulID][attribut] id ist in den attributen ebenfalls vorhanden 
 						return $this->buildResult($res,$attr[0]);
@@ -126,6 +126,7 @@ class Modul_Management{
 	* @return  array ['result'] enth‰lt false bei DB-Fehler, array[modulID][attribut] das attribut heiﬂt gleich dem DB-fieldnamen
 	*/
 	private function buildResult($res,$key){
+	//var_dump($res);
 		if(!$res)$rows['result']=false;//Fehlererkennung
 		else{
 			$rows['result']=true;

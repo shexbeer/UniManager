@@ -24,7 +24,7 @@ N&auml;chstes Semester: <b>{$next_semester}</b><br>
 	<td>{$var.sg_status}</td>
 	<td><span style="color:{if $var.MA_curr}green{else}red{/if}"}><b>X</b></span></td>
 	<td><span style="color:{if $var.MA_next}green{else}red{/if}"}><b>X</b></span></td>
-	<td><a href="{$rootDir}MA_create.php?forid={$var.sg_id}">ausw&auml;hlen</a></td>
+	<td><a onClick="MAcreate_buildLink('{$rootDir}','{$var.sg_id}','{$var.MA_curr}','{$var.MA_next}')">ausw&auml;hlen</a></td>
 </tr>
 {/foreach}
 </table>
