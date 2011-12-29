@@ -23,8 +23,8 @@
 	</td>
 	<td>
 		<select name="ma_semester" size="1" onChange="MA_changeSemester('{$sg_id}','{$current_semester}','{$next_semester}','{$mas.0}','{$mas.1}')">
-			<option value="1" {if $mark_semester==1}selected{/if}>Dieses Semster: {$current_semester}</option>
-			<option value="2" {if $mark_semester==2}selected{/if}>N&auml;chstes Semster: {$next_semester}</option>
+			<option value="1" {if $mark_semester==1}selected{/if}>Dieses Semester: {$current_semester}</option>
+			<option value="2" {if $mark_semester==2}selected{/if}>N&auml;chstes Semester: {$next_semester}</option>
 		</select>
 	</td>
 </tr>
@@ -52,7 +52,6 @@
 		Verwenden Sie zum Editieren diese <a href="{$rootDir}MA_edit.php?forid={$sg_id}">Funktion</a>
 	</h4>
 {/if}
-<br>
 <br>
 <hr>
 <h4>Dem Studiengang zugewiesene Module (Modulname + Plansemester),<br>
@@ -88,7 +87,8 @@ die in dem Zeitraum hinzugef&uuml;gt werden k&ouml;nnen</h4>
 <table width="600">
 <tr>
 	<td style="text-align: left;">
-		<a href="MA_create.php">Zur&uuml;ck</a>
+		<input type="button" value="Zur&uuml;ck" onClick="window.location='{$rootDir}MA_create.php'">
+		<!--<a href="MA_create.php">Zur&uuml;ck</a>-->
 	</td>
 	<td  style="text-align: right;">
 		<input type="submit" id="ma_submit" disabled value="Erstellen">

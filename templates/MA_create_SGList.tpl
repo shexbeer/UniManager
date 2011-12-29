@@ -24,8 +24,20 @@ N&auml;chstes Semester: <b>{$next_semester}</b><br>
 	<td>{$var.sg_status}</td>
 	<td><span style="color:{if $var.MA_curr}green{else}red{/if}"}><b>X</b></span></td>
 	<td><span style="color:{if $var.MA_next}green{else}red{/if}"}><b>X</b></span></td>
-	<td><a onClick="MAcreate_buildLink('{$rootDir}','{$var.sg_id}','{$var.MA_curr}','{$var.MA_next}')">ausw&auml;hlen</a></td>
+	<td><a style="cursor: pointer;" onClick="MAcreate_buildLink('{$rootDir}','{$var.sg_id}','{$var.MA_curr}','{$var.MA_next}')">ausw&auml;hlen</a></td>
 </tr>
 {/foreach}
+</table>
+<br>
+<b>Legende:</b><br>
+<table>
+<tr>
+	<td><span style="color:green; font-weight:bold;">X</span></td>
+	<td>Ein Modulangebot f&uuml;r dieses Semester existiert bereits.</td>
+</tr>
+<tr>
+	<td><span style="color:red; font-weight:bold;">X</span></td>
+	<td>F&uuml;r dieses Semester existiert kein Modulangebot</td>
+</tr>
 </table>
 {include file="footer.tpl" title=foo}
