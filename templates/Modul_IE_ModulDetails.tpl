@@ -1,5 +1,5 @@
 {include file="header.tpl" title=foo}
-Das Ergebnis der Aenderung vom Modul wurd gezeigt
+Die Moduldetails zum selektierten Modul werden angezeigt.
 <br><br>
 
 <table border>
@@ -58,5 +58,6 @@ Das Ergebnis der Aenderung vom Modul wurd gezeigt
 </tr>
 {/foreach}
 </table>
+<a href="Modul_IE.php?changedetails=yes">Moduldetails editieren</a>
 
 {include file="footer.tpl" title=foo}
