@@ -45,7 +45,7 @@ Details des ausgew&auml;lten Studiengangs
 		<!--
 		<input type="text" name="sg_name" value="{$sg.dekanvorname} {$sg.dekanname}">
 		-->
-		{$counter = 0;}
+		{$counter = 0}
 		{foreach from=$dekanlist item=var}
 			{if $sg.sg_dekan == $var.studiendekan_id}
 				<input checked="checked" type="radio" name="dekan" value="{$var.studiendekan_id}"> {$var.person_vorname} {$var.person_name}
