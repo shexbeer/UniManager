@@ -33,7 +33,7 @@
 		Verantwortlicher Lehrbeauftragter
 	</td>
 	<td>
-		{$counter = 0}
+		{$counter = 1}
 		{foreach from=$lehrbeauflist item=var}
 			<input type="radio" onChange="MA_create_checkIfSelected()" name="lb" onChange="" value="{$var.lehrbeauftr_id}"> {$var.person_vorname} {$var.person_name}
 			{if $counter % 4 == 0}
@@ -46,10 +46,11 @@
 </tr>
 </table>
 {if ($mark_semester == 1 && $mas.0 == 1) || ($mark_semester == 2 && $mas.1 == 1)}
+	{if $mas.0==1} {$editSem=1} {else if $mas.1==1} {$editSem=2} {/if}
 	<h4 id="warning">
 		Achtung! F&uuml;r das gew&auml;hlte Semester existiert bereits eine Modulaufstellung.<br>
 		Wenn Sie fortfahren wird die existierende Modulaufstellung &uuml;berschrieben.<br>
-		Verwenden Sie zum Editieren diese <a href="{$rootDir}MA_edit.php?forid={$sg_id}">Funktion</a>
+		Verwenden Sie zum Editieren diese <a href="{$rootDir}MA_edit.php?editMA=yes&forid={$sg_id}&sem={$editSem}">Funktion</a>
 	</h4>
 {/if}
 <br>

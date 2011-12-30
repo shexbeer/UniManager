@@ -26,12 +26,12 @@ class PO_MA_create
               $result[$var["sg_id"]]["sg_dekan"]=$dekan[$dekan_id]["person_vorname"]." ".$dekan[$dekan_id]["person_name"];
 
               //var_dump($dekan);
-              if($MA->checkModulangebotForSG($var["sg_id"], $this->UM->getCurrentSemester())) 
+              if($MA->checkModulangebotForSG($var["sg_id"], $this->UM->getCurrentSemester()) != false) 
               	$result[$var["sg_id"]]["MA_curr"] = true;
               else
                 $result[$var["sg_id"]]["MA_curr"] = false;
                 
-              if($MA->checkModulangebotForSG($var["sg_id"], $this->UM->getNextSemester())) 
+              if($MA->checkModulangebotForSG($var["sg_id"], $this->UM->getNextSemester()) != false) 
               	$result[$var["sg_id"]]["MA_next"] = true;
               else
                 $result[$var["sg_id"]]["MA_next"] = false;

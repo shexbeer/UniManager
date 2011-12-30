@@ -16,7 +16,7 @@
 		$MA = new Modulangebot_Management();
 		// Hole alle StudiengÃ¤nge zum anzeigen
 		$sg = $SG_M->getSGList();
-		$sglist = $this->UM->checkManagerResults($sg, "sg_id", "Abfrage der Studiengaenge");
+		$sglist = $this->UM->checkManagerResults($sg, "sg_id", "Studiengaenge");
 		
 		foreach($sglist as $var)
         {
@@ -27,12 +27,12 @@
               $result[$var["sg_id"]]["sg_dekan"]=$dekan[$dekan_id]["person_vorname"]." ".$dekan[$dekan_id]["person_name"];
 
               //var_dump($dekan);
-              if($MA->checkModulangebotForSG($var["sg_id"], $this->UM->getCurrentSemester())) 
+              if($MA->checkModulangebotForSG($var["sg_id"], $this->UM->getCurrentSemester()) != false) 
               	$result[$var["sg_id"]]["MA_curr"] = true;
               else
                 $result[$var["sg_id"]]["MA_curr"] = false;
                 
-              if($MA->checkModulangebotForSG($var["sg_id"], $this->UM->getNextSemester())) 
+              if($MA->checkModulangebotForSG($var["sg_id"], $this->UM->getNextSemester()) != false) 
               	$result[$var["sg_id"]]["MA_next"] = true;
               else
                 $result[$var["sg_id"]]["MA_next"] = false;
@@ -51,30 +51,12 @@
       */
       function getModulangebot($sg_id, $semesterShort)
       {
+      	// Manager 
       	$MM = new Modul_Management();
 		$SG = new SG_Management();
 		$PM = new Person_Management();
-         //Modulliste zum Studiengang holen und ueberpruefen
-        $modullist_unchecked=$MM->getModullist(true,"sg",$sg_id);
-        $modullist=$this->UM->checkManagerResults($modullist_unchecked,"modul_id","Abrufen der Modulliste");
-        $oddOrEven = $this->UM->checkIfOddOrEvenSemester($semester);
-        foreach($modullist as $key => $var) {
-        	if($oddOrEven == "odd") {
-        		if(($var["mauf_plansemester"] % 2) == 0) //odd
-        		{
-        			$result[$key] = $var;
-        		} else { // even
-        		}
-        	} else {
-        		if(($var["mauf_plansemester"] % 2) == 1) //even
-        		{
-        			$result[$key] = $var;
-        		} else { // odd
-        		}
-        	}
-        }
-        $modullist = $result;
-        
+		$MA = new Modulangebot_Management();
+		  
         $po=$SG->getPO($sg_id);
         
         $po = $this->UM->checkManagerResults($po, "sg_id", "Abfrage der PO");
@@ -86,12 +68,52 @@
         	$semester = $this->UM->getNextSemester();
         }
         $lehrbeauf_unchecked = $PM->getLehrbeauftragte();
-        $lehrbeauf = $this->UM->checkManagerResults($lehrbeauf_unchecked, "lehrbeauftr_id", "Abfrage der Lehrbeauftragten");
+        $lehrbeauf = $this->UM->checkManagerResults($lehrbeauf_unchecked, "lehrbeauftr_id", "Lehrbeauftragten");
         
         $sgname_unch = $SG->getSGNameforID($sg_id);
-        $sgname = $this->UM->checkManagerResults($sgname_unch, "sg_id", "Abfrage des Studiengangnames");
+        $sgname = $this->UM->checkManagerResults($sgname_unch, "sg_id", "Studiengangnames");
         $sgname = $sgname[$sg_id]["sg_name"];
-        $this->UM->VisualObject->showModulaufstellung($sg_id,$sgname,$lehrbeauf, $modullist,$po[$sg_id]["sg_po"],$modulhb[$sg_id]["sg_modulhandbuch"], $semester);
+        
+        $sgtyp_unch = $SG->getSGTypForID($sg_id);
+        $sgtyp = $this->UM->checkManagerResults($sgtyp_unch, "sg_id", "Studiengangtyps");
+        $sgtyp = $sgtyp[$sg_id]["sg_typ"];
+        
+		//Modulangebot derzeitiges Semester  	
+		$modulangebot_unchecked = $MA->getModulangebot($sg_id, $semester, $sgtyp);
+		$modulangebot = $this->UM->checkManagerResults($modulangebot_unchecked,"modul_id", "Modulangebots");
+		
+         //Modulliste zum Studiengang holen und ueberpruefen
+        $modullist_unchecked=$MM->getModullist(true,"sg",$sg_id);
+        $modullist=$this->UM->checkManagerResults($modullist_unchecked,"modul_id","Modulliste");
+        $oddOrEven = $this->UM->checkIfOddOrEvenSemester($semester);
+        foreach($modullist as $key => $var) 
+        {
+        	if($modulangebot[$var["modul_id"]]["modul_id"] == "") // Nur wenn Modul noch nicht im Modulangebot
+        	{
+        		if($oddOrEven == "odd") 
+        		{
+        			if(($var["mauf_plansemester"] % 2) == 0) //odd
+        			{
+        				$result[$key] = $var;
+        			}
+        		} else {
+        			if(($var["mauf_plansemester"] % 2) == 1) //even
+        			{
+        				$result[$key] = $var;
+        			}
+        		}
+        	}
+        }
+        
+        $modullist = $result;
+		
+		// Lehrbeauftragter fŸr Modulangebot
+		$ma_id = $MA->checkModulangebotForSG($sg_id, $semester);
+		$lb_unchecked = $MA->getLehrbeauftragterForMA($ma_id);
+		$lb_ma = $this->UM->checkManagerResults($lb_unchecked, "ma_count", "Lehrbeauftragten fŸr diese Modulaufstellung");
+        $lb_ma = $lb_ma[$ma_id];
+        
+        $this->UM->VisualObject->showModulaufstellung($sg_id,$sgname,$sgtyp,$lehrbeauf,$lb_ma, $modullist,$modulangebot,$po[$sg_id]["sg_po"],$modulhb[$sg_id]["sg_modulhandbuch"], $semester);
       }
       
       /**

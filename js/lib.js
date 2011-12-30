@@ -170,6 +170,164 @@ function MA_DelButton(id, name, plansemester) {
 	// alert(spanDown.childNodes.length);
 }
 
+function MAedit_AddButton(id, name, plansemester) {
+	
+	var spanDown = document.getElementById("modulangebot");
+	var spanTop = document.getElementById("modulliste");
+	var addSpan = document.getElementById("ma_modlist_"+id);
+	//var spanTop = document.getElementById("ma_add_span_"+id);
+	
+	// Span
+	var newSpan = document.createElement("span");
+	var newSpan_id = document.createAttribute("id");
+	newSpan.setAttributeNode(newSpan_id);
+	newSpan.id = "ma_modangebot_"+id;
+	
+	//newSpan.id = ;
+	
+	// Name Span
+	var nameSpan = document.createElement("span");
+	var nameSpan_text = document.createAttribute("innerText");
+	nameSpan.setAttributeNode(nameSpan_text);
+	nameSpan.innerText = name;
+	
+	//newSpan.id = ;
+	
+	// hidden Box
+	var newHBox = document.createElement("input");
+	var newHBox_type = document.createAttribute("type");
+	var newHBox_name = document.createAttribute("name");
+	var newHBox_value = document.createAttribute("value");
+
+	newHBox.setAttributeNode(newHBox_type);
+	newHBox.setAttributeNode(newHBox_name);
+	newHBox.setAttributeNode(newHBox_value);
+	newHBox.type = "hidden";
+	newHBox.name = "modulaufstellung[]";
+	newHBox.value = id;
+	
+	// Plansemester Anzeige
+	var planSpan = document.createElement("span");
+	var att_name = document.createAttribute("id");
+	att_name.nodeValue = "MA_rightSem";
+	var att_innerText = document.createAttribute("innerText");
+	planSpan.setAttributeNode(att_name);
+	planSpan.setAttributeNode(att_innerText);
+	planSpan.innerText = " "+plansemester+" ";
+	
+	// Del Button
+	var bt = document.createElement("input");
+	var bt_value = document.createAttribute("value");
+	var bt_onClick = document.createAttribute("onClick");
+	var bt_type = document.createAttribute("type");
+	bt.setAttributeNode(bt_value);
+	bt.setAttributeNode(bt_onClick);
+	bt.setAttributeNode(bt_type);
+	bt.value = "-";
+	bt.type = "button";
+	//alert(bt.onClick);
+	bt.setAttribute("onClick","MAedit_DelButton('"+id+"','"+name+"','"+plansemester+"')");
+	
+	var brtag = document.createElement("br");
+	newSpan.appendChild(nameSpan);
+	newSpan.appendChild(newHBox);
+	newSpan.appendChild(planSpan);
+	newSpan.appendChild(bt);
+	
+	spanDown.appendChild(newSpan);
+	
+	newSpan.appendChild(brtag);
+	
+	spanTop.removeChild(addSpan);
+	
+	if(spanDown.childNodes.length % 4 == 0) {
+		
+		//spanDown.appendChild(brtag);
+		//spanDown.removeChild(br);
+		//alert("hui");
+	}
+	
+	// Enable Submit Button
+	if(MA_create_RB_checker())
+		document.getElementById("ma_submit").disabled = false;
+}
+
+function MAedit_DelButton(id, name, plansemester) {
+	
+	var spanDown = document.getElementById("modulangebot");
+	var spanTop = document.getElementById("modulliste");
+	var delSpan = document.getElementById("ma_modangebot_"+id);
+	//var spanTop = document.getElementById("ma_add_span_"+id);
+	
+	// Span
+	var newSpan = document.createElement("span");
+	var newSpan_id = document.createAttribute("id");
+	newSpan_id.nodeValue = "ma_modlist_"+id;
+	newSpan.setAttributeNode(newSpan_id);
+	//newSpan.id = ;
+	
+	// Name Span
+	var nameSpan = document.createElement("span");
+	var nameSpan_text = document.createAttribute("innerText");
+	nameSpan.setAttributeNode(nameSpan_text);
+	nameSpan.innerText = name;
+	
+	//newSpan.id = ;
+	
+	// hidden Box
+	var newHBox = document.createElement("input");
+	var newHBox_type = document.createAttribute("type");
+	var newHBox_name = document.createAttribute("name");
+	var newHBox_value = document.createAttribute("value");
+
+	newHBox.setAttributeNode(newHBox_type);
+	newHBox.setAttributeNode(newHBox_name);
+	newHBox.setAttributeNode(newHBox_value);
+	newHBox.type = "hidden";
+	newHBox.name = "modulaufstellung[]";
+	newHBox.value = id;
+	
+	// Plansemester Anzeige
+	var planSpan = document.createElement("span");
+	var att_name = document.createAttribute("id");
+	att_name.nodeValue = "MA_rightSem";
+	var att_innerText = document.createAttribute("innerText");
+	planSpan.setAttributeNode(att_name);
+	planSpan.setAttributeNode(att_innerText);
+	planSpan.innerText = " "+plansemester+" ";
+	
+	// Add Button
+	var bt = document.createElement("input");
+	var bt_value = document.createAttribute("value");
+	var bt_onClick = document.createAttribute("onClick");
+	var bt_type = document.createAttribute("type");
+	bt.setAttributeNode(bt_value);
+	bt.setAttributeNode(bt_onClick);
+	bt.setAttributeNode(bt_type);
+	bt.value = "+";
+	bt.type = "button";
+	//alert(bt.onClick);
+	bt.setAttribute("onClick","MAedit_AddButton('"+id+"','"+name+"','"+plansemester+"')");
+
+	var brtag = document.createElement("br");
+	
+	newSpan.appendChild(nameSpan);
+	newSpan.appendChild(newHBox);
+	newSpan.appendChild(planSpan);
+	newSpan.appendChild(bt);
+	
+	spanTop.appendChild(newSpan);	
+	newSpan.appendChild(brtag);
+	
+	spanDown.removeChild(delSpan);
+	
+	if(spanDown.childNodes.length == 2) {
+		document.getElementById("ma_submit").disabled = "disabled";
+	}
+	
+	// alert(spanDown.childNodes.length);
+}
+
 
 function MA_create_RB_checker()
 {

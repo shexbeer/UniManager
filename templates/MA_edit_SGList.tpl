@@ -25,11 +25,11 @@ N&auml;chstes Semester: <b>{$next_semester}</b><br>
 	<!-- <td>{$var.sg_status}</td> -->
 	<td><span style="color:{if $var.MA_curr}green{else}red{/if}"}><b>X</b></span></td>
 	<td>
-		<input type="button" {if !$var.MA_curr}disabled{/if} value="ver&auml;ndern" onClick="window.location = '{$rootDir}MA_edit.php?editMA=yes&forid={$var.sg_id}&sem={$var.MA_curr}'">
+		<input type="button" {if !$var.MA_curr}disabled{/if} value="ver&auml;ndern" onClick="window.location = '{$rootDir}MA_edit.php?editMA=yes&forid={$var.sg_id}&sem=1'">
 	</td>
 	<td><span style="color:{if $var.MA_next}green{else}red{/if}"}><b>X</b></span></td>
 	<td>
-		<input type="button" {if !$var.MA_next}disabled{/if} value="ver&auml;ndern" onClick="window.location = '{$rootDir}MA_edit.php?editMA=yes&forid={$var.sg_id}&sem={$var.MA_next}'">
+		<input type="button" {if !$var.MA_next}disabled{/if} value="ver&auml;ndern" onClick="window.location = '{$rootDir}MA_edit.php?editMA=yes&forid={$var.sg_id}&sem=2'">
 	</td>
 	
 </tr>

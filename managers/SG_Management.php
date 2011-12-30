@@ -258,6 +258,12 @@ class SG_Management {
 		return $this->buildResult($res, "sg_id");
 	}
 	
+	function getSGTypForID ($sg_id) {
+		$sql = "SELECT sg_id, sg_typ FROM `studiengang` WHERE sg_id='".$sg_id."'";
+		$res = mysql_query($sql);
+		return $this->buildResult($res, "sg_id");
+	}
+	
 	///Helper///
 	
 	/**
