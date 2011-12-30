@@ -252,6 +252,11 @@ class SG_Management {
         Sebastian*/
         
 	}
+	function getSGNameforID ($sg_id) {
+		$sql = "SELECT sg_id, sg_name FROM `studiengang` WHERE sg_id='".$sg_id."'";
+		$res = mysql_query($sql);
+		return $this->buildResult($res, "sg_id");
+	}
 	
 	///Helper///
 	

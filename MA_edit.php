@@ -1,5 +1,5 @@
 <?php
-$seite = "Modulaufstellung aendern";
+$seite = "Modulangebot &auml;ndern";
 require_once("main.class.php");
 
 $UM = new UniManager("MA_edit");
@@ -13,6 +13,11 @@ if(!$_SESSION["user_loginname"])
 if(!$_GET && !$_POST)
 {
 	$UM->ProcessObject->initForm();
+}
+
+if($_GET["editMA"] && $_GET["forid"] && $_GET["sem"]) 
+{
+	$UM->ProcessObject->getModulangebot($_GET["forid"], $_GET["sem"]);
 }
 
 ?>

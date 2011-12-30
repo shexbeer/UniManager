@@ -12,6 +12,7 @@ N&auml;chstes Semester: <b>{$next_semester}</b><br>
 	<th>Dekan</td>
 	<!-- <th>Status</th> -->
 	<th>{$current_semester}</th>
+	<th></th>
 	<th>{$next_semester}</th>
 	<th></th>
 </tr>
@@ -23,10 +24,14 @@ N&auml;chstes Semester: <b>{$next_semester}</b><br>
 	<td>{$var.sg_dekan}</td>
 	<!-- <td>{$var.sg_status}</td> -->
 	<td><span style="color:{if $var.MA_curr}green{else}red{/if}"}><b>X</b></span></td>
+	<td>
+		<input type="button" {if !$var.MA_curr}disabled{/if} value="ver&auml;ndern" onClick="window.location = '{$rootDir}MA_edit.php?editMA=yes&forid={$var.sg_id}&sem={$var.MA_curr}'">
+	</td>
 	<td><span style="color:{if $var.MA_next}green{else}red{/if}"}><b>X</b></span></td>
 	<td>
-		<input type="button" value="erstellen" onClick="window.location = '{$rootDir}MA_create.php?forid={$var.sg_id}&curr={$var.MA_curr}&next={$var.MA_next}'">
+		<input type="button" {if !$var.MA_next}disabled{/if} value="ver&auml;ndern" onClick="window.location = '{$rootDir}MA_edit.php?editMA=yes&forid={$var.sg_id}&sem={$var.MA_next}'">
 	</td>
+	
 </tr>
 {/foreach}
 </table>

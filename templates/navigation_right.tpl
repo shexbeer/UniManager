@@ -9,7 +9,7 @@
 <a href='{$rootDir}POSO_edit.php' style="color: red;">PO/SO edit(Fei)</a> <br>
 <hr noshade size="1">
 <a href='{$rootDir}MA_create.php'>Modulangebot erstellen(shex)</a> <br>
-<a href='{$rootDir}MA_edit.php' style="color: red;">Modulangebot edit</a> <br>
+<a href='{$rootDir}MA_edit.php' style="color: red;">Modulangebot edit (shex)</a> <br>
 <a href='{$rootDir}MA_compare.php' style="color: red;">Modulangebot vergleichen</a> <br>
 <hr noshade size="1">
 <a href='{$rootDir}logout.php'>Logout</a><br>
