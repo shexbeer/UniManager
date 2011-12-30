@@ -29,8 +29,7 @@ class VO_Modul_IE
 	{
 		$this->UM->showfooter();
 		$this->UM->showheader($this->UM->seite);
-		
-		$this->UM->tpl->assign("modDetails", $mDetails);
+		$this->UM->tpl->assign("mod", $mDetails);
 		$this->UM->tpl->display("Modul_IE_ModulDetails.tpl", session_id());
 	}
 

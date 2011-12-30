@@ -20,9 +20,9 @@ if($_GET["forid"])
     $UM->ProcessObject->changemodul($_GET["forid"]);
 }
 
-if($_GET["changedetails"])
+if($_GET["forid"]&& $_POST)
 {//Moduldetails editieren
-    
+    $UM->ProcessObject->changemodul($_GET["forid"],$_POST["modul"]);
 }
 
 

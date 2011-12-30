@@ -38,24 +38,26 @@
         * Ruft Details zu einem speziellen Modul ab und ersetzt PersonenIDs durch Namen, danach schickt sie die Daten an das VO 
         * @param int $modul_id ID des Moduls das aufgerufen werden soll
         */
-        function changemodul($modul_id)
+        function changemodul($modul_id,$modul=false)
         {
             $MM = new Modul_Management();
             $PM = new Person_Management();
-            // Moduldetails zum speziellen Modul holen
-            $re = $MM->getModuldetails(true,"modul",$modul_id);
-            //Prüfen
-            $result = $this->UM->checkManagerResults($re,"modul_id", "Modul Details");
-            // Verantwortlichen-ID zu Namen auflösen
-            $verantwortlicher_id = $result["modul_person_id"];
-            $res = $PM->getNameForID($verantwortlicher_id);
-            //Prüfen
-            $res_cropped = $this->UM->checkManagerResults($res,"id", "Personen");
-            //Namen in result einfügen und ID durch Namen ersetzen (siehe oben)
-            $result["verantwortlicher"] = $res_cropped["vorname"]." ".$res_cropped["name"];
-            $result["modul_person_id"] = $res_cropped["vorname"]." ".$res_cropped["name"];
-            // Übergebe ausgabefertige Daten an VO
-            $this->UM->VisualObject->showModulDetails($result);
+            if (!$modul){
+                // Moduldetails zum speziellen Modul holen
+                $re = $MM->getModuldetails(true,"modul",$modul_id);
+                // Verantwortlichen-ID zu Namen auflösen
+                $res = $PM->getNameForID($re["modul_person_id"]);
+                //Prüfen
+                //Namen in result einfügen und ID durch Namen ersetzen (siehe oben)
+                $re["verantwortlicher"] = $res["vorname"]." ".$res["name"];
+                $re["modul_person_id"] = $res["vorname"]." ".$res["name"];
+                // Übergebe ausgabefertige Daten an VO
+                //var_dump($result);
+                $this->UM->VisualObject->showModulDetails($re);
+            }
+            else{
+                
+            }
             
              
         }
