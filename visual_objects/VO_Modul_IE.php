@@ -22,6 +22,7 @@ class VO_Modul_IE
 		
 		// Setze Variable mit Daten in eine Template Variable um 
 		$this->UM->tpl->assign("modDetails", $mDetails);
+		
 		// Zeige das Template für diese Ausgabe an
 		$this->UM->tpl->display("Modul_IE_Modullist.tpl", session_id());
 	}

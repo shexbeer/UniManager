@@ -70,7 +70,8 @@ Die Moduldetails zum selektierten Modul werden angezeigt.
                 Qualifikationsziel:
             </td>
             <td> 
-                <textarea cols="40" rows="5" name="modul_qualifytarget" &ampmod.modul_qualifytarget>
+                <textarea cols="40" rows="5" name="modul_qualifytarget">
+               		 {$mod.modul_qualifytarget}
                 </textarea>
             </td>
         </tr>
@@ -79,7 +80,8 @@ Die Moduldetails zum selektierten Modul werden angezeigt.
                 Inhalt:
             </td>
             <td>
-                <textarea cols="80" rows="8" name="modul_content" &ampmod.modul_qualifytarget>
+                <textarea cols="80" rows="8" name="modul_content" >
+                	{$mod.modul_content}
                 </textarea>
             </td>
         </tr>
@@ -88,7 +90,8 @@ Die Moduldetails zum selektierten Modul werden angezeigt.
                 Fachliteratur:
             </td>
             <td>
-                <textarea cols="40" rows="5" name="modul_literature" &ampmod.modul_literature>
+                <textarea cols="40" rows="5" name="modul_literature">
+                	{$mod.modul_literature}
                 </textarea>
             </td>
         </tr>
@@ -97,7 +100,8 @@ Die Moduldetails zum selektierten Modul werden angezeigt.
                 Lehrformen:
             </td>
             <td>
-                <textarea cols="30" rows="4" name="modul_teachform" &ampmod.modul_teachform>
+                <textarea cols="30" rows="4" name="modul_teachform">
+                	{$mod.modul_teachform}
                 </textarea>
             </td>
         </tr>
@@ -106,7 +110,8 @@ Die Moduldetails zum selektierten Modul werden angezeigt.
                 Vorraussetzungen:
             </td>
             <td>
-                <textarea cols="40" rows="5" name="modul_required" &ampmod.modul_teachform>
+                <textarea cols="40" rows="5" name="modul_required">
+	                {$mod.modul_required}
                 </textarea>
             </td>
         </tr>
@@ -136,10 +141,11 @@ Die Moduldetails zum selektierten Modul werden angezeigt.
         </tr>
         <tr>
             <td align="right">
-                Vorraussetzung für Leistungsnachweis:
+                Vorraussetzung f&uuml;r Leistungsnachweis:
             </td>
             <td>
-                <textarea cols="30" rows="3" name="modul_conditionforln" &ampmod.modul_conditionforln>
+                <textarea cols="30" rows="3" name="modul_conditionforln">
+                	{$mod.modul_conditionforln}
                 </textarea>
             </td>
         </tr>
@@ -148,7 +154,8 @@ Die Moduldetails zum selektierten Modul werden angezeigt.
                 Arbeitsaufwand:
             </td>
             <td>
-                <textarea cols="50" rows="5" name="modul_effort" &ampmod.modul_effort>
+                <textarea cols="50" rows="5" name="modul_effort">
+                	{$mod.modul_effort}
                 </textarea>
             </td>
         </tr>  

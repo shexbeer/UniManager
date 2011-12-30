@@ -32,6 +32,7 @@
             	//$result[$var["modul_id"]]["modul_person_id"] = $res_cropped[$verantwortlicher_id]["vorname"]." ".$res_cropped[$verantwortlicher_id]["name"];
             }
 			// Ÿbergebe Ausgabefertige Daten an VO
+			
             $this->UM->VisualObject->showModulList($result);
         }
         /**
@@ -45,15 +46,17 @@
             if (!$modul){
                 // Moduldetails zum speziellen Modul holen
                 $re = $MM->getModuldetails(true,"modul",$modul_id);
+                $result = $this->UM->checkManagerResults($re, "modul_id", "Moduldetails");
                 // Verantwortlichen-ID zu Namen auflösen
-                $res = $PM->getNameForID($re["modul_person_id"]);
+                $res = $PM->getNameForID($result[$modul_id]["modul_person_id"]);
                 //Prüfen
                 //Namen in result einfügen und ID durch Namen ersetzen (siehe oben)
-                $re["verantwortlicher"] = $res["vorname"]." ".$res["name"];
-                $re["modul_person_id"] = $res["vorname"]." ".$res["name"];
+                $result = $re[$modul_id];
+                $result["verantwortlicher"] = $res["vorname"]." ".$res["name"];
+                $result["modul_person_id"] = $res["vorname"]." ".$res["name"];
                 // Übergebe ausgabefertige Daten an VO
                 //var_dump($result);
-                $this->UM->VisualObject->showModulDetails($re);
+                $this->UM->VisualObject->showModulDetails($result);
             }
             else{
                 
