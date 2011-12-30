@@ -54,9 +54,8 @@
 	</h4>
 {/if}
 <br>
-<hr>
-<h4>Dem Studiengang zugewiesene Module (Modulname + Plansemester),<br>
-die in dem Zeitraum hinzugef&uuml;gt werden k&ouml;nnen</h4>
+<h4>Modulaufstellung des Studiengangs (Modulname + Plansemester),<br>
+die in diesem Zeitraum hinzugef&uuml;gt werden k&ouml;nnen</h4>
 <table>
 <!--<th colspan="4">  </th>-->
 {$counter = 1}

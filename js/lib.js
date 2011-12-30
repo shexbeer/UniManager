@@ -203,7 +203,7 @@ function MAedit_AddButton(id, name, plansemester) {
 	newHBox.setAttributeNode(newHBox_name);
 	newHBox.setAttributeNode(newHBox_value);
 	newHBox.type = "hidden";
-	newHBox.name = "modulaufstellung[]";
+	newHBox.name = "modulangebot[]";
 	newHBox.value = id;
 	
 	// Plansemester Anzeige

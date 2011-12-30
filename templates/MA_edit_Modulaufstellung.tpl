@@ -1,5 +1,5 @@
 {include file="header.tpl" title=foo}
-<form name="ma_edit" action="MA_edit.php?editMA=yes&forid={$sg_id}" method="POST">
+<form name="ma_edit" action="MA_edit.php?setMA=yes" method="POST">
 <table>
 <tr>
 	<td id="form_caption">
@@ -8,6 +8,7 @@
 	<td>
 		<b>
 			{$forSemester}
+			<input type="hidden" name="forSemester" value="{$forSemester}">
 		</b>
 	</td>
 </tr>
@@ -24,7 +25,8 @@
 		Studiengang
 	</td>
 	<td>
-		{$sg_name}	
+		{$sg_name}
+		<input type="hidden" name="forid" value="{$sg_id}">
 	</td>
 </tr>
 <tr>
@@ -64,10 +66,10 @@
 		Status des Modulangebots
 	</td>
 	<td>
-		<select name="sg_typ" size="1">
-      		<option {if $sg.sg_typ == "Bachelor"}selected{/if}>erstellt</option>
-      		<option {if $sg.sg_typ == "Master"} selected{/if}>gepr&uuml;ft</option>
-      		<option {if $sg.sg_typ == "Diplom"} selected{/if}>g&uuml;ltig</option>
+		<select name="ma_status" size="1">
+      		<option {if $ma_status == "erstellt"}selected{/if}>erstellt</option>
+      		<option {if $ma_status == "geprüft"}selected{/if}>gepr&uuml;ft</option>
+      		<option {if $ma_status == "gültig"}selected{/if}>g&uuml;ltig</option>
     	</select>
 	</td>
 </tr>
@@ -80,9 +82,8 @@
 	</h4>
 {/if}
 <br>
-<hr>
-<h4>Dem Studiengang zugewiesene Module (Modulname + Plansemester),<br>
-die in dem Zeitraum hinzugef&uuml;gt werden k&ouml;nnen</h4>
+<h4>Modulaufstellung des Studiengangs (Modulname + Plansemester),<br>
+die in diesem Zeitraum hinzugef&uuml;gt werden k&ouml;nnen</h4>
 <span id="modulliste" width="200">
 {foreach $modullist as $var}
 	<span id="ma_modlist_{$var.modul_id}">
@@ -99,7 +100,7 @@ die in dem Zeitraum hinzugef&uuml;gt werden k&ouml;nnen</h4>
 {foreach $modulangebot as $var}
 	<span id="ma_modangebot_{$var.modul_id}">
 		<span>{$var.modul_name}</span>
-		<input type="hidden" name="modulaufstellung[]" value="{$var.modul_id}">
+		<input type="hidden" name="modulangebot[]" value="{$var.modul_id}">
 		<span name="MA_rightSem" id="MA_rightSem">{$var.mauf_plansemester}</span>	
 		<input type="button" value="-" onClick="MAedit_DelButton('{$var.modul_id }','{$var.modul_name}','{$var.mauf_plansemester}')">
 		<br>

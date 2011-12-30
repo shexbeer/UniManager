@@ -367,6 +367,14 @@ class Modulangebot_Management{
 			return false; // Löschen gescheitert
 		return true;
 	}
+	function removeMA($sgid, $semester) 
+	{
+		$sql="DELETE FROM `modulangebot` WHERE `ma_sg`='".$sgid."' AND `ma_semester`='".$semester.";";
+		if( mysql_query($sql) )
+			return true;
+		else
+			return false;
+	}
 	
 	/**
 	* Funtion zum ersetzen der Daten eines alten durch ein neues Event (zB um Uhrzeit oder Tag zu ändern)

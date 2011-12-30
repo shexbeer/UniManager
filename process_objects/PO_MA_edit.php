@@ -113,23 +113,44 @@
 		$lb_ma = $this->UM->checkManagerResults($lb_unchecked, "ma_count", "Lehrbeauftragten fŸr diese Modulaufstellung");
         $lb_ma = $lb_ma[$ma_id];
         
-        $this->UM->VisualObject->showModulaufstellung($sg_id,$sgname,$sgtyp,$lehrbeauf,$lb_ma, $modullist,$modulangebot,$po[$sg_id]["sg_po"],$modulhb[$sg_id]["sg_modulhandbuch"], $semester);
+        reset($modulangebot);
+		$firstKey = key($modulangebot);
+		$ma_status = $modulangebot[$firstKey]["ma_status"];
+        
+        $this->UM->VisualObject->showModulaufstellung($sg_id,$sgname,$sgtyp,$lehrbeauf,$lb_ma, $modullist,$modulangebot,$po[$sg_id]["sg_po"],$modulhb[$sg_id]["sg_modulhandbuch"], $semester,$ma_status);
       }
       
       /**
-      * Diese Funktion setzt den Status einer Modulaufstellung zu einem bestimmten Studiengang
-      * @param int $sg_id ID des Studienganges
-      * @param string $status 
-      */
-      
-      function setStatus($sg_id,$status)
-      {
-          //Manager initialieren
-          $MA=new Modulaufstellung_Management;
-          //Statusänderung an Manager schicken
-          $result=$MA->setStatus($sg_id,$status);
-          //Ergebnis an VO schicken
-          $this->UM->VisualObject->showResult($result);
-      }
+    * Schickt die Modulaufstellung für einen Studiengang an den Manager
+    * @param int $sg_id  ID des Studienganges
+    * @param mixed $modul_aufstellung 2 dim. Array mit der Modulaufstellung enthaelt die Felder [ccunt],[modul_id,plansemester]
+    * @param string $typ Art des Studiums z.B. "Bachelor","Master"
+    */
+    
+	function setMA($sg_id,$semester,$modulliste, $lb, $ma_status)
+	{
+        //Manager initialisieren
+        $MA=new Modulangebot_Management();
+        // Events zusammenstellen
+        $events = array();
+        foreach($modulliste as $key => $var)
+        {
+        	$events[$key]["semester"] = $semester;
+        	
+            $events[$key]["time"] = "07:30:00";
+            $events[$key]["weekday"] = "Montag";
+			$events[$key]["week"] = "jede";
+            $events[$key]["lb"] = $lb;
+            
+            $events[$key]["modul"] = $var;
+        }
+        //Modulaufstellung an Manager senden
+        $result=$MA->setModulangebotPerSG($sg_id,$events);
+        if($result) {
+	        $MA->setModulangebotStatus($ma_status, $semester, $sg_id);
+	    }
+        //Erfolg oder Misserfolg an VO melden
+        $this->UM->VisualObject->showResult($result, "Modulangebot setzen war nicht erfolgreich");
+	}
   }
 ?>
