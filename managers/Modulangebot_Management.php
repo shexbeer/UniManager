@@ -23,11 +23,18 @@ class Modulangebot_Management{
 			$result[count]['sg'] die Studiengang-ID nochmal gespeichert
 			$result[count]['event'] Die restdaten in Eventform für mögliche set-Aktionen (für Struktur siehe weiter unten)
 	*/
-	function getModulangebot($id,$sem)
+	function getModulangebot($id,$sem, $sg_typ)
 	{
-		$sql = "SELECT * FROM `modulangebot` WHERE `ma_semester`='".$sem."' AND `ma_sg`='".$id."';";
+		//$sql = "SELECT * FROM `modulangebot` WHERE `ma_semester`='".$sem."' AND `ma_sg`='".$id."';";
+		$sql = "SELECT modul_id, modul_name, mauf_plansemester, ma_status, ma.ma_modul 
+				FROM `modulangebot` AS ma 
+				INNER JOIN `modul` AS m ON m.modul_id = ma.ma_modul 
+				INNER JOIN `modulaufstellung`AS mauf ON mauf.mauf_modul_id = ma.ma_modul
+				WHERE ma.`ma_semester`='".$sem."' 
+				AND ma.`ma_sg`='".$id."' 
+				AND mauf.mauf_typ = '".$sg_typ."';";
 		$res = mysql_query($sql);
-		return $this->buildResultEvent($res);
+		return $this->buildResult($res, "ma_modul");
 	}
 	
 	/**
@@ -360,6 +367,14 @@ class Modulangebot_Management{
 			return false; // Löschen gescheitert
 		return true;
 	}
+	function removeMA($sgid, $semester) 
+	{
+		$sql="DELETE FROM `modulangebot` WHERE `ma_sg`='".$sgid."' AND `ma_semester`='".$semester.";";
+		if( mysql_query($sql) )
+			return true;
+		else
+			return false;
+	}
 	
 	/**
 	* Funtion zum ersetzen der Daten eines alten durch ein neues Event (zB um Uhrzeit oder Tag zu ändern)
@@ -398,16 +413,49 @@ class Modulangebot_Management{
 	*/
 	function checkModulangebotForSG($sg_id, $semester)
 	{
-		$sql = "SELECT ma_sg FROM `modulangebot`WHERE `ma_sg` = '".$sg_id."' AND `ma_semester` = '".$semester."';";
+		$sql = "SELECT ma_count,ma_sg FROM `modulangebot`WHERE `ma_sg` = '".$sg_id."' AND `ma_semester` = '".$semester."';";
 		$res = mysql_query($sql);
 		if(mysql_num_rows($res) == 0) {
 			return false;
 		} else {
-			return true;
+			return mysql_result($res, 0, "ma_count");
 		}
+	}
+	function getLehrbeauftragterForMA($ma_count) {
+		$sql = "SELECT ma.ma_count, p.person_vorname, p.person_name, p.person_id, ma.ma_lb FROM `modulangebot` AS ma 
+				INNER JOIN `lehrbeauftragter`AS lb ON ma.ma_lb = lb.lehrbeauftr_id 
+				INNER JOIN `person` AS p ON lb.lehrbeauftr_personenid=p.person_id 
+				WHERE ma.ma_count=".$ma_count.";";
+		$res = mysql_query($sql);
+		return $this->buildResult($res, "ma_count");
 	}
 	
 	//HELPER
+	/**
+	* Erneut die buildResult aus Modul_Management, Füllt die DB-Resultate in eine array um (array[modulID][attribut])
+	  setzt Eintrag "sg_so" auf false falls SO und PO in ein un der selben Datei liegen kann rausgenommen werden falls wir nur die Strings speichern
+	* @param mySql-Rsourcedatei $res
+	* @return array ['result'] enthält false bei DB-Fehler, array[modulID][attribut] das attribut heißt gleich dem DB-fieldnamen
+	*/
+	private function buildResult($res,$keyvalue){
+		if(!$res)$rows['result']=false;//Fehlererkennung
+		else{
+			$rows['result']=true;
+			$rnum=mysql_num_rows($res);# 0 wenn kein Treffer gefunden wurde
+			if($rnum == 0) {
+				$rows['result']=false;
+			}
+			else {
+				$fnum=mysql_num_fields($res);
+				for($i=0;$i<$rnum;$i++){
+					$key = mysql_result($res,$i,$keyvalue);
+					for($j=0;$j<$fnum;$j++)$rows[$key][mysql_field_name($res,$j)]=mysql_result($res,$i,$j);
+				}
+			}
+		}
+		return $rows;
+	}
+	
 	private function buildResultforStatus($res)
 	{
 		$mod_id=NULL;
