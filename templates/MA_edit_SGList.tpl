@@ -1,10 +1,18 @@
 {include file="header.tpl" title=foo}
 
-W&auml;hlen sie einen Studiengang aus, zu dem ein Modulangebot erstellt werden soll.
-<br><br>
-Derzeitiges Semster: <b>{$current_semester}</b><br>
-N&auml;chstes Semester: <b>{$next_semester}</b><br>
+W&auml;hlen sie einen Studiengang aus, zu dem ein Modulangebot erstellt werden soll.<br>
 <br>
+<table>
+<tr>
+	<td>Derzeitiges Semster:</td>
+	<td><b>{$current_semester}</b></td>
+</tr>
+<tr>
+	<td>N&auml;chstes Semester:</td>
+	<td><b>{$next_semester}</b></td>
+</tr>
+</table>
+<h4>W&auml;hlen Sie einen Studiengang aus</h4>
 <table>
 <tr>
 	<th>Studiengang-Typ</th>

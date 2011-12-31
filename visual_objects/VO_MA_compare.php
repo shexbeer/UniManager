@@ -19,6 +19,8 @@ class VO_MA_compare
 		$this->UM->showheader($this->UM->seite);
 		// Setze Variable mit Daten in eine Template Variable um 
 		$this->UM->tpl->assign("sglist", $sglist);
+		$this->UM->tpl->assign("currentSemester", $this->UM->getcurrentSemester());
+		$this->UM->tpl->assign("nextSemester", $this->UM->getnextSemester());
 		// Zeige das Template fuer diese Ausgabe an
 		$this->UM->tpl->display("MA_compare_SGlist.tpl", session_id());
 	}

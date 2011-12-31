@@ -1,5 +1,5 @@
 <?php
-$seite = "Modulaufstellungen IST/SOLL vergleichen";
+$seite = "Modulangebot vergleichen";
 require_once("main.class.php");
 
 $UM = new UniManager("MA_compare");
@@ -13,6 +13,11 @@ if(!$_SESSION["user_loginname"])
 if(!$_GET && !$_POST)
 {
 	$UM->ProcessObject->initForm();
+}
+
+if($_GET["compareMA"] && $_GET["forid"] && $_GET["sem"]) 
+{
+	$UM->ProcessObject->getSG($_GET["forid"], $_GET["sem"]);
 }
 
 ?>

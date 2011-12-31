@@ -18,6 +18,8 @@
 		$sg = $SG_M->getSGList();
 		$sglist = $this->UM->checkManagerResults($sg, "sg_id", "Studiengaenge");
 		
+		$currentSemester = $this->UM->getCurrentSemester();
+		$nextSemester = $this->UM->getNextSemester();
 		foreach($sglist as $var)
         {
               $result[$var["sg_id"]]=$var;
@@ -27,12 +29,12 @@
               $result[$var["sg_id"]]["sg_dekan"]=$dekan[$dekan_id]["person_vorname"]." ".$dekan[$dekan_id]["person_name"];
 
               //var_dump($dekan);
-              if($MA->checkModulangebotForSG($var["sg_id"], $this->UM->getCurrentSemester()) != false) 
+              if($MA->checkModulangebotForSG($var["sg_id"], $currentSemester) != false) 
               	$result[$var["sg_id"]]["MA_curr"] = true;
               else
                 $result[$var["sg_id"]]["MA_curr"] = false;
                 
-              if($MA->checkModulangebotForSG($var["sg_id"], $this->UM->getNextSemester()) != false) 
+              if($MA->checkModulangebotForSG($var["sg_id"], $nextSemester) != false) 
               	$result[$var["sg_id"]]["MA_next"] = true;
               else
                 $result[$var["sg_id"]]["MA_next"] = false;
