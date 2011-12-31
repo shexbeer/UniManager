@@ -34,6 +34,5 @@ class VO_Modul_IE
         $this->UM->tpl->assign("dekanlist", $dekanlist);
 		$this->UM->tpl->display("Modul_IE_ModulDetails.tpl", session_id());
 	}
-
 }
 ?>

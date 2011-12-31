@@ -48,7 +48,6 @@ Die Moduldetails zum selektierten Modul werden angezeigt.
                 <select name="modul_status" size="1">
                     <option {if $mod.modul_status == "Bearbeitung"}selected{/if}>Bearbeitung</option>
                     <option {if $mod.modul_status == "Genehmigt"} selected{/if}>Genehmigt</option>
-                    <option {if $mod.modul_status == "Erstellt"} selected{/if}>Erstellt</option>
                 </select>
             </td>
         </tr>
@@ -131,7 +130,7 @@ Die Moduldetails zum selektierten Modul werden angezeigt.
                 H&aumlufigkeit:
             </td>
             <td>
-                <input name="modul_frequency" type="text" value="{$mod.modul_frequency}" size="30" maxlength="30">
+                <input name="modul_frequency" type="text" value="{$mod.modul_frequency}" size="30" maxlength="50">
             </td>
         </tr>
         <tr>
@@ -139,7 +138,7 @@ Die Moduldetails zum selektierten Modul werden angezeigt.
                 Verwendbarkeit:
             </td>
             <td>
-                <input name="modul_usability" type="text" value="{$mod.modul_usability}" size="30" maxlength="60">
+                <input name="modul_usability" type="text" value="{$mod.modul_usability}" size="30" maxlength="100">
             </td>
         </tr>
         <tr>
@@ -170,6 +169,13 @@ Die Moduldetails zum selektierten Modul werden angezeigt.
                 </textarea>
             </td>
         </tr>  
+    </table>
+    <table>
+    <tr>
+    <td align=left>
+        <input type="submit" value="Moduleintrag ändern" name="submit">
+    </td>
+</tr>
     </table>
 </form>
 {include file="footer.tpl" title=foo}
