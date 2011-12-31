@@ -6,11 +6,9 @@
 require_once("Modul_Management.php");
 
 class Modulangebot_Management{
-
-	private $MM;
 	
 	function Modulangebot_Management(){
-		$MM = new Modul_Management;
+		$this->MM = new Modul_Management;
 	}
 	
 	/**
@@ -430,6 +428,32 @@ class Modulangebot_Management{
 		return $this->buildResult($res, "ma_count");
 	}
 	
+	function getBedarf($sg_id, $semester) {
+		 //Modulliste zum Studiengang holen und ueberpruefen
+		$modullist_unchecked=$this->MM->getModullist(true,"sg",$sg_id);
+		$modullist=$this->checkManagerResults($modullist_unchecked,"modul_id","Modulliste");
+		//var_dump($modullist);
+		foreach($modullist as $key => $var) {
+			//$frequency = utf8_decode($var["modul_frequency"]);
+			$frequency = $var["modul_frequency"];
+			//$frequency = utf8_encode($var["modul_frequency"]);
+			var_dump($frequency);
+			var_dump("J&auml;hrlich zum Wintersemester");
+			if($frequency == "J&auml;hrlich zum Wintersemester") echo "test";
+			switch($frequency) {
+				case "JŠhrlich zum Wintersemester":
+					echo "WS";
+					break;
+				case "JŠhrlich zum Sommersemester":
+					echo "SS";
+					break;
+				case "jedes Semester":
+					echo "jedes";
+					break;
+			}
+		}
+	}
+	
 	//HELPER
 	/**
 	* Erneut die buildResult aus Modul_Management, Füllt die DB-Resultate in eine array um (array[modulID][attribut])
@@ -477,6 +501,33 @@ class Modulangebot_Management{
 			}
 		}
 		return $rows;
+	}
+	private function checkManagerResults($results, $index_description_in_results, $error_description = '')
+	{
+		//var_dump($results);
+		foreach($results as $var) {
+			// Wenn Ergebniss kein Array, dann ist es die Result Meldung des Managers
+			if(!is_array($var)) {
+				if(!$var) {
+					// Ein Fehler ist aufgetreten
+					if($error_description == '') {
+						$extra_error = '';
+					} else {
+						$extra_error = 'Fehler ist Aufgetreten bei der Abfrage der '.$error_description;
+					}
+					$this->trigger_error(3, $extra_error , true, true);
+				}
+			} else {// Wenn $var Array ist, dann ist es teil des results
+				// wenn ein event im Result muss es anders aufgebaut sein
+				if(!is_array($var["event"])) {
+					
+					$results_edited[$var[$index_description_in_results]] = $var;
+				} else { 
+					$results_edited[$var["event"][$index_description_in_results]] = $var;
+				}
+			}
+		}
+		return $results_edited;
 	}
 }
 

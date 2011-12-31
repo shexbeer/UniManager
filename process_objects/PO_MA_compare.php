@@ -51,6 +51,9 @@
         	} else {
         		$semester = $this->UM->getNextSemester();
        		}
+       		$sgtyp_unch = $SG->getSGTypForID($sg_id);
+	        $sgtyp = $this->UM->checkManagerResults($sgtyp_unch, "sg_id", "Studiengangtyps");
+    	    $sgtyp = $sgtyp[$sg_id]["sg_typ"];
 			//Modulangebot derzeitiges Semester  	
 			$modulangebot_unchecked = $MA->getModulangebot($sg_id, $semester, $sgtyp);
 			$modulangebot = $this->UM->checkManagerResults($modulangebot_unchecked,"modul_id", "Modulangebots");
@@ -59,7 +62,7 @@
 			$modullist_unchecked=$MM->getModullist(true,"sg",$sg_id);
 			$modullist=$this->UM->checkManagerResults($modullist_unchecked,"modul_id","Modulliste");
 			
-			
+			$MA->getBedarf($sg_id, $semester);
 			
 			
 			$oddOrEven = $this->UM->checkIfOddOrEvenSemester($semester);
