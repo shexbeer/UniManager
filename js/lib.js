@@ -180,6 +180,9 @@ function MAedit_AddButton(id, name, plansemester) {
 	// Span
 	var newSpan = document.createElement("span");
 	var newSpan_id = document.createAttribute("id");
+	var newSpan_name = document.createAttribute("name");
+	newSpan_name.nodeValue = "ma_modAngebot";
+	newSpan.setAttributeNode(newSpan_name);
 	newSpan.setAttributeNode(newSpan_id);
 	newSpan.id = "ma_modangebot_"+id;
 	
@@ -261,9 +264,10 @@ function MAedit_DelButton(id, name, plansemester) {
 	
 	// Span
 	var newSpan = document.createElement("span");
-	var newSpan_id = document.createAttribute("id");
+	var newSpan_id = document.createAttribute("id");	
 	newSpan_id.nodeValue = "ma_modlist_"+id;
 	newSpan.setAttributeNode(newSpan_id);
+
 	//newSpan.id = ;
 	
 	// Name Span
@@ -321,7 +325,7 @@ function MAedit_DelButton(id, name, plansemester) {
 	
 	spanDown.removeChild(delSpan);
 	
-	if(spanDown.childNodes.length == 2) {
+	if(document.getElementsByName("ma_modAngebot").length == 0) {
 		document.getElementById("ma_submit").disabled = "disabled";
 	}
 	

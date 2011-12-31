@@ -98,7 +98,7 @@ die in diesem Zeitraum hinzugef&uuml;gt werden k&ouml;nnen</h4>
 <h4>Ausgew&auml;hlte Module f&uuml;r das Modulangebot</h4>
 <span id="modulangebot" width="200">
 {foreach $modulangebot as $var}
-	<span id="ma_modangebot_{$var.modul_id}">
+	<span id="ma_modangebot_{$var.modul_id}" name="ma_modAngebot">
 		<span>{$var.modul_name}</span>
 		<input type="hidden" name="modulangebot[]" value="{$var.modul_id}">
 		<span name="MA_rightSem" id="MA_rightSem">{$var.mauf_plansemester}</span>	
