@@ -56,7 +56,9 @@
                 $result["modul_person_id"] = $res["vorname"]." ".$res["name"];
                 // Übergebe ausgabefertige Daten an VO
                 //var_dump($result);
-                $this->UM->VisualObject->showModulDetails($result);
+                $dekan_unchecked = $PM->getDekans();
+                $dekans = $this->UM->checkManagerResults($dekan_unchecked,"studiendekan_id","Dekanabfrage");
+                $this->UM->VisualObject->showModulDetails($result,$dekans);
                 die();
             }
             else{

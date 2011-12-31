@@ -26,7 +26,18 @@ Die Moduldetails zum selektierten Modul werden angezeigt.
                 Verantwortlicher:
             </td>
             <td>
-                <input name="verantwortlicher" type="text" value="{$mod.modul_person_id}" size="25" maxlength="25">
+            {$counter = 0}
+            {foreach from=$dekanlist item=var}
+                {if $mod.modul_person_id == $var.studiendekan_persid}
+                    <input checked="checked" type="radio" name="dekan" value="{$var.studiendekan_id}"> {$var.person_vorname} {$var.person_name}
+                    {else}
+                        <input type="radio" name="dekan" value="{$var.studiendekan_id}"> {$var.person_vorname} {$var.person_name}
+                {/if}
+                {if $counter % 4 == 0}
+                    <br>
+                {/if}
+                {$counter = $counter + 1}
+            {/foreach}
             </td>
         </tr>
         <tr> 
