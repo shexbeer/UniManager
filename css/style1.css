@@ -43,12 +43,12 @@ th {
 	font-weight: bold;
 
 }
-#MA_rightSem {
+.MA_rightSem {
 	color: green;
 	font-size: 12px;
 	font-weight: bold;
 }
-#MA_wrongSem {
+.MA_wrongSem {
 	color: gray;
 	font-weight: bold;
 }

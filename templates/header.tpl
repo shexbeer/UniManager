@@ -14,7 +14,7 @@
 		<div id="ueberschrift_seite">{$seite}</div>
 	</td>
 </table>
-<hr width='800' align='left'>
+<hr width='1000' align='left'>
 <table>
 <tr> 
 	<td rowspan="2" width="200" style="vertical-align:top;">

@@ -69,15 +69,14 @@
 			$bedarf = $MA->getBedarf($sg_id, $semester);
 			
 			$key1 = array_keys($modulangebot);
-			//var_dump($key1);
 			$key2 = array_keys($bedarf);
-			//var_dump($key2);
-			$both = array_merge($key1, $key2);
-			sort($both);
-			//var_dump($both);
+			$both = array_merge($key2, $key1);
+			//sort($both);
 			foreach($both as $var) {
 				$compareList[$var]["modulangebot"] = $modulangebot[$var];
 				$compareList[$var]["bedarf"] = $bedarf[$var];
+				if(!in_array($var, $key2)) 
+					$compareList[$var]["modulangebot"]["onlyInMA"] = "true";
 			}
 			
 			$sg["id"] = $sg_id;

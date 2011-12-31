@@ -383,6 +383,54 @@ function MA_changeSemester(sgid, cur, next, MAcurr, MAnext) {
 
 function MAcreate_buildLink(rootDir, sgid, MAcurr, MAnext) {
 	window.location = rootDir+"MA_create.php?forid="+sgid+"&curr="+MAcurr+"&next="+MAnext;
+}
+function MAcompare_AddButton(id, name, plansemester, frequency) {
+	var newName = document.getElementById("compareRight_name_"+id);
+	var newId = document.getElementById("compareRight_idField_"+id);
+	var newPs = document.getElementById("compareRight_ps_"+id);
+	var newButton = document.getElementById("compareRight_bt_"+id);
+	var oldButton = document.getElementById("compareLeft_bt_"+id);
+	var compareControl = document.getElementById("compareControl_"+id);
 
-
+	newName.innerText = name;
+	newId.value=id;
+	newPs.innerText = plansemester
+	newButton.style.visibility = "visible";
+	
+	oldButton.disabled = "true";
+	compareControl.style.backgroundColor = "green";
+}
+function MAcompare_DelButton(id, name, plansemester, frequency, realDelete) {
+	if(realDelete == "false") {
+		var newName = document.getElementById("compareLeft_name_"+id);
+		//var newId = document.getElementById("compareLeft_idField_"+id);
+		var newPs = document.getElementById("compareLeft_ps_"+id);
+		var newButton = document.getElementById("compareLeft_bt_"+id);
+		var newFrequency = document.getElementById("compareLeft_frequency_"+id);
+		var newRow = document.getElementById("compareList_Row_"+id);
+		
+		var oldName = document.getElementById("compareRight_name_"+id);
+		var oldId = document.getElementById("compareRight_idField_"+id);
+		var oldPs = document.getElementById("compareRight_ps_"+id);	
+		var oldButton = document.getElementById("compareRight_bt_"+id);
+		
+		var compareControl = document.getElementById("compareControl_"+id);
+	
+		newName.innerText = name;
+		newPs.innerText = plansemester
+		newButton.disabled = "";
+		newButton.style.visibility = "visible";
+		newFrequency.innerText = frequency
+		
+		oldName.innerText = "";
+		oldId.value = "";
+		oldPs.innerText = "";
+		oldButton.style.visibility = "hidden";
+		
+		compareControl.style.backgroundColor = "red";
+	} else {
+		if(confirm("Wollen Sie dieses Modul wirklich aus dem Modulangebot loeschen?")) {
+			alert("BUH");
+		}
+	}
 }

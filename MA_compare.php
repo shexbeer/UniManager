@@ -19,5 +19,5 @@ if($_GET["compareMA"] && $_GET["forid"] && $_GET["sem"])
 {
 	$UM->ProcessObject->getSG($_GET["forid"], $_GET["sem"]);
 }
-
+var_dump($_POST);
 ?>
