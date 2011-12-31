@@ -24,13 +24,14 @@ class Modulangebot_Management{
 	function getModulangebot($id,$sem, $sg_typ)
 	{
 		//$sql = "SELECT * FROM `modulangebot` WHERE `ma_semester`='".$sem."' AND `ma_sg`='".$id."';";
-		$sql = "SELECT modul_id, modul_name, mauf_plansemester, ma_status, ma.ma_modul 
+		$sql = "SELECT modul_id, modul_name, mauf_plansemester, ma_status, ma.ma_modul, modul_frequency
 				FROM `modulangebot` AS ma 
 				INNER JOIN `modul` AS m ON m.modul_id = ma.ma_modul 
 				INNER JOIN `modulaufstellung`AS mauf ON mauf.mauf_modul_id = ma.ma_modul
 				WHERE ma.`ma_semester`='".$sem."' 
 				AND ma.`ma_sg`='".$id."' 
-				AND mauf.mauf_typ = '".$sg_typ."';";
+				AND mauf.mauf_typ = '".$sg_typ."'
+				ORDER BY mauf_plansemester;";
 		$res = mysql_query($sql);
 		return $this->buildResult($res, "ma_modul");
 	}
@@ -432,26 +433,24 @@ class Modulangebot_Management{
 		 //Modulliste zum Studiengang holen und ueberpruefen
 		$modullist_unchecked=$this->MM->getModullist(true,"sg",$sg_id);
 		$modullist=$this->checkManagerResults($modullist_unchecked,"modul_id","Modulliste");
-		//var_dump($modullist);
-		foreach($modullist as $key => $var) {
-			//$frequency = utf8_decode($var["modul_frequency"]);
-			$frequency = $var["modul_frequency"];
-			//$frequency = utf8_encode($var["modul_frequency"]);
-			var_dump($frequency);
-			var_dump("J&auml;hrlich zum Wintersemester");
-			if($frequency == "J&auml;hrlich zum Wintersemester") echo "test";
-			switch($frequency) {
-				case "JŠhrlich zum Wintersemester":
-					echo "WS";
-					break;
-				case "JŠhrlich zum Sommersemester":
-					echo "SS";
-					break;
-				case "jedes Semester":
-					echo "jedes";
-					break;
+		$oddOrEven = $this->checkIfOddOrEvenSemester($semester);
+        foreach($modullist as $key => $var) 
+        {
+        	if($oddOrEven == "odd") 
+        	{
+				if(($var["mauf_plansemester"] % 2) == 0) //odd
+				{
+					$result[$key] = $var;
+				}
+			} else {
+				if(($var["mauf_plansemester"] % 2) == 1) //even
+				{
+					$result[$key] = $var;
+				}
 			}
-		}
+        }
+        
+		return $result;
 	}
 	
 	//HELPER
@@ -478,6 +477,12 @@ class Modulangebot_Management{
 			}
 		}
 		return $rows;
+	}
+	private function checkIfOddOrEvenSemester($sem) { // WS => 1.,3.,5.,7... SS=>2.,4.,6.,8...
+		if(strncmp($sem, "WS", 2) == 0) // String ist WSXXXX String
+			return "odd";
+		else
+			return "even";
 	}
 	
 	private function buildResultforStatus($res)

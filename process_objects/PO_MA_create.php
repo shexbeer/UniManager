@@ -55,24 +55,29 @@ class PO_MA_create
          //Modulliste zum Studiengang holen und ueberpruefen
         $modullist_unchecked=$MM->getModullist(true,"sg",$sg_id);
         $modullist=$this->UM->checkManagerResults($modullist_unchecked,"modul_id","Abrufen der Modulliste");
+        
         $oddOrEven = $this->UM->checkIfOddOrEvenSemester($semester);
         foreach($modullist as $key => $var) {
+        	$result[$key] = $var;
         	if($oddOrEven == "odd") {
         		if(($var["mauf_plansemester"] % 2) == 0) //odd
         		{
-        			$result[$key] = $var;
+        			$result[$key]["plansemester_Mark"] = "true";
         		} else { // even
+        			$result[$key]["plansemester_Mark"] = "false";
         		}
         	} else {
         		if(($var["mauf_plansemester"] % 2) == 1) //even
         		{
-        			$result[$key] = $var;
+        			$result[$key]["plansemester_Mark"] = "true";
         		} else { // odd
+        			$result[$key]["plansemester_Mark"] = "false";
         		}
         	}
         }
-        $modullist = $result;
         
+        $modullist = $result;
+        var_dump($modullist);
         $po=$SG->getPO($sg_id);
         
         $po = $this->UM->checkManagerResults($po, "sg_id", "Abfrage der PO");

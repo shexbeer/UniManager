@@ -88,7 +88,7 @@ die in diesem Zeitraum hinzugef&uuml;gt werden k&ouml;nnen</h4>
 {foreach $modullist as $var}
 	<span id="ma_modlist_{$var.modul_id}">
 		<span>{$var.modul_name}</span>
-		<span name="MA_rightSem" id="MA_rightSem">{$var.mauf_plansemester}</span>	
+		<span name="MA_rightSem" id="{if $var.plansemester_Mark=="true"}MA_rightSem{else}MA_wrongSem{/if}">{$var.mauf_plansemester}</span>	
 		<input type="button" value="+" onClick="MAedit_AddButton('{$var.modul_id }','{$var.modul_name}','{$var.mauf_plansemester}')">
 		<br>
 	</span>
@@ -120,6 +120,5 @@ die in diesem Zeitraum hinzugef&uuml;gt werden k&ouml;nnen</h4>
 </tr>
 </table>
 </form>
-
 
 {include file="footer.tpl" title=foo}

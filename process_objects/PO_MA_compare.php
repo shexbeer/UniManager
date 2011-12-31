@@ -54,39 +54,36 @@
        		$sgtyp_unch = $SG->getSGTypForID($sg_id);
 	        $sgtyp = $this->UM->checkManagerResults($sgtyp_unch, "sg_id", "Studiengangtyps");
     	    $sgtyp = $sgtyp[$sg_id]["sg_typ"];
+    	    
+			$sgname_unch = $SG->getSGNameforID($sg_id);
+			$sgname = $this->UM->checkManagerResults($sgname_unch, "sg_id", "Studiengangnames");
+			$sgname = $sgname[$sg_id]["sg_name"];
 			//Modulangebot derzeitiges Semester  	
 			$modulangebot_unchecked = $MA->getModulangebot($sg_id, $semester, $sgtyp);
 			$modulangebot = $this->UM->checkManagerResults($modulangebot_unchecked,"modul_id", "Modulangebots");
 			
-			 //Modulliste zum Studiengang holen und ueberpruefen
-			$modullist_unchecked=$MM->getModullist(true,"sg",$sg_id);
-			$modullist=$this->UM->checkManagerResults($modullist_unchecked,"modul_id","Modulliste");
+			//Modulliste zum Studiengang holen und ueberpruefen
+			//$modullist_unchecked=$MM->getModullist(true,"sg",$sg_id);
+			//$modullist=$this->UM->checkManagerResults($modullist_unchecked,"modul_id","Modulliste");
 			
-			$MA->getBedarf($sg_id, $semester);
+			$bedarf = $MA->getBedarf($sg_id, $semester);
 			
-			
-			$oddOrEven = $this->UM->checkIfOddOrEvenSemester($semester);
-			foreach($modullist as $key => $var) 
-			{
-				if($modulangebot[$var["modul_id"]]["modul_id"] == "") // Nur wenn Modul noch nicht im Modulangebot
-				{
-					if($oddOrEven == "odd") 
-					{
-						if(($var["mauf_plansemester"] % 2) == 0) //odd
-						{
-							$result[$key] = $var;
-						}
-					} else {
-						if(($var["mauf_plansemester"] % 2) == 1) //even
-						{
-							$result[$key] = $var;
-						}
-					}
-				}
+			$key1 = array_keys($modulangebot);
+			//var_dump($key1);
+			$key2 = array_keys($bedarf);
+			//var_dump($key2);
+			$both = array_merge($key1, $key2);
+			sort($both);
+			//var_dump($both);
+			foreach($both as $var) {
+				$compareList[$var]["modulangebot"] = $modulangebot[$var];
+				$compareList[$var]["bedarf"] = $bedarf[$var];
 			}
 			
-			$modullist = $result;
-			$this->UM->VisualObject->showLNAList($result);
+			$sg["id"] = $sg_id;
+			$sg["name"] = $sgname;
+			$sg["typ"] = $sgtyp;
+			$this->UM->VisualObject->showCompareList($sg, $semester, $modulangebot, $bedarf, $compareList);
       }
       function changeSGModulA()
       {

@@ -65,7 +65,9 @@ die in diesem Zeitraum hinzugef&uuml;gt werden k&ouml;nnen</h4>
 		<span id="ma_add_span_{$var.modul_id}">
 		{$var.modul_name} 
 		<b>
-			<span name="MA_rightSem" id="MA_rightSem">{$var.mauf_plansemester}</span>	
+			<span name="MA_rightSem" id="{if $var.plansemester_Mark=="true"}MA_rightSem{else}MA_wrongSem{/if}">
+				{$var.mauf_plansemester}
+			</span>
 		</b> 
 		<input type="button" value="+" onClick="MA_AddButton('{$var.modul_id }','{$var.modul_name}','{$var.mauf_plansemester}')">
 		</span>

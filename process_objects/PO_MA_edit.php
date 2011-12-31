@@ -92,19 +92,24 @@
         {
         	if($modulangebot[$var["modul_id"]]["modul_id"] == "") // Nur wenn Modul noch nicht im Modulangebot
         	{
-        		if($oddOrEven == "odd") 
-        		{
-        			if(($var["mauf_plansemester"] % 2) == 0) //odd
-        			{
-        				$result[$key] = $var;
-        			}
-        		} else {
-        			if(($var["mauf_plansemester"] % 2) == 1) //even
-        			{
-        				$result[$key] = $var;
-        			}
+        		$result[$key] = $var;
+        		if($oddOrEven == "odd") {
+					if(($var["mauf_plansemester"] % 2) == 0) //odd
+					{
+						$result[$key]["plansemester_Mark"] = "true";
+					} else { // even
+						$result[$key]["plansemester_Mark"] = "false";
+					}
+				} else {
+					if(($var["mauf_plansemester"] % 2) == 1) //even
+					{
+						$result[$key]["plansemester_Mark"] = "true";
+					} else { // odd
+						$result[$key]["plansemester_Mark"] = "false";
+					}
         		}
         	}
+     		
         }
         
         $modullist = $result;

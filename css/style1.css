@@ -45,19 +45,24 @@ th {
 }
 #MA_rightSem {
 	color: green;
+	font-size: 12px;
 	font-weight: bold;
 }
 #MA_wrongSem {
 	color: gray;
+	font-weight: bold;
 }
 .MA_inputText {
 	background-color: #FFF; 
 	border:0px
 	solid #ddd;
 }
-.MA_inputText [disabled='disabled'] {
-	color: black;
-	background-color: black;
+
+.MAcompare_table {
+	border-bottom-width: 1px;
+	border-bottom-color: black;
+	border-bottom-style: solid;
+	empty-cells: show;
 }
 
 #sg_edit_table_flags_left {
