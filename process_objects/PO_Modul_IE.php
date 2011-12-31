@@ -39,11 +39,11 @@
         * Ruft Details zu einem speziellen Modul ab und ersetzt PersonenIDs durch Namen, danach schickt sie die Daten an das VO 
         * @param int $modul_id ID des Moduls das aufgerufen werden soll
         */
-        function changemodul($modul_id,$modul=false)
+        function changemodul($modul_id,$modul_name=false,$dekan=false,$modul_status=false,$modul_duration=false,$modul_qualifytarget=false,$modul_content=false,$modul_literature=false,$modul_teachform=false,$modul_required=false,$modul_frequency=false,$modul_usability=false,$modul_lp=false,$modul_conditionforln=false,$modul_effort=false) 
         {
             $MM = new Modul_Management();
             $PM = new Person_Management();
-            if (!$modul){
+            if (!$modul_name && !$dekan && !$modul_status && !$modul_duration && !$modul_qualifytarget && !$modul_content && !$modul_literature && !$modul_teachform && !$modul_required && !$modul_status && !$modul_frequency && !$modul_usability && !$modul_lp && !$modul_conditionforln && !$modul_effort){
                 // Moduldetails zum speziellen Modul holen
                 $re = $MM->getModuldetails(true,"modul",$modul_id);
                 $result = $this->UM->checkManagerResults($re, "modul_id", "Moduldetails");
@@ -62,22 +62,119 @@
                 die();
             }
             else{
-                
+                $re = $MM->getModuldetails(true,"modul",$modul_id);
+                $res = $this->UM->checkManagerResults($re, "modul_id", "Moduldetails");
+                var_dump($modul_name,$modul_content,$dekan,$modul_duration,$modul_effort,$modul_frequency,$modul_id,$modul_literature,$modul_lp,$modul_qualifytarget,$modul_required,$modul_required,$modul_status,$modul_teachform,$modul_usability);
+                if(modul_name!=false)
+                {
+                    if(modul_name!=$res[$modul_id][modul_name])
+                    {
+                        $fixes[modul_name]=$modul_name;
+                    }
+                }
+                if(dekan!=false)
+                {
+                    if(dekan!=$res[$modul_id][modul_person_id])
+                    {
+                        $fixes[modul_person_id]=$dekan;
+                    }
+                }
+                if(modul_duration!=false)
+                {
+                    if(modul_duration!=$res[$modul_id][modul_duration])
+                    {
+                        $fixes[modul_duration]=$modul_duration;
+                    }
+                }
+                if(modul_qualifytarget!=false)
+                {
+                    if(modul_qualifytarget!=$res[$modul_id][modul_qualifytarget])
+                    {
+                        $fixes[modul_qualifytarget]=$modul_qualifytarget;
+                    }
+                }
+                if(modul_content!=false)
+                {
+                    if(modul_content!=$res[$modul_id][modul_content])
+                    {
+                        $fixes[modul_content]=$modul_content;
+                    }
+                }
+                if(modul_literature!=false)
+                {
+                    if(modul_literature!=$res[$modul_id][modul_literature])
+                    {
+                        $fixes[modul_literature]=$modul_literature;
+                    }
+                }
+                if(modul_teachform!=false)
+                {
+                    if(modul_teachform!=$res[$modul_id][modul_teachform])
+                    {
+                        $fixes[modul_teachform]=$modul_teachform;
+                    }
+                }
+                if(modul_required!=false)
+                {
+                    if(modul_required!=$res[$modul_id][modul_required])
+                    {
+                        $fixes[modul_required]=$modul_required;
+                    }
+                }
+                if(modul_frequency!=false)
+                {
+                    if(modul_frequency!=$res[$modul_id][modul_frequency])
+                    {
+                        $fixes[modul_frequency]=$modul_frequency;
+                    }
+                }
+                if(modul_usability!=false)
+                {
+                    if(modul_usability!=$res[$modul_id][modul_usability])
+                    {
+                        $fixes[modul_usability]=$modul_usability;
+                    }
+                }
+                if(modul_lp!=false)
+                {
+                    if(modul_lp!=$res[$modul_id][modul_lp])
+                    {
+                        $fixes[modul_lp]=$modul_lp;
+                    }
+                }
+                if(modul_conditionforln!=false)
+                {
+                    if(modul_conditionforln!=$res[$modul_id][modul_conditionforln])
+                    {
+                        $fixes[modul_conditionforln]=$modul_conditionforln;
+                    }
+                }
+                if(modul_effort!=false)
+                {
+                    if(modul_effort!=$res[$modul_id][modul_effort])
+                    {
+                        $fixes[modul_effort]=$modul_effort;
+                    }
+                }
+                if (!$fixes)
+                {
+                    if($modul_status!="Bearbeitung")
+                    {
+                        $result=$MM->setModuldetails($modul_id,$res,$modul_status);
+                    }
+                    else
+                    {
+                        $result=$MM->setModuldetails($modul_id,$res);
+                    }
+                    $this->UM->VisualObject->showResult($result);
+                }
+                else
+                {
+                    $this->UM->VisualObject->showResult($false,"Es wurden keine &Aumlnderungen gemacht.");
+                }
             }
-            // Moduldetails zum speziellen Modul holen
-            $re = $MM->getModuldetails(true,"modul",$modul_id);
-            //Prüfen
-            $result = $this->UM->checkManagerResults($re,"modul_id", "Modul Details");
-            // Verantwortlichen-ID zu Namen auflösen
-            //$verantwortlicher_id = $result["modul_person_id"];
-            //$res = $PM->getNameForID($verantwortlicher_id);
-            //Prüfen
-            //$res_cropped = $this->UM->checkManagerResults($res,"id", "Personen");
-            //Namen in result einfügen und ID durch Namen ersetzen (siehe oben)
-            //$result["verantwortlicher"] = $res_cropped["vorname"]." ".$res_cropped["name"];
-            //$result["modul_person_id"] = $res_cropped["vorname"]." ".$res_cropped["name"];
-            // Übergebe ausgabefertige Daten an VO
-            $this->UM->VisualObject->showModulDetails($result);
+            
+            
             
              
         }
