@@ -43,7 +43,6 @@
         {
             $MM = new Modul_Management();
             $PM = new Person_Management();
-<<<<<<< HEAD
             if (!$modul){
                 // Moduldetails zum speziellen Modul holen
                 $re = $MM->getModuldetails(true,"modul",$modul_id);
@@ -58,11 +57,11 @@
                 // Übergebe ausgabefertige Daten an VO
                 //var_dump($result);
                 $this->UM->VisualObject->showModulDetails($result);
+                die();
             }
             else{
                 
             }
-=======
             // Moduldetails zum speziellen Modul holen
             $re = $MM->getModuldetails(true,"modul",$modul_id);
             //Prüfen
@@ -77,7 +76,6 @@
             //$result["modul_person_id"] = $res_cropped["vorname"]." ".$res_cropped["name"];
             // Übergebe ausgabefertige Daten an VO
             $this->UM->VisualObject->showModulDetails($result);
->>>>>>> 659dca770bd8ffe78588177b70f1fe34a6b3afd0
             
              
         }
