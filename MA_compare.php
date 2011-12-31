@@ -1,5 +1,5 @@
 <?php
-$seite = "Modulaufstellungen vergleichen";
+$seite = "Modulaufstellungen IST/SOLL vergleichen";
 require_once("main.class.php");
 
 $UM = new UniManager("MA_compare");
