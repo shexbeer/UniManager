@@ -46,13 +46,13 @@
             //Prüfen
             $result = $this->UM->checkManagerResults($re,"modul_id", "Modul Details");
             // Verantwortlichen-ID zu Namen auflösen
-            $verantwortlicher_id = $result["modul_person_id"];
-            $res = $PM->getNameForID($verantwortlicher_id);
+            //$verantwortlicher_id = $result["modul_person_id"];
+            //$res = $PM->getNameForID($verantwortlicher_id);
             //Prüfen
-            $res_cropped = $this->UM->checkManagerResults($res,"id", "Personen");
+            //$res_cropped = $this->UM->checkManagerResults($res,"id", "Personen");
             //Namen in result einfügen und ID durch Namen ersetzen (siehe oben)
-            $result["verantwortlicher"] = $res_cropped["vorname"]." ".$res_cropped["name"];
-            $result["modul_person_id"] = $res_cropped["vorname"]." ".$res_cropped["name"];
+            //$result["verantwortlicher"] = $res_cropped["vorname"]." ".$res_cropped["name"];
+            //$result["modul_person_id"] = $res_cropped["vorname"]." ".$res_cropped["name"];
             // Übergebe ausgabefertige Daten an VO
             $this->UM->VisualObject->showModulDetails($result);
             
@@ -71,5 +71,46 @@
             // Erfolg oder Misserfolg im VO melden
             $this->UM->VisualObject->showResult($result); 
         }
+
+ function showCreateModul()
+      {
+          //Manager initialisieren
+          $SG= new Modul_Management();
+          $PM= new Person_Management();
+          $this->UM->VisualObject->ShowCreateModul();                     
+      }
+      
+function enterList($list)
+      {
+        $MM= new Modul_Management();
+       
+        $failure = false;
+        
+	
+        	$result = $MM->setModuldetails($list.modul_id, $list);
+        	if($result = false) {
+        		$failure = true;
+        	}
+        
+        //Erfolg oder Misserfolg melden 
+        //$this->UM->VisualObject->showResult($failure, "Bitte melden Sie sich bei der Software Hotline: Code 9999");   
+	$this->UM->VisualObject->showResult($list); 
+	 
+      }
+
+function addmodul($newmodul)
+
+ {
+        $MM= new Modul_Management();
+
+$p_id= (int)$newmodul["v_id"];
+	$result = $MM->addModul($newmodul["modul_name"],$p_id,0);
+      
+	$this->UM->VisualObject->showResultadd($result); 
+	 
+   }
+
+
+
     }
 ?>
