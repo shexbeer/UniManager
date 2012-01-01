@@ -38,7 +38,6 @@ if($_GET["showEdit"] && $_GET["forid"])
 }
 if($_GET["editSG"] && $_GET["forid"] && $_POST)
 {	// Edit SG
-
 	if($_FILES['poso_file']['tmp_name'] != ""){
 		$path = $UM->cwd["Path"] . PDF_POSO_DIR;
 		$name = "POSO_".$_GET["forid"].".pdf";
@@ -48,9 +47,9 @@ if($_GET["editSG"] && $_GET["forid"] && $_POST)
    			$UM->VisualObject->showResult(false, "Fehler beim kopieren der Upload-Datei");
    			die();
    		}
-   		$UM->ProcessObject->editSG($_GET["forid"], $_POST["sg_name"], $_POST["dekan"],$_POST["sg_typ"],$_POST["modul"],$_POST["modul_semester"], $_POST["sg_status"], $name);
+   		$UM->ProcessObject->editSG($_GET["forid"], $_POST["sg_name"], $_POST["dekan"],$_POST["sg_typ"],$_POST["modulaufstellung"],$_POST["modul_ps"], $_POST["sg_status"], $name);
 	}else{
- 		$UM->ProcessObject->editSG($_GET["forid"], $_POST["sg_name"], $_POST["dekan"],$_POST["sg_typ"],$_POST["modul"],$_POST["modul_semester"], $_POST["sg_status"]);
+ 		$UM->ProcessObject->editSG($_GET["forid"], $_POST["sg_name"], $_POST["dekan"],$_POST["sg_typ"],$_POST["modulaufstellung"],$_POST["modul_ps"], $_POST["sg_status"]);
 	}
 }
 

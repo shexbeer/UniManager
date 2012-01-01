@@ -119,7 +119,7 @@
 		  }
           $this->UM->VisualObject->showALLSGContent($sgdetail, $dekans, $modullist);                 
       }
-      function editSG($sgid, $sgname, $sgdekan, $sgtyp, $modul, $modul_semester, $sgstatus, $name=false)
+      function editSG($sgid, $sgname, $sgdekan, $sgtyp, $modulaufstellung, $modul_ps, $sgstatus, $name=false)
       {
     		$SG=new SG_Management();
     		$var = array();
@@ -139,18 +139,16 @@
     		$result = $SG->setSGDetails($var);
     
     		$new_mods = array();
-    		$counter = 1;
     		
-    		if($modul) {
-				foreach($modul as $key => $var) {
-					$new_mods[$counter]["modul_id"] = $var;
-					if($modul_semester[$counter]) {
-						$new_mods[$counter]["plansemester"] = $modul_semester[$key+1];
+    		if($modulaufstellung) {
+				foreach($modulaufstellung as $key => $var) {
+					$new_mods[$var]["modul_id"] = $var;
+					if($modul_ps[$var]) {
+						$new_mods[$var]["plansemester"] = $modul_ps[$var];
 					} else {
-						$new_mods[$counter]["plansemester"] = "1";
+						$new_mods[$var]["plansemester"] = "1";
 					}
-					$new_mods[$counter]["typ"] = $sgtyp;
-					$counter++;
+					$new_mods[$var]["typ"] = $sgtyp;
 				}
     		}
     		// Modulliste Aktualisieren

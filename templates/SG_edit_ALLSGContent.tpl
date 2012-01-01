@@ -3,7 +3,7 @@
 <form action="SG_edit.php?editSG=yes&forid={$sg.sg_id}" enctype="multipart/form-data" method="POST">
 Details des ausgew&auml;lten Studiengangs
 <br><br>
-<table width=500><table cellspacing="20">
+<table>
 <tr>
 	<td width=150 id="form_caption">
 		Studiengang Ident
@@ -30,10 +30,9 @@ Details des ausgew&auml;lten Studiengangs
 <tr>
 	<td width=150 id="form_caption">
 		Studiengangname
-	
 	</td>
 	<td width=350 align=left>
-		<input type="text" name="sg_name" value="{$sg.sg_name}" size="30">
+		<input type="text" name="sg_name" onChange="SGcheckName(this, this.value)" value="{$sg.sg_name}" size="30">
 	</td>
 </tr>
 <tr>
@@ -130,18 +129,14 @@ Details des ausgew&auml;lten Studiengangs
 	</td>
 </tr>
 
-
-{if $modullist}
 <tr>
-	<td width=150 id="form_caption">
-		Module<br>
-		(Name + Plansemester)
+	<td width=150 id="form_caption"  style="vertical-align:top;">
+		Modulaufstellung<br>
 	</td>
 	<td width=800 align=left>
 		<!--
 		<input type="text" name="sg_name" value="{$sg.dekanvorname} {$sg.dekanname}">
 		-->
-		{$counter = 0}
 		{if $sg.sg_typ==Bachelor}
 			{$sems = 6}
 		{else if $sg.sg_typ==Master}
@@ -149,63 +144,92 @@ Details des ausgew&auml;lten Studiengangs
 		{else if $sg.sg_typ == Diplom}
 			{$sems = 10}
 		{/if}
-		{foreach from=$modullist item=var}
-			{$counter=$counter+1}
-			
-			<span id="span_{$var.modul_id}">
-			{if $var.in_SG}
-			
-				<input id="chkbox_{$var.modul_id}" onClick="Modul_Checkbox({$var.modul_id},{$sems})" checked="checked" type="checkbox" name="modul[]" value="{$var.modul_id}"> {$var.modul_name}
-				<select id="modul_semester[{$var.modul_id}]" name="modul_semester[{$var.modul_id}]" size="1">
-      			{if $sg.sg_typ==Master}
-					<option {if {$var.mauf_plansemester==1}}selected{/if}>1</option>
-					<option {if {$var.mauf_plansemester==2}}selected{/if}>2</option>
-					<option {if {$var.mauf_plansemester==3}}selected{/if}>3</option>
-					<option {if {$var.mauf_plansemester==4}}selected{/if}>4</option>
-      			{/if}
-      			{if $sg.sg_typ==Bachelor}
-					<option {if {$var.mauf_plansemester==1}}selected{/if}>1</option>
-					<option {if {$var.mauf_plansemester==2}}selected{/if}>2</option>
-					<option {if {$var.mauf_plansemester==3}}selected{/if}>3</option>
-					<option {if {$var.mauf_plansemester==4}}selected{/if}>4</option>
-					<option {if {$var.mauf_plansemester==5}}selected{/if}>5</option>
-					<option {if {$var.mauf_plansemester==6}}selected{/if}>6</option>
-      			{/if}
-      			{if $sg.sg_typ==Diplom}
-					<option {if {$var.mauf_plansemester==1}}selected{/if}>1</option>
-					<option {if {$var.mauf_plansemester==2}}selected{/if}>2</option>
-					<option {if {$var.mauf_plansemester==3}}selected{/if}>3</option>
-					<option {if {$var.mauf_plansemester==4}}selected{/if}>4</option>
-					<option {if {$var.mauf_plansemester==5}}selected{/if}>5</option>
-					<option {if {$var.mauf_plansemester==6}}selected{/if}>6</option>
-					<option {if {$var.mauf_plansemester==7}}selected{/if}>7</option>
-					<option {if {$var.mauf_plansemester==8}}selected{/if}>8</option>
-					<option {if {$var.mauf_plansemester==9}}selected{/if}>9</option>
-					<option {if {$var.mauf_plansemester==10}}selected{/if}>10</option>
-      			{/if}
-    		</select>
-			{else}
-				
-				<input id="chkbox_{$var.modul_id}" type="checkbox" onClick="Modul_Checkbox({$var.modul_id},{$sems})" name="modul[]" value="{$var.modul_id}"> {$var.modul_name}
-			{/if}
-			</span>
-			|
-			{if $counter%4 == 0}
-				<br>
-			{/if}
+		<table width="650" style="border-collapse: collapse;">
+		<tr style="font-size: 9px; font-weight: bold;">
+			<td width="5%" class="SGedit_modul_table"></td>
+			<td width="40%" class="SGedit_modul_table">Modulname</td>
+			<td width="20%" class="SGedit_modul_table">Angebot Modul</td>
+			<td width="5%" class="SGedit_modul_table">PS</td>
+			<td width="30%" class="SGedit_modul_table">Verwendbarkeit</td>
+		</tr>
+		{foreach $modullist item=var key=keyValue}
+		<tr {if !$var.in_SG}style="color:gray;"{/if} id="modul_row_{$var.modul_id}">
+			<td width="5%" >
+				<input id="modul_chkbox_{$var.modul_id}" onClick="Modul_Checkbox({$var.modul_id},{$sems})" {if $var.in_SG}checked="checked"{/if} type="checkbox" name="modulaufstellung[]" value="{$var.modul_id}">
+			</td>
+			<td width="40%">{$var.modul_name}</td>
+			<td width="20%">{$var.modul_frequency}</td>
+			<td width="5%">
+				<select id="modul_ps_{$var.modul_id}" name="modul_ps[{$var.modul_id}]" size="1" {if !$var.in_SG}style="visibility: hidden;"{/if}>
+						{if $sg.sg_typ==Master}
+							<option {if {$var.mauf_plansemester==1}}selected{/if}>1</option>
+							<option {if {$var.mauf_plansemester==2}}selected{/if}>2</option>
+							<option {if {$var.mauf_plansemester==3}}selected{/if}>3</option>
+							<option {if {$var.mauf_plansemester==4}}selected{/if}>4</option>
+						{/if}
+						{if $sg.sg_typ==Bachelor}
+							<option {if {$var.mauf_plansemester==1}}selected{/if}>1</option>
+							<option {if {$var.mauf_plansemester==2}}selected{/if}>2</option>
+							<option {if {$var.mauf_plansemester==3}}selected{/if}>3</option>
+							<option {if {$var.mauf_plansemester==4}}selected{/if}>4</option>
+							<option {if {$var.mauf_plansemester==5}}selected{/if}>5</option>
+							<option {if {$var.mauf_plansemester==6}}selected{/if}>6</option>
+						{/if}
+						{if $sg.sg_typ==Diplom}
+							<option {if {$var.mauf_plansemester==1}}selected{/if}>1</option>
+							<option {if {$var.mauf_plansemester==2}}selected{/if}>2</option>
+							<option {if {$var.mauf_plansemester==3}}selected{/if}>3</option>
+							<option {if {$var.mauf_plansemester==4}}selected{/if}>4</option>
+							<option {if {$var.mauf_plansemester==5}}selected{/if}>5</option>
+							<option {if {$var.mauf_plansemester==6}}selected{/if}>6</option>
+							<option {if {$var.mauf_plansemester==7}}selected{/if}>7</option>
+							<option {if {$var.mauf_plansemester==8}}selected{/if}>8</option>
+							<option {if {$var.mauf_plansemester==9}}selected{/if}>9</option>
+							<option {if {$var.mauf_plansemester==10}}selected{/if}>10</option>
+						{/if}
+					</select>
+			</td>
+			<td widht="30%">
+				{$var.modul_usability}
+			</td>
+		</tr>
+		<tr>
+			<td colspan="5" style="border-bottom: 1px black solid;">
+			</td>
+		</tr>
 		{/foreach}
+		</table>
 	</td>
 </tr>
-{/if}
 </table>
-<table width=500>
+
+<br><br>
+<table width="800">
 <tr>
-	<td width=200 align=left>
+	<td style="text-align: left;">
+		<input type="button" value="Zur&uuml;ck" onClick="window.location='{$rootDir}SG_edit.php'">
 	</td>
-	<td width=300 align=right>
-		<input type="submit" value="Senden" name="submit">
+	<td  style="text-align: right;">
+		<input type="submit" id="sg_submit" value="Speichern">
 	</td>
 </tr>
 </table>
 </form>
+<br>
+<b>Legende:</b><br>
+<table>
+<tr>
+	<td width="120" align="center"><span style="color:black; font-weight:bold;">PS</span></td>
+	<td>Plansemester</td>
+</tr>
+<tr>
+	<td align="center"><b>Angebot Modul</b></td>
+	<td>Wann wird dieses Modul generell angeboten</td>
+</tr>
+<tr>
+	<td align="center"><b>Verwendbarkeit</b></td>
+	<td>Angaben zur Verwendbarkeit des Moduls aus der Modulbeschreibung</td>
+</tr>
+</table>
+
 {include file="footer.tpl" title=foo}
