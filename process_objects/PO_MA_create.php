@@ -77,7 +77,7 @@ class PO_MA_create
         }
         
         $modullist = $result;
-        var_dump($modullist);
+        //var_dump($modullist);
         $po=$SG->getPO($sg_id);
         
         $po = $this->UM->checkManagerResults($po, "sg_id", "Abfrage der PO");
@@ -110,17 +110,17 @@ class PO_MA_create
         $events = array();
         foreach($modulliste as $key => $var)
         {
-        	if($semester == 1) $events[$key]["semester"] = $this->UM->getCurrentSemester();
-        	else $events[$key]["semester"] = $this->UM->getNextSemester();
-        	
-            $events[$key]["time"] = "07:30:00";
-            $events[$key]["weekday"] = "Montag";
-			$events[$key]["week"] = "jede";
-            $events[$key]["lb"] = $lb;
-            
-            $id=preg_split(":\::",$var);
-            $id = substr($id[1], 0, -1);
-            $events[$key]["modul"] = $id;
+			if($var != "") {
+				if($semester == 1) $events[$key]["semester"] = $this->UM->getCurrentSemester();
+				else $events[$key]["semester"] = $this->UM->getNextSemester();
+				
+				$events[$key]["time"] = "07:30:00";
+				$events[$key]["weekday"] = "Montag";
+				$events[$key]["week"] = "jede";
+				$events[$key]["lb"] = $lb;
+				
+				$events[$key]["modul"] = $var;
+			}
         }
         //Modulaufstellung an Manager senden
         $result=$MA->setModulangebotPerSG($sg_id,$events);

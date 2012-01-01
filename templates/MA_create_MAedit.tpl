@@ -47,46 +47,84 @@
 </table>
 {if ($mark_semester == 1 && $mas.0 == 1) || ($mark_semester == 2 && $mas.1 == 1)}
 	{if $mas.0==1} {$editSem=1} {else if $mas.1==1} {$editSem=2} {/if}
-	<h4 id="warning">
+	<h4 class="warning">
 		Achtung! F&uuml;r das gew&auml;hlte Semester existiert bereits eine Modulaufstellung.<br>
 		Wenn Sie fortfahren wird die existierende Modulaufstellung &uuml;berschrieben.<br>
-		Verwenden Sie zum Editieren diese <a href="{$rootDir}MA_edit.php?editMA=yes&forid={$sg_id}&sem={$editSem}">Funktion</a>
+		Verwenden Sie zum Editieren die Funktion Modulangebot editieren <input type="button" onClick="window.location = '{$rootDir}MA_edit.php?editMA=yes&forid={$sg_id}&sem={$editSem}'" value="Zur Funktion springen">
 	</h4>
 {/if}
 <br>
-<h4>Modulaufstellung des Studiengangs (Modulname + Plansemester),<br>
-die in diesem Zeitraum hinzugef&uuml;gt werden k&ouml;nnen</h4>
-<table>
-<!--<th colspan="4">  </th>-->
-{$counter = 1}
+<h4>Modulaufstellung des Studiengangs und das derzeitige Modulangebot.</h4>
+<table width="800" style="border-collapse: collapse;">
 <tr>
-{foreach $modullist as $var}
-	<td id="ma_add_{$var.modul_id}">
-		<span id="ma_add_span_{$var.modul_id}">
-		{$var.modul_name} 
-		<b>
-			<span name="MA_rightSem" id="{if $var.plansemester_Mark=="true"}MA_rightSem{else}MA_wrongSem{/if}">
-				{$var.mauf_plansemester}
-			</span>
-		</b> 
-		<input type="button" value="+" onClick="MA_AddButton('{$var.modul_id }','{$var.modul_name}','{$var.mauf_plansemester}')">
-		</span>
+	<th class="MAcreate_table" style="background-color:white;">Modulaufstellung</th>
+	<th class="MAcreate_table" style="background-color:white;">Modulangebot</th>
+</tr>
+<tr>
+	<td width="400" style="border-collapse: collapse; border-right: 1px black dotted;">
+		<table class="MAcreate_table" width="100%" style="font-size: 9px; font-weight: bold;">
+		<tr>
+			<td width="65%">Modulname</td>
+			<td width="10%">PS</td>
+			<td width="35%"></td>
+		</tr>
+		</table>
 	</td>
-{if $counter%4==0}
+	<td width="400" style="border-collapse: collapse;">
+		<table class="MAcreate_table" width="100%" style="font-size: 9px; font-weight: bold;">
+		<tr>
+			<td width="65%">Modulname</td>
+			<td width="10%">PS</td>
+			<td width="35%"></td>
+		</tr>
+		</table>
+	</td>
 </tr>
-<tr>
-{/if}
-{$counter = $counter+1}
-{/foreach}
-</tr>
-</table>
-<hr>
-<h4>Ausgew&auml;hlte Module f&uuml;r das Modulangebot</h4>
-<span id="modulangebot">
+{foreach from=$modullist item=var key=keyVal}
+<tr id="compareList_Row_{$keyVal}">
+	<td width="400" style="border-right: 1px black dotted; border-collapse: collapse;">
+		<table class="MAcreate_table" id="modullist_{$var.keyVal}" width="100%">
+		<tr>
+			<td width="65%" id="compareLeft_name_{$keyVal}">{$var.modul_name}</td>
+			<td width="10%" id="compareLeft_ps_{$keyVal}" class={if $var.plansemester_Mark=='true'}"MA_rightSem"{else}"MA_wrongSem"{/if}>{$var.mauf_plansemester}</td>
+			<td width="35%">
+				{if $var.modul_name != ""}
+				<input type="button" id="compareLeft_bt_{$keyVal}" onClick="MAcreate_AddButton('{$keyVal}','{$var.modul_name}','{$var.mauf_plansemester}')" value="hinzuf&uuml;gen" {if $var.modul_name==$var.modulangebot.modul_name}disabled="true"{/if}>
+				{else}
+				<input type="button" id="compareLeft_bt_{$keyVal}" onClick="MAcreate_AddButton('{$keyVal}','{$var.modulangebot.modul_name}','{$var.modulangebot.mauf_plansemester}')" value="hinzuf&uuml;gen" style="visibility:hidden;" {if $var.modul_name==$var.modulangebot.modul_name}disabled="true"{/if}>
+				{/if}
+			</td>
+		</tr>
+		</table>
+	</td>
+		<!-- Trennung -->
+	<td width="400">
+		<table class="MAcreate_table"  id="angebot_{$var.keyVal}" width="100%">
+		<tr>
+			<td width="65%" id="compareRight_name_{$keyVal}">
+				{$var.modulangebot.modul_name}
+			</td>
+			<td width="10%" id="compareRight_ps_{$keyVal}" class={if $var.plansemester_Mark=='true'}"MA_rightSem"{else}"MA_wrongSem"{/if}>{$var.modulangebot.mauf_plansemester}</td>
+			<!-- <td width="30%">{$modulangebot.$keyVal.modul_frequency}</td>-->
+			<td width="25%">
+			{if $var.modulangebot.modul_name != ""}
+					<input type="button" onClick="MAcreate_DelButton('{$keyVal}','{$var.modulangebot.modul_name}','{$var.modulangebot.mauf_plansemester}')" id="compareRight_bt_{$keyVal}" value="entfernen">
 
-</span
+			{else}
+				<input type="button" onClick="MAcreate_DelButton('{$keyVal}','{$var.modul_name}','{$var.mauf_plansemester}')" id="compareRight_bt_{$keyVal}" value="entfernen" style="visibility:hidden;">
+			{/if}
+			</td>
+			<input type="hidden" name="modulangebot[]" id="compareRight_idField_{$keyVal}" {if $var.modulangebot.modul_name != ""}value="{$keyVal}"{/if}>
+			<!--	<td width="20%"><pre> </pre></td> -->
+			
+		</tr>
+		</table>
+	</td>
+<tr>
+{/foreach}
+</table>
 <br><br>
-<table width="600">
+<table width="800">
 <tr>
 	<td style="text-align: left;">
 		<input type="button" value="Zur&uuml;ck" onClick="window.location='{$rootDir}MA_create.php'">
@@ -100,6 +138,26 @@ die in diesem Zeitraum hinzugef&uuml;gt werden k&ouml;nnen</h4>
 </form>
 
 
+<br>
+<b>Legende:</b><br>
+<table>
+<tr>
+	<td width="120" align="center"><span style="color:black; font-weight:bold;">PS</span></td>
+	<td>Plansemester</td>
+</tr>
+<tr>
+	<td align="center"><div style="color:green; font-weight:bold;">4</span</td>
+	<td>Plansemester stimmt mit aktuellen Semester &uuml;berein f&uuml;r dass das Modulangebot erstellt wird.</td>
+</tr>
+<tr>
+	<td align="center"><div style="color:gray; font-weight:bold;">3</span</td>
+	<td>Modul normalerweise in anderen Semesterturnus geplant</td>
+</tr>
+</table>
+
+<h4 class="hinweis">
+	Im Studiengangmanagement k&ouml;nnen Sie &Auml;nderungen an den Modulen der Modulaufstellung vornehmen. <input type="button" value="Zur Funktion Springen" onClick="window.location='{$rootDir}SG_edit.php?showEdit=yes&forid={$sg_id}'">
+</h4>
 
 <!--
 <table>

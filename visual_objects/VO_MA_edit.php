@@ -15,14 +15,12 @@ class VO_MA_edit
 		$this->UM->tpl->assign("next_semester", $this->UM->getNextSemester());
 		$this->UM->tpl->display("MA_edit_SGList.tpl", session_id());
 	}
-	function showModulaufstellung($sg_id,$sgname,$sg_typ,$lehrbeauftragte,$lb_ma,$compareList,$modullist,$modulangebot,$po,$modulhb,$semester,$ma_status)
+	function showModulaufstellung($sg_id,$sgname,$sg_typ,$lehrbeauftragte,$lb_ma,$compareList,$po,$modulhb,$semester,$ma_status)
 	{
 		$curr = $this->UM->getCurrentSemester();
 		$next = $this->UM->getNextSemester();
 		$this->UM->showfooter();
 		$this->UM->showheader($this->UM->seite);
-		$this->UM->tpl->assign("modullist", $modullist);
-		$this->UM->tpl->assign("modulangebot", $modulangebot);
 		$this->UM->tpl->assign("compareList", $compareList);
 		
 		$this->UM->tpl->assign("po", $po);

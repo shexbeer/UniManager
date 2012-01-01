@@ -33,141 +33,63 @@ function Modul_Checkbox(id, sems) {
 	}
 }
 
-function MA_AddButton(id, name, plansemester) {
+function MAcreate_AddButton(id, name, plansemester) {
 	
-	var spanDown = document.getElementById("modulangebot");
-	var tdTop = document.getElementById("ma_add_"+id);
-	var spanTop = document.getElementById("ma_add_span_"+id);
+	var newName = document.getElementById("compareRight_name_"+id);
+	var newId = document.getElementById("compareRight_idField_"+id);
+	var newPs = document.getElementById("compareRight_ps_"+id);
+	var newButton = document.getElementById("compareRight_bt_"+id);
+	var oldButton = document.getElementById("compareLeft_bt_"+id);
+	//var compareControl = document.getElementById("compareControl_"+id);
 	
-	// Span
-	var newSpan = document.createElement("span");
-	var newSpan_id = document.createAttribute("id");
-	newSpan_id.nodeValue = "ma_del_"+id;
-	newSpan.setAttributeNode(newSpan_id);
-	//newSpan.id = ;
+	var oldName = document.getElementById("compareLeft_name_"+id);
+	//var oldId = document.getElementById("compareLeft_idField_"+id);
+	var oldPs = document.getElementById("compareLeft_ps_"+id);	
+	var oldButton = document.getElementById("compareLeft_bt_"+id);
+
+	newName.innerText = name;
+	newId.value=id;
+	newPs.innerText = plansemester
+	newButton.style.visibility = "visible";
 	
-	// Textbox
-	var newTextBox = document.createElement("input");
-	var newTextBox_id = document.createAttribute("id");
-	var newTextBox_type = document.createAttribute("type");
-	var newTextBox_name = document.createAttribute("name");
-	var newTextBox_value = document.createAttribute("value");
-	var newTextBox_size = document.createAttribute("size");
-	var newTextBox_class = document.createAttribute("class");
-	var newTextBox_disabled = document.createAttribute("readonly");
-	
-	newTextBox.setAttributeNode(newTextBox_id);
-	newTextBox.setAttributeNode(newTextBox_type);
-	newTextBox.setAttributeNode(newTextBox_name);
-	newTextBox.setAttributeNode(newTextBox_value);
-	newTextBox.setAttributeNode(newTextBox_size)
-	newTextBox.setAttributeNode(newTextBox_class);
-	newTextBox.setAttributeNode(newTextBox_disabled);
-	newTextBox.id = "ma_"+id;
-	newTextBox.type = "text";
-	newTextBox.name = "ma_text[]";
-	newTextBox.size = name.length + 0;
-	newTextBox.value = name+" (ID:"+id+")";
-	//newTextBox.class = "MA_inputText";
-	newTextBox.setAttribute("class","MA_inputText");
-	//newTextBox.setAttribute("onClick","tes()");
-	
-	// Plansemester Anzeige
-	var planSpan = document.createElement("span");
-	var att_name = document.createAttribute("id");
-	att_name.nodeValue = "MA_rightSem";
-	var att_innerText = document.createAttribute("innerText");
-	planSpan.setAttributeNode(att_name);
-	planSpan.setAttributeNode(att_innerText);
-	planSpan.innerText = " "+plansemester+" ";
-	
-	// Del Button
-	var bt = document.createElement("input");
-	var bt_value = document.createAttribute("value");
-	var bt_onClick = document.createAttribute("onClick");
-	var bt_type = document.createAttribute("type");
-	bt.setAttributeNode(bt_value);
-	bt.setAttributeNode(bt_onClick);
-	bt.setAttributeNode(bt_type);
-	bt.value = "-";
-	bt.type = "button";
-	//alert(bt.onClick);
-	bt.setAttribute("onClick","MA_DelButton('"+id+"','"+name+"','"+plansemester+"')");
-	
-	newSpan.appendChild(newTextBox);
-	newSpan.appendChild(planSpan);
-	newSpan.appendChild(bt);
-	spanDown.appendChild(newSpan);	
-	
-	tdTop.removeChild(spanTop);
-	
-	if(spanDown.childNodes.length % 4 == 0) {
-		var br = document.createElement("br");
-		spanDown.appendChild(br);
-	}
+	oldName.innerText = '';
+	oldPs.innerText = '';
+	oldButton.style.visibility = "hidden";
+	//compareControl.style.backgroundColor = "green";
 	
 	// Enable Submit Button
 	if(MA_create_RB_checker())
 		document.getElementById("ma_submit").disabled = false;
 }
 
-function MA_DelButton(id, name, plansemester) {
+function MAcreate_DelButton(id, name, plansemester) {
 
-	var spanDown = document.getElementById("modulangebot");
-	var spanDelSpan = document.getElementById("ma_del_"+id);
-	var tdTop = document.getElementById("ma_add_"+id);
+	var newName = document.getElementById("compareLeft_name_"+id);
+	//var newId = document.getElementById("compareLeft_idField_"+id);
+	var newPs = document.getElementById("compareLeft_ps_"+id);
+	var newButton = document.getElementById("compareLeft_bt_"+id);
+	//var newFrequency = document.getElementById("compareLeft_frequency_"+id);
+	//var newRow = document.getElementById("compareList_Row_"+id);
 	
+	var oldName = document.getElementById("compareRight_name_"+id);
+	var oldId = document.getElementById("compareRight_idField_"+id);
+	var oldPs = document.getElementById("compareRight_ps_"+id);	
+	var oldButton = document.getElementById("compareRight_bt_"+id);
 	
-	// Span
-	var newSpan = document.createElement("span");
-	var newSpan_id = document.createAttribute("id");
-	newSpan_id.nodeValue = "ma_add_span_"+id;
-	newSpan.setAttributeNode(newSpan_id);
-	//newSpan.id = ;
+	//var compareControl = document.getElementById("compareControl_"+id);
+
+	newName.innerText = name;
+	newPs.innerText = plansemester
+	newButton.disabled = "";
+	newButton.style.visibility = "visible";
+	//newFrequency.innerText = frequency
 	
-	// Name des Moduls
-	var nameSpan = document.createElement("span");
-	//var att_name = document.createAttribute("id");
-	//att_name.nodeValue = "MA_rightSem";
-	var att_innerText = document.createAttribute("innerText");
-	nameSpan.setAttributeNode(att_innerText);
-	nameSpan.innerText = name+" ";
+	oldName.innerText = "";
+	oldId.value = "";
+	oldPs.innerText = "";
+	oldButton.style.visibility = "hidden";
 	
-	
-	// Plansemester Anzeige
-	var planSpan = document.createElement("span");
-	var att_name = document.createAttribute("id");
-	att_name.nodeValue = "MA_rightSem";
-	var att_innerText = document.createAttribute("innerText");
-	planSpan.setAttributeNode(att_name);
-	planSpan.setAttributeNode(att_innerText);
-	planSpan.innerText = plansemester+" ";
-	
-	// Add Button
-	var bt = document.createElement("input");
-	var bt_value = document.createAttribute("value");
-	var bt_onClick = document.createAttribute("onClick");
-	var bt_type = document.createAttribute("type");
-	bt.setAttributeNode(bt_value);
-	bt.setAttributeNode(bt_onClick);
-	bt.setAttributeNode(bt_type);
-	bt.value = "+";
-	bt.type = "button";
-	//alert(bt.onClick);
-	bt.setAttribute("onClick","MA_AddButton('"+id+"','"+name+"','"+plansemester+"')");
-	
-	newSpan.appendChild(nameSpan);
-	newSpan.appendChild(planSpan);
-	newSpan.appendChild(bt);
-	tdTop.appendChild(newSpan);	
-	
-	spanDown.removeChild(spanDelSpan);
-	
-	if(spanDown.childNodes.length == 1) {
-		document.getElementById("ma_submit").disabled = "disabled";
-	}
-	
-	// alert(spanDown.childNodes.length);
+	MAcheckModulangebot();
 }
 
 function MAedit_AddButton(id, name, plansemester) {
@@ -226,19 +148,7 @@ function MAedit_DelButton(id, name, plansemester) {
 	oldPs.innerText = "";
 	oldButton.style.visibility = "hidden";
 	
-	//compareControl.style.backgroundColor = "red";
-	var mods = document.getElementsByName("modulangebot[]");
-	var rows = mods.length;
-	var count = 0;
-	for(var i=0; i<rows; i++) {
-		if(mods[i].value != "")
-			count++
-	}
-	if(count == 0) {
-		document.getElementById("ma_submit").disabled = "disabled";
-	}
-	
-	// alert(spanDown.childNodes.length);
+	MAcheckModulangebot();
 }
 
 
@@ -265,7 +175,7 @@ function MA_create_RB_checker()
 	return (true);
 }
 function MA_create_checkIfSelected() {
-	if(MA_create_RB_checker() && document.getElementById("modulangebot").childNodes.length > 1)
+	if(MA_create_RB_checker() && MAcheckModulangebot())
 		document.getElementById("ma_submit").disabled = false;
 }
 
@@ -359,5 +269,7 @@ function MAcheckModulangebot() {
 	}
 	if(count == 0) {
 		document.getElementById("ma_submit").disabled = "disabled";
+		return false;
 	}
+	return true;
 }

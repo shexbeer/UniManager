@@ -70,7 +70,12 @@ th {
 	border-bottom-style: solid;
 	empty-cells: show;
 }
-
+.MAcreate_table {
+	border-bottom-width: 1px;
+	border-bottom-color: black;
+	border-bottom-style: solid;
+	empty-cells: show;
+}
 #sg_edit_table_flags_left {
 	border-left-color: black;
 	border-left-width: 1px;

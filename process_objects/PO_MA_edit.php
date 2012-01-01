@@ -135,7 +135,7 @@
 				$compareList[$var]["modulangebot"]["onlyInMA"] = "true";
 		}
         
-        $this->UM->VisualObject->showModulaufstellung($sg_id,$sgname,$sgtyp,$lehrbeauf,$lb_ma, $compareList, $modullist,$modulangebot,$po[$sg_id]["sg_po"],$modulhb[$sg_id]["sg_modulhandbuch"], $semester,$ma_status);
+        $this->UM->VisualObject->showModulaufstellung($sg_id,$sgname,$sgtyp,$lehrbeauf,$lb_ma, $compareList, $po[$sg_id]["sg_po"],$modulhb[$sg_id]["sg_modulhandbuch"], $semester,$ma_status);
       }
       
       /**

@@ -44,7 +44,7 @@ if ($_GET['page'] == 'about')
                  </td>
                  </tr>
          <tr><td colspan=2>
-         <b>Test Index Seite! Nur ein Vorschlag XD</b></td></tr>
+         <b>(Javascript muss aktiviert sein f&uuml;r diese Seite)</b></td></tr>
          </table>
          </td>
 </tr>
