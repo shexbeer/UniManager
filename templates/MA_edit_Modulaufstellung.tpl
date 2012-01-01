@@ -75,40 +75,85 @@
 </tr>
 </table>
 {if ($mark_semester == 1 && $mas.0 == 1) || ($mark_semester == 2 && $mas.1 == 1)}
-	<h4 id="warning">
+	<h4 class="warning">
 		Achtung! F&uuml;r das gew&auml;hlte Semester existiert bereits eine Modulaufstellung.<br>
 		Wenn Sie fortfahren wird die existierende Modulaufstellung &uuml;berschrieben.<br>
 		Verwenden Sie zum Editieren diese <a href="{$rootDir}MA_edit.php?forid={$sg_id}">Funktion</a>
 	</h4>
 {/if}
 <br>
-<h4>Modulaufstellung des Studiengangs (Modulname + Plansemester),<br>
-die in diesem Zeitraum hinzugef&uuml;gt werden k&ouml;nnen</h4>
-<span id="modulliste" width="200">
-{foreach $modullist as $var}
-	<span id="ma_modlist_{$var.modul_id}">
-		<span>{$var.modul_name}</span>
-		<span name="MA_rightSem" id="{if $var.plansemester_Mark=="true"}MA_rightSem{else}MA_wrongSem{/if}">{$var.mauf_plansemester}</span>	
-		<input type="button" value="+" onClick="MAedit_AddButton('{$var.modul_id }','{$var.modul_name}','{$var.mauf_plansemester}')">
-		<br>
-	</span>
+<h4>Modulaufstellung des Studiengangs und das derzeitige Modulangebot.</h4>
+<table width="800" style="border-collapse: collapse;">
+<tr>
+	<th class="MAedit_table" style="background-color:white;">Modulaufstellung</th>
+	<th class="MAedit_table" style="background-color:white;">Modulangebot</th>
+</tr>
+<tr>
+	<td width="400" style="border-collapse: collapse; border-right: 1px black dotted;">
+		<table class="MAedit_table" width="100%" style="font-size: 9px; font-weight: bold;">
+		<tr>
+			<td width="65%">Modulname</td>
+			<td width="10%">PS</td>
+			<td width="35%"></td>
+		</tr>
+		</table>
+	</td>
+	<td width="400" style="border-collapse: collapse;">
+		<table class="MAedit_table" width="100%" style="font-size: 9px; font-weight: bold;">
+		<tr>
+			<td width="65%">Modulname</td>
+			<td width="10%">PS</td>
+			<td width="35%"></td>
+		</tr>
+		</table>
+	</td>
+</tr>
+{foreach from=$compareList item=var key=keyVal}
+<tr id="compareList_Row_{$keyVal}">
+	<td width="400" style="border-right: 1px black dotted; border-collapse: collapse;">
+		<table class="MAedit_table" id="modullist_{$var.keyVal}" width="100%">
+		<tr>
+			<td width="65%" id="compareLeft_name_{$keyVal}">{$var.modullist.modul_name}</td>
+			<td width="10%" id="compareLeft_ps_{$keyVal}" class={if $var.modullist.plansemester_Mark=='true'}"MA_rightSem"{else}"MA_wrongSem"{/if}>{$var.modullist.mauf_plansemester}</td>
+			<td width="35%">
+				{if $var.modullist.modul_name != ""}
+				<input type="button" id="compareLeft_bt_{$keyVal}" onClick="MAedit_AddButton('{$keyVal}','{$var.modullist.modul_name}','{$var.modullist.mauf_plansemester}')" value="hinzuf&uuml;gen" {if $var.modullist.modul_name==$var.modulangebot.modul_name}disabled="true"{/if}>
+				{else}
+				<input type="button" id="compareLeft_bt_{$keyVal}" onClick="MAedit_AddButton('{$keyVal}','{$var.modulangebot.modul_name}','{$var.modulangebot.mauf_plansemester}')" value="hinzuf&uuml;gen" style="visibility:hidden;" {if $var.modullist.modul_name==$var.modulangebot.modul_name}disabled="true"{/if}>
+				{/if}
+			</td>
+		</tr>
+		</table>
+	</td>
+		<!-- Trennung -->
+	<td width="400">
+		<table class="MAedit_table"  id="angebot_{$var.keyVal}" width="100%">
+		<tr>
+			<td width="65%" id="compareRight_name_{$keyVal}">
+				{$var.modulangebot.modul_name}
+			</td>
+			<td width="10%" id="compareRight_ps_{$keyVal}" class={if $var.modullist.plansemester_Mark=='true'}"MA_rightSem"{else}"MA_wrongSem"{/if}>{$var.modulangebot.mauf_plansemester}</td>
+			<!-- <td width="30%">{$modulangebot.$keyVal.modul_frequency}</td>-->
+			<td width="25%">
+			{if $var.modulangebot.modul_name != ""}
+					<input type="button" onClick="MAedit_DelButton('{$keyVal}','{$var.modulangebot.modul_name}','{$var.modulangebot.mauf_plansemester}')" id="compareRight_bt_{$keyVal}" value="entfernen">
+
+			{else}
+				<input type="button" onClick="MAedit_DelButton('{$keyVal}','{$var.modullist.modul_name}','{$var.modullist.mauf_plansemester}')" id="compareRight_bt_{$keyVal}" value="entfernen" style="visibility:hidden;">
+			{/if}
+			</td>
+			<input type="hidden" name="modulangebot[]" id="compareRight_idField_{$keyVal}" {if $var.modulangebot.modul_name != ""}value="{$keyVal}"{/if}>
+			<!--	<td width="20%"><pre> </pre></td> -->
+			
+		</tr>
+		</table>
+	</td>
+<tr>
 {/foreach}
-</span>
-<hr>
-<h4>Ausgew&auml;hlte Module f&uuml;r das Modulangebot</h4>
-<span id="modulangebot" width="200">
-{foreach $modulangebot as $var}
-	<span id="ma_modangebot_{$var.modul_id}" name="ma_modAngebot">
-		<span>{$var.modul_name}</span>
-		<input type="hidden" name="modulangebot[]" value="{$var.modul_id}">
-		<span name="MA_rightSem" id="MA_rightSem">{$var.mauf_plansemester}</span>	
-		<input type="button" value="-" onClick="MAedit_DelButton('{$var.modul_id }','{$var.modul_name}','{$var.mauf_plansemester}')">
-		<br>
-	</span>
-{/foreach}
-</span>
+</table>
+	
 <p></p>
-<table width="600">
+<table width="800">
 <tr>
 	<td style="text-align: left;">
 		<input type="button" value="Zur&uuml;ck" onClick="window.location='{$rootDir}MA_edit.php'">
@@ -120,5 +165,27 @@ die in diesem Zeitraum hinzugef&uuml;gt werden k&ouml;nnen</h4>
 </tr>
 </table>
 </form>
+
+
+<br>
+<b>Legende:</b><br>
+<table>
+<tr>
+	<td width="120" align="center"><span style="color:black; font-weight:bold;">PS</span></td>
+	<td>Plansemester</td>
+</tr>
+<tr>
+	<td align="center"><div style="color:green; font-weight:bold;">4</span</td>
+	<td>Plansemester stimmt mit aktuellen Semester &uuml;berein f&uuml;r dass das Modulangebot erstellt wird.</td>
+</tr>
+<tr>
+	<td align="center"><div style="color:gray; font-weight:bold;">3</span</td>
+	<td>Modul normalerweise in anderen Semesterturnus geplant</td>
+</tr>
+</table>
+
+<h4 class="hinweis">
+	Im Studiengangmanagement k&ouml;nnen Sie &Auml;nderungen an den Modulen der Modulaufstellung vornehmen. <input type="button" value="Zur Funktion Springen" onClick="window.location='{$rootDir}SG_edit.php?showEdit=yes&forid={$sg_id}'">
+</h4>
 
 {include file="footer.tpl" title=foo}

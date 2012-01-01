@@ -64,6 +64,12 @@ th {
 	border-bottom-style: solid;
 	empty-cells: show;
 }
+.MAedit_table {
+	border-bottom-width: 1px;
+	border-bottom-color: black;
+	border-bottom-style: solid;
+	empty-cells: show;
+}
 
 #sg_edit_table_flags_left {
 	border-left-color: black;
@@ -84,12 +90,16 @@ th {
 	border-left-style: solid;
 }
 
-#warning {
+.warning {
 	background-color: red;
 	color: white;
 	text-align: center;
 }
-
+.hinweis {
+	background-color: yellow;
+	color: black;
+	text-align: center;
+}
 
 /*body {
 	background-color: #FFFFFF;

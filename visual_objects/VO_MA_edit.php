@@ -15,7 +15,7 @@ class VO_MA_edit
 		$this->UM->tpl->assign("next_semester", $this->UM->getNextSemester());
 		$this->UM->tpl->display("MA_edit_SGList.tpl", session_id());
 	}
-	function showModulaufstellung($sg_id,$sgname,$sg_typ,$lehrbeauftragte,$lb_ma,$modullist,$modulangebot,$po,$modulhb,$semester,$ma_status)
+	function showModulaufstellung($sg_id,$sgname,$sg_typ,$lehrbeauftragte,$lb_ma,$compareList,$modullist,$modulangebot,$po,$modulhb,$semester,$ma_status)
 	{
 		$curr = $this->UM->getCurrentSemester();
 		$next = $this->UM->getNextSemester();
@@ -23,6 +23,8 @@ class VO_MA_edit
 		$this->UM->showheader($this->UM->seite);
 		$this->UM->tpl->assign("modullist", $modullist);
 		$this->UM->tpl->assign("modulangebot", $modulangebot);
+		$this->UM->tpl->assign("compareList", $compareList);
+		
 		$this->UM->tpl->assign("po", $po);
 		$this->UM->tpl->assign("modulhb", $modulhb);
 		$this->UM->tpl->assign("current_semester", $curr);
@@ -34,6 +36,7 @@ class VO_MA_edit
 		$this->UM->tpl->assign("lbForMA", $lb_ma);
 		$this->UM->tpl->assign("sg_name", $sgname);
 		$this->UM->tpl->assign("ma_status", utf8_encode($ma_status));
+		
 		$this->UM->tpl->display("MA_edit_Modulaufstellung.tpl", session_id());
 	}
 	function showResult($result, $message)
