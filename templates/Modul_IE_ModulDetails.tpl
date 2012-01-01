@@ -10,7 +10,7 @@ Die Moduldetails zum selektierten Modul werden angezeigt.
                 Modulname:
             </td>
             <td>
-                <input name="modul_name" type="text" value="{$mod.modul_name}" size="30" maxlength="30" >
+                <input name="modul_name" type="text" value="{$mod.modul_name}" size="30" maxlength="30" disabled="true" >
             </td>
         </tr>
         <tr>
@@ -27,11 +27,11 @@ Die Moduldetails zum selektierten Modul werden angezeigt.
             </td>
             <td>
             {$counter = 0}
-            {foreach from=$dekanlist item=var}
-                {if $mod.modul_person_id == $var.studiendekan_persid}
-                    <input checked="checked" type="radio" name="dekan" value="{$var.studiendekan_id}"> {$var.person_vorname} {$var.person_name}
+            {foreach from=$lehrendelist item=var}
+                {if $mod.modul_person_id == $var.lehrende_personenid}
+                    <input checked="checked" type="radio" name="lehrende" value="{$var.lehrende_id}"> {$var.person_vorname} {$var.person_name}
                     {else}
-                        <input type="radio" name="dekan" value="{$var.studiendekan_id}"> {$var.person_vorname} {$var.person_name}
+                        <input type="radio" name="lehrende" value="{$var.lehrende_id}"> {$var.person_vorname} {$var.person_name}
                 {/if}
                 {if $counter % 4 == 0}
                     <br>

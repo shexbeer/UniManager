@@ -26,12 +26,12 @@ class VO_Modul_IE
 		// Zeige das Template für diese Ausgabe an
 		$this->UM->tpl->display("Modul_IE_Modullist.tpl", session_id());
 	}
-	 function showModulDetails($mDetails,$dekanlist=false) 
+	 function showModulDetails($mDetails,$lehrendelist=false) 
 	{
 		$this->UM->showfooter();
 		$this->UM->showheader($this->UM->seite);
 		$this->UM->tpl->assign("mod", $mDetails);
-        $this->UM->tpl->assign("dekanlist", $dekanlist);
+        $this->UM->tpl->assign("lehrendelist", $lehrendelist);
 		$this->UM->tpl->display("Modul_IE_ModulDetails.tpl", session_id());
 	}
 }

@@ -97,6 +97,13 @@ class Person_Management
 		$res = mysql_query($sql);
 		return $this->buildResult($res, "studiendekan_id");
 	}
+    
+    function getLehrende()
+    {
+        $sql = "SELECT * FROM lehrende AS l INNER JOIN person as p ON p.person_id=l.lehrende_personenid";
+        $res = mysql_query($sql);
+        return $this->buildResult($res, "lehrende_id");
+    }
 	
 	/**!!
 	* holt die Personendetails zu einem Lehrenden 

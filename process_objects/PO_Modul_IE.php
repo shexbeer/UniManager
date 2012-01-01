@@ -23,13 +23,10 @@
             	// Abfrage des Richtigen Namens der Verantwortlichen ID und ŸberprŸfen der ManagerDaten auf Fehler
             	$res = $PM->getNameForID($verantwortlicher_id);
             	//var_dump($res);
-            	//$res_cropped = $this->UM->checkManagerResults($res, "id", "Personen");
-            	   
             	// GrundsŠtzlich ersteinmal alles was in $modDetails drinsteht wieder nach $results rein
             	$result[$var["modul_id"]] = $var;
             	// Vorsichtshalber wird das ID Feld ausgetauscht mit dem Richtigen Namen aber auch ein Neues Feld erstellt um bei den VO Machern jegliche Dummheiten auszuschlie§en ;)
             	$result[$var["modul_id"]]["verantwortlicher"] = $res["vorname"]." ".$res["name"];
-            	//$result[$var["modul_id"]]["modul_person_id"] = $res_cropped[$verantwortlicher_id]["vorname"]." ".$res_cropped[$verantwortlicher_id]["name"];
             }
 			// Ÿbergebe Ausgabefertige Daten an VO
 			
@@ -39,11 +36,11 @@
         * Ruft Details zu einem speziellen Modul ab und ersetzt PersonenIDs durch Namen, danach schickt sie die Daten an das VO 
         * @param int $modul_id ID des Moduls das aufgerufen werden soll
         */
-        function changemodul($modul_id,$modul_name=false,$dekan=false,$modul_status=false,$modul_duration=false,$modul_qualifytarget=false,$modul_content=false, $modul_institute=false, $modul_literature=false,$modul_teachform=false,$modul_required=false,$modul_frequency=false,$modul_usability=false,$modul_lp=false,$modul_conditionforln=false,$modul_effort=false) 
+        function changemodul($modul_id,$lehrende=false,$modul_status=false,$modul_duration=false,$modul_qualifytarget=false,$modul_content=false, $modul_institute=false, $modul_literature=false,$modul_teachform=false,$modul_required=false,$modul_frequency=false,$modul_usability=false,$modul_lp=false,$modul_conditionforln=false,$modul_effort=false) 
         {
             $MM = new Modul_Management();
             $PM = new Person_Management();
-            if (!$modul_name && !$dekan && !$modul_status && !$modul_duration && !$modul_qualifytarget && !$modul_institute && !$modul_content && !$modul_literature && !$modul_teachform && !$modul_required && !$modul_status && !$modul_frequency && !$modul_usability && !$modul_lp && !$modul_conditionforln && !$modul_effort){
+            if (!$lehrende && !$modul_status && !$modul_duration && !$modul_qualifytarget && !$modul_institute && !$modul_content && !$modul_literature && !$modul_teachform && !$modul_required && !$modul_status && !$modul_frequency && !$modul_usability && !$modul_lp && !$modul_conditionforln && !$modul_effort){
                 // Moduldetails zum speziellen Modul holen
                 $re = $MM->getModuldetails(true,"modul",$modul_id);
                 $result = $this->UM->checkManagerResults($re, "modul_id", "Moduldetails");
@@ -56,83 +53,78 @@
                 $result["modul_person_id"] = $res["vorname"]." ".$res["name"];
                 // Übergebe ausgabefertige Daten an VO
                 //var_dump($result);
-                $dekan_unchecked = $PM->getDekans();
-                $dekans = $this->UM->checkManagerResults($dekan_unchecked,"studiendekan_id","Dekanabfrage");
-                $this->UM->VisualObject->showModulDetails($result,$dekans);
+                $lehrende_unchecked = $PM->getLehrende();
+                $lehrende = $this->UM->checkManagerResults($lehrende_unchecked,"lehrende_id","Lehrendeabfrage");
+                var_dump($lehrende);
+                $this->UM->VisualObject->showModulDetails($result,$lehrende);
                 die();
             }
             else{
                 $re = $MM->getModuldetails(true,"modul",$modul_id);
                 $res = $this->UM->checkManagerResults($re, "modul_id", "Moduldetails");
                     
-                    $count=0;
-                    if($modul_name==$res[$modul_id][modul_name])
+                    if(strcmp($lehrende,$res[$modul_id]['modul_person_id'])!=0)
                     {
-                        $fixes['modul_name']=$modul_name;
+                        $fixes['person_id']=$dekan;
+                    }
+                    if(strcmp($modul_duration,$res[$modul_id]['modul_duration'])!=0)
+                    {
+                        $fixes['duration']=$modul_duration;
                         $count=$count+1; 
                     }
-                    if($dekan==$res[$modul_id]['modul_person_id'])
+                    if(strcmp($modul_qualifytarget,$res[$modul_id]['modul_qualifytarget'])!=0)
                     {
-                        $fixes['modul_person_id']=$dekan;
-                    }
-                    if($modul_duration==$res[$modul_id]['modul_duration'])
-                    {
-                        $fixes['modul_duration']=$modul_duration;
+                        $fixes['qualifytarget']=$modul_qualifytarget;
                         $count=$count+1; 
                     }
-                    if($modul_qualifytarget==$res[$modul_id]['modul_qualifytarget'])
+                    if(strcmp($modul_institute,$res[$modul_id]['modul_institute'])!=0)
                     {
-                        $fixes['modul_qualifytarget']=$modul_qualifytarget;
+                        $fixes['institut']=$modul_institute;
                         $count=$count+1; 
                     }
-                    if($modul_institute==$res[$modul_id]['modul_institute'])
+                    if(strcmp($modul_content,$res[$modul_id]['modul_content'])!=0)
                     {
-                        $fixes['modul_institute']=$modul_institute;
+                        $fixes['content']=$modul_content;
                         $count=$count+1; 
                     }
-                    if($modul_content==$res[$modul_id]['modul_content'])
+                    if(strcmp($modul_literature,$res[$modul_id]['modul_literature'])!=0)
                     {
-                        $fixes['modul_content']=$modul_content;
+                        $fixes['literature']=$modul_literature;
                         $count=$count+1; 
                     }
-                    if($modul_literature==$res[$modul_id]['modul_literature'])
+                    if(strcmp($modul_teachform,$res[$modul_id]['modul_teachform'])!=0)
                     {
-                        $fixes['modul_literature']=$modul_literature;
+                        $fixes['teachform']=$modul_teachform;
                         $count=$count+1; 
                     }
-                    if($modul_teachform==$res[$modul_id]['modul_teachform'])
+                    if(strcmp($modul_required,$res[$modul_id]['modul_required'])!=0)
                     {
-                        $fixes['modul_teachform']=$modul_teachform;
+                        $fixes['required']=$modul_required;
                         $count=$count+1; 
                     }
-                    if($modul_required==$res[$modul_id]['modul_required'])
+                    if(strcmp($modul_frequency,$res[$modul_id]['modul_frequency'])!=0)
                     {
-                        $fixes['modul_required']=$modul_required;
+                        $fixes['frequency']=$modul_frequency;
                         $count=$count+1; 
                     }
-                    if($modul_frequency==$res[$modul_id]['modul_frequency'])
+                    if(strcmp($modul_usability,$res[$modul_id]['modul_usability'])!=0)
                     {
-                        $fixes['modul_frequency']=$modul_frequency;
+                        $fixes['usability']=$modul_usability;
                         $count=$count+1; 
                     }
-                    if($modul_usability==$res[$modul_id]['modul_usability'])
+                    if(strcmp($modul_lp,$res[$modul_id]['modul_lp'])!=0)
                     {
-                        $fixes['modul_usability']=$modul_usability;
+                        $fixes['lp']=$modul_lp;
                         $count=$count+1; 
                     }
-                    if($modul_lp==$res[$modul_id]['modul_lp'])
+                    if(strcmp($modul_conditionforln,$res[$modul_id]['modul_conditionforln'])!=0)
                     {
-                        $fixes['modul_lp']=$modul_lp;
+                        $fixes['conditionforln']=$modul_conditionforln;
                         $count=$count+1; 
                     }
-                    if($modul_conditionforln==$res[$modul_id]['modul_conditionforln'])
+                    if(strcmp($modul_effort,$res[$modul_id]['modul_effort'])!=0)
                     {
-                        $fixes['modul_conditionforln']=$modul_conditionforln;
-                        $count=$count+1; 
-                    }
-                    if($modul_effort==$res[$modul_id]['modul_effort'])
-                    {
-                        $fixes['modul_effort']=$modul_effort;
+                        $fixes['effort']=$modul_effort;
                         $count=$count+1; 
                     }
                 var_dump($count);
@@ -141,11 +133,11 @@
                 {
                     if($modul_status!="Bearbeitung")
                     {
-                        $result=$MM->setModuldetails($modul_id,$res,$modul_status);
+                        $result=$MM->setModuldetails($modul_id,$fixes,$modul_status);
                     }
                     else
                     {
-                        $result=$MM->setModuldetails($modul_id,$res);
+                        $result=$MM->setModuldetails($modul_id,$fixes);
                     }
                     $this->UM->VisualObject->showResult($result);
                 }
@@ -203,15 +195,12 @@ function addmodul($newmodul)
 
  {
         $MM= new Modul_Management();
-
-$p_id= (int)$newmodul["v_id"];
-	$result = $MM->addModul($newmodul["modul_name"],$p_id,0);
-      
-	$this->UM->VisualObject->showResultadd($result); 
-	 
-   }
+        $p_id= (int)$newmodul["v_id"];
+	    $result = $MM->addModul($newmodul["modul_name"],$p_id,0);
+        $this->UM->VisualObject->showResultadd($result); 
+ }
 
 
 
-    }
+}
 ?>
