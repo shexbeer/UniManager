@@ -172,83 +172,27 @@ function MA_DelButton(id, name, plansemester) {
 
 function MAedit_AddButton(id, name, plansemester) {
 	
-	var spanDown = document.getElementById("modulangebot");
-	var spanTop = document.getElementById("modulliste");
-	var addSpan = document.getElementById("ma_modlist_"+id);
-	//var spanTop = document.getElementById("ma_add_span_"+id);
+	var newName = document.getElementById("compareRight_name_"+id);
+	var newId = document.getElementById("compareRight_idField_"+id);
+	var newPs = document.getElementById("compareRight_ps_"+id);
+	var newButton = document.getElementById("compareRight_bt_"+id);
+	var oldButton = document.getElementById("compareLeft_bt_"+id);
+	//var compareControl = document.getElementById("compareControl_"+id);
 	
-	// Span
-	var newSpan = document.createElement("span");
-	var newSpan_id = document.createAttribute("id");
-	var newSpan_name = document.createAttribute("name");
-	newSpan_name.nodeValue = "ma_modAngebot";
-	newSpan.setAttributeNode(newSpan_name);
-	newSpan.setAttributeNode(newSpan_id);
-	newSpan.id = "ma_modangebot_"+id;
-	
-	//newSpan.id = ;
-	
-	// Name Span
-	var nameSpan = document.createElement("span");
-	var nameSpan_text = document.createAttribute("innerText");
-	nameSpan.setAttributeNode(nameSpan_text);
-	nameSpan.innerText = name;
-	
-	//newSpan.id = ;
-	
-	// hidden Box
-	var newHBox = document.createElement("input");
-	var newHBox_type = document.createAttribute("type");
-	var newHBox_name = document.createAttribute("name");
-	var newHBox_value = document.createAttribute("value");
+	var oldName = document.getElementById("compareLeft_name_"+id);
+	//var oldId = document.getElementById("compareLeft_idField_"+id);
+	var oldPs = document.getElementById("compareLeft_ps_"+id);	
+	var oldButton = document.getElementById("compareLeft_bt_"+id);
 
-	newHBox.setAttributeNode(newHBox_type);
-	newHBox.setAttributeNode(newHBox_name);
-	newHBox.setAttributeNode(newHBox_value);
-	newHBox.type = "hidden";
-	newHBox.name = "modulangebot[]";
-	newHBox.value = id;
+	newName.innerText = name;
+	newId.value=id;
+	newPs.innerText = plansemester
+	newButton.style.visibility = "visible";
 	
-	// Plansemester Anzeige
-	var planSpan = document.createElement("span");
-	var att_name = document.createAttribute("id");
-	att_name.nodeValue = "MA_rightSem";
-	var att_innerText = document.createAttribute("innerText");
-	planSpan.setAttributeNode(att_name);
-	planSpan.setAttributeNode(att_innerText);
-	planSpan.innerText = " "+plansemester+" ";
-	
-	// Del Button
-	var bt = document.createElement("input");
-	var bt_value = document.createAttribute("value");
-	var bt_onClick = document.createAttribute("onClick");
-	var bt_type = document.createAttribute("type");
-	bt.setAttributeNode(bt_value);
-	bt.setAttributeNode(bt_onClick);
-	bt.setAttributeNode(bt_type);
-	bt.value = "-";
-	bt.type = "button";
-	//alert(bt.onClick);
-	bt.setAttribute("onClick","MAedit_DelButton('"+id+"','"+name+"','"+plansemester+"')");
-	
-	var brtag = document.createElement("br");
-	newSpan.appendChild(nameSpan);
-	newSpan.appendChild(newHBox);
-	newSpan.appendChild(planSpan);
-	newSpan.appendChild(bt);
-	
-	spanDown.appendChild(newSpan);
-	
-	newSpan.appendChild(brtag);
-	
-	spanTop.removeChild(addSpan);
-	
-	if(spanDown.childNodes.length % 4 == 0) {
-		
-		//spanDown.appendChild(brtag);
-		//spanDown.removeChild(br);
-		//alert("hui");
-	}
+	oldName.innerText = '';
+	oldPs.innerText = '';
+	oldButton.style.visibility = "hidden";
+	//compareControl.style.backgroundColor = "green";
 	
 	// Enable Submit Button
 	if(MA_create_RB_checker())
@@ -257,75 +201,40 @@ function MAedit_AddButton(id, name, plansemester) {
 
 function MAedit_DelButton(id, name, plansemester) {
 	
-	var spanDown = document.getElementById("modulangebot");
-	var spanTop = document.getElementById("modulliste");
-	var delSpan = document.getElementById("ma_modangebot_"+id);
-	//var spanTop = document.getElementById("ma_add_span_"+id);
+	var newName = document.getElementById("compareLeft_name_"+id);
+	//var newId = document.getElementById("compareLeft_idField_"+id);
+	var newPs = document.getElementById("compareLeft_ps_"+id);
+	var newButton = document.getElementById("compareLeft_bt_"+id);
+	//var newFrequency = document.getElementById("compareLeft_frequency_"+id);
+	//var newRow = document.getElementById("compareList_Row_"+id);
 	
-	// Span
-	var newSpan = document.createElement("span");
-	var newSpan_id = document.createAttribute("id");	
-	newSpan_id.nodeValue = "ma_modlist_"+id;
-	newSpan.setAttributeNode(newSpan_id);
+	var oldName = document.getElementById("compareRight_name_"+id);
+	var oldId = document.getElementById("compareRight_idField_"+id);
+	var oldPs = document.getElementById("compareRight_ps_"+id);	
+	var oldButton = document.getElementById("compareRight_bt_"+id);
+	
+	//var compareControl = document.getElementById("compareControl_"+id);
 
-	//newSpan.id = ;
+	newName.innerText = name;
+	newPs.innerText = plansemester
+	newButton.disabled = "";
+	newButton.style.visibility = "visible";
+	//newFrequency.innerText = frequency
 	
-	// Name Span
-	var nameSpan = document.createElement("span");
-	var nameSpan_text = document.createAttribute("innerText");
-	nameSpan.setAttributeNode(nameSpan_text);
-	nameSpan.innerText = name;
+	oldName.innerText = "";
+	oldId.value = "";
+	oldPs.innerText = "";
+	oldButton.style.visibility = "hidden";
 	
-	//newSpan.id = ;
-	
-	// hidden Box
-	var newHBox = document.createElement("input");
-	var newHBox_type = document.createAttribute("type");
-	var newHBox_name = document.createAttribute("name");
-	var newHBox_value = document.createAttribute("value");
-
-	newHBox.setAttributeNode(newHBox_type);
-	newHBox.setAttributeNode(newHBox_name);
-	newHBox.setAttributeNode(newHBox_value);
-	newHBox.type = "hidden";
-	newHBox.name = "modulaufstellung[]";
-	newHBox.value = id;
-	
-	// Plansemester Anzeige
-	var planSpan = document.createElement("span");
-	var att_name = document.createAttribute("id");
-	att_name.nodeValue = "MA_rightSem";
-	var att_innerText = document.createAttribute("innerText");
-	planSpan.setAttributeNode(att_name);
-	planSpan.setAttributeNode(att_innerText);
-	planSpan.innerText = " "+plansemester+" ";
-	
-	// Add Button
-	var bt = document.createElement("input");
-	var bt_value = document.createAttribute("value");
-	var bt_onClick = document.createAttribute("onClick");
-	var bt_type = document.createAttribute("type");
-	bt.setAttributeNode(bt_value);
-	bt.setAttributeNode(bt_onClick);
-	bt.setAttributeNode(bt_type);
-	bt.value = "+";
-	bt.type = "button";
-	//alert(bt.onClick);
-	bt.setAttribute("onClick","MAedit_AddButton('"+id+"','"+name+"','"+plansemester+"')");
-
-	var brtag = document.createElement("br");
-	
-	newSpan.appendChild(nameSpan);
-	newSpan.appendChild(newHBox);
-	newSpan.appendChild(planSpan);
-	newSpan.appendChild(bt);
-	
-	spanTop.appendChild(newSpan);	
-	newSpan.appendChild(brtag);
-	
-	spanDown.removeChild(delSpan);
-	
-	if(document.getElementsByName("ma_modAngebot").length == 0) {
+	//compareControl.style.backgroundColor = "red";
+	var mods = document.getElementsByName("modulangebot[]");
+	var rows = mods.length;
+	var count = 0;
+	for(var i=0; i<rows; i++) {
+		if(mods[i].value != "")
+			count++
+	}
+	if(count == 0) {
 		document.getElementById("ma_submit").disabled = "disabled";
 	}
 	
@@ -399,6 +308,8 @@ function MAcompare_AddButton(id, name, plansemester, frequency) {
 	
 	oldButton.disabled = "true";
 	compareControl.style.backgroundColor = "green";
+	
+	document.getElementById("ma_submit").disabled = false;
 }
 function MAcompare_DelButton(id, name, plansemester, frequency, realDelete) {
 	if(realDelete == "false") {
@@ -428,10 +339,25 @@ function MAcompare_DelButton(id, name, plansemester, frequency, realDelete) {
 		oldButton.style.visibility = "hidden";
 		
 		compareControl.style.backgroundColor = "red";
+		MAcheckModulangebot();
 	} else {
 		if(confirm("Wollen Sie dieses Modul wirklich aus dem Modulangebot loeschen?")) {
 			var newRow = document.getElementById("compareList_Row_"+id);
 			newRow.parentNode.removeChild(newRow);
+			MAcheckModulangebot();
 		}
+	}
+}
+
+function MAcheckModulangebot() {
+	var mods = document.getElementsByName("modulangebot[]");
+	var rows = mods.length;
+	var count = 0;
+	for(var i=0; i<rows; i++) {
+		if(mods[i].value != "")
+			count++
+	}
+	if(count == 0) {
+		document.getElementById("ma_submit").disabled = "disabled";
 	}
 }

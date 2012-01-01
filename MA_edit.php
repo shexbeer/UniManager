@@ -16,6 +16,7 @@ if(!$_GET && !$_POST)
 }
 
 if($_GET["setMA"] && $_POST) {
+var_dump($_POST);
 	$UM->ProcessObject->setMA($_POST["forid"], $_POST["forSemester"], $_POST["modulangebot"], $_POST["lb"], $_POST["ma_status"]);
 }
 if($_GET["editMA"] && $_GET["forid"] && $_GET["sem"]) 

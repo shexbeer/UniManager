@@ -68,6 +68,8 @@
 			
 			$bedarf = $MA->getBedarf($sg_id, $semester);
 			
+			if(!$bedarf) $modullist = array();
+			if(!$modulangebot) $modulangebot = array();
 			$key1 = array_keys($modulangebot);
 			$key2 = array_keys($bedarf);
 			$both = array_merge($key2, $key1);

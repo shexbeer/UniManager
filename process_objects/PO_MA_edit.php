@@ -93,24 +93,23 @@
         	if($modulangebot[$var["modul_id"]]["modul_id"] == "") // Nur wenn Modul noch nicht im Modulangebot
         	{
         		$result[$key] = $var;
-        		if($oddOrEven == "odd") {
-					if(($var["mauf_plansemester"] % 2) == 0) //odd
-					{
-						$result[$key]["plansemester_Mark"] = "true";
-					} else { // even
-						$result[$key]["plansemester_Mark"] = "false";
-					}
-				} else {
-					if(($var["mauf_plansemester"] % 2) == 1) //even
-					{
-						$result[$key]["plansemester_Mark"] = "true";
-					} else { // odd
-						$result[$key]["plansemester_Mark"] = "false";
-					}
-        		}
         	}
-     		
-        }
+			if($oddOrEven == "odd") {
+				if(($var["mauf_plansemester"] % 2) == 0) //odd
+				{
+					$result[$key]["plansemester_Mark"] = "true";
+				} else { // even
+					$result[$key]["plansemester_Mark"] = "false";
+				}
+			} else {
+				if(($var["mauf_plansemester"] % 2) == 1) //even
+				{
+					$result[$key]["plansemester_Mark"] = "true";
+				} else { // odd
+					$result[$key]["plansemester_Mark"] = "false";
+				}
+			}
+		}
         
         $modullist = $result;
 		
@@ -123,8 +122,20 @@
         reset($modulangebot);
 		$firstKey = key($modulangebot);
 		$ma_status = $modulangebot[$firstKey]["ma_status"];
+		
+		if(!$modullist) $modullist = array();
+		if(!$modulangebot) $modulangebot = array();
+		$key1 = array_keys($modulangebot);
+		$key2 = array_keys($modullist);
+		$both = array_merge($key2, $key1);
+		foreach($both as $var) {
+			$compareList[$var]["modulangebot"] = $modulangebot[$var];
+			$compareList[$var]["modullist"] = $modullist[$var];
+			if(!in_array($var, $key2)) 
+				$compareList[$var]["modulangebot"]["onlyInMA"] = "true";
+		}
         
-        $this->UM->VisualObject->showModulaufstellung($sg_id,$sgname,$sgtyp,$lehrbeauf,$lb_ma, $modullist,$modulangebot,$po[$sg_id]["sg_po"],$modulhb[$sg_id]["sg_modulhandbuch"], $semester,$ma_status);
+        $this->UM->VisualObject->showModulaufstellung($sg_id,$sgname,$sgtyp,$lehrbeauf,$lb_ma, $compareList, $modullist,$modulangebot,$po[$sg_id]["sg_po"],$modulhb[$sg_id]["sg_modulhandbuch"], $semester,$ma_status);
       }
       
       /**
@@ -142,14 +153,16 @@
         $events = array();
         foreach($modulliste as $key => $var)
         {
-        	$events[$key]["semester"] = $semester;
-        	
-            $events[$key]["time"] = "07:30:00";
-            $events[$key]["weekday"] = "Montag";
-			$events[$key]["week"] = "jede";
-            $events[$key]["lb"] = $lb;
-            
-            $events[$key]["modul"] = $var;
+	        if($var != "") {
+				$events[$key]["semester"] = $semester;
+				
+				$events[$key]["time"] = "07:30:00";
+				$events[$key]["weekday"] = "Montag";
+				$events[$key]["week"] = "jede";
+				$events[$key]["lb"] = $lb;
+				
+				$events[$key]["modul"] = $var;
+			}
         }
         //Modulaufstellung an Manager senden
         $result=$MA->setModulangebotPerSG($sg_id,$events);
