@@ -1,6 +1,6 @@
 {include file="header.tpl" title=foo}
 
-<form action="MA_compare.php?editMA=yes" method="POST" name="compare_Form">
+<form action="MA_compare.php?setMA=yes" method="POST" name="compare_Form">
 
 <table>
 <tr>
@@ -31,6 +31,34 @@
 		<input type="hidden" name="forid" value="{$sg.id}">
 	</td>
 </tr>
+<tr>
+	<td id="form_caption">
+		Verantwortlicher Lehrbeauftragter
+	</td>
+	<td>
+		{$counter = 1}
+		{foreach from=$lehrbeaufList item=var}
+			<input type="radio" name="lb" onChange="" value="{$var.lehrbeauftr_id}" {if $lb.ma_lb == $var.lehrbeauftr_id}checked="true"{/if}}>{$var.person_vorname} {$var.person_name}
+			{if $counter % 4 == 0}
+				<br>
+			{/if}
+			{$counter = $counter + 1}
+		{/foreach}
+		
+	</td>
+</tr>
+<tr>
+	<td id="form_caption">
+		Status des Modulangebots
+	</td>
+	<td>
+		<select name="ma_status" size="1">
+      		<option {if $sg.ma_status == "erstellt"}selected{/if}>erstellt</option>
+      		<option {if $sg.ma_status == "geprüft"}selected{/if}>gepr&uuml;ft</option>
+      		<option {if $sg.ma_status == "gültig"}selected{/if}>g&uuml;ltig</option>
+    	</select>
+	</td>
+</tr>
 </table>
 
 <table width="730" style="border-collapse: collapse;">
@@ -50,7 +78,7 @@
 		</tr>
 		</table>
 	</td>
-	<td width="30"></td>
+	<td width="30" style="border-right: 1px black dotted; border-collapse: collapse; border-left: 1px black dotted;"></td>
 	<td width="300" style="border-collapse: collapse;">
 		<table class="MAcompare_table" width="100%" style="font-size: 9px; font-weight: bold;">
 		<tr>
@@ -110,7 +138,7 @@
 				<input type="button" onClick="MAcompare_DelButton('{$keyVal}','{$var.bedarf.modul_name}','{$var.bedarf.mauf_plansemester}','{$var.bedarf.modul_frequency}','false')" id="compareRight_bt_{$keyVal}" value="entfernen" style="visibility:hidden;">
 			{/if}
 			</td>
-			<input type="hidden" {if $var.modulangebot.modul_name != ""}value="$keyVal"{/if} name="modulangebot[]" id="compareRight_idField_{$keyVal}">
+			<input type="hidden" name="modulangebot[]" id="compareRight_idField_{$keyVal}" {if $var.modulangebot.modul_name != ""}value="{$keyVal}"{/if}>
 			<!--	<td width="20%"><pre> </pre></td> -->
 			
 		</tr>
@@ -137,15 +165,21 @@
 <b>Legende:</b><br>
 <table>
 <tr>
-	<td width="80"><span style="color:black; font-weight:bold;">PS</span></td>
+	<td width="120" align="center"><span style="color:black; font-weight:bold;">PS</span></td>
 	<td>Plansemester</td>
 </tr>
-<!--
 <tr>
-	<td><span style="color:red; font-weight:bold;">X</span></td>
-	<td>F&uuml;r dieses Semester existiert kein Modulangebot</td>
+	<td align="center"><b>Angebot Modul</b></td>
+	<td>Wann wird dieses Modul generell angeboten</td>
 </tr>
--->
+<tr>
+	<td align="center"><div style="background-color:green; width:30%;" align="center"><pre> </pre></span></td>
+	<td>&Uuml;bereinstimmung von Bedarf und Angebot</td>
+</tr>
+<tr>
+	<td align="center"><div style="background-color:red; width:30%;"><pre> </pre></span</td>
+	<td>KEINE &Uuml;bereinstimmung von Bedarf und Angebot</td>
+</tr>
 </table>
 
 {include file="footer.tpl" title=foo}

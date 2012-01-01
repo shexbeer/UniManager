@@ -430,7 +430,8 @@ function MAcompare_DelButton(id, name, plansemester, frequency, realDelete) {
 		compareControl.style.backgroundColor = "red";
 	} else {
 		if(confirm("Wollen Sie dieses Modul wirklich aus dem Modulangebot loeschen?")) {
-			alert("BUH");
+			var newRow = document.getElementById("compareList_Row_"+id);
+			newRow.parentNode.removeChild(newRow);
 		}
 	}
 }

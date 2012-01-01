@@ -188,10 +188,10 @@ class Modulangebot_Management{
 				return false;
 		}
 		else
-			return false;
-			
+			return false;	
 		if( isset($event['modul']) )
 		{
+			;
 			if( is_numeric($event['modul']) )
 			{
 				$event['modul']=intval($event['modul']);
@@ -213,6 +213,7 @@ class Modulangebot_Management{
 		}
 		else
 			return false;	
+		
 		return true;
 	}
 	/**
@@ -236,12 +237,15 @@ class Modulangebot_Management{
 			{
 				if($sem==NULL)
 					$sem=$event['semester'];
-				if( $sem!=$event['semester'] )
+				if( $sem!=$event['semester'] ) {
+					
 					return false; //Semster sind unterschiedlich aber flag nicht gestezt
+				}
 			}
 		}
 		// ALT: Überprüfen ob einige Events schon vorhanden sind vorhandene ignorieren
 		// NEU: (by shex) Alte Events werden komplett rausgeworfen wenn eine neue gesetzt wird
+		
 		foreach( $offer as $index => $event )
 		{
 			$arr=array();

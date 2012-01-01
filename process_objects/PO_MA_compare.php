@@ -78,16 +78,51 @@
 				if(!in_array($var, $key2)) 
 					$compareList[$var]["modulangebot"]["onlyInMA"] = "true";
 			}
-			
+			$lehrbeauf_unchecked = $PM->getLehrbeauftragte();
+	        $lehrbeauf = $this->UM->checkManagerResults($lehrbeauf_unchecked, "lehrbeauftr_id", "Lehrbeauftragten");
+	        // Lehrbeauftragter für Modulangebot
+			$ma_id = $MA->checkModulangebotForSG($sg_id, $semester);
+			$lb_unchecked = $MA->getLehrbeauftragterForMA($ma_id);
+			$lb_ma = $this->UM->checkManagerResults($lb_unchecked, "ma_count", "Lehrbeauftragten für diese Modulaufstellung");
+	        $lb_ma = $lb_ma[$ma_id];
+
 			$sg["id"] = $sg_id;
 			$sg["name"] = $sgname;
 			$sg["typ"] = $sgtyp;
-			$this->UM->VisualObject->showCompareList($sg, $semester, $modulangebot, $bedarf, $compareList);
+			
+			reset($modulangebot);
+			$firstKey = key($modulangebot);
+			$sg["ma_status"] = utf8_encode($modulangebot[$firstKey]["ma_status"]);
+			//echo $sg["ma_status"];
+			$this->UM->VisualObject->showCompareList($sg, $semester, $compareList, $lehrbeauf, $lb_ma);
       }
-      function changeSGModulA()
+      function changeSGModulA($sg_id,$semester,$modulliste, $lb, $ma_status)
       {
-        $this->UM->VisualObject->showResult($failure, "&Auml;nderung der Modulangebots");    
-      }
+			//Manager initialisieren
+			$MA=new Modulangebot_Management();
+			// Events zusammenstellen
+			$events = array();
+			foreach($modulliste as $key => $var)
+			{
+				if($var != "") {
+					$events[$key]["semester"] = $semester;
+					
+					$events[$key]["time"] = "07:30:00";
+					$events[$key]["weekday"] = "Montag";
+					$events[$key]["week"] = "jede";
+					$events[$key]["lb"] = $lb;
+					
+					$events[$key]["modul"] = $var;
+				}
+			}
+			//Modulaufstellung an Manager senden
+			$result=$MA->setModulangebotPerSG($sg_id,$events);
+			if($result) {
+				$MA->setModulangebotStatus($ma_status, $semester, $sg_id);
+			}
+			//Erfolg oder Misserfolg an VO melden
+			$this->UM->VisualObject->showResult($result, "Modulangebot setzen war nicht erfolgreich");
+		  }
       function checkWholeModulA()
       {
       

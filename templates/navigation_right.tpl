@@ -10,6 +10,6 @@
 <hr noshade size="1">
 <a href='{$rootDir}MA_create.php'>Modulangebot erstellen(shex)</a> <br>
 <a href='{$rootDir}MA_edit.php'>Modulangebot ver&auml;ndern (shex)</a> <br>
-<a href='{$rootDir}MA_compare.php' style="color: red;">Modulangebot vergleichen</a> <br>
+<a href='{$rootDir}MA_compare.php'>Modulangebot vergleichen (shex)</a> <br>
 <hr noshade size="1">
 <a href='{$rootDir}logout.php'>Logout</a><br>
