@@ -8,29 +8,19 @@ function (txt) { this.textContent = txt; });
 }
 
 function Modul_Checkbox(id, sems) {
-	var span = document.getElementById("span_" + id);
-	var chkbox = document.getElementById("chkbox_" + id);
+	var chkbox = document.getElementById("modul_chkbox_" + id);
+	
+	var ps = document.getElementById("modul_ps_" + id);
+	var row = document.getElementById("modul_row_" + id);
+	//alert("hallo");
 	if(chkbox.checked) {
-		var newSelect = document.createElement("select");
-		var select_id = document.createAttribute("id");
-		var select_size = document.createAttribute("size");
-		var select_name = document.createAttribute("name");
-		newSelect.setAttributeNode(select_id);
-		newSelect.setAttributeNode(select_size);
-		newSelect.setAttributeNode(select_name);
-		newSelect.name = "modul_semester[" + id + "]";
-		newSelect.id = "modul_semester[" + id + "]";
-		newSelect.size = 1;
-	   
-		for (var i = 1; i <= sems; i++) {
-			var NeuerEintrag = new Option(i);
-			newSelect.options[newSelect.length] = NeuerEintrag;
-		}
-		
-		span.appendChild(newSelect);
+		ps.style.visibility = "visible";
+		row.style.color = "black";
 	} else {
-		span.removeChild(document.getElementById("modul_semester["+id+"]"));
+		ps.style.visibility = "hidden";
+		row.style.color = "gray";
 	}
+	SGcheckModulaufstellung();
 }
 
 function MAcreate_AddButton(id, name, plansemester) {
@@ -268,8 +258,37 @@ function MAcheckModulangebot() {
 			count++
 	}
 	if(count == 0) {
-		document.getElementById("ma_submit").disabled = "disabled";
+		document.getElementById("ma_submit").disabled = true;
 		return false;
 	}
 	return true;
+}
+
+function SGcheckModulaufstellung () {
+	var mods = document.getElementsByName("modulaufstellung[]");
+	var rows = mods.length;
+	var lastChecked = true;
+	var textbox = document.getElementsByName("sg_name")[0];
+	for(var i=0; i<rows; i++) {
+		if(mods[i].checked == true)
+			lastChecked = false;
+	}
+	
+	if(lastChecked == false && textbox.value!="") {
+		document.getElementById("sg_submit").disabled = false;
+		return true;
+	} else {
+		document.getElementById("sg_submit").disabled = true;
+		return false;
+	}
+}
+function SGcheckName(textbox) {
+	//alert(value);
+	if(textbox.value=="") {
+		document.getElementById("sg_submit").disabled = true;
+		return false;
+	} else {
+		document.getElementById("sg_submit").disabled = false;
+		return true;
+	}
 }

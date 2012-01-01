@@ -27,7 +27,7 @@ Einen ausw&auml;hlen um ihn zu editieren bzw zu l&ouml;schen oder hier einen neu
 	<th id="sg_edit_table_flags">Status</th>
 	<th></th>
 	
-	<th id="sg_edit_table_flags" colspan="3">setze</th>
+	<th id="sg_edit_table_flags" colspan="4">setze</th>
 	<!-- <th></th> -->
 	<th></th>
 </tr>
@@ -39,15 +39,15 @@ Einen ausw&auml;hlen um ihn zu editieren bzw zu l&ouml;schen oder hier einen neu
 	<!-- <td>{$var.sg_id}</td> -->
 	<td align=center>{$var.sg_dekan}</td>
 	<td {if $var.sg_status=="beschlossen"}style="color:blue;"{else if $var.sg_status=="abgestimmt"}style="color:orange;"{else if $var.sg_status=="bestaetigt"}style="color:green;"{/if}>{$var.sg_status}</td>
-	<td><a href="SG_edit.php?showEdit=yes&forid={$var.sg_id}"> &auml;ndern </a></td>
-
-	<td><a id="sg_edit_table_flags_left" style="color:blue;" href="SG_edit.php?setStatus=1&forid={$var.sg_id}"> beschlossen </a></td>
+	<td id="sg_edit_table_flags_left" ><input type="button" value="&auml;ndern" onClick="window.location = '{$rootDir}SG_edit.php?showEdit=yes&forid={$var.sg_id}'"></td>
+	<td id="sg_edit_table_flags_left" ><input type="button" value="Status setzen" onClick="">
+	<td><a style="color:blue;" href="SG_edit.php?setStatus=1&forid={$var.sg_id}"> beschlossen </a></td>
 	<td><a  style="color:orange" href="SG_edit.php?setStatus=2&forid={$var.sg_id}"> abgestimmt </a></td>
-	<td><a id="sg_edit_table_flags_right" style="color:green" href="SG_edit.php?setStatus=3&forid={$var.sg_id}"> best&auml;tigt </a></td>
+	<td id="sg_edit_table_flags_right" ><a style="color:green" href="SG_edit.php?setStatus=3&forid={$var.sg_id}"> best&auml;tigt </a></td>
 
 	<!-- <td><a href="SG_edit.php?editMauf=yes&forid={$var.sg_id}"> Modulaufstellung </a></td> -->
 
-	<td><a style="color:red" onClick="send_formular({$var.sg_id})"> l&ouml;schen</a></td>
+	<td><input type="button" class="deleteButton" value="l&ouml;schen" onClick="send_formular({$var.sg_id})"></td>
 </tr>
 {/foreach}
 </table>
