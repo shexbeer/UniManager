@@ -15,22 +15,15 @@ if(!$_GET && !$_POST)
 	$UM->ProcessObject->initForm();
 }
 
-if($_GET["forid"])
+if($_GET["forid"] && !$_POST)
 {//Moduldetails anzeigen
     $UM->ProcessObject->changemodul($_GET["forid"]);
     die();
 }
 
-if($_GET["forid"]&& $_POST)
-{//Moduldetails editieren
-    $UM->ProcessObject->changemodul($_GET["forid"],$_POST["modul"]);
-}
-
-if($_GET["changemodul"] == "yes" && $_GET["forid"] && $_POST)
+if($_GET["changemodul"] &&  $_GET["forid"] && $_POST)
 {
-    $UM->ProcessObject->changemodul($_GET["forid"],$_POST["modul_name"],$_POST["modul_id"],$_POST["dekan"],$_POST["modul_status"],$_POST["modul_institut"], $_POST["modul_duration"], $_POST["modul_qualifytarget"], $_POST["modul_content"], $_POST["modul_literature"], $_POST["modul_teachform"], $_POST["modul_required"], $_POST["modul_frequency"], $_POST["modul_usability"], $_POST["modul_lp"], $_POST["modul_conditionforln"], $_POST["modul_effort"]);
+    $UM->ProcessObject->changemodul($_GET["forid"],$_POST["modul_name"],$_POST["dekan"],$_POST["modul_status"], $_POST["modul_duration"],$_POST["modul_qualifytarget"], $_POST["modul_content"],$_POST["modul_institut"] , $_POST["modul_literature"], $_POST["modul_teachform"], $_POST["modul_required"], $_POST["modul_frequency"], $_POST["modul_usability"], $_POST["modul_lp"], $_POST["modul_conditionforln"], $_POST["modul_effort"]);
 }
-
-
 
 ?>
