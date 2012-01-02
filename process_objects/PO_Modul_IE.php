@@ -54,7 +54,8 @@
                 }
                 else{
                     $re=$MM->getModuldetails(false,'modul',$modul_id);
-                    $result=$this->UM->checkManagerResults($re,"aenderung_id","Änderungsdetailabfrage");
+                    //$result=$this->UM->checkManagerResults($re,"aenderung_id","Änderungsdetailabfrage");
+                    $result=$re[$modul_id];
                     $lehrende_unchecked = $PM->getLehrende();
                     $lehrende = $this->UM->checkManagerResults($lehrende_unchecked,"lehrende_id","Lehrendeabfrage");
                     $this->UM->VisualObject->showChangeDetails($result,$lehrende);

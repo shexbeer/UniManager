@@ -46,7 +46,12 @@ if($_GET["changemodul"] &&  $_GET["forid"] && $_POST)
      $fixes['lp']=$_POST["modul_lp"];
      $fixes['conditionforln']=$_POST["modul_conditionforln"];
      $fixes['effort']=$_POST["modul_effort"];
-    $UM->ProcessObject->changemodul($_GET["forid"],true,$_POST["modul_status"],$fixes);
+     $UM->ProcessObject->changemodul($_GET["forid"],true,$_POST["modul_status"],$fixes);
+}
+
+if($_GET["changechange"] && $_GET["forid"] && $_POST)
+{
+    
 }
 
 ?>
