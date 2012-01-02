@@ -36,29 +36,32 @@
         * Ruft Details zu einem speziellen Modul ab und ersetzt PersonenIDs durch Namen, danach schickt sie die Daten an das VO 
         * @param int $modul_id ID des Moduls das aufgerufen werden soll
         */
-        function changemodul($modul_id,$modul_status=false,$fixes=false) 
+        function changemodul($modul_id,$typ,$modul_status=false,$fixes=false) 
         {
             $MM = new Modul_Management();
             $PM = new Person_Management();
             if (!$lehrende && !$modul_status && !$modul_duration && !$modul_qualifytarget && !$modul_institute && !$modul_content && !$modul_literature && !$modul_teachform && !$modul_required && !$modul_status && !$modul_frequency && !$modul_usability && !$modul_lp && !$modul_conditionforln && !$modul_effort){
-                // Moduldetails zum speziellen Modul holen
-                $re = $MM->getModuldetails(true,"modul",$modul_id);
-                $result = $this->UM->checkManagerResults($re, "modul_id", "Moduldetails");
-                // Verantwortlichen-ID zu Namen auflösen
-                $res = $PM->getNameForID($result[$modul_id]["modul_person_id"]);
-                //Prüfen
-                //Namen in result einfügen und ID durch Namen ersetzen (siehe oben)
-                $result = $re[$modul_id];
-                $result["verantwortlicher"] = $res["vorname"]." ".$res["name"];
-                // Übergebe ausgabefertige Daten an VO
-                $lehrende_unchecked = $PM->getLehrende();
-                $lehrende = $this->UM->checkManagerResults($lehrende_unchecked,"lehrende_id","Lehrendeabfrage");
-                $this->UM->VisualObject->showModulDetails($result,$lehrende);
-                die();
+                if ($typ){           //Check ob Modul oder Änderung
+                    // Moduldetails zum speziellen Modul holen
+                    $re = $MM->getModuldetails(true,"modul",$modul_id);
+                    $result = $re[$modul_id];
+                    $result["verantwortlicher"] = $res["vorname"]." ".$res["name"];
+                    // Übergebe ausgabefertige Daten an VO
+                    $lehrende_unchecked = $PM->getLehrende();
+                    $lehrende = $this->UM->checkManagerResults($lehrende_unchecked,"lehrende_id","Lehrendeabfrage");
+                    $this->UM->VisualObject->showModulDetails($result,$lehrende);
+                    die();
+                }
+                else{
+                    $re=$MM->getModuldetails(false,'modul',$modul_id);
+                    $result=$this->UM->checkManagerResults($re,"aenderung_id","Änderungsdetailabfrage");
+                    $lehrende_unchecked = $PM->getLehrende();
+                    $lehrende = $this->UM->checkManagerResults($lehrende_unchecked,"lehrende_id","Lehrendeabfrage");
+                    $this->UM->VisualObject->showChangeDetails($result,$lehrende);
+                    die();                    
+                }
             }
             else{
-                $re = $MM->getModuldetails(true,"modul",$modul_id);
-                $res = $this->UM->checkManagerResults($re, "modul_id", "Moduldetails");
                 if ($fixes)
                 {
                     if($modul_status!="Bearbeitung")

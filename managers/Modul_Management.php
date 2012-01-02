@@ -56,7 +56,7 @@ class Modul_Management{
 			$table="aenderungen";
 			$attr[0]="aenderung_id";
 			$attr[1]="aenderung_mid";
-			$attr[2]="aenderung.*";
+			$attr[2]="aenderungen.*";
 		}
 		return $this->getModul($table,$attr,$type,$id,$semtype,$sem);
 	}
