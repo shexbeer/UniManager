@@ -196,7 +196,7 @@ class UniManager
 	function checkUserHasRole($roles) {
 		$hasRole = false;
 		foreach($roles as $var) {
-			if($_SESSION["user_roles"][$key])
+			if($_SESSION["user_roles"][$var])
 				$hasRole = true;
 		}
 		if($hasRole == false) {

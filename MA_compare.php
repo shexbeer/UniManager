@@ -9,7 +9,7 @@ if(!$_SESSION["user_loginname"])
 {
 	$UM->SessionEnd();
 }
-
+var_dump($_SESSION["user_roles"]);
 $UM->checkUserHasRole(array("studiendekan"));
 
 if(!$_GET && !$_POST)
