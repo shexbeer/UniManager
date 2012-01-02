@@ -22,14 +22,16 @@
             	$verantwortlicher_id = $var["modul_person_id"];
             	// Abfrage des Richtigen Namens der Verantwortlichen ID und ŸberprŸfen der ManagerDaten auf Fehler
             	$res = $PM->getNameForID($verantwortlicher_id);
-            	//var_dump($res);
             	// GrundsŠtzlich ersteinmal alles was in $modDetails drinsteht wieder nach $results rein
             	$result[$var["modul_id"]] = $var;
             	// Vorsichtshalber wird das ID Feld ausgetauscht mit dem Richtigen Namen aber auch ein Neues Feld erstellt um bei den VO Machern jegliche Dummheiten auszuschlie§en ;)
             	$result[$var["modul_id"]]["verantwortlicher"] = $res["vorname"]." ".$res["name"];
             }
 			// Ÿbergebe Ausgabefertige Daten an VO
-			
+			$a_list_unchecked=$MM->getModullist(false,'modul');
+            //var_dump($a_list_unchecked);
+            $a_list=$this->UM->checkManagerResults($a_list_unchecked,"aenderung_mid","Änderungsliste");
+            //var_dump($a_list);
             $this->UM->VisualObject->showModulList($result);
         }
         /**
@@ -53,15 +55,6 @@
                 // Übergebe ausgabefertige Daten an VO
                 $lehrende_unchecked = $PM->getLehrende();
                 $lehrende = $this->UM->checkManagerResults($lehrende_unchecked,"lehrende_id","Lehrendeabfrage");
-                //Änderungene abfragen
-                $a_list_unchecked=$MM->getModuldetails(false,'modul',$modul_id);
-                $a_list=$this->UM->checkManagerResults($re,"modul_id","Änderungsdetails");
-                
-                //var_dump($a_list);
-                                
-                
-                
-                
                 $this->UM->VisualObject->showModulDetails($result,$lehrende);
                 die();
             }

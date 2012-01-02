@@ -74,7 +74,7 @@ class Modul_Management{
 	*/
 	private function getModul($table,$attr,$type=false,$id=false,$semtype=false,$sem=false){
 		$str="";
-		for($i=1;$i<count($attr)-1;$i++)$str=$str.$attr[$i].",";
+		for($i=0;$i<count($attr)-1;$i++)$str=$str.$attr[$i].",";
 		$str=$str.$attr[count($attr)-1];
 		if(!$type){
 			$sql = "SELECT ".$str." FROM ".$table;
@@ -87,7 +87,12 @@ class Modul_Management{
 			$id=func_get_arg(3);
 			switch($idtype){ // Typenunterscheidung (erster Parameter)
 				case "modul":
-					$sql = "SELECT ".$str." FROM ".$table." WHERE ".$attr[1]."=".$id;
+                    if($id){
+                        $sql = "SELECT ".$str." FROM ".$table." WHERE ".$attr[1]."=".$id;
+                    }
+                    else{
+                        $sql = "SELECT ".$str." FROM ".$table."";
+                    }
 					$res = mysql_query($sql);# false wenn Entity oder Attribut nicht existiert
 					//2dim array array[modulID][attribut] id ist in den attributen ebenfalls vorhanden 
 					return $this->buildResult($res,$attr[0]);
