@@ -65,12 +65,13 @@
                     
                     if(strcmp($lehrende,$res[$modul_id]['modul_person_id'])!=0)
                     {
-                        $fixes['person_id']=$dekan;
+                        $fixes['person_id']=$lehrende;
+						$count++;
                     }
                     if(strcmp($modul_duration,$res[$modul_id]['modul_duration'])!=0)
                     {
                         $fixes['duration']=$modul_duration;
-                        $count=$count+1; 
+                        $count=$count+1;
                     }
                     if(strcmp($modul_qualifytarget,$res[$modul_id]['modul_qualifytarget'])!=0)
                     {
@@ -127,19 +128,21 @@
                         $fixes['effort']=$modul_effort;
                         $count=$count+1; 
                     }
-                var_dump($count);
-                var_dump($fixes);
-                if (!$fixes)
+                //var_dump($count);
+                //var_dump($fixes);
+                if ($fixes)
                 {
                     if($modul_status!="Bearbeitung")
                     {
                         $result=$MM->setModuldetails($modul_id,$fixes,$modul_status);
+                        //echo $result;
                     }
                     else
                     {
                         $result=$MM->setModuldetails($modul_id,$fixes);
+                        //echo $result;
                     }
-                    $this->UM->VisualObject->showResult($result);
+                    $this->UM->VisualObject->showResult($result,"Teststring");
                 }
                 else
                 {

@@ -176,7 +176,7 @@
 </tr>
 <tr>
 	<td align="center"><div style="color:green; font-weight:bold;">4</span</td>
-	<td>Plansemester stimmt mit aktuellen Semester &uuml;berein f&uuml;r dass das Modulangebot erstellt wird.</td>
+	<td>Plansemester stimmt mit aktuellen Semester &uuml;berein, f&uuml;r dass das Modulangebot erstellt wird.</td>
 </tr>
 <tr>
 	<td align="center"><div style="color:gray; font-weight:bold;">3</span</td>

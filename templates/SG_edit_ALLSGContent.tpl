@@ -1,7 +1,7 @@
 {include file="header.tpl" title=foo}
 
 <form action="SG_edit.php?editSG=yes&forid={$sg.sg_id}" enctype="multipart/form-data" method="POST">
-Details des ausgew&auml;lten Studiengangs
+Details des ausgew&auml;hlten Studiengangs
 <br><br>
 <table>
 <tr>
@@ -10,7 +10,8 @@ Details des ausgew&auml;lten Studiengangs
 	
 	</td>
 	<td width=250 align=left>
-		<input type="text" name="sg_id" value="{$sg.sg_id}" disabled=true>
+		{$sg.sg_id}
+		<input type="hidden" name="sg_id" value="{$sg.sg_id}">
 	</td>
 </tr>
 <tr>
@@ -125,7 +126,8 @@ Details des ausgew&auml;lten Studiengangs
 	
 	</td>
 	<td width=250 align=left>
-		<input type="text" name="sg_name" disabled=true value="{$sg.sg_createdate}">
+		{$sg.sg_createdate}
+		<!-- <input type="text" name="sg_name" value="{$sg.sg_createdate}"> -->
 	</td>
 </tr>
 

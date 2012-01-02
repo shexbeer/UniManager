@@ -32,9 +32,7 @@
 				  if($MA->checkModulangebotForSG($var["sg_id"], $nextSemester) != false) 
 					$result[$var["sg_id"]]["MA_next"] = true;
 				  else
-					$result[$var["sg_id"]]["MA_next"] = false;
-					
-				
+					$result[$var["sg_id"]]["MA_next"] = false;		
 			}
 			
 			$this->UM->VisualObject->showSGList($result);        

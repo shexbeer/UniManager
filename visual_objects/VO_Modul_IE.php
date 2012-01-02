@@ -6,14 +6,14 @@ class VO_Modul_IE
 		// instanzierte UniManager Klasse, klassenweit verfügbar machen
 		$this->UM = $UM;
 	}
-	function showResult($error_occurred, $extra_message)
+	function showResult($result, $extra_message)
 	{
-		$this->UM->tpl->assign("error", $error_occurred);
-                $this->UM->tpl->assign("extra_msg", $extra_message);
-                $this->UM->showfooter();
-                $this->UM->showheader($this->UM->seite);
-                $this->UM->tpl->display("Modul_IE_Result.tpl", session_id());
-	}
+		$this->UM->tpl->assign("result", $result);
+		$this->UM->tpl->assign("extra_msg", $extra_message);
+		$this->UM->showfooter();
+		$this->UM->showheader($this->UM->seite);
+		$this->UM->tpl->display("Modul_IE_Result.tpl", session_id());
+}
 	function showModulList($mDetails)	
 	{
 		// Setze Variablen für Footer und Header

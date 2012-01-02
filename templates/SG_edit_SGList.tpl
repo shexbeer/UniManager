@@ -1,8 +1,9 @@
 {include file="header.tpl" title=foo}
 
 <b>Die Liste zeigt alle existierender Studiengaenge.</b><br><br>
-Einen ausw&auml;hlen um ihn zu editieren bzw zu l&ouml;schen oder hier einen neuen anlegen:<br>
-	<a href="SG_edit.php?createnew=yes">Neuen Studiengang kreieren</a>
+Einen Studiengang ausw&auml;hlen um ihn zu editieren, bzw. um ihn zu l&ouml;schen oder einen neuen anlegen:<br>
+	<input type="button" value="Neuen Studiengang kreieren" onClick="window.location='{$rootDir}SG_edit.php?createnew=yes'">
+	<!--<a href="SG_edit.php?createnew=yes">Neuen Studiengang kreieren</a>-->
 <br><br>
 <script language="JavaScript">
     <!--
