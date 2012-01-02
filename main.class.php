@@ -105,7 +105,8 @@ class UniManager
 		$error_codes = array("0" => "Sie sind nicht/nicht mehr eingeloggt!",
 			"1" => "Unvollstaendige GET/POST Uebergabe",
 			"2" => "Falscher Benutzername oder Passwort",
-			"3" => "Fehler beim Abfragen aus der Datenbank");
+			"3" => "Fehler beim Abfragen aus der Datenbank",
+			"4" => "Sie haben kein Zugriff auf diese Funktion");
 
 		$this->showHeader("Error! Code: " . $code);
 		$this->tpl->assign("showHeaders", $showHeaders);
@@ -139,8 +140,7 @@ class UniManager
 		$this->tpl->assign("user_vorname", $_SESSION["user_vorname"]);
 		$this->tpl->assign("user_nachname", $_SESSION["user_nachname"]);
 		
-		//$admin = $this->checkAccesslvl("admin.php");
-		//$this->tpl->assign("admin", $admin);
+		$this->tpl->assign("user_roles", $_SESSION["user_roles"]);
 		
 		$this->tpl->assign("pdf_poso_dir", PDF_POSO_DIR);
 		$this->tpl->assign("pdf_modulhandbuch_dir", PDF_Modulhandbuch_DIR);
@@ -164,26 +164,46 @@ class UniManager
 
 		return $_id->id;
 	}
-	function checkAccesslvl($site)
+	/*
+	*	Prüft ob eine person id eine bestimmte Rolle innehat
+	*	Rollen: fakultaetsrat, lehrbeauftragter, lehrende, rektorat, studiendekan, student
+	*	return true wenn diese Person die Rolle innehat, false wenn nicht oder wenn Fehler!
+	*/
+	function checkUserRole($pid,$accessType)
 	{
-		$sql = "SELECT * FROM restricted WHERE linkurl = '" . $site . "'";
+		$accessType = strtolower($accessType);	// Sicherheitshalber
+		switch($accessType) {
+			case "fakultaetsrat": $pid_name = "rat_personid"; break;
+			case "lehrbeauftragter": $pid_name = "lehrbeauftr_personenid"; break;
+			case "lehrende": $pid_name = "lehrende_personenid"; break;
+			case "rektorat": 
+				$pid_join = "INNER JOIN `lehrende` ON rektorat_l_id=lehrende_id";
+				$pid_name = "lehrende_personenid";
+				break;
+			case "studiendekan": $pid_name = "studiendekan_persid"; break;
+			case "student": $pid_name = "student_personenid"; break;
+			default: return false; break;
+		}
+		if(!$pid_join) {
+			$sql = "SELECT * FROM `".$accessType."` WHERE ".$pid_name."='".$pid."';";
+		} else {
+			$sql = "SELECT * FROM `".$accessType."` ".$pid_join." WHERE ".$pid_name."='".$pid."';";
+		}
 		$res = mysql_query($sql);
-		if(mysql_affected_rows() == 0)
-		{
-			$lvl = 1;
+		if(mysql_num_rows($res) == 0) return false;
+		else return true;
+	}
+	function checkUserHasRole($roles) {
+		$hasRole = false;
+		foreach($roles as $var) {
+			if($_SESSION["user_roles"][$key])
+				$hasRole = true;
 		}
-		else
-		{
-			$restricted = mysql_fetch_object($res);
-			if($restricted->accesslvl <= $_SESSION["accesslvl"])
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+		if($hasRole == false) {
+			$this->trigger_error(4, "Es fehlen Ihnen die n&ouml;tigen Zugriffsrechte", true, true);
 		}
+		return $hasRole;
+			
 	}
 	/* Prüft Rückgaben von ManagerKlassen auf mögliche Fehlermeldungen und gibt diese, falls vorhanden, aus
 	 * return: Gibt die Resultate zurück, allerdings ohne die Meldung des Managers ob die Abfrage erfolgreich war

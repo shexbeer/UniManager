@@ -45,7 +45,24 @@ else // Wenn dann alles richtig war ...
 	$_SESSION['user_id'] = $row->person_id;
 	$_SESSION['user_vorname'] = $row->person_vorname;
 	$_SESSION['user_nachname'] = $row->person_name;
-	$_SESSION["user_accesslvl"] = $row->person_zugriffsrecht;	
+	$_SESSION["user_accesslvl"] = $row->person_zugriffsrecht;
+	
+	//fakultaetsrat, lehrbeauftragter, lehrende, rektorat, studiendekan, student
+	if($row->person_zugriffsrecht != "100") {
+		$_SESSION["user_roles"]["student"] = $UM->checkUserRole($row->person_id,"student");
+		$_SESSION["user_roles"]["fakultaetsrat"] = $UM->checkUserRole($row->person_id,"fakultaetsrat");
+		$_SESSION["user_roles"]["lehrbeauftragter"] = $UM->checkUserRole($row->person_id,"lehrbeauftragter");
+		$_SESSION["user_roles"]["lehrende"] = $UM->checkUserRole($row->person_id,"lehrende");
+		$_SESSION["user_roles"]["rektorat"] = $UM->checkUserRole($row->person_id,"rektorat");
+		$_SESSION["user_roles"]["studiendekan"] = $UM->checkUserRole($row->person_id,"studiendekan");
+	} else { // Adminrechte, alles sehen und verändern ;)
+		$_SESSION["user_roles"]["student"] = true;
+		$_SESSION["user_roles"]["fakultaetsrat"] = true;
+		$_SESSION["user_roles"]["lehrbeauftragter"] = true;
+		$_SESSION["user_roles"]["lehrende"] = true;
+		$_SESSION["user_roles"]["rektorat"] = true;
+		$_SESSION["user_roles"]["studiendekan"] = true;
+	}
 	
 	// ##
 	// Aktuellen Timestamp in DB eintragen wegen Status ....
