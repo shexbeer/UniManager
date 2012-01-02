@@ -6,7 +6,7 @@ Es ist leider ein Fehler aufgetreten bei Ihrer Aenderung zum Modul.<br>
 Modul wurd <b>nicht</b> geaendert.<br>
 Fehlermeldung des Systems: <span id="systemfehler">{$extra_msg}</span>
 {else}
-Modul wurd erfolgreich geandert!
+&Aumlnderungen wurden erfolgreich als &Aumlnderungseintrag zu diesem Modul gespeichert!
 {/if}
 
 {include file="footer.tpl" title=foo}
