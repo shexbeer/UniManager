@@ -10,6 +10,8 @@ if(!$_SESSION["user_loginname"])
 	$UM->SessionEnd();
 }
 
+$UM->checkUserHasRole(array("lehrende","fakultaetsrat","studiendekan"));
+
 if(!$_GET && !$_POST)
 {
 	$UM->ProcessObject->initForm();

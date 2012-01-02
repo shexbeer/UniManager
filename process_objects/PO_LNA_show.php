@@ -19,12 +19,14 @@
 			$res = $ModM->getModulList(true);
 			$mod = $this->UM->checkManagerResults($res, "modul_id", "Module");
 			
-			foreach($lna as $var) {
-				$id = $var["lna_id"];
-				$data[$id]["lna_id"] = $id;
-				$data[$id]["lna_registrationdate"] = $var["lna_registrationdate"];
-				$data[$id]["lna_mark"] = $var["lna_mark"];
-				$data[$id]["lna_modul_name"] = $mod[$ln[$var["lna_ln_id"]]["ln_modul_id"]]["modul_name"];
+			if($lna) {
+				foreach($lna as $var) {
+					$id = $var["lna_id"];
+					$data[$id]["lna_id"] = $id;
+					$data[$id]["lna_registrationdate"] = $var["lna_registrationdate"];
+					$data[$id]["lna_mark"] = $var["lna_mark"];
+					$data[$id]["lna_modul_name"] = $mod[$ln[$var["lna_ln_id"]]["ln_modul_id"]]["modul_name"];
+				}
 			}
         	$this->UM->VisualObject->showLNA($data);
         }

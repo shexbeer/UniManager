@@ -9,6 +9,7 @@ if(!$_SESSION["user_loginname"])
 {
 	$UM->SessionEnd();
 }
+$UM->checkUserHasRole(array("student"));
 
 $UM->ProcessObject->initForm();
 
