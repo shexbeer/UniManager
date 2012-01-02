@@ -26,7 +26,7 @@ Die Moduldetails zum selektierten Modul werden angezeigt.
                 Verantwortlicher:
             </td>
             <td>
-            {$counter = 0}
+            {$counter = 1}
             {foreach from=$lehrendelist item=var}
                 {if $mod.modul_person_id == $var.lehrende_personenid}
                     <input checked="checked" type="radio" name="lehrende" value="{$var.lehrende_id}"> {$var.person_vorname} {$var.person_name}

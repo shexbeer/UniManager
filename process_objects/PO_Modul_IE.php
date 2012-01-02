@@ -50,7 +50,6 @@
                 //Namen in result einfügen und ID durch Namen ersetzen (siehe oben)
                 $result = $re[$modul_id];
                 $result["verantwortlicher"] = $res["vorname"]." ".$res["name"];
-                $result["modul_person_id"] = $res["vorname"]." ".$res["name"];
                 // Übergebe ausgabefertige Daten an VO
                 //var_dump($result);
                 $lehrende_unchecked = $PM->getLehrende();
