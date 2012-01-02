@@ -2,7 +2,9 @@
 
 <b>Die Liste zeigt alle existierender Studiengaenge.</b><br><br>
 Einen Studiengang ausw&auml;hlen um ihn zu editieren, bzw. um ihn zu l&ouml;schen oder einen neuen anlegen:<br>
-	<input type="button" value="Neuen Studiengang kreieren" onClick="window.location='{$rootDir}SG_edit.php?createnew=yes'">
+	{if !$user_roles.rektorat}
+		<input type="button" value="Neuen Studiengang kreieren" onClick="window.location='{$rootDir}SG_edit.php?createnew=yes'">
+	{/if}
 	<!--<a href="SG_edit.php?createnew=yes">Neuen Studiengang kreieren</a>-->
 <br><br>
 <script language="JavaScript">
@@ -28,7 +30,7 @@ Einen Studiengang ausw&auml;hlen um ihn zu editieren, bzw. um ihn zu l&ouml;sche
 	<th id="sg_edit_table_flags">Status</th>
 	<th></th>
 	
-	<th id="sg_edit_table_flags" colspan="4">setze</th>
+	<th id="sg_edit_table_flags" colspan="3">setze Status</th>
 	<!-- <th></th> -->
 	<th></th>
 </tr>
@@ -41,10 +43,9 @@ Einen Studiengang ausw&auml;hlen um ihn zu editieren, bzw. um ihn zu l&ouml;sche
 	<td align=center>{$var.sg_dekan}</td>
 	<td {if $var.sg_status=="beschlossen"}style="color:blue;"{else if $var.sg_status=="abgestimmt"}style="color:orange;"{else if $var.sg_status=="bestaetigt"}style="color:green;"{/if}>{$var.sg_status}</td>
 	<td id="sg_edit_table_flags_left" ><input type="button" value="&auml;ndern" onClick="window.location = '{$rootDir}SG_edit.php?showEdit=yes&forid={$var.sg_id}'"></td>
-	<td id="sg_edit_table_flags_left" ><input type="button" value="Status setzen" onClick="">
-	<td><a style="color:blue;" href="SG_edit.php?setStatus=1&forid={$var.sg_id}"> beschlossen </a></td>
-	<td><a  style="color:orange" href="SG_edit.php?setStatus=2&forid={$var.sg_id}"> abgestimmt </a></td>
-	<td id="sg_edit_table_flags_right" ><a style="color:green" href="SG_edit.php?setStatus=3&forid={$var.sg_id}"> best&auml;tigt </a></td>
+	<td id="sg_edit_table_flags_left"><input type="button" style="color:blue;" onClick="window.location='{$rootDir}SG_edit.php?setStatus=1&forid={$var.sg_id}'" value="beschlossen"></td>
+	<td><input type="button" style="color:orange;" onClick="window.location='{$rootDir}SG_edit.php?setStatus=2&forid={$var.sg_id}'" value="abgestimmt"></td>
+	<td id="sg_edit_table_flags_right" ><input type="button" style="color:green;" onClick="window.location='{$rootDir}SG_edit.php?setStatus=3&forid={$var.sg_id}'" value="best&auml;tigt"></td>
 
 	<!-- <td><a href="SG_edit.php?editMauf=yes&forid={$var.sg_id}"> Modulaufstellung </a></td> -->
 

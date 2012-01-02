@@ -38,12 +38,10 @@ if($_GET["deleteid"])
 }
 if($_GET["showEdit"] && $_GET["forid"])
 {	// SG Edit Form
-	$UM->checkUserHasRole(array("studiendekan", "fakultaetsrat"));
 	$UM->ProcessObject->showEditSG(false, $_GET["forid"]);
 }
 if($_GET["editSG"] && $_GET["forid"] && $_POST)
 {	// Edit SG
-	$UM->checkUserHasRole(array("studiendekan", "fakultaetsrat"));
 	if($_FILES['poso_file']['tmp_name'] != ""){
 		$path = $UM->cwd["Path"] . PDF_POSO_DIR;
 		$name = "POSO_".$_GET["forid"].".pdf";
