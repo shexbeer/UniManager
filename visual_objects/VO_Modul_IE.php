@@ -19,12 +19,9 @@ class VO_Modul_IE
 		// Setze Variablen für Footer und Header
 		$this->UM->showfooter();
 		$this->UM->showheader($this->UM->seite);
-		
 		// Setze Variable mit Daten in eine Template Variable um
         $this->UM->tpl->assign("a_list", $a_list);
-        var_dump($a_list); 
 		$this->UM->tpl->assign("modDetails", $mDetails);
-		
 		// Zeige das Template für diese Ausgabe an
 		$this->UM->tpl->display("Modul_IE_Modullist.tpl", session_id());
 	}

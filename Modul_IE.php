@@ -17,7 +17,7 @@ if(!$_GET && !$_POST)
 	$UM->ProcessObject->initForm();
 }
 
-if($_GET["forid"] && !$_POST)
+if($_GET["change"]==false && $_GET["forid"] && !$_POST)
 {//Moduldetails anzeigen
     $UM->ProcessObject->changemodul($_GET["forid"]);
     die();
