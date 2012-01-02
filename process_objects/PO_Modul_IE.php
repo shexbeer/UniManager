@@ -55,79 +55,26 @@
                 //var_dump($result);
                 $lehrende_unchecked = $PM->getLehrende();
                 $lehrende = $this->UM->checkManagerResults($lehrende_unchecked,"lehrende_id","Lehrendeabfrage");
-                var_dump($lehrende);
+                //var_dump($lehrende);
                 $this->UM->VisualObject->showModulDetails($result,$lehrende);
                 die();
             }
             else{
                 $re = $MM->getModuldetails(true,"modul",$modul_id);
                 $res = $this->UM->checkManagerResults($re, "modul_id", "Moduldetails");
-                    
-                    if(strcmp($lehrende,$res[$modul_id]['modul_person_id'])!=0)
-                    {
                         $fixes['person_id']=$lehrende;
-						$count++;
-                    }
-                    if(strcmp($modul_duration,$res[$modul_id]['modul_duration'])!=0)
-                    {
                         $fixes['duration']=$modul_duration;
-                        $count=$count+1;
-                    }
-                    if(strcmp($modul_qualifytarget,$res[$modul_id]['modul_qualifytarget'])!=0)
-                    {
                         $fixes['qualifytarget']=$modul_qualifytarget;
-                        $count=$count+1; 
-                    }
-                    if(strcmp($modul_institute,$res[$modul_id]['modul_institute'])!=0)
-                    {
                         $fixes['institut']=$modul_institute;
-                        $count=$count+1; 
-                    }
-                    if(strcmp($modul_content,$res[$modul_id]['modul_content'])!=0)
-                    {
                         $fixes['content']=$modul_content;
-                        $count=$count+1; 
-                    }
-                    if(strcmp($modul_literature,$res[$modul_id]['modul_literature'])!=0)
-                    {
                         $fixes['literature']=$modul_literature;
-                        $count=$count+1; 
-                    }
-                    if(strcmp($modul_teachform,$res[$modul_id]['modul_teachform'])!=0)
-                    {
                         $fixes['teachform']=$modul_teachform;
-                        $count=$count+1; 
-                    }
-                    if(strcmp($modul_required,$res[$modul_id]['modul_required'])!=0)
-                    {
                         $fixes['required']=$modul_required;
-                        $count=$count+1; 
-                    }
-                    if(strcmp($modul_frequency,$res[$modul_id]['modul_frequency'])!=0)
-                    {
                         $fixes['frequency']=$modul_frequency;
-                        $count=$count+1; 
-                    }
-                    if(strcmp($modul_usability,$res[$modul_id]['modul_usability'])!=0)
-                    {
                         $fixes['usability']=$modul_usability;
-                        $count=$count+1; 
-                    }
-                    if(strcmp($modul_lp,$res[$modul_id]['modul_lp'])!=0)
-                    {
                         $fixes['lp']=$modul_lp;
-                        $count=$count+1; 
-                    }
-                    if(strcmp($modul_conditionforln,$res[$modul_id]['modul_conditionforln'])!=0)
-                    {
                         $fixes['conditionforln']=$modul_conditionforln;
-                        $count=$count+1; 
-                    }
-                    if(strcmp($modul_effort,$res[$modul_id]['modul_effort'])!=0)
-                    {
                         $fixes['effort']=$modul_effort;
-                        $count=$count+1; 
-                    }
                 //var_dump($count);
                 //var_dump($fixes);
                 if ($fixes)
