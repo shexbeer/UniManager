@@ -1,6 +1,7 @@
 <?php
 require_once("../main.class.php");
 require('fpdf.php');
+require('html2pdf/html2pdf.class.php');
 
 $UM = new UniManager();
 
@@ -213,10 +214,29 @@ class PDFCreator
 			header("Location: " . $UM->cwd["rootDir"] . $dest . $name . "?time=".time());
 		}
 	}
+	function POSO($id, $display="true")
+	{
+		include("poso/poso_bachelor_template.php");
+		
+		$this->UM->tpl->assign("titelseite", $_titelseite);
+		$this->UM->tpl->assign("c", $_content);
+		$this->UM->tpl->assign("footer", $_footerseite);
+		$this->UM->tpl->assign("ziele", $_ziele);
+		
+		$content = $this->UM->tpl->fetch("POSO_bachelor_template.tpl"); 
+
+		$html2pdf = new HTML2PDF('P','A4','de');
+    	$html2pdf->WriteHTML($content);
+	    $html2pdf->Output('test.pdf');
+		//$this->UM->tpl->display("POSO_bachelor_template.tpl", session_id());
+		die();
+	}
 }
 
 if($_GET["type"]=="POSO") // Erstelle PDF für eine Studien & Prüfungsordnung
 {
+	$pdfc = new PDFCreator($UM);
+	$pdfc->POSO(1,true);
 }
 
 if($_GET["type"]=="Modulhb" && $_GET["forid"]) // Erstelle eine Modulhandbuch PDF
