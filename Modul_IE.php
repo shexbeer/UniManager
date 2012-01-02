@@ -23,6 +23,12 @@ if($_GET["forid"] && !$_POST)
     die();
 }
 
+if($_GET["change"] && $_GET["forid"] && !$_POST)
+{
+    //Änderungsdetails anzeigen
+    
+}
+
 if($_GET["changemodul"] &&  $_GET["forid"] && $_POST)
 {
      $fixes['person_id']=$_POST["lehrende"];

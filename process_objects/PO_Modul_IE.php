@@ -29,10 +29,8 @@
             }
 			// Ÿbergebe Ausgabefertige Daten an VO
 			$a_list_unchecked=$MM->getModullist(false,'modul');
-            //var_dump($a_list_unchecked);
-            $a_list=$this->UM->checkManagerResults($a_list_unchecked,"aenderung_mid","Änderungsliste");
-            //var_dump($a_list);
-            $this->UM->VisualObject->showModulList($result);
+            $a_list=$this->UM->checkManagerResults($a_list_unchecked,"aenderung_id","Änderungsliste");
+            $this->UM->VisualObject->showModulList($result,$a_list);
         }
         /**
         * Ruft Details zu einem speziellen Modul ab und ersetzt PersonenIDs durch Namen, danach schickt sie die Daten an das VO 
