@@ -192,9 +192,17 @@ Die Moduldetails zum selektierten Modul werden angezeigt.
             </td>
             <td>
             {if $status!='Genehmigt'}
-                <input name="modul_frequency" type="text" value="{$mod.modul_frequency}" size="30" maxlength="50">
+                <select name="modul_frequency" size="1">
+                    <option {if $mod.modul_frequency == "im Wintersemester"}selected{/if}>im Wintersemester</option>
+                    <option {if $mod.modul_frequency == "im Sommersemester"} selected{/if}>im Sommersemester</option>
+                    <option {if $mod.modul_frequency == "jedes Semester"} selected{/if}>jedes Semester</option>
+                </select>
             {else}
-                 <input name="modul_frequency" type="text" value="{$mod.modul_frequency}" size="30" maxlength="50" disabled="true">  
+                 <select name="modul_frequency" size="1" disabled="true">
+                    <option {if $mod.modul_frequency == "im Wintersemester"}selected{/if}>im Wintersemester</option>
+                    <option {if $mod.modul_frequency == "im Sommersemester"} selected{/if}>im Sommersemester</option>
+                    <option {if $mod.modul_frequency == "jedes Semester"} selected{/if}>jedes Semester</option>
+                </select>
             {/if}
             </td>
         </tr>

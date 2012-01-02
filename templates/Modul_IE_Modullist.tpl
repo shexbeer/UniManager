@@ -20,5 +20,7 @@ Die Liste aller Module zu denen &Auml;nderungen vorgenommen werden k&ouml;nnen
 </tr>
 {/foreach}
 </table>
+<br><br>
+Bereits genehmigte Module können nur angezeigt werden.
 
 {include file="footer.tpl" title=foo}
