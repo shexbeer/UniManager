@@ -22,21 +22,21 @@
             	$verantwortlicher_id = $var["modul_person_id"];
             	// Abfrage des Richtigen Namens der Verantwortlichen ID und ŸberprŸfen der ManagerDaten auf Fehler
             	$res = $PM->getNameForID($verantwortlicher_id);
-            	//var_dump($res);
             	// GrundsŠtzlich ersteinmal alles was in $modDetails drinsteht wieder nach $results rein
             	$result[$var["modul_id"]] = $var;
             	// Vorsichtshalber wird das ID Feld ausgetauscht mit dem Richtigen Namen aber auch ein Neues Feld erstellt um bei den VO Machern jegliche Dummheiten auszuschlie§en ;)
             	$result[$var["modul_id"]]["verantwortlicher"] = $res["vorname"]." ".$res["name"];
             }
 			// Ÿbergebe Ausgabefertige Daten an VO
-			
-            $this->UM->VisualObject->showModulList($result);
+			$a_list_unchecked=$MM->getModullist(false,'modul');
+            $a_list=$this->UM->checkManagerResults($a_list_unchecked,"aenderung_id","Änderungsliste");
+            $this->UM->VisualObject->showModulList($result,$a_list);
         }
         /**
         * Ruft Details zu einem speziellen Modul ab und ersetzt PersonenIDs durch Namen, danach schickt sie die Daten an das VO 
         * @param int $modul_id ID des Moduls das aufgerufen werden soll
         */
-        function changemodul($modul_id,$lehrende=false,$modul_status=false,$modul_duration=false,$modul_qualifytarget=false,$modul_content=false, $modul_institute=false, $modul_literature=false,$modul_teachform=false,$modul_required=false,$modul_frequency=false,$modul_usability=false,$modul_lp=false,$modul_conditionforln=false,$modul_effort=false) 
+        function changemodul($modul_id,$modul_status=false,$fixes=false) 
         {
             $MM = new Modul_Management();
             $PM = new Person_Management();
@@ -51,44 +51,30 @@
                 $result = $re[$modul_id];
                 $result["verantwortlicher"] = $res["vorname"]." ".$res["name"];
                 // Übergebe ausgabefertige Daten an VO
-                //var_dump($result);
                 $lehrende_unchecked = $PM->getLehrende();
                 $lehrende = $this->UM->checkManagerResults($lehrende_unchecked,"lehrende_id","Lehrendeabfrage");
-                //var_dump($lehrende);
                 $this->UM->VisualObject->showModulDetails($result,$lehrende);
                 die();
             }
             else{
                 $re = $MM->getModuldetails(true,"modul",$modul_id);
                 $res = $this->UM->checkManagerResults($re, "modul_id", "Moduldetails");
-                        $fixes['person_id']=$lehrende;
-                        $fixes['duration']=$modul_duration;
-                        $fixes['qualifytarget']=$modul_qualifytarget;
-                        $fixes['institut']=$modul_institute;
-                        $fixes['content']=$modul_content;
-                        $fixes['literature']=$modul_literature;
-                        $fixes['teachform']=$modul_teachform;
-                        $fixes['required']=$modul_required;
-                        $fixes['frequency']=$modul_frequency;
-                        $fixes['usability']=$modul_usability;
-                        $fixes['lp']=$modul_lp;
-                        $fixes['conditionforln']=$modul_conditionforln;
-                        $fixes['effort']=$modul_effort;
-                //var_dump($count);
-                //var_dump($fixes);
                 if ($fixes)
                 {
                     if($modul_status!="Bearbeitung")
                     {
                         $result=$MM->setModuldetails($modul_id,$fixes,$modul_status);
-                        //echo $result;
                     }
                     else
                     {
                         $result=$MM->setModuldetails($modul_id,$fixes);
-                        //echo $result;
                     }
-                    $this->UM->VisualObject->showResult($result,"Teststring");
+                    if($result){
+                        $this->UM->VisualObject->showResult($result,"Moduldetails erfolgreich als &Aumlnderung abgespeichert.");
+                    }
+                    else{
+                        $this->UM->VisualObject->showResult($result,"Fehler beim Speichern des &Aumlnderungseintrages!"); 
+                    }
                 }
                 else
                 {

@@ -74,7 +74,7 @@ class Modul_Management{
 	*/
 	private function getModul($table,$attr,$type=false,$id=false,$semtype=false,$sem=false){
 		$str="";
-		for($i=1;$i<count($attr)-1;$i++)$str=$str.$attr[$i].",";
+		for($i=0;$i<count($attr)-1;$i++)$str=$str.$attr[$i].",";
 		$str=$str.$attr[count($attr)-1];
 		if(!$type){
 			$sql = "SELECT ".$str." FROM ".$table;
@@ -87,7 +87,12 @@ class Modul_Management{
 			$id=func_get_arg(3);
 			switch($idtype){ // Typenunterscheidung (erster Parameter)
 				case "modul":
-					$sql = "SELECT ".$str." FROM ".$table." WHERE ".$attr[1]."=".$id;
+                    if($id){
+                        $sql = "SELECT ".$str." FROM ".$table." WHERE ".$attr[1]."=".$id;
+                    }
+                    else{
+                        $sql = "SELECT ".$str." FROM ".$table."";
+                    }
 					$res = mysql_query($sql);# false wenn Entity oder Attribut nicht existiert
 					//2dim array array[modulID][attribut] id ist in den attributen ebenfalls vorhanden 
 					return $this->buildResult($res,$attr[0]);
@@ -284,6 +289,7 @@ class Modul_Management{
 		{	
 			$arr[]="`aenderung_".$k."`='".$v."'";
 		}
+        //var_dump($arr);
 		// Überprüfen ob Änderungseintrag zum Modul vorhanden Anlegen eines neuen wenn nicht;
 		$sql = "SELECT `aenderung_id` FROM `aenderungen` WHERE `aenderung_mid` = '".$id."';";
 		//echo $sql;
@@ -292,11 +298,12 @@ class Modul_Management{
 		if($res)
 		{
 			$aeID = mysql_fetch_row($res);
+            //var_dump($aeID);
 			if($aeID) 
 			{
 				$aenderung_id = $aeID[0];
 				$sql = "UPDATE `aenderungen` SET `aenderung_status`='".$status."' WHERE `aenderung_id`='".$aenderung_id."';";
-				echo $sql;
+				//echo $sql;
 				if( !mysql_query($sql) ) return false; //Statusupdate fehlgeschalgen 
 			}
 			else
