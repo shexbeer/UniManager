@@ -9,6 +9,7 @@ if(!$_SESSION["user_loginname"])
 {
 	$UM->SessionEnd();
 }
+$UM->checkUserHasRole(array("lehrende"));
 
 if(!$_GET && !$_POST)
 {

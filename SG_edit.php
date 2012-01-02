@@ -10,6 +10,8 @@ if(!$_SESSION["user_loginname"])
 	$UM->SessionEnd();
 }
 
+$UM->checkUserHasRole(array("studiendekan", "fakultaetsrat", "rektorat"));
+
 if(!$_GET && !$_POST)
 {	// Startformular zeigen
 	$UM->ProcessObject->initForm();
@@ -17,11 +19,12 @@ if(!$_GET && !$_POST)
 
 if($_GET["createnew"] == "yes" && !$_POST)
 {	// Neuen SG kreieren Formular anzeigen
-	// DEGUG: SICHERHEITSÜBERPRÜFUNG auf BERECHTIGUNG NOTWENDIG
+	$UM->checkUserHasRole(array("studiendekan", "fakultaetsrat"));
 	$UM->ProcessObject->getCreateSGForm();
 }
 if($_GET["createnew"] == "yes" && $_POST) 
 {	// Studiengang kreieren
+	$UM->checkUserHasRole(array("studiendekan", "fakultaetsrat"));
 	$UM->ProcessObject->createSG($_POST["sg_name"], $_POST["dekan"], $_POST["sg_typ"]);
 }
 if($_GET["setStatus"] && $_GET["forid"]) 
@@ -30,6 +33,7 @@ if($_GET["setStatus"] && $_GET["forid"])
 }
 if($_GET["deleteid"])
 {	// SG löschen
+	$UM->checkUserHasRole(array("studiendekan", "fakultaetsrat"));
 	$UM->ProcessObject->deleteSG($_GET["deleteid"]);
 }
 if($_GET["showEdit"] && $_GET["forid"])

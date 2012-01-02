@@ -175,7 +175,7 @@ class Person_Management
     */
 	function getLehrbeauftragte()
 	{
-		$sql = "SELECT * FROM `lehrbeauftragter` AS s INNER JOIN person as p ON p.person_id=s.lehrbeauftr_id";
+		$sql = "SELECT * FROM `lehrbeauftragter` AS s INNER JOIN person as p ON p.person_id=s.lehrbeauftr_personenid";
 		$res = mysql_query($sql);
 		return $this->buildResult($res, "lehrbeauftr_id");
 	}
