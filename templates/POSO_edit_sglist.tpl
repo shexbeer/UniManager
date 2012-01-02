@@ -28,3 +28,5 @@ W&auml;hlen sie einen Studiengang aus. zu dem die Studien- und Pr&uuml;fungsordn
 {/foreach}
 
 </table>
+
+{include file="footer.tpl" title=foo}  
