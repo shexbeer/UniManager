@@ -15,21 +15,43 @@ page {
 </style>
 <page>
 
-<div style="text-align:center; font-weight:bold;">{$titelseite.header}</div>
+<div style="text-align:center; font-weight:bold;">Amtliche Bekanntmachungen</div>
 <hr>
-{$titelseite.ausgabe}
+Nr. {$c.issue}, Heft 1 vom {$c.issue_date}
 <br><br><br><br><br><br>
-<div style="text-align:center; font-weight:bold;">{$titelseite.title}</div>
-
+<div style="text-align:center; font-weight:bold; font-size: 25px;">
+	Prüfungs- und Studienordnung 
+<br>für den 
+<br>Bachelorstudiengang
+<br>{$c.sgname}</div>
+<br><br><br><br>
+<table style="position:absolute;bottom:120;">
+<tr>
+	<td>Herausgeber</td>
+	<td>{$titelseite.herausgeber}</td>
+</tr>
+<tr>
+	<td>Redaktion</td>
+	<td>{$titelseite.redaktion}</td>
+</tr>
+<tr>
+	<td>Anschrift</td>
+	<td>{$titelseite.anschrift}</td>
+</tr>
+<tr>
+	<td>Druck</td>
+	<td>{$titelseite.druck}</td>
+</tr>
+</table>
 </page>
 <page>
 <h4 class="center">Prüfungsordnung für den {$c.sgtyp} {$c.sgname} an der <br>
-Technischen Universität Bergakademie Freiberg</h4>
+{$c.uni_long}</h4>
 <div class="center">Vom {$c.podate}</div>
 <p>
 Auf der Grundlage von § 13 Absatz 4 Satz 2 i. V. m. § 35 Absatz 1 Satz 2 und § 34 
 des Gesetzes über die Hochschulen im  Freistaat Sachsen (SächsHSG) vom 10. 
-Dezember 2008 (SächsGVBl. S. 900) hat der Fakultätsrat der Fakultät für Mathematik und Informatik an der Technischen Universität Bergakademie Freiberg im Benehmen mit dem Senat für den Bachelorstudiengang Network Computing folgende 
+Dezember 2008 (SächsGVBl. S. 900) hat der Fakultätsrat der {$c.fak} an der {$c.uni_long} im Benehmen mit dem Senat für den Bachelorstudiengang {$c.sgname} folgende 
 Prüfungsordnung beschlossen:  
 </p>
 <p>
@@ -123,14 +145,14 @@ Ordnung gelten gleichberechtigt für Personen femininen Geschlechts.
 </tr>
 </table>
 <p>
-	Anlage: Prüfungsplan des Diplomstudienganges Angewandte Mathematik
+	Anlage: Prüfungsplan des Bachelorstudiengangs {$c.sgname}
 </p>
 </page>
 
 <page>
 <p class="paragraph">§ 1<br>
 <h3 class="paragraph">Zweck der Bachelorprüfung </h3></p>
-Die Bachelorprüfung bildet den berufsqualifizierenden Abschluss des Bachelorstudienganges Network Computing. Durch die Bachelorprüfung wird festgestellt, ob der 
+Die Bachelorprüfung bildet den berufsqualifizierenden Abschluss des Bachelorstudienganges {$c.sgname}. Durch die Bachelorprüfung wird festgestellt, ob der 
 Prüfling einen Überblick über die Zusammenhänge innerhalb  der eigenen Disziplin 
 und mit benachbarten Disziplinen gewonnen hat; ob er die Fähigkeit besitzt, wissenschaftliche Methoden und Erkenntnisse anzuwenden und ob er darüber hinaus das 
 für den Übergang in die Berufspraxis oder für ein Masterstudium notwendige 
@@ -221,7 +243,7 @@ Prüfungsordnung vorgesehener Leistungsnachweis erbracht, erfolgt die Exmatrikul
 <p class="paragraph">§ 6<br>
 <h3 class="paragraph">Allgemeine Zulassungsvoraussetzungen </h3></p>
 (1) Eine Modulprüfung kann nur ablegen, wer <br><br>
-1. an der TU Bergakademie Freiberg eingeschrieben ist, <br><br>
+1. an der {$c.uni} eingeschrieben ist, <br><br>
 2. die Zulassungsvoraussetzungen für das betreffende Modul erfüllt,<br><br> 
 3. alle erforderlichen Prüfungsvorleistungen für die jeweilige Prüfungsleistung 
 erbracht hat und <br><br>
@@ -229,8 +251,7 @@ erbracht hat und <br><br>
 Die Möglichkeit der Ablegung einer Prüfung im externen Verfahren gemäß den 
 gesetzlichen Regelungen bleibt hiervon unberührt. <br><br>
 (2) Die Ausgabe des Themas der Bachelorarbeit (§ 20 Absatz 3) setzt voraus, dass 
-der Prüfling im Bachelorstudiengang Network Computing  an der TU Bergakademie 
-Freiberg eingeschrieben ist. <br><br>
+der Prüfling im Bachelorstudiengang {$c.sgname}  an der {$c.uni} eingeschrieben ist. <br><br>
 (3) Die Zulassung zu einer Prüfungsleistung beantragt der Prüfling im Studentenbü-
 ro. Antragstermine werden rechtzeitig bekannt gegeben. Das  Studentenbüro prüft 
 das Vorliegen der Zulassungsvoraussetzungen und erstellt die Zulassungslisten. Die 
@@ -531,8 +552,7 @@ erforderlichen Unterlagen vorzulegen. <br><br>
 <p class="paragraph">§ 17<br>
 <h3 class="paragraph">Prüfungsausschuss</h3></p>
 (1) Für die Organisation der Prüfungen und zur Wahrnehmung der durch diese 
-Prüfungsordnung zugewiesenen Aufgaben bestellt der Fakultätsrat der Fakultät für 
-Mathematik und Informatik einen Prüfungsausschuss. Der Prüfungsausschuss 
+Prüfungsordnung zugewiesenen Aufgaben bestellt der Fakultätsrat der {$c.fak} einen Prüfungsausschuss. Der Prüfungsausschuss 
 entscheidet unter Mitwirkung des Studentenbüros über alle  Prüfungsangelegenheiten. Er entscheidet insbesondere über <br><br>
 1.  die Zulassung zur Prüfung (§ 6), <br>
 2.  Prüfungserleichterungen (§ 7 Absatz 2) und Abweichungen vom Studienablaufplan (§ 5 Absatz 6),  <br>
@@ -548,16 +568,16 @@ externen Arbeiten (§ 20 Absatz 2) , <br>
 10.  die Ungültigkeit der Bachelorprüfung (§ 24) und <br>
 11.  Widersprüche (§ 26). <br>
 Der Prüfungsausschuss wird darüber hinaus in die Beratungen der Studienkommission über die Aktualisierung der Ausbildung gemäß der Studienordnung für den 
-Bachelorstudiengang Network Computing einbezogen. <br><br>
+Bachelorstudiengang {$c.sgname} einbezogen. <br><br>
 (2) Der Prüfungsausschuss hat fünf Mitglieder und setzt sich aus drei Hochschullehrern, einem wissenschaftlichen Mitarbeiter sowie einem Studierenden zusammen. 
 Die Amtszeit der Mitglieder  beträgt drei Jahre, die der Studierenden ein Jahr. Die 
 erneute Bestellung ist zulässig. <br><br>
-(3) Der Vorsitzende, dessen Stellvertreter, die weiteren Mitglieder des Prüfungsausschusses sowie deren Stellvertreter werden vom Fakultätsrat der Fakultät für Mathematik und Informatik bestellt.
+(3) Der Vorsitzende, dessen Stellvertreter, die weiteren Mitglieder des Prüfungsausschusses sowie deren Stellvertreter werden vom Fakultätsrat der {$c.fak} bestellt.
 </page>
 
 <page>
 Die Bestellung des Studierenden erfolgt im 
-Benehmen mit dem Fachschaftsrat der Fakultät für Mathematik und Informatik. <br><br>
+Benehmen mit dem Fachschaftsrat der {$c.fak}. <br><br>
 (4) Der Prüfungsausschuss ist beschlussfähig, wenn die Sitzung ordnungsgemäß 
 einberufen worden ist und  wenn die Mehrheit der stimmberechtigten Mitglieder 
 anwesend ist. Ordnungsgemäß einberufen ist die Sitzung,  wenn der Termin allen 
@@ -577,8 +597,7 @@ zur Verschwiegenheit zu verpflichten.  <br><br>
 <p class="paragraph">§ 18<br>
 <h3 class="paragraph">Prüfer und Beisitzer </h3></p>
 (1) Der Prüfungsausschuss bestellt die Prüfer und teilt diese dem Studentenbüro mit. 
-Zu Prüfern sollen nur Mitglieder und Angehörige der Technischen Universität 
-Bergakademie Freiberg oder einer anderen Hochschule bestellt werden, die in dem 
+Zu Prüfern sollen nur Mitglieder und Angehörige der {$c.uni_long} oder einer anderen Hochschule bestellt werden, die in dem 
 betreffenden Prüfungsfach zur selbständigen Lehre berechtigt sind. Soweit dies nach 
 dem Gegenstand der Prüfung sachgerecht ist, kann zum Prüfer auch bestellt 
 werden, wer die Befugnis zur selbständigen Lehre nur für ein Teilgebiet des Prü-
@@ -611,8 +630,7 @@ Fach selbstständig nach wissenschaftlichen Methoden zu bearbeiten und das
 Problem sowie hierzu gegebenenfalls durchgeführte eigene Arbeiten schriftlich und 
 mündlich darzustellen. <br><br>
 (2) Die Bachelorarbeit kann nur von einem Hochschullehrer oder einer anderen, nach 
-Landesrecht prüfungsberechtigten Person betreut werden, soweit diese an der TU 
-Bergakademie Freiberg in einem für den Studiengang relevanten Bereich tätig ist. 
+Landesrecht prüfungsberechtigten Person betreut werden, soweit diese an der {$c.uni} in einem für den Studiengang relevanten Bereich tätig ist. 
 Soll die Bachelorarbeit in  einer Einrichtung außerhalb der Hochschule durchgeführt 
 werden, bedarf es hierzu der Zustimmung des Vorsitzenden des Prüfungsausschusses.  <br><br>
 (3) Das Thema der Bachelorarbeit muss  in einem inhaltlichen Zusammenhang mit 
@@ -620,7 +638,7 @@ dem Studiengang stehen und so begrenzt sein, dass die Bearbeitungszeit eingehalt
 und Zeitpunkt sind aktenkundig zu machen. Der Prüfling kann Themenwünsche 
 äußern und einen Betreuer vorschlagen. Auf Antrag des Prüflings wird vom Vorsitzenden des Prüfungsausschusses die rechtzeitige Ausgabe eines Themas der 
 Bachelorarbeit veranlasst. Das Thema  der Bachelorarbeit kann nur ausgegeben 
-werden, wenn 12 Pflichtmodule und ein Wahlpflichtmodul  des Bachelorstudienganges Network Computing erfolgreich abgeschlossen worden sind. Die Anmeldung zur 
+werden, wenn 12 Pflichtmodule und ein Wahlpflichtmodul  des Bachelorstudienganges {$c.sgname} erfolgreich abgeschlossen worden sind. Die Anmeldung zur 
 Bachelorarbeit soll spätestens einen Monat nach Abschluss der letzten nach dieser 
 Prüfungsordnung erforderlichen Modulprüfung erfolgen. <br><br>
 (4) Das Thema kann nur einmal und innerhalb von vier Wochen nach Ausgabe 
@@ -634,7 +652,7 @@ Grund der Angabe von Abschnitten, Seitenzahlen oder anderen objektiven Kriterien
 die eine eindeutige Abgrenzung ermöglichen, deutlich unterscheidbar und bewertbar 
 ist und die Anforderungen des Absatzes 1 erfüllt. <br><br>
 (6) Die Bachelorarbeit ist spätestens  20 Wochen nach dem aktenkundigen Termin 
-der Ausgabe des Themas in zwei Exemplaren im Studentenbüro der TU Bergakademie Freiberg vorzulegen.
+der Ausgabe des Themas in zwei Exemplaren im Studentenbüro der {$c.uni} vorzulegen.
 </page>
 
 <page>
@@ -682,16 +700,16 @@ Modulen (Zusatzmodule) einer Prüfung unterziehen. Diese Module können fakultat
 </page>
 
 <page>
-aus dem gesamten Modulangebot der TU  Bergakademie Freiberg oder einer 
+aus dem gesamten Modulangebot der {$c.uni} oder einer 
 kooperierenden Hochschule erbracht werden. Sie gehen nicht in die Berechnung des 
 studentischen Arbeitsaufwandes ein. Sie bleiben bei der Berechnung der Gesamtnote der Bachelorprüfung unberücksichtigt, können aber auf Antrag zusätzlich ins 
 Zeugnis aufgenommen werden. Besonders empfohlen wird die fakultative Teilnahme 
 an Modulen zum englischsprachigen Unterricht und im Studium Generale. <br><br>
 <p class="paragraph">§ 22<br>
 <h3 class="paragraph">Akademischer Grad</h3></p>
-Ist die Bachelorprüfung bestanden, verleiht die TU Bergakademie Freiberg den 
+Ist die Bachelorprüfung bestanden, verleiht die {$c.uni} den 
 akademischen Grad  
-„Bachelor of Science“(abgekürzt „B. Sc.“). 
+„{$c.degree}“(abgekürzt „{$c.degree_short}“). 
 <p class="paragraph">§ 23<br>
 <h3 class="paragraph">Zeugnis, Bachelorurkunde und Diploma Supplement</h3></p>
 (1) Nach dem erfolgreichen Abschluss der Bachelorprüfung erhält der Prüfling in der 
@@ -702,14 +720,13 @@ Thema der Bachelorarbeit und deren Note sowie die Gesamtnote aufgenommen.
 Gegebenenfalls können ferner die Studienschwerpunkte sowie – auf Antrag 
 des Prüflings – das Ergebnis der Modulprüfungen in weiteren als den vorgeschriebenen Modulen (Zusatzmodule) in das Zeugnis aufgenommen werden. <br><br>
 (2) Das Bachelorzeugnis trägt das Datum des Tages, an dem die letzte Prüfungsleistung erbracht worden ist und das Datum der Ausfertigung. <br><br>
-(3) Die TU Bergakademie Freiberg stellt ein Diploma Supplement (DS) entsprechend 
+(3) Die {$c.uni} stellt ein Diploma Supplement (DS) entsprechend 
 dem „Diploma Supplement Modell“ von Europäischer Union/ Europarat/ Unesco in 
 englischer Sprache aus. <br><br>
 (4) Zusätzlich zum Zeugnis der Bachelorprüfung erhält der Prüfling die Bachelorurkunde mit den Daten des Zeugnisses gemäß Absatz 2. Darin wird die Verleihung des 
 Bachelorgrades beurkundet. <br><br>
-(5) Die Bachelorurkunde und das Zeugnis werden vom Dekan der Fakultät für 
-Mathematik und Informatik und dem Vorsitzenden des Prüfungsausschusses 
-unterzeichnet und mit dem Siegel der TU Bergakademie Freiberg versehen. Der 
+(5) Die Bachelorurkunde und das Zeugnis werden vom Dekan der {$c.fak} und dem Vorsitzenden des Prüfungsausschusses 
+unterzeichnet und mit dem Siegel der {$c.uni} versehen. Der 
 Bachelorurkunde und auf Antrag des Prüflings auch dem Zeugnis ist jeweils eine 
 englische Übersetzung beizufügen. <br><br>
 <p class="paragraph">§ 24<br>
@@ -750,24 +767,23 @@ Widerspruchsführer zuzustellen. Der Widerspruchsbescheid bestimmt auch, wer die
 Kosten des Verfahrens trägt. <br><br>
 <p class="paragraph">§ 27<br>
 <h3 class="paragraph">Inkrafttreten, Außerkrafttreten und Übergangsbestimmungen </h3></p>
-(1) Diese Ordnung tritt am Tage nach der Veröffentlichung in den Amtlichen Bekanntmachungen der TU Bergakademie Freiberg in Kraft. Sie gilt für Studierende, die 
-ihr Studium ab Wintersemester 2009/2010 aufgenommen haben. <br><br>
-(2) Gleichzeitig tritt die Prüfungsordnung für den Bachelorstudiengang Network 
-Computing an der TU Bergakademie Freiberg vom 26. September 2007 (Amtliche 
-Bekanntmachungen der TU Bergakademie Freiberg Nr. 6 vom 27. September 2007) 
+(1) Diese Ordnung tritt am Tage nach der Veröffentlichung in den Amtlichen Bekanntmachungen der {$c.uni} in Kraft. Sie gilt für Studierende, die 
+ihr Studium ab {$c.begin_sem} aufgenommen haben. <br><br>
+(2) Gleichzeitig tritt die Prüfungsordnung für den Bachelorstudiengang {$c.sgname} an der {$c.uni} vom {$c.old_date} (Amtliche 
+Bekanntmachungen der {$c.uni} Nr. {$c.old_issue} vom {$c.old_issue_date}) 
 vorbehaltlich des Absatzes 3 außer Kraft. <br><br>
-(3) Studierende, die ihr Studium im Bachelorstudiengang Network Computing vor 
+(3) Studierende, die ihr Studium im Bachelorstudiengang {$c.sgname} vor 
 Inkrafttreten dieser Prüfungsordnung aufgenommen haben, können ihr Studium nach 
 der für sie gültigen Prüfungsordnung fortsetzen. Sie müssen die Bachelorprüfung 
-spätestens bis zum 30.09.2012 abgelegt haben. Ein Anspruch auf die Durchführung 
+spätestens bis zum {$c.latestDate} abgelegt haben. Ein Anspruch auf die Durchführung 
 von Wiederholungsprüfungen besteht darüber  hinaus nach Maßgabe der in der für
 </page>
 
 <page>
-sie gültigen Prüfungsordnung des Bachelorstudienganges Network Computing 
+sie gültigen Prüfungsordnung des Bachelorstudienganges {$c.sgname} 
 geregelten Fristen zur Wiederholung von Prüfungen. <br><br> 
-Diese Prüfungsordnung wurde ausgefertigt aufgrund des Beschlusses des Fakultätsrates der Fakultät für Mathematik und Informatik vom 29.07.2009. Die Prüfungsordnung wurde vom Rektorat der TU Bergakademie Freiberg mit Beschluss vom 
-28.09.2009 genehmigt. 
+Diese Prüfungsordnung wurde ausgefertigt aufgrund des Beschlusses des Fakultätsrates der {$c.fak} vom {$c.poBeschluss}. Die Prüfungsordnung wurde vom Rektorat der {$c.uni} mit Beschluss vom 
+{$c.poGenehmigt} genehmigt. 
 <br><br><br><br>
 {$footer.ort}, den {$footer.date} 
 <br><br>
@@ -777,7 +793,7 @@ i. V.   gez.: {$footer.iv_gez} <br>
 
 
 <page orientation="landscape"">
-<div style="font-weight: bold;font-size: 18px;">Anlage: Prüfungsplan des Bachelorstudienganges Network Computing</div><br>
+<div style="font-weight: bold;font-size: 18px;">Anlage: Prüfungsplan des Bachelorstudienganges {$c.sgname}</div><br>
 <table style="border: 1px solid black;" width="100%">
 <tr style="font-weight: bold;">
 	<td>Modul</td>
@@ -805,13 +821,12 @@ i. V.   gez.: {$footer.iv_gez} <br>
 </page>
 
 <page orientation="portrait">
-<h2 class="center">Studienordnung für den Bachelorstudiengang Network Computing an der 
-Technischen Universität Bergakademie Freiberg </h2>
-<p class="paragraph">Vom 30. September 2009</p>
+<h2 class="center">Studienordnung für den Bachelorstudiengang {$c.sgname} an der 
+{$c.uni_long} </h2>
+<p class="paragraph">Vom {$c.sodate}</p>
 <p>Auf der Grundlage von § 13 Abs. 4 Satz 2 i. V. m. § 36 Absatz 1 Satz 1 des Gesetzes über die Hochschulen im Freistaat Sachsen (SächsHSG) vom 10. Dezember 
-2008 (SächsGVBl. S. 900), hat der Fakultätsrat der Fakultät für Mathematik und 
-Informatik an der Technischen Universität Bergakademie Freiberg im Benehmen mit 
-dem Senat für den Bachelorstudiengang Network Computing folgende Studienordnung beschlossen: </p>
+2008 (SächsGVBl. S. 900), hat der Fakultätsrat der {$c.fak} an der {$c.uni_long} im Benehmen mit 
+dem Senat für den Bachelorstudiengang {$c.sgname} folgende Studienordnung beschlossen: </p>
 <p>Anmerkung zum Sprachgebrauch: Maskuline Personenbezeichnungen in dieser 
 Ordnung gelten gleichberechtigt für Personen femininen Geschlechts.  </p>
 
@@ -863,8 +878,8 @@ Ordnung gelten gleichberechtigt für Personen femininen Geschlechts.  </p>
 </table>
 
 <p>
-Anlage 1: Studienablaufplan des Bachelorstudienganges Network Computing <br>
-Anlage 2: Modulbeschreibungen des Bachelorstudienganges Network Computing
+Anlage 1: Studienablaufplan des Bachelorstudienganges {$c.sgname} <br>
+Anlage 2: Modulbeschreibungen des Bachelorstudienganges {$c.sgname}
 </p>
 </page>
 
@@ -873,8 +888,8 @@ Anlage 2: Modulbeschreibungen des Bachelorstudienganges Network Computing
 <p class="paragraph">§ 1<br>
 <h3 class="paragraph">Geltungsbereich</h3></p>
 Die vorliegende Studienordnung regelt auf der Grundlage der Prüfungsordnung des 
-Bachelorstudienganges Network Computing an der TU Bergakademie Freiberg Ziel, 
-Inhalt und Aufbau des Bachelorstudienganges Network Computing. 
+Bachelorstudienganges {$c.sgname} an der {$c.uni} Ziel, 
+Inhalt und Aufbau des Bachelorstudienganges {$c.sgname}. 
 <p class="paragraph">§ 2<br>
 <h3 class="paragraph">Ziele des Studiengangs</h3></p> 
 (1) {$ziele.gegenstand}<br><br>
@@ -888,7 +903,7 @@ anerkanntes Zeugnis nachgewiesen.
 <p class="paragraph">§ 4<br>
 <h3 class="paragraph">Studiendauer, Studienvolumen und Studienbeginn </h3></p>
 (1) Die Regelstudienzeit beträgt sechs Semester.<br><br> 
-(2) Im Bachelorstudiengang Network Computing sind 180 Leistungspunkte zu 
+(2) Im Bachelorstudiengang {$c.sgname} sind {$ziele.lp} Leistungspunkte zu 
 erreichen. <br><br>
 (3) Das Studium beginnt in der Regel im Wintersemester. <br><br>
 </page>
@@ -898,7 +913,7 @@ erreichen. <br><br>
 <h3 class="paragraph">Studienberatung </h3></p>
 (1) Neben der von der Zentralen Studienberatung durchgeführten allgemeinen 
 Studienberatung, wird eine  Studienfachberatung durch  den Studiendekan oder den 
-Bildungsbeauftragten für den Bachelorstudiengang Network Computing angeboten. 
+Bildungsbeauftragten für den Bachelorstudiengang {$c.sgname} angeboten. 
 Sie beinhaltet unter anderem die Beratung über Studienvoraussetzungen, Studienablauf, Prüfungsangelegenheiten,  Hochschulwechsel, Studienaufenthalte im Ausland 
 und Berufseinstiegsmöglichkeiten. <br><br>
 (2) Studierende, die bis zum Beginn des dritten Semesters noch keine Modulprüfung 
@@ -914,7 +929,7 @@ und <br>
 3.  die Vertiefungsphase, welche sich über das fünfte und sechste Semester 
 erstreckt. <br><br>
 (2) Die Anfertigung der Bachelorarbeit erfolgt im sechsten Semester. Näheres zur 
-Bachelorarbeit und dem Kolloquium regelt die Prüfungsordnung für den Bachelorstudiengang Network Computing. <br><br>
+Bachelorarbeit und dem Kolloquium regelt die Prüfungsordnung für den Bachelorstudiengang {$c.sgname}. <br><br>
 (3) Fachlich oder thematisch im Zusammenhang stehende, abgrenzbare Stoffgebiete 
 werden zu in sich abgeschlossenen Modulen zusammengefasst. Diese umfassen 
 fachlich aufeinander abgestimmte Lehrveranstaltungen unterschiedlicher Art (§ 7 
@@ -952,7 +967,7 @@ zwingend benotet. Sie sind im Einzelnen in den Modulbeschreibungen geregelt. <br
 <p class="paragraph">§ 8<br>
 <h3 class="paragraph">Bereitstellung des Lehrangebots  </h3></p>
 (1) Die Hochschule stellt durch ihr  Lehrangebot sicher, dass die Modulprüfungen 
-gemäß der Prüfungsordnung für den Bachelorstudiengang Network Computing in 
+gemäß der Prüfungsordnung für den Bachelorstudiengang {$c.sgname} in 
 den festgesetzten Fristen abgelegt werden können. Der Studienablaufplan (Anlage) 
 ermöglicht einen Studienabschluss innerhalb der Regelstudienzeit. <br><br>
 (2) In der Regel finden Modulprüfungen in dem Semester statt, in dem die Lehrveranstaltungen des Moduls enden. Bei Modulen, die sich über mehrere Semester 
@@ -977,30 +992,29 @@ hierzu ergeben sich aus den Modulbeschreibungen.
 
 <page>
 (5) Die Studierenden können darüber hinaus fakultativ Zusatzmodule absolvieren. 
-Näheres regelt die Prüfungsordnung für den Bachelorstudiengang Network Computing.<br><br> 
+Näheres regelt die Prüfungsordnung für den Bachelorstudiengang {$c.sgname}.<br><br> 
 <p class="paragraph">§ 10<br>
 <h3 class="paragraph">Inkrafttreten, Außerkrafttreten und Übergangsbestimmungen  </h3></p>
-(1) Diese Studienordnung tritt zusammen mit der Prüfungsordnung für den Bachelorstudiengang Network Computing am Tage nach der  Veröffentlichung in den 
-Amtlichen Bekanntmachungen der TU Bergakademie Freiberg in Kraft. Sie gilt für 
-Studierende, die ihr Studium ab Wintersemester 2009/2010 aufgenommen haben. <br><br>
-(2) Gleichzeitig tritt die Studienordnung für den Bachelorstudiengang Network 
-Computing an der TU Bergakademie Freiberg vom 26. September 2007 (Amtliche 
-Bekanntmachungen der TU Bergakademie Freiberg Nr. 6 vom 27. September 2007) 
+(1) Diese Studienordnung tritt zusammen mit der Prüfungsordnung für den Bachelorstudiengang {$c.sgname} am Tage nach der  Veröffentlichung in den 
+Amtlichen Bekanntmachungen der {$c.uni} in Kraft. Sie gilt für 
+Studierende, die ihr Studium ab {$c.begin_sem} aufgenommen haben. <br><br>
+(2) Gleichzeitig tritt die Studienordnung für den Bachelorstudiengang {$c.sgname} an der {$c.uni} vom {$c.old_date} (Amtliche 
+Bekanntmachungen der {$c.uni} Nr. {$c.old_issue} vom {$c.old_issue_date}) 
 vorbehaltlich des Absatzes 3 außer Kraft. <br><br>
-(3) Studierende, die ihr Studium im Bachelorstudiengang Network Computing vor 
+(3) Studierende, die ihr Studium im Bachelorstudiengang {$c.sgname} vor 
 Inkrafttreten dieser  Studienordnung aufgenommen haben, können ihr Studium 
 gemäß der für sie geltenden Studienordnung fortsetzen. Die entsprechenden 
-Lehrveranstaltungen werden bis einschließlich Sommersemester 2012 angeboten. 
-Näheres regelt die Prüfungsordnung für den Bachelorstudiengang Network Computing. 
-Diese Studienordnung wurde ausgefertigt aufgrund des Beschlusses des Fakultätsrates der Fakultät für Mathematik und  Informatik vom 29.07.2009. Die Studienordnung wurde vom Rektorat der TU Bergakademie Freiberg mit Beschluss vom 
-28.09.2009 genehmigt. <br><br><br><br>
+Lehrveranstaltungen werden bis einschließlich {$c.latestSem} angeboten. 
+Näheres regelt die Prüfungsordnung für den Bachelorstudiengang {$c.sgname}. 
+Diese Studienordnung wurde ausgefertigt aufgrund des Beschlusses des Fakultätsrates der {$c.fak} vom {$c.soGenehmigt}. Die Studienordnung wurde vom Rektorat der {$c.uni} mit Beschluss vom 
+{$c.soBeschluss} genehmigt. <br><br><br><br>
 {$footer.ort}, den {$c.sodate} <br><br>
 i. V.   gez.: {$footer.iv_gez}<br>
 {$footer.rektor}
 </page>
 
 <page orientation="landscape"">
-<div style="font-weight: bold;font-size: 18px;">Anlage: Studienablaufplan des Bachelorstudienganges Network Computing</div><br>
+<div style="font-weight: bold;font-size: 18px;">Anlage: Studienablaufplan des Bachelorstudienganges {$c.sgname}</div><br>
 <table style="border: 1px solid black;" width="100%">
 <tr style="font-weight: bold;">
 	<td>Modul</td>
