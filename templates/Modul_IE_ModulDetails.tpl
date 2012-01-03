@@ -1,5 +1,5 @@
 {include file="header.tpl" title=foo}
-Die Moduldetails zum selektierten Modul werden angezeigt.
+Die Details zum selektierten Modul werden angezeigt.
 <br><br>
 {$status=$mod.modul_status}
 
@@ -272,11 +272,13 @@ Die Moduldetails zum selektierten Modul werden angezeigt.
         </form>
     {else}
         <input type="reset" value=" Änderungen verwerfen" disabled="true">
-        <input type="submit" value="Moduleintrag ändern" name="submit" disabled="true">
+        <input type="submit" value="Änderungseintrag erstellen" name="submit" disabled="true">
     {/if}
     </td>
 </tr>
     </table>
+    <br>
+    Bestehende Änderungseinträge werden beim Erstellen überschrieben!!
 </form>
 {include file="footer.tpl" title=foo}
 

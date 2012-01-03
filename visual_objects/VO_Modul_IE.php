@@ -25,7 +25,7 @@ class VO_Modul_IE
 		// Zeige das Template für diese Ausgabe an
 		$this->UM->tpl->display("Modul_IE_Modullist.tpl", session_id());
 	}
-	 function showModulDetails($mDetails,$lehrendelist=false) 
+	 function showModulDetails($mDetails,$lehrendelist) 
 	{
 		$this->UM->showfooter();
 		$this->UM->showheader($this->UM->seite);
@@ -33,5 +33,14 @@ class VO_Modul_IE
         $this->UM->tpl->assign("lehrendelist", $lehrendelist);
 		$this->UM->tpl->display("Modul_IE_ModulDetails.tpl", session_id());
 	}
+    function showChangeDetails($chDetails,$lehrendelist)
+    {
+        $this->UM->showfooter();
+        $this->UM->showheader($this->UM->seite);
+        $this->UM->tpl->assign("change",$chDetails);
+        var_dump($chDetails);
+        $this->UM->tpl->assign("list",$lehrendelist);
+        $this->UM->tpl->display("Modul_IE_ChangeDetails.tpl", session_id());
+    }
 }
 ?>
