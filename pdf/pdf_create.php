@@ -223,6 +223,12 @@ class PDFCreator
 		$this->UM->tpl->assign("footer", $_footerseite);
 		$this->UM->tpl->assign("ziele", $_ziele);
 		
+		$MM = new Modul_Management();
+		$modullist_unchecked=$MM->getModullist(true,"sg",1);
+        $modullist=$this->UM->checkManagerResults($modullist_unchecked,"modul_id","Abrufen der Modulliste");
+		
+		$this->UM->tpl->assign("modullist", $modullist);
+		
 		$content = $this->UM->tpl->fetch("POSO_bachelor_template.tpl"); 
 
 		$html2pdf = new HTML2PDF('P','A4','de');

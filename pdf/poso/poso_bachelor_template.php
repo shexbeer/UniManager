@@ -2,14 +2,13 @@
 //$_content["sgtyp"] = "Bachelorstudiengang";
 $_content["sgname"] = "Network Computing";
 $_content["podate"] = "29. September 2009";
+$_content["sodate"] = "30. September 2009";
 $_content["fakrat"] = "Fakultät für Mathematik und Informatik";
 $_content["issue"] = "26";
 $_content["degree"] = "Bachelor of Science";
 $_content["degree_short"] = "B. Sc.";
 $_content["begin_sem"] = "Wintersemester 2009/2010";
-
-TU Bergakademie Freiberg
-
+$_content["uni"] = "TU Bergakademie Freiberg";
 //old
 $_content["old_date"] = "26. September 2007";
 $_content["old_issue"] = "6"; // Nr. 6
@@ -40,13 +39,12 @@ Kommunikationstechnologien sowie die Analyse, Modellierung, Konstruktion und
 Bewertung von Systemen praxisrelevanter Größenordnung und Komplexität.";
 
 $_ziele["regel"] = "sechs";
-
 $_ziele["lp"] = "180";
 
 
 $_titelseite["header"] = "Amtliche Bekanntmachungen";
 $_titelseite["ausgabe"] = "Nr. 26, Heft 1 vom 1. Oktober 2009";
-$_titelseite["title"] = "Prüfungs- und Studienordnung <br>für den <br>Bachelorstudiengang<br>".$_is["sg_name"];
+$_titelseite["title"] = "Prüfungs- und Studienordnung <br>für den <br>Bachelorstudiengang<br>".$_content["sgname"];
 $_titelseite["herausgeber"]="Der Rektor der TU Bergakademie Freiberg";
 $_titelseite["redaktion"]="Redaktion: Prorektor für Bildung";
 $_titelseite["anschrift"]="TU Bergakademie Freiberg <br>09596 Freiberg";

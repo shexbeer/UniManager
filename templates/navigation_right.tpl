@@ -18,7 +18,7 @@
 	<a href='{$rootDir}Modul_IE.php' style="color: red;">Modulinhalte erstellen (Sebastian)</a> <br>
 {/if}
 {if $user_roles.studiendekan}
-	<a href='{$rootDir}POSO_edit.php' style="color: red;">PO/SO edit(Fei)</a> <br>
+	<a href='{$rootDir}POSO_edit.php' style="color: red;">PO/SO edit(shexbeer)</a> <br>
 {/if}
 
 <hr noshade size="1">

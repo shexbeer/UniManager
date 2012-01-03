@@ -130,7 +130,7 @@ Ordnung gelten gleichberechtigt für Personen femininen Geschlechts.
 <page>
 <p class="paragraph">§ 1<br>
 <h3 class="paragraph">Zweck der Bachelorprüfung </h3></p>
-Die Bachelorprüfung bildet  den berufsqualifizierenden Abschluss des Bachelorstudienganges Network Computing. Durch die Bachelorprüfung wird festgestellt, ob der 
+Die Bachelorprüfung bildet den berufsqualifizierenden Abschluss des Bachelorstudienganges Network Computing. Durch die Bachelorprüfung wird festgestellt, ob der 
 Prüfling einen Überblick über die Zusammenhänge innerhalb  der eigenen Disziplin 
 und mit benachbarten Disziplinen gewonnen hat; ob er die Fähigkeit besitzt, wissenschaftliche Methoden und Erkenntnisse anzuwenden und ob er darüber hinaus das 
 für den Übergang in die Berufspraxis oder für ein Masterstudium notwendige 
@@ -775,11 +775,36 @@ i. V.   gez.: {$footer.iv_gez} <br>
 {$footer.rektor}
 </page>
 
-<page orientation="paysage">
-<div style="font-weight: bold;font-size: 18px;">Anlage: Prüfungsplan des Bachelorstudienganges Network Computing</div>
+
+<page orientation="landscape"">
+<div style="font-weight: bold;font-size: 18px;">Anlage: Prüfungsplan des Bachelorstudienganges Network Computing</div><br>
+<table style="border: 1px solid black;" width="100%">
+<tr style="font-weight: bold;">
+	<td>Modul</td>
+	<td>1.Sem</td>
+	<td>2.Sem</td>
+	<td>3.Sem</td>
+	<td>4.Sem</td>
+	<td>5.Sem</td>
+	<td>6.Sem</td>
+	<td>LP</td>
+</tr>
+{foreach from=$modullist item=var}
+<tr>
+	<td>{$var.modul_name}</td>
+	<td>{if $var.mauf_plansemester==1}X{/if}</td>
+	<td>{if $var.mauf_plansemester==2}X{/if}</td>
+	<td>{if $var.mauf_plansemester==3}X{/if}</td>
+	<td>{if $var.mauf_plansemester==4}X{/if}</td>
+	<td>{if $var.mauf_plansemester==5}X{/if}</td>
+	<td>{if $var.mauf_plansemester==6}X{/if}</td>
+	<td>{$var.modul_lp}</td>
+</tr>
+{/foreach}
+</table>
 </page>
 
-<page>
+<page orientation="portrait">
 <h2 class="center">Studienordnung für den Bachelorstudiengang Network Computing an der 
 Technischen Universität Bergakademie Freiberg </h2>
 <p class="paragraph">Vom 30. September 2009</p>
@@ -789,9 +814,10 @@ Informatik an der Technischen Universität Bergakademie Freiberg im Benehmen mit
 dem Senat für den Bachelorstudiengang Network Computing folgende Studienordnung beschlossen: </p>
 <p>Anmerkung zum Sprachgebrauch: Maskuline Personenbezeichnungen in dieser 
 Ordnung gelten gleichberechtigt für Personen femininen Geschlechts.  </p>
-<table width="100%">
+
+<table width="90%">
 <tr>
-	<td><b>Inhaltsübersicht:  <b></td>
+	<td><b>Inhaltsübersicht:  </b></td>
 	<td>§§</td>
 </tr>
 <tr>
@@ -834,11 +860,14 @@ Ordnung gelten gleichberechtigt für Personen femininen Geschlechts.  </p>
  	<td>Inkrafttreten, Außerkrafttreten und Übergangsbestimmungen</td>
  	<td>10</td>
  </tr>
+</table>
+
 <p>
 Anlage 1: Studienablaufplan des Bachelorstudienganges Network Computing <br>
 Anlage 2: Modulbeschreibungen des Bachelorstudienganges Network Computing
 </p>
 </page>
+
 
 <page>
 <p class="paragraph">§ 1<br>
@@ -848,26 +877,9 @@ Bachelorstudienganges Network Computing an der TU Bergakademie Freiberg Ziel,
 Inhalt und Aufbau des Bachelorstudienganges Network Computing. 
 <p class="paragraph">§ 2<br>
 <h3 class="paragraph">Ziele des Studiengangs</h3></p> 
-(1) Gegenstand des Network Computing sind  Analyse, Modellbildung, Konstruktion 
-und Bewertung von komplexen und vernetzten Systemen mit Hilfe der Methoden der 
-Mathematik und Informatik. Speziell werden im Bachelorstudiengang Network 
-Computing Systeme der Informations- und Kommunikationstechnologien einschließ-
-lich der Integration in technische und  sozio-technische Umgebungen betrachtet. 
-Hierzu wird zusätzlich in eines der Anwendungsgebiete Betriebswirtschaft oder 
-Geowissenschaften oder Technik eingeführt.<br><br>
-(2) Der Studiengang ist als mathematisch orientierter Studiengang in Kombination 
-mit einer vertieften Ausbildung in Praktischer Informatik konzipiert und dient der 
-wissenschaftlichen, theoretischen und praktischen Ausbildung auf dem Gebiet des 
-Network Computing. Durch Konzentration auf die für das Network Computing 
-relevanten Teilgebiete der Mathematik,  der Informatik und des jeweils gewählten 
-Anwendungsfachs (Betriebswirtschaft, Technik oder Geowissenschaften/Geotechnik) 
-wird ein rascher berufsqualifizierender Abschluss erreicht. <br><br>
-(3) Ausgehend von einem Fundament in Mathematik und Informatik erwirbt der 
-Studierende Kenntnisse und Fähigkeiten zum Lösen berufstypischer Probleme mit 
-mathematischen, Informatik-typischen  und ingenieurmäßigen Methoden. Zu seinen 
-Kernkompetenzen gehören insbesondere mathematische Verfahren und Algorithmen, Entwicklung von Softwaresystemen, Beherrschung von Informations- und 
-Kommunikationstechnologien sowie die Analyse, Modellierung, Konstruktion und 
-Bewertung von Systemen praxisrelevanter Größenordnung und Komplexität.<br><br>  
+(1) {$ziele.gegenstand}<br><br>
+(2) {$ziele.gegenstand2}<br><br>
+(3) {$ziele.gegenstand3}<br><br>  
 <p class="paragraph">§ 3<br>
 <h3 class="paragraph">Zugangsvoraussetzungen</h3></p>
 Die Qualifikation für das Studium wird grundsätzlich durch ein Zeugnis der allgemeinen Hochschulreife, einer einschlägigen  fachgebundenen Hochschulreife oder ein 
@@ -982,7 +994,35 @@ Lehrveranstaltungen werden bis einschließlich Sommersemester 2012 angeboten.
 Näheres regelt die Prüfungsordnung für den Bachelorstudiengang Network Computing. 
 Diese Studienordnung wurde ausgefertigt aufgrund des Beschlusses des Fakultätsrates der Fakultät für Mathematik und  Informatik vom 29.07.2009. Die Studienordnung wurde vom Rektorat der TU Bergakademie Freiberg mit Beschluss vom 
 28.09.2009 genehmigt. <br><br><br><br>
-{$footerseite.ort}, den {$c.sodate} <br><br>
-i. V.   gez.: {$footerseite.iv_gez}<br>
-{$footerseite.rektor}
+{$footer.ort}, den {$c.sodate} <br><br>
+i. V.   gez.: {$footer.iv_gez}<br>
+{$footer.rektor}
+</page>
+
+<page orientation="landscape"">
+<div style="font-weight: bold;font-size: 18px;">Anlage: Studienablaufplan des Bachelorstudienganges Network Computing</div><br>
+<table style="border: 1px solid black;" width="100%">
+<tr style="font-weight: bold;">
+	<td>Modul</td>
+	<td>1.Sem</td>
+	<td>2.Sem</td>
+	<td>3.Sem</td>
+	<td>4.Sem</td>
+	<td>5.Sem</td>
+	<td>6.Sem</td>
+	<td>LP</td>
+</tr>
+{foreach from=$modullist item=var}
+<tr>
+	<td>{$var.modul_name}</td>
+	<td>{if $var.mauf_plansemester==1}X{/if}</td>
+	<td>{if $var.mauf_plansemester==2}X{/if}</td>
+	<td>{if $var.mauf_plansemester==3}X{/if}</td>
+	<td>{if $var.mauf_plansemester==4}X{/if}</td>
+	<td>{if $var.mauf_plansemester==5}X{/if}</td>
+	<td>{if $var.mauf_plansemester==6}X{/if}</td>
+	<td>{$var.modul_lp}</td>
+</tr>
+{/foreach}
+</table>
 </page>

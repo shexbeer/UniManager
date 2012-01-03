@@ -22,6 +22,7 @@ class Modul_Management{
 			$attr[3]="modul_frequency";
 			$attr[4]="modul_person_id";
 			$attr[5]="modul_usability";
+			$attr[6]="modul_lp";
 			}
 		else{
 			$table="aenderungen";
