@@ -79,7 +79,7 @@
       * @param int $sg_id ID des Studienganges für den die Modulliste gesetzt werden soll
       * @param mixed $modullist Array mit den Feldern count,modul_id, plansemester
       */
-      function ($sg_id,$modullist)
+      function setModullisteForSG($sg_id,$modullist)
       {
           //Manager initialisieren
           $SG=new SG_Management();
