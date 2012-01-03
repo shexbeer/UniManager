@@ -128,5 +128,27 @@
           //Erfolg oder Misserfolg an VO melden
           $this->UM->VisualObject->showResult($result);
       }
+      function editTemplate($type) 
+      {
+      	$temp_exists = $this->UM->checkPOSOTemplates($type);
+      	if(!$temp_exists) $this->UM->trigger_error(5,"",true, true);
+      	
+      	$path = $this->UM->getPOSOTemplatePath($type);
+      	
+      	
+      	
+      	$content = utf8_decode(file_get_contents($path));
+      	$this->UM->VisualObject->showEditTemplate($type, $content);
+      }
+      function setTemplate($type, $content)
+      {
+      	//var_dump($content);
+      	$temp_exists = $this->UM->checkPOSOTemplates($type);
+      	if(!$temp_exists) $this->UM->trigger_error(5,"",true, true);
+      	
+      	$path = $this->UM->getPOSOTemplatePath($type);
+      	file_put_contents($path,utf8_encode($content));
+      	$this->UM->VisualObject->showTemplateResult(true, "");
+      }
   }
 ?>

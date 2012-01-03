@@ -36,12 +36,12 @@ W&auml;hlen sie einen Studiengang aus. zu dem die Studien- und Pr&uuml;fungsordn
 </table>
 <br>
 {if ($posot.0 == true)}
-	<input type="button" value="Bachelor PO/SO Template bearbeiten">
+	<input type="button" value="Bachelor PO/SO Template bearbeiten" onClick="window.location='{$rootDir}POSO_edit.php?editTemplate=yes&type=Bachelor'">
 {/if}
 {if ($posot.1 == true)}
-	<input type="button" value="Master PO/SO Template bearbeiten">
+	<input type="button" value="Master PO/SO Template bearbeiten" onClick="">
 {/if}
 {if ($posot.2 == true)}
-	<input type="button" value="Diplom PO/SO Template bearbeiten">
+	<input type="button" value="Diplom PO/SO Template bearbeiten" onClick="">
 {/if}
 {include file="footer.tpl" title=foo}  

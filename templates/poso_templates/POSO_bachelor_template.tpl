@@ -355,8 +355,8 @@ Die Leistungen müssen individuell zurechenbar sein.<br><br>
 (2) § 9 Absatz 3 gilt entsprechend mit der Maßgabe, dass einer der Prüfer diejenige 
 Person ist, die für die der alternativen Prüfungsleistung zugrunde liegende Lehrveranstaltung verantwortlich ist. <br><br>
 (3) Bei der Abgabe einer Prüfungsleistung im Sinne des Absatzes 1 hat der Prüfling 
-schriftlich zu versichern, dass er seine Arbeit – bei einer Gruppenarbeit seinen 
-entsprechend gekennzeichneten Anteil der Arbeit – selbstständig verfasst und keine 
+schriftlich zu versichern, dass er seine Arbeit ? bei einer Gruppenarbeit seinen 
+entsprechend gekennzeichneten Anteil der Arbeit ? selbstständig verfasst und keine 
 anderen als die angegebenen Quellen und Hilfsmittel benutzt hat. <br><br>
 (4) Art, Dauer und Umfang einer Alternativen Prüfungsleistung werden in der 
 Modulbeschreibung festgelegt.<br><br>
@@ -400,7 +400,7 @@ Berechnung statt mit 12 Leistungspunkten mit 32 Leistungspunkten gewichtet.
 Absatz 4 Sätze 2 und 4 gelten entsprechend.  <br><br>
 (6) Neben der Note auf der Grundlage der deutschen Notenskala von 1 - 5 ist bei der 
 Gesamtnote zusätzlich auch ein ECTS-Rang entsprechend der nachfolgenden EUeinheitlichen ECTS-Bewertungsskala auszuweisen: <br>
-ECTS –Rang der erfolgreichen Teilnehmer <br><br>
+ECTS ?Rang der erfolgreichen Teilnehmer <br><br>
 A  die besten  10 % <br>
 B  die nächsten  25 % <br>
 C  die nächsten  30 % <br>
@@ -424,7 +424,7 @@ E  3,6 bis einschließlich 4,0 (sufficient) <br>
 F  ab 4,1 (fail) <br><br>
 <p class="paragraph">§ 12<br>
 <h3 class="paragraph">Rücknahme des Antrags, Versäumnis, Rücktritt, Täuschung, Ordnungsverstoß</h3></p>
-(1) Eine Prüfungsleistung gilt als mit „nicht ausreichend“ (5,0) bewertet, wenn der 
+(1) Eine Prüfungsleistung gilt als mit ?nicht ausreichend? (5,0) bewertet, wenn der 
 Prüfling einen für ihn bindenden Prüfungstermin ohne triftigen Grund versäumt oder 
 wenn er von einer Prüfung, die er angetreten hat, ohne triftigen Grund zurücktritt. 
 Dasselbe gilt, wenn eine schriftliche Prüfungsleistung nicht innerhalb der vorgegebenen Bearbeitungszeit erbracht wird. <br><br>
@@ -443,10 +443,10 @@ Einhaltung von Bearbeitungszeiten für Prüfungsarbeiten betroffen sind, steht d
 Krankheit des Prüflings die Krankheit eines von ihm überwiegend allein zu versorgenden Kindes gleich. Wird der Grund anerkannt, so wird ein neuer Termin anberaumt. Die bereits vorliegenden Prüfungsergebnisse sind in diesem Fall anzurechnen. <br><br>
 (5) Versucht der Prüfling, das Ergebnis seiner Prüfungsleistungen durch Täuschung 
 oder Benutzung nicht zugelassener Hilfsmittel zu beeinflussen, wird die betreffende 
-Prüfungsleistung mit „nicht ausreichend“  (5,0) bewertet. Ein Prüfling, der den 
+Prüfungsleistung mit ?nicht ausreichend?  (5,0) bewertet. Ein Prüfling, der den 
 ordnungsgemäßen Ablauf der Prüfung stört,  kann von dem jeweiligen Prüfer oder 
 Aufsichtsführenden von der Fortsetzung der Prüfungsleistung ausgeschlossen 
-werden; in diesem Fall wird die Prüfungsleistung mit „nicht ausreichend“ (5,0) 
+werden; in diesem Fall wird die Prüfungsleistung mit ?nicht ausreichend? (5,0) 
 bewertet. In schwerwiegenden Fällen wird der Prüfungsausschuss den Prüfling von 
 der Erbringung weiterer Prüfungen ausschließen. <br><br>
 (6) Entscheidungen nach Absatz 5 sind dem Prüfling unverzüglich schriftlich mit 
@@ -456,20 +456,20 @@ Begründung bekannt zu geben und mit einer Rechtsbehelfsbelehrung zu versehen.
 <page>
 <p class="paragraph">§ 13<br>
 <h3 class="paragraph">Bestehen und Nichtbestehen</h3></p>
-(1) Eine Modulprüfung ist bestanden, wenn die Modulnote mindestens „ausreichend“ 
+(1) Eine Modulprüfung ist bestanden, wenn die Modulnote mindestens ?ausreichend? 
 (4,0) ist. Wird eine erstmalig nicht  bestandene Modulprüfung nicht innerhalb eines 
 Jahres nach Abschluss des ersten Prüfungsversuches der letzten Prüfungsleistung 
 wiederholt, gilt sie als endgültig nicht bestanden. <br><br> 
 (2) Besteht eine Modulprüfung aus mehreren Prüfungsleistungen, kann das Bestehen einer Modulprüfung davon abhängig gemacht werden, dass bestimmte Prü-
-fungsleistungen mindestens mit „ausreichend“ (4,0) bewertet sein müssen. Dies 
+fungsleistungen mindestens mit ?ausreichend? (4,0) bewertet sein müssen. Dies 
 ergibt sich aus dem Prüfungsplan (Anlage). <br><br> 
 (3) Die Bachelorprüfung ist bestanden, wenn die jeweiligen Modulprüfungen bestanden sind und die Bachelorarbeit sowie das Kolloquium (§ 20 Absatz 10) mindestens 
-mit der Note „ausreichend“ (4,0) bewertet worden sind. Eine Modulprüfung, die nicht 
+mit der Note ?ausreichend? (4,0) bewertet worden sind. Eine Modulprüfung, die nicht 
 innerhalb von vier Semestern nach Abschluss der Regelstudienzeit abgelegt worden 
 ist, gilt als nicht bestanden. Wird sie nicht innerhalb von 6 Semestern nach Abschluss der Regelstudienzeit absolviert, gilt sie als endgültig nicht bestanden. 
 Gleiches gilt für die Bachelorarbeit und das Kolloquium. <br><br>
 (4) Sind eine Modulprüfung, die Bachelorarbeit oder das Kolloquium schlechter als 
-„ausreichend“ bewertet worden, erhält der Prüfling Auskunft darüber, ob und 
+?ausreichend? bewertet worden, erhält der Prüfling Auskunft darüber, ob und 
 gegebenenfalls in welchem Umfang und innerhalb welcher  Frist die Modulprüfung, 
 die Bachelorarbeit oder das Kolloquium wiederholt werden können. <br><br>
 (5) Hat der Prüfling die Bachelorprüfung  nicht bestanden, wird ihm auf Antrag eine 
@@ -487,9 +487,9 @@ der Freiversuch für jede einzelne Prüfungsleistung möglich. Dabei muss die ei
 Prüfungsleistung spätestens  in dem Prüfungszeitraum  des letzten Fachsemesters 
 vor der gemäß § 5 Absatz 2 empfohlenen  Prüfungsfrist absolviert werden. Besteht 
 eine Modulprüfung aus mehreren Prüfungsleistungen, werden Prüfungsleistungen, 
-die mindestens mit „ausreichend“ (4,0) oder besser bewertet wurden, auf Antrag des 
+die mindestens mit ?ausreichend? (4,0) oder besser bewertet wurden, auf Antrag des 
 Prüflings in einem neuen Prüfungsverfahren angerechnet. <br><br>
-(2) Auf Antrag des Prüflings können in den Fällen des Absatzes 1 Prüfungsleistungen von im Freiversuch bestandenen Modulprüfungen, die mindestens mit „ausreichend“ (4,0) bewertet wurden, zur Verbesserung der Note im nächsten regulären 
+(2) Auf Antrag des Prüflings können in den Fällen des Absatzes 1 Prüfungsleistungen von im Freiversuch bestandenen Modulprüfungen, die mindestens mit ?ausreichend? (4,0) bewertet wurden, zur Verbesserung der Note im nächsten regulären 
 Prüfungstermin einmal wiederholt werden. In diesen Fällen zählt die bessere Note.
 </page>
 
@@ -499,7 +499,7 @@ Prüfungstermin einmal wiederholt werden. In diesen Fällen zählt die bessere N
 (1) Nicht bestandene Modulprüfungen können  nur innerhalb eines Jahres nach 
 Abschluss des ersten Prüfungsversuches  der letzten Prüfungsleistung einmal 
 wiederholt werden, wobei nur diejenigen  Prüfungsleistungen wiederholbar sind, die 
-mit schlechter als „ausreichend“ (4,0) bewertet worden sind. <br><br>
+mit schlechter als ?ausreichend? (4,0) bewertet worden sind. <br><br>
 (2) Eine zweite Wiederholungsprüfung kann nur zum nächstmöglichen Prüfungstermin abgelegt werden. Der Antrag ist beim Studentenbüro zu stellen. <br><br>
 (3) Die Wiederholung einer bestandenen Modulprüfung ist, abgesehen von dem in  
 § 14 Absatz 2 geregelten Fall, nicht zulässig.  <br><br>
@@ -536,7 +536,7 @@ Gesamtnote einzubeziehen. Bei unvergleichbaren Notensystemen wird der Vermerk
 </page>
 
 <page>
-„bestanden“ aufgenommen. Eine Kennzeichnung der Anrechnung im Zeugnis ist 
+?bestanden? aufgenommen. Eine Kennzeichnung der Anrechnung im Zeugnis ist 
 zulässig. Die entsprechende Anzahl von Leistungspunkten nach dieser Ordnung wird 
 vergeben. <br><br>
 (7) Studienzeiten, Studienleistungen und Prüfungsleistungen sind im Umfang von bis 
@@ -658,8 +658,8 @@ der Ausgabe des Themas in zwei Exemplaren im Studentenbüro der {$c.uni} vorzule
 <page>
 Im Einzelfall kann auf begründeten Antrag die Bearbeitungszeit um höchstens 10 Wochen verlängert werden. Der Abgabezeitpunkt ist 
 aktenkundig zu machen. Bei der Abgabe hat der Prüfling schriftlich an Eides statt zu 
-versichern, dass er seine Arbeit –  bei einer Gruppenarbeit seinen entsprechend 
-gekennzeichneten Anteil der Arbeit – selbstständig verfasst und keine anderen als 
+versichern, dass er seine Arbeit ?  bei einer Gruppenarbeit seinen entsprechend 
+gekennzeichneten Anteil der Arbeit ? selbstständig verfasst und keine anderen als 
 die angegebenen Quellen und Hilfsmittel benutzt hat. <br><br>
 (7) Die Bachelorarbeit ist in der Regel von mindestens zwei Prüfern selbstständig in 
 Form von schriftlichen Gutachten zu bewerten und zu benoten. Darunter soll 
@@ -667,18 +667,18 @@ derjenige sein, der das Thema ausgegeben hat (Betreuer). Das Bewertungsverfahren
 (8) Bei Verfahren auf Grundlage von Vereinbarungen über gemeinsame Hochschulabschlüsse mit ausländischen Hochschulen wird ein Prüfer von der ausländischen 
 Hochschule bestimmt. <br><br>
 (9) Die Bachelorarbeit ist bestanden, wenn beide Prüfer mindestens die Note 
-„ausreichend“ (4,0) erteilen. § 11 Absätze 2 und 3 gelten entsprechend. Bei unterschiedlicher Beurteilung wird die Note aus dem arithmetischen Mittel gebildet. Der 
+?ausreichend? (4,0) erteilen. § 11 Absätze 2 und 3 gelten entsprechend. Bei unterschiedlicher Beurteilung wird die Note aus dem arithmetischen Mittel gebildet. Der 
 Prüfungsausschuss kann in besonderen Fällen einen dritten Prüfer hinzuziehen. Ein 
 dritter Prüfer ist hinzuzuziehen, wenn die Differenz der beiden Bewertungen 1,7 
 übersteigt. Satz 3 gilt entsprechend. Für den Fall, dass nur einer der Prüfer die Note 
-„nicht ausreichend“ (5,0) gegeben hat und der andere die Arbeit mit 3,3,  3,7 oder 4,0 
+?nicht ausreichend? (5,0) gegeben hat und der andere die Arbeit mit 3,3,  3,7 oder 4,0 
 bewertet hat, muss ein dritter Prüfer  hinzugezogen werden, der nur noch darüber 
-entscheidet, ob die Bachelorarbeit mit „ausreichend“ (4,0) oder „nicht ausreichend“ 
+entscheidet, ob die Bachelorarbeit mit ?ausreichend? (4,0) oder ?nicht ausreichend? 
 (5,0) bewertet wird. Eine nicht fristgemäß eingereichte Bachelorarbeit wird mit der 
-Note „nicht ausreichend“(5,0) bewertet.  <br><br>
+Note ?nicht ausreichend?(5,0) bewertet.  <br><br>
 (10) Die Bachelorarbeit ist in einem Kolloquium zu verteidigen. Am Kolloquium ist 
 derjenige zu beteiligen, der das Thema der Bachelorarbeit ausgegeben hat (Betreuer). Voraussetzung für die Zulassung zu diesem Kolloquium ist die Bewertung der 
-Bachelorarbeit mit mindestens „ausreichend“ (4,0). Der Prüfling hat das Recht, die im 
+Bachelorarbeit mit mindestens ?ausreichend? (4,0). Der Prüfling hat das Recht, die im 
 Rahmen der Beurteilung erstellten Gutachten spätestens einen Tag vor dem 
 Kolloquium einzusehen. Das Kolloquium soll innerhalb von sechs Wochen nach 
 Abgabe der Bachelorarbeit stattfinden. Der Kolloquiumsvortrag soll ca. 30 Minuten 
@@ -687,7 +687,7 @@ Kolloquium wird wie eine mündliche Prüfungsleistung (§ 8) bewertet. <br><br>
 (11) Die Note der Bachelorarbeit einschließlich des Kolloquiums errechnet sich aus 
 der Note der Bachelorarbeit gemäß Absatz 9 mit der Gewichtung 3 und der Note des 
 Kolloquiums mit der Gewichtung 1, wobei die Benotung des Kolloquiums mindestens 
-„ausreichend“ (4,0) ausfallen muss. § 11 Absatz 4 gilt entsprechend.  <br><br>
+?ausreichend? (4,0) ausfallen muss. § 11 Absatz 4 gilt entsprechend.  <br><br>
 (12) Für die Wiederholung der Bachelorarbeit und des Kolloquiums gilt § 15 entsprechend. § 15 Absatz 2 gilt mit der Maßgabe, dass bei einer zweiten Wiederholung der 
 Bachelorarbeit diese innerhalb eines Monats nach Zugang des Bescheids über das 
 Nichtbestehen wiederholt werden kann. <br><br>
@@ -709,7 +709,7 @@ an Modulen zum englischsprachigen Unterricht und im Studium Generale. <br><br>
 <h3 class="paragraph">Akademischer Grad</h3></p>
 Ist die Bachelorprüfung bestanden, verleiht die {$c.uni} den 
 akademischen Grad  
-„{$c.degree}“(abgekürzt „{$c.degree_short}“). 
+?{$c.degree}?(abgekürzt ?{$c.degree_short}?). 
 <p class="paragraph">§ 23<br>
 <h3 class="paragraph">Zeugnis, Bachelorurkunde und Diploma Supplement</h3></p>
 (1) Nach dem erfolgreichen Abschluss der Bachelorprüfung erhält der Prüfling in der 
@@ -717,11 +717,11 @@ Regel innerhalb von 4 Wochen nach der Verteidigung der Bachelorarbeit in einem
 Kolloquium oder nach Bekanntgabe des Ergebnisses der letzten Prüfungsleistung 
 ein Zeugnis. In das Zeugnis werden die Modulnoten, die Leistungspunkte, das 
 Thema der Bachelorarbeit und deren Note sowie die Gesamtnote aufgenommen. 
-Gegebenenfalls können ferner die Studienschwerpunkte sowie – auf Antrag 
-des Prüflings – das Ergebnis der Modulprüfungen in weiteren als den vorgeschriebenen Modulen (Zusatzmodule) in das Zeugnis aufgenommen werden. <br><br>
+Gegebenenfalls können ferner die Studienschwerpunkte sowie ? auf Antrag 
+des Prüflings ? das Ergebnis der Modulprüfungen in weiteren als den vorgeschriebenen Modulen (Zusatzmodule) in das Zeugnis aufgenommen werden. <br><br>
 (2) Das Bachelorzeugnis trägt das Datum des Tages, an dem die letzte Prüfungsleistung erbracht worden ist und das Datum der Ausfertigung. <br><br>
 (3) Die {$c.uni} stellt ein Diploma Supplement (DS) entsprechend 
-dem „Diploma Supplement Modell“ von Europäischer Union/ Europarat/ Unesco in 
+dem ?Diploma Supplement Modell? von Europäischer Union/ Europarat/ Unesco in 
 englischer Sprache aus. <br><br>
 (4) Zusätzlich zum Zeugnis der Bachelorprüfung erhält der Prüfling die Bachelorurkunde mit den Daten des Zeugnisses gemäß Absatz 2. Darin wird die Verleihung des 
 Bachelorgrades beurkundet. <br><br>
@@ -733,8 +733,8 @@ englische Übersetzung beizufügen. <br><br>
 <h3 class="paragraph">Ungültigkeit der Bachelorprüfung </h3></p> 
 (1) Hat der Prüfling bei einer Prüfungsleistung getäuscht und wird diese Tatsache 
 erst nach Aushändigung des Zeugnisses bekannt, so ist die Note der Prüfungsleistung entsprechend § 12 Absatz 5 Satz 1 zu berichtigen. In diesem Fall ist die 
-Modulprüfung für „nicht ausreichend“ (5,0) und die Bachelorprüfung für „nicht 
-bestanden“ zu erklären. Entsprechendes gilt für die Bachelorarbeit sowie das 
+Modulprüfung für ?nicht ausreichend? (5,0) und die Bachelorprüfung für ?nicht 
+bestanden? zu erklären. Entsprechendes gilt für die Bachelorarbeit sowie das 
 Kolloquium.<br><br>
 </page>
 
@@ -743,13 +743,13 @@ Kolloquium.<br><br>
 ohne dass der Prüfling hierüber täuschen wollte, und wird diese Tatsache erst nach 
 Aushändigung des Zeugnisses bekannt, so wird dieser Mangel durch das Bestehen 
 der Modulprüfung geheilt. Hat der Prüfling vorsätzlich zu Unrecht erwirkt, dass er die 
-Modulprüfung ablegen konnte, so ist die Modulprüfung für „nicht ausreichend“ (5,0) 
-und die Bachelorprüfung für „nicht bestanden“ zu erklären. <br><br>
+Modulprüfung ablegen konnte, so ist die Modulprüfung für ?nicht ausreichend? (5,0) 
+und die Bachelorprüfung für ?nicht bestanden? zu erklären. <br><br>
 (3) Der Prüfling ist vor der Entscheidung anzuhören. <br><br>
 (4) Das unrichtige Zeugnis ist vom Studentenbüro einzuziehen  und gegebenenfalls 
 ein neues zu erteilen. Mit dem unrichtigen Zeugnis sind auch die Bachelorurkunde, 
 das Diploma Supplement und die englischsprachigen Übersetzungen der Urkunde 
-und des Zeugnisses einzuziehen, wenn die Bachelorprüfung aufgrund einer Täuschung für „nicht bestanden“ erklärt wurde.  <br><br>
+und des Zeugnisses einzuziehen, wenn die Bachelorprüfung aufgrund einer Täuschung für ?nicht bestanden? erklärt wurde.  <br><br>
 (5) Eine Entscheidung nach den Absätzen 1 und 2 Satz 2 ist nach einer Frist von fünf 
 Jahren ab dem Datum der Ausfertigung des Zeugnisses ausgeschlossen. <br><br>
 <p class="paragraph">§ 25<br>

@@ -36,6 +36,12 @@ if($_GET["editModulaufstellung"] && $_GET["forid"]) {
 if($_GET["editModulaufstellung"] && $_POST) {
 	$UM->ProcessObject->setModullisteForSG();
 }
+if($_GET["editTemplate"] && $_POST["type"] && $_POST) {
+	$UM->ProcessObject->setTemplate($_POST["type"], $_POST["content"]);
+}
+if($_GET["editTemplate"] && $_GET["type"]) {
+	$UM->ProcessObject->editTemplate($_GET["type"]);
+}
 
 
 

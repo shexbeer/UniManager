@@ -25,11 +25,11 @@ $descriptions["content"]["old_issue_date"] = "Alte Ausgaben Datum";
 $descriptions["content"]["latestDate"] = "Datum gültig bis"; // X
 $descriptions["content"]["latestSem"] = "Semster gültig bis";
 
-$descriptions["ziele"]["gegenstand"]["value"] = "Beschreibung Gegenstand der Studiengangs (Ziele)";
+$descriptions["ziele"]["gegenstand"]["value"] = "Beschreibung Gegenstand des Studiengangs (Ziele)";
 $descriptions["ziele"]["gegenstand"]["multiline"] = true;
-$descriptions["ziele"]["gegenstand2"]["value"] = "Beschreibung Gegenstand der Studiengangs (Ziele) 2.";
+$descriptions["ziele"]["gegenstand2"]["value"] = "Beschreibung Gegenstand des Studiengangs (Ziele) 2.";
 $descriptions["ziele"]["gegenstand2"]["multiline"] = true;
-$descriptions["ziele"]["gegenstand3"]["value"] = "Beschreibung Gegenstand der Studiengangs (Ziele) 3.";
+$descriptions["ziele"]["gegenstand3"]["value"] = "Beschreibung Gegenstand des Studiengangs (Ziele) 3.";
 $descriptions["ziele"]["gegenstand3"]["multiline"] = true;
 $descriptions["ziele"]["lp"] = "Gesamte Leistungspunkte";
 

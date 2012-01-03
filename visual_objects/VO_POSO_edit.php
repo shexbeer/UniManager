@@ -55,9 +55,22 @@
       {
           
       }
-      
-      
-      
-      
+      function showEditTemplate($type,$content)
+      {
+          $this->UM->showfooter();
+          $this->UM->showheader($this->UM->seite);
+          $this->UM->tpl->assign("content",$content);
+          $this->UM->tpl->assign("type",$type);
+          $this->UM->tpl->display("POSO_edit_editTemplate.tpl", session_id());      	
+      }
+      function showTemplateResult($result, $extra_message)
+      {
+      		$this->UM->tpl->assign("result", $result);
+            $this->UM->tpl->assign("extra_msg", $extra_message);
+            $this->UM->showfooter();
+            $this->UM->showheader($this->UM->seite);
+            $this->UM->tpl->display("POSO_edit_templateResult.tpl", session_id());
+            
+      }
   }
 ?>
