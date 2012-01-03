@@ -17,4 +17,26 @@ if(!$_GET && !$_POST)
 	$UM->ProcessObject->initForm();
 }
 
+if($_GET["editPOSO"] && $_GET["forid"]) {
+	$UM->ProcessObject->editPOSO_Template($_GET["forid"]);
+}
+
+if($_GET["editPOSO"] && $_POST) {
+	//var_dump($_POST);
+	//die();
+	$sgid = $_POST["sgid"];
+	unset($_POST["sgid"]);
+	$UM->ProcessObject->createPOSO($sgid, $_POST);
+}
+
+if($_GET["editModulaufstellung"] && $_GET["forid"]) {
+	$UM->ProcessObject->editModulaufstellung();
+}
+
+if($_GET["editModulaufstellung"] && $_POST) {
+	$UM->ProcessObject->setModullisteForSG();
+}
+
+
+
 ?>

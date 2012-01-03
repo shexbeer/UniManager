@@ -107,7 +107,8 @@ class UniManager
 			"1" => "Unvollstaendige GET/POST Uebergabe",
 			"2" => "Falscher Benutzername oder Passwort",
 			"3" => "Fehler beim Abfragen aus der Datenbank",
-			"4" => "Sie haben kein Zugriff auf diese Funktion");
+			"4" => "Sie haben kein Zugriff auf diese Funktion",
+			"5" => "Fuer diesen Studiengang gibt es kein Template");
 
 		$this->showHeader("Error! Code: " . $code);
 		$this->tpl->assign("showHeaders", $showHeaders);
@@ -283,11 +284,20 @@ class UniManager
 		else
 			return "even";
 	}
-	function checkPOSOTemplates() {
-		$ret[0] = is_file($this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_bachelor_template.tpl");
-		$ret[1] = is_file($this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_master_template.tpl");
-		$ret[2] = is_file($this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_diplom_template.tpl");
-		return $ret;
+	function checkPOSOTemplates($type = "") {
+		if($type == "") {
+			$ret[0] = is_file($this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_bachelor_template.tpl");
+			$ret[1] = is_file($this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_master_template.tpl");
+			$ret[2] = is_file($this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_diplom_template.tpl");
+			return $ret;
+		} else {
+			switch ($type) {
+				case "Bachelor": return is_file($this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_bachelor_template.tpl"); break;
+				case "Master": return is_file($this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_master_template.tpl"); break;
+				case "Diplom": return is_file($this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_diplom_template.tpl"); break;
+				default: return false; break;
+			}
+		}
 	}
 	function getPOSOTemplatePath($type) {
 		switch ($type) {
@@ -296,5 +306,14 @@ class UniManager
 			case "Diplom": return $this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_diplom_template.tpl"; break;
 			default: return false; break;
 		}
+	}
+	function getPOSOTemplateFields($type) {
+		switch($type) {
+			case "Bachelor": include($this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_bachelor_template.php"); break;
+			case "Master": include($this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_master_template.php"); break;
+			case "Diplom": include($this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_bachelor_template.php"); break;
+			default: return false; break;
+		}
+		return $descriptions;
 	}
 }

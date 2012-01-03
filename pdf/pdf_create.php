@@ -1,5 +1,7 @@
 <?php
-require_once("../main.class.php");
+if(is_file("../main.class.php")) include_once("../main.class.php");
+if(is_file("main.class.php")) include_once("main.class.php");
+//include_once("../main.class.php");
 require('fpdf.php');
 require('html2pdf/html2pdf.class.php');
 
@@ -214,9 +216,9 @@ class PDFCreator
 			header("Location: " . $UM->cwd["rootDir"] . $dest . $name . "?time=".time());
 		}
 	}
-	function POSO($id, $display="true")
+	function POSO($id, $content, $display="true")
 	{
-		include("../templates/poso_templates/poso_bachelor_template.php");
+		include("templates/poso_templates/poso_bachelor_template.php");
 		
 		$SG = new SG_Management();
 		
@@ -226,26 +228,39 @@ class PDFCreator
 		//$this->UM->tpl->assign("footer", $descriptions["footerseite"]);
 		//$this->UM->tpl->assign("ziele", $descriptions["ziele"]);
 		
-		$MM = new Modul_Management();
-		$modullist_unchecked=$MM->getModullist(true,"sg",1);
-        $modullist=$this->UM->checkManagerResults($modullist_unchecked,"modul_id","Abrufen der Modulliste");
-		
-		//$this->UM->tpl->assign("modullist", $modullist);
-		
 		//$content = $this->UM->tpl->fetch("poso_templates/POSO_bachelor_template.tpl"); 
-		$content = $SG->getTemplate("Bachelor",$descriptions["titelseite"], $descriptions["content"], $descriptions["ziele"], $descriptions["footerseite"], $modullist);
+		//$content = $SG->getTemplate($sgtyp,$descriptions["titelseite"], $descriptions["content"], $descriptions["ziele"], $descriptions["footerseite"], $modullist);
 
 		$html2pdf = new HTML2PDF('P','A4','de');
     	$html2pdf->WriteHTML($content);
-	    $html2pdf->Output('test.pdf');
-		die();
+	    
+	    if($display == true) {
+			$html2pdf->Output();
+		} else {
+			$name = "POSO_".$id.".pdf";
+			$dest = PDF_POSO_DIR;
+			
+			$html2pdf->Output($dest.$name, "F");
+			//header("Location: " . $UM->cwd["rootDir"] . $dest . $name . "?time=".time());
+		}
 	}
 }
 
-if($_GET["type"]=="POSO") // Erstelle PDF für eine Studien & Prüfungsordnung
+if($_GET["type"]=="POSO" && $_GET["content"]) // Erstelle PDF für eine Studien & Prüfungsordnung
 {
 	$pdfc = new PDFCreator($UM);
-	$pdfc->POSO(1,true);
+	
+	if($_GET["forid"]) {
+		if($_GET["toFile"]) {
+			$pdfc->POSO($_GET["forid"],$_GET["content"], false);
+			die();
+		} else {
+			$pdfc->POSO($_GET["forid"],$_GET["content"]);
+			die();
+		}
+	} else {
+		$pdfc->POSO(1,'',true);
+	}
 }
 
 if($_GET["type"]=="Modulhb" && $_GET["forid"]) // Erstelle eine Modulhandbuch PDF

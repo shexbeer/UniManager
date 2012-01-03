@@ -21,8 +21,11 @@ W&auml;hlen sie einen Studiengang aus. zu dem die Studien- und Pr&uuml;fungsordn
     <td>{$var.sg_status}</td>
     <td>{$var.sg_dekan}</td>
     <td>
+    	<input type="button" value="neues Modulhandbuch erstellen">
+    </td>
+    <td>
     	{if ($var.sg_typ=="Bachelor" && $posot.0 == true) || ($var.sg_typ=="Master" && $posot.1 == true) || ($var.sg_typ=="Diplom" && $posot.2 == true)}
-	    	<input type="button" value="PO/SO editieren">
+	    	<input type="button" value="PO/SO editieren" onClick="window.location='{$rootDir}POSO_edit.php?editPOSO=yes&forid={$var.sg_id}'">
 	    {else}
 	    	<b>f&uuml;r diesen SG Typ gibt es kein Template</b>
 	    {/if}

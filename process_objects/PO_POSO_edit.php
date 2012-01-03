@@ -35,15 +35,41 @@
       * Holt die Vorlage für die PO und SO von dem SG-Manager und sendet diese an das VO (array mit den feldern po und so (ich gehe bis jetzt von 2 pdf dateien aus))
       *       
       */
-      function editPOSO_Template()
+      function editPOSO_Template($sg_id)
       {
           //Manager initialieren
           $SG= new SG_Management();
+          $MM = new Modul_Management();
           //Vorlage von Manager holen und ueberpruefen
-          $vorlage_unchecked=$SG->getTamplate();
-          $vorlage=$this->UM->checkManagerResults($vorlage_unchecked,"po","POSO");
+          
+          $sgtyp_unch = $SG->getSGTypForID($sg_id);
+	      $sgtyp = $this->UM->checkManagerResults($sgtyp_unch, "sg_id", "Studiengangtyps");
+    	  $sgtyp = $sgtyp[$sg_id]["sg_typ"];
+    	  //var_dump($sgtyp_unch);
+    	  if(!$this->UM->checkPOSOTemplates($sgtyp)) {
+    	  	$this->UM->trigger_error(5, "", true, true);	
+    	  }
+    	  
+    	  $descriptions = $this->UM->getPOSOTemplateFields($sgtyp);
+    	  if($descriptions) {
+			  foreach($descriptions as $key => $var) {
+				foreach($var as $key2 => $var2) {
+					if(!is_array($var2)) {
+						$descriptions[$key][$key2] = utf8_decode($var2);
+					}
+				}
+			  }
+		  } else {
+		  	$this->UM->trigger_error(5, "", true, true);
+		  }
+    	  
+    	  //Modulliste zum Studiengang holen und ueberpruefen
+          $modullist_unchecked=$MM->getModullist(true,"sg",$sg_id);
+          $modullist=$this->UM->checkManagerResults($modullist_unchecked,"modul_id","Abrufen der Modulliste");
+    	  
+          //$vorlage = $SG->getTemplate($sgtyp, $descriptions["titelseite"], $descriptions["content"], $descriptions["ziele"], $descriptions["footerseite"], $descriptions["modullist"]);
           //vorlage an VO senden
-          $this->UM->VisualObject->showPOSOTemplate($vorlage);
+          $this->UM->VisualObject->showPOSOTemplate($sg_id, $vorlage, $descriptions);
       }
       
       /**
@@ -52,34 +78,48 @@
       * @param mixed $poso  Array das die felder po und so enthaelt
       */
       
-      function createPOSO($sg_id,$poso)
+      function createPOSO($sg_id,$descriptions)
       {
           //Manager initialieren
           $SG=new SG_Management();
           $MM=new Modul_Management();
-          //Falls nur SO existiert; SO auch auf PO kopieren um Datenbankfehler zu vermeiden
-          if (!$poso["po"]){
-              $poso["po"]=$poso["so"];
-          }
-          //PO und SO an Manager schicken  
-          $result=$SG->setPO($sg_id,$poso["po"]);
-          if ($result)
-          {
-              $result=$SG->setSO($sg_id,$poso["so"]);
-          }
-          //Modulliste holen und ueberpruefen
-          $modullist_unchecked=$MM->getModullist(true);
-          $modullist=$this->UM->checkManagerResults($modullist_unchecked,"modul_id","Modulliste");
-          //result und liste an vo senden
-          $this->UM->VisualObject->showModullistEditor($result,$modullist);
+          
+          include_once("pdf/pdf_create.php");
+          $pdfc = new PDFCreator($this->UM);
+          
+          $sgtyp_unch = $SG->getSGTypForID($sg_id);
+	      $sgtyp = $this->UM->checkManagerResults($sgtyp_unch, "sg_id", "Studiengangtyps");
+    	  $sgtyp = $sgtyp[$sg_id]["sg_typ"];
+          
+          $MM = new Modul_Management();
+		  $modullist_unchecked=$MM->getModullist(true,"sg",$sg_id);
+          $modullist=$this->UM->checkManagerResults($modullist_unchecked,"modul_id","Abrufen der Modulliste");
+          
+   		  $content = $SG->getTemplate($sgtyp,$descriptions["titelseite"], $descriptions["content"], $descriptions["ziele"], $descriptions["footerseite"], $modullist);
+        
+          $pdfc->POSO($sg_id,$content, false);
+          
+          $poso_name= "POSO_".$sg_id.".pdf";
+          $SG->setPO($sg_id, $poso_name);
+          $SG->setSO($sg_id, $poso_name);
+          $this->UM->VisualObject->showResult(true,PDF_POSO_DIR.$poso_name);
       }
       
       /**
-      * Schickt eine Modulliste für einen Studiengang an den Mananger
+      * Schickt eine Modulliste für einen Studiengang an den Mananger und erstellt ein neues Modulhandbuch
       * @param int $sg_id ID des Studienganges für den die Modulliste gesetzt werden soll
       * @param mixed $modullist Array mit den Feldern count,modul_id, plansemester
       */
       function setModullisteForSG($sg_id,$modullist)
+      {
+          //Manager initialisieren
+          $SG=new SG_Management();
+          //Modulliste an Manager senden
+          $result=$SG->setModullisteForSG($sg_id,$modullist);
+          //Erfolg oder Misserfolg an VO melden
+          $this->UM->VisualObject->showResult($result);
+      }
+      function editModulaufstellung($sg_id,$modullist)
       {
           //Manager initialisieren
           $SG=new SG_Management();

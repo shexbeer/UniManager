@@ -7,13 +7,13 @@
       }
       
       
-      function showResult($error_occurred, $extra_message)
+      function showResult($result, $extra_message)
       {
-      $this->UM->tpl->assign("error", $error_occurred);
+      		$this->UM->tpl->assign("result", $result);
             $this->UM->tpl->assign("extra_msg", $extra_message);
             $this->UM->showfooter();
             $this->UM->showheader($this->UM->seite);
-            $this->UM->tpl->display("LN_Edit_Result.tpl", session_id());
+            $this->UM->tpl->display("POSO_edit_Result.tpl", session_id());
             
       }
       
@@ -36,12 +36,14 @@
       * @param mixed $vorlage array mit den Feldern po und so (wahrscheinlich beides pdf- dateien)
       */
       
-      function showPOSOTemplate($vorlage)
+      function showPOSOTemplate($sg_id, $vorlage, $descriptions)
       {
           $this->UM->showfooter();
           $this->UM->showheader($this->UM->seite);
-          $this->UM->tpl->assign("SG",$SG);
-          $this->UM->tpl->display("POSO_show_template.tpl", session_id());
+          $this->UM->tpl->assign("vorlage",$vorlage);
+          $this->UM->tpl->assign("descriptions",$descriptions);
+          $this->UM->tpl->assign("sgid",$sg_id);
+          $this->UM->tpl->display("POSO_edit_POSOTemplate.tpl", session_id());
       }
       
       /**

@@ -60,7 +60,7 @@ Ordnung gelten gleichberechtigt für Personen femininen Geschlechts.
 </p>
 <table>
 <tr>
-	<td>Inhaltsübersicht:</td><td>§§ </td>
+	<td><b>Inhaltsübersicht:</b></td><td><b>§§ </b></td>
 </tr>
 <tr>
 	<td>Zweck der Diplomprüfung</td><td>  1 </td>
