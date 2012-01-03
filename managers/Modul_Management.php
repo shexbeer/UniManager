@@ -306,7 +306,7 @@ class Modul_Management{
 			{
 				$aenderung_id = $aeID[0];
 				$sql = "UPDATE `aenderungen` SET `aenderung_status`='".$status."' WHERE `aenderung_id`='".$aenderung_id."';";
-				//echo $sql;
+				echo $sql;
 				if( !mysql_query($sql) ) return false; //Statusupdate fehlgeschalgen 
 			}
 			else

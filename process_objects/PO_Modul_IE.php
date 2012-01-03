@@ -40,7 +40,7 @@
         {
             $MM = new Modul_Management();
             $PM = new Person_Management();
-            if (!$lehrende && !$modul_status && !$modul_duration && !$modul_qualifytarget && !$modul_institute && !$modul_content && !$modul_literature && !$modul_teachform && !$modul_required && !$modul_status && !$modul_frequency && !$modul_usability && !$modul_lp && !$modul_conditionforln && !$modul_effort){
+            if (!$fixes && !$modul_status){
                 if ($typ){           //Check ob Modul oder Änderung
                     // Moduldetails zum speziellen Modul holen
                     $re = $MM->getModuldetails(true,"modul",$modul_id);
@@ -70,17 +70,9 @@
                     die();                    
                 }
             }
-            else{
-                if ($fixes)
+              else
                 {
-                    if($modul_status!="Bearbeitung")
-                    {
-                        $result=$MM->setModuldetails($modul_id,$fixes,$modul_status);
-                    }
-                    else
-                    {
-                        $result=$MM->setModuldetails($modul_id,$fixes);
-                    }
+                    $result=$MM->setModuldetails($modul_id,$fixes);
                     if($result){
                         $this->UM->VisualObject->showResult($result,"Moduldetails erfolgreich als &Aumlnderung abgespeichert.");
                     }
@@ -88,11 +80,7 @@
                         $this->UM->VisualObject->showResult($result,"Fehler beim Speichern des &Aumlnderungseintrages!"); 
                     }
                 }
-                else
-                {
-                    $this->UM->VisualObject->showResult($false,"Es wurden keine &Aumlnderungen gemacht.");
-                }
-            }
+        
             
             
             

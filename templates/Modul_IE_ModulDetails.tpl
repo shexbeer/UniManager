@@ -2,7 +2,9 @@
 Die Details zum selektierten Modul werden angezeigt.
 <br><br>
 {$status=$mod.modul_status}
-
+{if $status=='Genehmigt'}                                                                      
+             <span style="font-weight: bold; color: red;">Modul kann nicht geändert werden!!</span>
+{/if}
 <form action="Modul_IE.php?changemodul=true&forid={$mod.modul_id}" enctype="multipart/form-data" method="POST">
     <h1> Modulinhalt </h1>
     <table border="0" cellpadding="0" cellspacing="4">

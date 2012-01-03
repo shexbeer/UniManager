@@ -1,6 +1,6 @@
 {include file="header.tpl" title=foo} 
 Die Details zur selektierten &Aumlnderung werden angezeigt<br>
-<form action="Modul_IE.php?changechange=true&forid={$list.aenderung_id}" enctype="multipart/form-data" method="POST">
+<form action="Modul_IE.php?changechange=true&forid={$list.aenderung_mid}" enctype="multipart/form-data" method="POST">
     <h1> Änderungsinhalt </h1>
     <table border="0" cellpadding="0" cellspacing="4">
         <tr>
@@ -51,7 +51,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Modulstatus:
             </td>
             <td>
-                <select name="aenderung_status" size="1">
+                <select name="aenderung_status" size="1" disabled="true">
                     <option {if $list.aenderung_status == "Bearbeitung"}selected{/if}>Bearbeitung</option>
                     <option {if $list.aenderung_status == "Genehmigt"} selected{/if}>Genehmigt</option>
                 </select>
