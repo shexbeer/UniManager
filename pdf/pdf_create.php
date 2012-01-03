@@ -216,25 +216,28 @@ class PDFCreator
 	}
 	function POSO($id, $display="true")
 	{
-		include("poso/poso_bachelor_template.php");
+		include("../templates/poso_templates/poso_bachelor_template.php");
 		
-		$this->UM->tpl->assign("titelseite", $_titelseite);
-		$this->UM->tpl->assign("c", $_content);
-		$this->UM->tpl->assign("footer", $_footerseite);
-		$this->UM->tpl->assign("ziele", $_ziele);
+		$SG = new SG_Management();
+		
+		
+		//$this->UM->tpl->assign("titelseite", $descriptions["titelseite"]);
+		//$this->UM->tpl->assign("c", $descriptions["content"]);
+		//$this->UM->tpl->assign("footer", $descriptions["footerseite"]);
+		//$this->UM->tpl->assign("ziele", $descriptions["ziele"]);
 		
 		$MM = new Modul_Management();
 		$modullist_unchecked=$MM->getModullist(true,"sg",1);
         $modullist=$this->UM->checkManagerResults($modullist_unchecked,"modul_id","Abrufen der Modulliste");
 		
-		$this->UM->tpl->assign("modullist", $modullist);
+		//$this->UM->tpl->assign("modullist", $modullist);
 		
-		$content = $this->UM->tpl->fetch("POSO_bachelor_template.tpl"); 
+		//$content = $this->UM->tpl->fetch("poso_templates/POSO_bachelor_template.tpl"); 
+		$content = $SG->getTemplate("Bachelor",$descriptions["titelseite"], $descriptions["content"], $descriptions["ziele"], $descriptions["footerseite"], $modullist);
 
 		$html2pdf = new HTML2PDF('P','A4','de');
     	$html2pdf->WriteHTML($content);
 	    $html2pdf->Output('test.pdf');
-		//$this->UM->tpl->display("POSO_bachelor_template.tpl", session_id());
 		die();
 	}
 }

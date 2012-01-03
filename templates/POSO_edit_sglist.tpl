@@ -21,10 +21,10 @@ W&auml;hlen sie einen Studiengang aus. zu dem die Studien- und Pr&uuml;fungsordn
     <td>{$var.sg_status}</td>
     <td>{$var.sg_dekan}</td>
     <td>
-    	{if $var.sg_typ=="Bachelor"}
+    	{if ($var.sg_typ=="Bachelor" && $posot.0 == true) || ($var.sg_typ=="Master" && $posot.1 == true) || ($var.sg_typ=="Diplom" && $posot.2 == true)}
 	    	<input type="button" value="PO/SO editieren">
 	    {else}
-	    	<b>Nur Bachelor Studiengang Templates zurzeit</b>
+	    	<b>f&uuml;r diesen SG Typ gibt es kein Template</b>
 	    {/if}
     </td>
 </tr>
@@ -32,7 +32,13 @@ W&auml;hlen sie einen Studiengang aus. zu dem die Studien- und Pr&uuml;fungsordn
 
 </table>
 <br>
-
-<input type="button" value="Bachelor PO/SO Template bearbeiten">
-
+{if ($posot.0 == true)}
+	<input type="button" value="Bachelor PO/SO Template bearbeiten">
+{/if}
+{if ($posot.1 == true)}
+	<input type="button" value="Master PO/SO Template bearbeiten">
+{/if}
+{if ($posot.2 == true)}
+	<input type="button" value="Diplom PO/SO Template bearbeiten">
+{/if}
 {include file="footer.tpl" title=foo}  

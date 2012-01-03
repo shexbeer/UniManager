@@ -18,6 +18,7 @@
           $sglist_unchecked=$SG->getSGList();
           $sglist=$this->UM->checkManagerResults($sglist_unchecked,"sg_id","Studiengangliste");
           //Jeden Studiengang in das Result schieben und die DekanID durch einen Namen substituieren
+          $posotemplates = $this->UM->checkPOSOTemplates();
           foreach($sglist as $var)
           {
               $result[$var["sg_id"]]=$var;
@@ -27,7 +28,7 @@
               //var_dump($dekan);
               $result[$var["sg_id"]]["sg_dekan"]=$dekan[$dekan_id]["person_vorname"]." ".$dekan[$dekan_id]["person_name"];
           }
-          $this->UM->VisualObject->showSGList($result);  
+          $this->UM->VisualObject->showSGList($result, $posotemplates);  
       }
       
       /**
@@ -78,7 +79,7 @@
       * @param int $sg_id ID des Studienganges für den die Modulliste gesetzt werden soll
       * @param mixed $modullist Array mit den Feldern count,modul_id, plansemester
       */
-      function setModullisteForSG($sg_id,$modullist)
+      function ($sg_id,$modullist)
       {
           //Manager initialisieren
           $SG=new SG_Management();

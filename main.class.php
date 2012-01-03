@@ -6,8 +6,9 @@ define('PO_dir', "process_objects/");
 define('VO_dir', "visual_objects/");
 define('prefix_PO', "PO_");
 define('prefix_VO', "VO_");
-define('template_dir', "templates");
-
+define('template_dir', "templates/");
+define("template_compiled_dir", "templates_c/");
+define('poso_templates_dir', "poso_templates/");
 
 define('PDF_POSO_DIR', 'pdf/poso/');
 define('PDF_Modulhandbuch_DIR', 'pdf/modul/');
@@ -49,8 +50,8 @@ class UniManager
 		$this->tpl->compile_check = false;
 		$this->tpl->force_compile = true;
 		$this->tpl->cache_dir = $this->cwd["Path"] . "template_cache/";
-		$this->tpl->template_dir = $this->cwd["Path"] . "templates";
-		$this->tpl->compile_dir = $this->cwd["Path"] . "templates_c"; 
+		$this->tpl->template_dir = $this->cwd["Path"] . template_dir;
+		$this->tpl->compile_dir = $this->cwd["Path"] . template_compiled_dir; 
 
 
 		// Deprecated Nachrichten unterdrŸcken FIXME:
@@ -74,7 +75,7 @@ class UniManager
 		 * die();
 		 * }
 		 */
-		 
+				
 		// Prozessobjekt der Seite laden
 		if(is_file($this->cwd["Path"] . PO_dir . prefix_PO . $site . ".php"))
 		{
@@ -281,5 +282,19 @@ class UniManager
 			return "odd";
 		else
 			return "even";
+	}
+	function checkPOSOTemplates() {
+		$ret[0] = is_file($this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_bachelor_template.tpl");
+		$ret[1] = is_file($this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_master_template.tpl");
+		$ret[2] = is_file($this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_diplom_template.tpl");
+		return $ret;
+	}
+	function getPOSOTemplatePath($type) {
+		switch ($type) {
+			case "Bachelor": return $this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_bachelor_template.tpl"; break;
+			case "Master": return $this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_master_template.tpl"; break;
+			case "Diplom": return $this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_diplom_template.tpl"; break;
+			default: return false; break;
+		}
 	}
 }

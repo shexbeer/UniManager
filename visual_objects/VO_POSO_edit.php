@@ -21,11 +21,13 @@
       * zeigt eine Liste aller Studiengaenge an und ermoeglicht dem Nutzer die Auswahl
       */
       
-      function showSGList($SG)
+      function showSGList($SG, $posotemplates)
       {
           $this->UM->showfooter();
           $this->UM->showheader($this->UM->seite);
           $this->UM->tpl->assign("SG",$SG);
+          $this->UM->tpl->assign("posot",$posotemplates);
+          var_dump($posotemplates);
           $this->UM->tpl->display("POSO_edit_sglist.tpl", session_id());
           
       }

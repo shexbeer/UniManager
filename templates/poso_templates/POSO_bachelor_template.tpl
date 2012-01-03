@@ -174,7 +174,7 @@ einem festgelegten Angebot (Prüfungsplan) zu erbringen sind. </li>
 (2) Leistungspunkte sind die Maßeinheit für den zu erwartenden studentischen 
 Arbeitsaufwand (workload). Ein Leistungspunkt  gibt einen Aufwand von 30 Arbeitsstunden wieder. Der Arbeitsaufwand umfasst neben der Präsenzzeit auch das 
 Selbststudium. Der Gesamtarbeitsaufwand eines Vollzeitstudierenden in einem 
-Studienjahr wird mit 1800 Stunden angenommen. Ein Anspruch des Studierenden, 
+Studienjahr wird mit {$ziele.lp * 10} Stunden angenommen. Ein Anspruch des Studierenden, 
 bestimmte Prüfungen mit einem bestimmten  Arbeitsaufwand bestehen zu können, 
 wird dadurch nicht begründet.  <br><br>
 (3) Modulprüfungen sind Prüfungen, mit denen Module abgeschlossen werden.  <br><br>
@@ -202,10 +202,10 @@ erstreckt, <br><br>
 2. die Eignungsphase, welche sich über das dritte und vierte Semester erstreckt 
 und <br><br>
 3. die Vertiefungsphase, welche sich über das fünfte und sechste Semester 
-erstreckt und die Bachelorarbeit einschließlich des Kolloquiums umfasst. 
+erstreckt und die Bachelorarbeit einschließlich des Kolloquiums umfasst. <br><br>
 (3) Der zeitliche Gesamtumfang der für den Abschluss des Bachelorstudiums 
 nachzuweisenden Modulprüfungen und der Bachelorarbeit einschließlich des 
-Kolloquiums entspricht 180 Leistungspunkten. <br>
+Kolloquiums entspricht {$ziele.lp} Leistungspunkten. <br>
 <p class="paragraph">§ 4<br>
 <h3 class="paragraph">Prüfungsaufbau</h3></p>
 (1) Die Bachelorprüfung umfasst Modulprüfungen zu Modulen der Orientierungs-, 
@@ -794,7 +794,7 @@ i. V.   gez.: {$footer.iv_gez} <br>
 
 <page orientation="landscape"">
 <div style="font-weight: bold;font-size: 18px;">Anlage: Prüfungsplan des Bachelorstudienganges {$c.sgname}</div><br>
-<table style="border: 1px solid black;" width="100%">
+<table style="border: 1px solid black; width: 1000px; text-align: center;" width="1000">
 <tr style="font-weight: bold;">
 	<td>Modul</td>
 	<td>1.Sem</td>
@@ -803,17 +803,17 @@ i. V.   gez.: {$footer.iv_gez} <br>
 	<td>4.Sem</td>
 	<td>5.Sem</td>
 	<td>6.Sem</td>
-	<td>LP</td>
+	<td>Leistungspunkte</td>
 </tr>
 {foreach from=$modullist item=var}
 <tr>
-	<td>{$var.modul_name}</td>
-	<td>{if $var.mauf_plansemester==1}X{/if}</td>
-	<td>{if $var.mauf_plansemester==2}X{/if}</td>
-	<td>{if $var.mauf_plansemester==3}X{/if}</td>
-	<td>{if $var.mauf_plansemester==4}X{/if}</td>
-	<td>{if $var.mauf_plansemester==5}X{/if}</td>
-	<td>{if $var.mauf_plansemester==6}X{/if}</td>
+	<td width="300" style="text-align: left;">{$var.modul_name}</td>
+	<td width="100">{if $var.mauf_plansemester==1}X{/if}</td>
+	<td width="100">{if $var.mauf_plansemester==2}X{/if}</td>
+	<td width="100">{if $var.mauf_plansemester==3}X{/if}</td>
+	<td width="100">{if $var.mauf_plansemester==4}X{/if}</td>
+	<td width="100">{if $var.mauf_plansemester==5}X{/if}</td>
+	<td width="100">{if $var.mauf_plansemester==6}X{/if}</td>
 	<td>{$var.modul_lp}</td>
 </tr>
 {/foreach}
@@ -1015,7 +1015,7 @@ i. V.   gez.: {$footer.iv_gez}<br>
 
 <page orientation="landscape"">
 <div style="font-weight: bold;font-size: 18px;">Anlage: Studienablaufplan des Bachelorstudienganges {$c.sgname}</div><br>
-<table style="border: 1px solid black;" width="100%">
+<table style="border: 1px solid black; width: 1000px; text-align: center;" width="1000">
 <tr style="font-weight: bold;">
 	<td>Modul</td>
 	<td>1.Sem</td>
@@ -1024,17 +1024,17 @@ i. V.   gez.: {$footer.iv_gez}<br>
 	<td>4.Sem</td>
 	<td>5.Sem</td>
 	<td>6.Sem</td>
-	<td>LP</td>
+	<td>Leistungspunkte</td>
 </tr>
 {foreach from=$modullist item=var}
 <tr>
-	<td>{$var.modul_name}</td>
-	<td>{if $var.mauf_plansemester==1}X{/if}</td>
-	<td>{if $var.mauf_plansemester==2}X{/if}</td>
-	<td>{if $var.mauf_plansemester==3}X{/if}</td>
-	<td>{if $var.mauf_plansemester==4}X{/if}</td>
-	<td>{if $var.mauf_plansemester==5}X{/if}</td>
-	<td>{if $var.mauf_plansemester==6}X{/if}</td>
+	<td width="300" style="text-align: left;">{$var.modul_name}</td>
+	<td width="100">{if $var.mauf_plansemester==1}X{/if}</td>
+	<td width="100">{if $var.mauf_plansemester==2}X{/if}</td>
+	<td width="100">{if $var.mauf_plansemester==3}X{/if}</td>
+	<td width="100">{if $var.mauf_plansemester==4}X{/if}</td>
+	<td width="100">{if $var.mauf_plansemester==5}X{/if}</td>
+	<td width="100">{if $var.mauf_plansemester==6}X{/if}</td>
 	<td>{$var.modul_lp}</td>
 </tr>
 {/foreach}

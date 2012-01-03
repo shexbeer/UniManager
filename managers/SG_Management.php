@@ -245,12 +245,31 @@ class SG_Management {
     }
 	
 	
-	//Inhalt ist mir nicht ganz klar --Diskusionsbedarf--
-	function getTemplate(){
-        /*Soll die Vorlage für eine Studienordnung und eine Prüfungsordnung aus der Datenbank abrufen und zurückgeben; die Vorlagen müssen noch in der SQL Datenbank erstellt werden
-        Zweck ist es bei der Erstellung auf ein schon vorgefertigtes Dokument zurückgreifen zu können, damit der Ersteller nicht soviel schreiben muss sondern nur noch die relevanten Informationen ersetzen muss
+	/*Soll die Vorlage fŸr eine Studienordnung und eine PrŸfungsordnung aus der Datenbank abrufen und zurŸckgeben; die Vorlagen mŸssen noch in der SQL Datenbank erstellt werden
+        Zweck ist es bei der Erstellung auf ein schon vorgefertigtes Dokument zurŸckgreifen zu kšnnen, damit der Ersteller nicht soviel schreiben muss sondern nur noch die relevanten Informationen ersetzen muss
         Sebastian*/
-        
+	function getTemplate($typ, $titelseite, $content, $ziele, $footerseite, $modullist) {
+        $UM = new UniManager();
+        $etemps = $UM->checkPOSOTemplates();
+        switch($typ) {
+        	case "Bachelor":
+        		if($etemps[0] == true) $path = $UM->getPOSOTemplatePath($typ);
+        		break;
+        	case "Master":
+        		if($etemps[1] == true) $path = $UM->getPOSOTemplatePath($typ);
+        		break;
+        	case "Diplom":
+        		if($etemps[2] == true) $path = $UM->getPOSOTemplatePath($typ);
+        		break;
+    	} 
+    	if(!$path) return false;
+    	$UM->tpl->assign("titelseite", $titelseite);
+		$UM->tpl->assign("c", $content);
+		$UM->tpl->assign("footer", $footerseite);
+		$UM->tpl->assign("ziele", $ziele);
+		$UM->tpl->assign("modullist", $modullist);
+    	$template = $UM->tpl->fetch($path);
+    	return $template;
 	}
 	function getSGNameforID ($sg_id) {
 		$sql = "SELECT sg_id, sg_name FROM `studiengang` WHERE sg_id='".$sg_id."'";
