@@ -40,7 +40,7 @@
         {
             $MM = new Modul_Management();
             $PM = new Person_Management();
-            if (!$lehrende && !$modul_status && !$modul_duration && !$modul_qualifytarget && !$modul_institute && !$modul_content && !$modul_literature && !$modul_teachform && !$modul_required && !$modul_status && !$modul_frequency && !$modul_usability && !$modul_lp && !$modul_conditionforln && !$modul_effort){
+            if (!$fixes && !$modul_status){
                 if ($typ){           //Check ob Modul oder Änderung
                     // Moduldetails zum speziellen Modul holen
                     $re = $MM->getModuldetails(true,"modul",$modul_id);
@@ -53,26 +53,26 @@
                     die();
                 }
                 else{
+                    $aend_id=$modul_id;
+                    $a_list_unchecked=$MM->getModullist(false,'modul');                //Modul-Id zur Änderung bestimmen    
+                    $a_list=$this->UM->checkManagerResults($a_list_unchecked,"aenderung_id","Änderungsliste");
+                    foreach($a_list as $var){                              
+                            if ( $aend_id==$var['aenderung_id']){
+                                $modul_id=$var['aenderung_mid'];
+                            }
+                    }
                     $re=$MM->getModuldetails(false,'modul',$modul_id);
-                    //$result=$this->UM->checkManagerResults($re,"aenderung_id","Änderungsdetailabfrage");
-                    $result=$re[$modul_id];
+                    $res=$this->UM->checkManagerResults($re,"aenderung_id","Änderungsdetailabfrage");
+                    $result=$res[$aend_id];
                     $lehrende_unchecked = $PM->getLehrende();
                     $lehrende = $this->UM->checkManagerResults($lehrende_unchecked,"lehrende_id","Lehrendeabfrage");
-                    $this->UM->VisualObject->showChangeDetails($result,$lehrende);
+                    $this->UM->VisualObject->showChangeDetails($modul_id,$result,$lehrende);
                     die();                    
                 }
             }
-            else{
-                if ($fixes)
+              else
                 {
-                    if($modul_status!="Bearbeitung")
-                    {
-                        $result=$MM->setModuldetails($modul_id,$fixes,$modul_status);
-                    }
-                    else
-                    {
-                        $result=$MM->setModuldetails($modul_id,$fixes);
-                    }
+                    $result=$MM->setModuldetails($modul_id,$fixes);
                     if($result){
                         $this->UM->VisualObject->showResult($result,"Moduldetails erfolgreich als &Aumlnderung abgespeichert.");
                     }
@@ -80,11 +80,7 @@
                         $this->UM->VisualObject->showResult($result,"Fehler beim Speichern des &Aumlnderungseintrages!"); 
                     }
                 }
-                else
-                {
-                    $this->UM->VisualObject->showResult($false,"Es wurden keine &Aumlnderungen gemacht.");
-                }
-            }
+        
             
             
             

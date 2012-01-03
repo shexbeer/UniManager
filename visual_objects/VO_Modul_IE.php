@@ -38,7 +38,6 @@ class VO_Modul_IE
         $this->UM->showfooter();
         $this->UM->showheader($this->UM->seite);
         $this->UM->tpl->assign("change",$chDetails);
-        var_dump($chDetails);
         $this->UM->tpl->assign("list",$lehrendelist);
         $this->UM->tpl->display("Modul_IE_ChangeDetails.tpl", session_id());
     }

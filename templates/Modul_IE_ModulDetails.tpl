@@ -2,7 +2,9 @@
 Die Details zum selektierten Modul werden angezeigt.
 <br><br>
 {$status=$mod.modul_status}
-
+{if $status=='Genehmigt'}                                                                      
+             <span style="font-weight: bold; color: red;">Modul kann nicht geändert werden!!</span>
+{/if}
 <form action="Modul_IE.php?changemodul=true&forid={$mod.modul_id}" enctype="multipart/form-data" method="POST">
     <h1> Modulinhalt </h1>
     <table border="0" cellpadding="0" cellspacing="4">
@@ -112,13 +114,9 @@ Die Details zum selektierten Modul werden angezeigt.
             </td>
             <td>
             {if $status!='Genehmigt'} 
-                <textarea cols="40" rows="5" name="modul_qualifytarget">
-               		 {$mod.modul_qualifytarget}
-                </textarea>
+                <textarea cols="40" rows="5" name="modul_qualifytarget">{$mod.modul_qualifytarget}</textarea>
             {else}
-                <textarea cols="40" rows="5" name="modul_qualifytarget" disabled="true">
-                        {$mod.modul_qualifytarget}
-                </textarea>
+                <textarea cols="40" rows="5" name="modul_qualifytarget" disabled="true">{$mod.modul_qualifytarget}</textarea>
             {/if}
             </td>
         </tr>
@@ -128,13 +126,9 @@ Die Details zum selektierten Modul werden angezeigt.
             </td>
             <td>
             {if $status!='Genehmigt'}
-                <textarea cols="80" rows="8" name="modul_content" >
-                	{$mod.modul_content}
-                </textarea>
+                <textarea cols="80" rows="8" name="modul_content" >{$mod.modul_content}</textarea>
             {else}
-                <textarea cols="80" rows="8" name="modul_content" disabled="true">
-                    {$mod.modul_content}
-                </textarea>
+                <textarea cols="80" rows="8" name="modul_content" disabled="true">{$mod.modul_content}</textarea>
             {/if} 
             </td>
         </tr>
@@ -144,14 +138,9 @@ Die Details zum selektierten Modul werden angezeigt.
             </td>
             <td>
             {if $status!='Genehmigt'} 
-                <textarea cols="40" rows="5" name="modul_literature">
-                	{$mod.modul_literature}
-                </textarea>
+                <textarea cols="40" rows="5" name="modul_literature">{$mod.modul_literature}</textarea>
             {else}
-                 <textarea cols="40" rows="5" name="modul_literature" disabled="true">
-                    {$mod.modul_literature}
-                </textarea>
-            {/if}
+                 <textarea cols="40" rows="5" name="modul_literature" disabled="true">{$mod.modul_literature}</textarea>                                                                                             {/if}
             </td>
         </tr>
         <tr>
@@ -160,13 +149,9 @@ Die Details zum selektierten Modul werden angezeigt.
             </td>
             <td>
             {if $status!='Genehmigt'}
-                <textarea cols="30" rows="4" name="modul_teachform">
-                	{$mod.modul_teachform}
-                </textarea>
+                <textarea cols="30" rows="4" name="modul_teachform">{$mod.modul_teachform}</textarea>
             {else}
-                  <textarea cols="30" rows="4" name="modul_teachform" disabled="true">
-                    {$mod.modul_teachform}
-                </textarea>
+                  <textarea cols="30" rows="4" name="modul_teachform" disabled="true">{$mod.modul_teachform}</textarea>
             {/if}
             </td>
         </tr>
@@ -176,13 +161,9 @@ Die Details zum selektierten Modul werden angezeigt.
             </td>
             <td>
             {if $status!='Genehmigt'}
-                <textarea cols="40" rows="5" name="modul_required">
-	                {$mod.modul_required}
-                </textarea>
+                <textarea cols="40" rows="5" name="modul_required">{$mod.modul_required}</textarea>
             {else}
-                 <textarea cols="40" rows="5" name="modul_required" disabled="true">
-                    {$mod.modul_required}
-                </textarea>
+                 <textarea cols="40" rows="5" name="modul_required" disabled="true">{$mod.modul_required}</textarea>
             {/if}
             </td>
         </tr>
@@ -236,13 +217,9 @@ Die Details zum selektierten Modul werden angezeigt.
             </td>
             <td>
             {if $status!='Genehmigt'}
-                <textarea cols="30" rows="3" name="modul_conditionforln">
-                	{$mod.modul_conditionforln}
-                </textarea>
+                <textarea cols="30" rows="3" name="modul_conditionforln">{$mod.modul_conditionforln}</textarea>
             {else}
-                <textarea cols="30" rows="3" name="modul_conditionforln" disabled="true">
-                    {$mod.modul_conditionforln}
-                </textarea>
+                <textarea cols="30" rows="3" name="modul_conditionforln" disabled="true">{$mod.modul_conditionforln}</textarea>
             {/if}
             </td>
         </tr>
@@ -252,13 +229,9 @@ Die Details zum selektierten Modul werden angezeigt.
             </td>
             <td>
             {if $status!='Genehmigt'}
-                <textarea cols="50" rows="5" name="modul_effort">
-                	{$mod.modul_effort}
-                </textarea>
+                <textarea cols="50" rows="5" name="modul_effort">{$mod.modul_effort}</textarea>
             {else}
-                 <textarea cols="50" rows="5" name="modul_effort" disabled="true">
-                    {$mod.modul_effort}
-                </textarea>
+                 <textarea cols="50" rows="5" name="modul_effort" disabled="true">{$mod.modul_effort}</textarea>
             {/if} 
             </td>
         </tr>  

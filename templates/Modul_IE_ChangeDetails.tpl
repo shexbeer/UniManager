@@ -1,7 +1,6 @@
 {include file="header.tpl" title=foo} 
 Die Details zur selektierten &Aumlnderung werden angezeigt<br>
-
-<form action="Modul_IE.php?changechange=true&forid={$list.aenderung_id}" enctype="multipart/form-data" method="POST">
+<form action="Modul_IE.php?changechange=true&forid={$list.aenderung_mid}" enctype="multipart/form-data" method="POST">
     <h1> Änderungsinhalt </h1>
     <table border="0" cellpadding="0" cellspacing="4">
         <tr>
@@ -52,7 +51,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Modulstatus:
             </td>
             <td>
-                <select name="aenderung_status" size="1">
+                <select name="aenderung_status" size="1" disabled="true">
                     <option {if $list.aenderung_status == "Bearbeitung"}selected{/if}>Bearbeitung</option>
                     <option {if $list.aenderung_status == "Genehmigt"} selected{/if}>Genehmigt</option>
                 </select>
@@ -87,9 +86,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Qualifikationsziel:
             </td>
             <td>
-                <textarea cols="40" rows="5" name="aenderung_qualifytarget">
-                        {$list.aenderung_qualifytarget}
-                </textarea>
+                <textarea cols="40" rows="5" name="aenderung_qualifytarget">{$list.aenderung_qualifytarget}</textarea>
             </td>
         </tr>
         <tr>
@@ -97,9 +94,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Inhalt:
             </td>
             <td>
-                <textarea cols="80" rows="8" name="aenderung_content" >
-                    {$list.aenderung_content}
-                </textarea>
+                <textarea cols="80" rows="8" name="aenderung_content" >{$list.aenderung_content}</textarea>
             </td>
         </tr>
         <tr>
@@ -107,9 +102,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Fachliteratur:
             </td>
             <td>
-                <textarea cols="40" rows="5" name="aenderung_literature">
-                    {$list.aenderung_literature}
-                </textarea>
+                <textarea cols="40" rows="5" name="aenderung_literature">{$list.aenderung_literature}</textarea>
             </td>
         </tr>
         <tr>
@@ -117,9 +110,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Lehrformen:
             </td>
             <td>
-                <textarea cols="30" rows="4" name="aenderung_teachform">
-                    {$list.aenderung_teachform}
-                </textarea>
+                <textarea cols="30" rows="4" name="aenderung_teachform">{$list.aenderung_teachform}</textarea>
             </td>
         </tr>
         <tr>
@@ -127,9 +118,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Vorraussetzungen:
             </td>
             <td>
-                <textarea cols="40" rows="5" name="aenderung_required">
-                    {$list.aenderung_required}
-                </textarea>
+                <textarea cols="40" rows="5" name="aenderung_required">{$list.aenderung_required}</textarea>
             </td>
         </tr>
         <tr>
@@ -165,9 +154,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Vorraussetzung f&uuml;r Leistungsnachweis:
             </td>
             <td>
-                <textarea cols="30" rows="3" name="aenderung_conditionforln">
-                    {$list.aenderung_conditionforln}
-                </textarea>
+                <textarea cols="30" rows="3" name="aenderung_conditionforln">{$list.aenderung_conditionforln}</textarea>
             </td>
         </tr>
         <tr>
@@ -175,9 +162,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Arbeitsaufwand:
             </td>
             <td>
-                <textarea cols="50" rows="5" name="aenderung_effort">
-                    {$list.aenderung_effort}
-                </textarea>
+                <textarea cols="50" rows="5" name="aenderung_effort">{$list.aenderung_effort}</textarea>
             </td>
         </tr>  
     </table>
