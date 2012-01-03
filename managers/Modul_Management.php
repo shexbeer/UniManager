@@ -90,6 +90,7 @@ class Modul_Management{
 				case "modul":
                     if($id){
                         $sql = "SELECT ".$str." FROM ".$table." WHERE ".$attr[1]."=".$id;
+                        //var_dump($sql);
                     }
                     else{
                         $sql = "SELECT ".$str." FROM ".$table."";
@@ -145,6 +146,7 @@ class Modul_Management{
 					for($j=0;$j<$fnum;$j++) $rows[$mod_id][mysql_field_name($res,$j)]=mysql_result($res,$i,$j);
 			}
 		}
+        //var_dump($rows);
 		return $rows;
 	}
 	

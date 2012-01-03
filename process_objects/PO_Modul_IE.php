@@ -53,12 +53,20 @@
                     die();
                 }
                 else{
+                    $aend_id=$modul_id;
+                    $a_list_unchecked=$MM->getModullist(false,'modul');                //Modul-Id zur Änderung bestimmen    
+                    $a_list=$this->UM->checkManagerResults($a_list_unchecked,"aenderung_id","Änderungsliste");
+                    foreach($a_list as $var){                              
+                            if ( $aend_id==$var['aenderung_id']){
+                                $modul_id=$var['aenderung_mid'];
+                            }
+                    }
                     $re=$MM->getModuldetails(false,'modul',$modul_id);
-                    //$result=$this->UM->checkManagerResults($re,"aenderung_id","Änderungsdetailabfrage");
-                    $result=$re[$modul_id];
+                    $res=$this->UM->checkManagerResults($re,"aenderung_id","Änderungsdetailabfrage");
+                    $result=$res[$aend_id];
                     $lehrende_unchecked = $PM->getLehrende();
                     $lehrende = $this->UM->checkManagerResults($lehrende_unchecked,"lehrende_id","Lehrendeabfrage");
-                    $this->UM->VisualObject->showChangeDetails($result,$lehrende);
+                    $this->UM->VisualObject->showChangeDetails($modul_id,$result,$lehrende);
                     die();                    
                 }
             }
