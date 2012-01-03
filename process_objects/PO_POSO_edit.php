@@ -87,6 +87,19 @@
           include_once("pdf/pdf_create.php");
           $pdfc = new PDFCreator($this->UM);
           
+          if($descriptions) {
+			  foreach($descriptions as $key => $var) {
+				foreach($var as $key2 => $var2) {
+					if(!is_array($var2)) {
+						$descriptions[$key][$key2] = utf8_encode($var2);
+					}
+				}
+			  }
+		  } else {
+		  	$this->UM->trigger_error(5, "", true, true);
+		  }
+          		
+          
           $sgtyp_unch = $SG->getSGTypForID($sg_id);
 	      $sgtyp = $this->UM->checkManagerResults($sgtyp_unch, "sg_id", "Studiengangtyps");
     	  $sgtyp = $sgtyp[$sg_id]["sg_typ"];
@@ -134,8 +147,6 @@
       	if(!$temp_exists) $this->UM->trigger_error(5,"",true, true);
       	
       	$path = $this->UM->getPOSOTemplatePath($type);
-      	
-      	
       	
       	$content = utf8_decode(file_get_contents($path));
       	$this->UM->VisualObject->showEditTemplate($type, $content);
