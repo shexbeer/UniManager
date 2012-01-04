@@ -103,7 +103,8 @@ class UniManager
 	}
 	function trigger_error($code, $extra_infos = '', $showHeaders = true, $showFooters = true)
 	{
-		$error_codes = array("0" => "Sie sind nicht/nicht mehr eingeloggt!",
+		$error_codes = array(
+			"0" => "Sie sind nicht/nicht mehr eingeloggt!",
 			"1" => "Unvollstaendige GET/POST Uebergabe",
 			"2" => "Falscher Benutzername oder Passwort",
 			"3" => "Fehler beim Abfragen aus der Datenbank",
@@ -311,7 +312,7 @@ class UniManager
 		switch($type) {
 			case "Bachelor": include($this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_bachelor_template.php"); break;
 			case "Master": include($this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_master_template.php"); break;
-			case "Diplom": include($this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_bachelor_template.php"); break;
+			case "Diplom": include($this->cwd["Path"] . template_dir . poso_templates_dir . "POSO_diplom_template.php"); break;
 			default: return false; break;
 		}
 		return $descriptions;

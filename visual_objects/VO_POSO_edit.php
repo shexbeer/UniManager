@@ -51,9 +51,13 @@
       * @param bool $result liefert das Ergebnis der vorangegangenen Aenderung der PO und SO
       * @param mixed $modullist Array eine Liste aller existierender Module
       */
-      function showModullistEditor($result,$modullist)
+      function showModullistEditor($sg,$modullist)
       {
-          
+           $this->UM->showfooter();
+          $this->UM->showheader($this->UM->seite);
+          $this->UM->tpl->assign("modullist",$modullist);
+          $this->UM->tpl->assign("sg",$sg);
+          $this->UM->tpl->display("POSO_edit_Modullist.tpl", session_id());
       }
       function showEditTemplate($type,$content)
       {
@@ -62,6 +66,15 @@
           $this->UM->tpl->assign("content",$content);
           $this->UM->tpl->assign("type",$type);
           $this->UM->tpl->display("POSO_edit_editTemplate.tpl", session_id());      	
+      }
+      function showModullistResult($result, $sgdetail, $extra_message) 
+      {
+      	  $this->UM->showfooter();
+          $this->UM->showheader($this->UM->seite);
+          $this->UM->tpl->assign("sg",$sgdetail);
+          $this->UM->tpl->assign("result",$result);
+          $this->UM->tpl->assign("extra_msg",$extra_message);
+          $this->UM->tpl->display("POSO_edit_ModullistResult.tpl", session_id());      	
       }
       function showTemplateResult($result, $extra_message)
       {
