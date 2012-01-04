@@ -41,14 +41,14 @@
             $MM = new Modul_Management();
             $PM = new Person_Management();
             if (!$fixes && !$modul_status){
+                $lehrende_unchecked = $PM->getLehrende();
+                $lehrende = $this->UM->checkManagerResults($lehrende_unchecked,"lehrende_id","Lehrendeabfrage");
                 if ($typ){           //Check ob Modul oder Änderung
                     // Moduldetails zum speziellen Modul holen
                     $re = $MM->getModuldetails(true,"modul",$modul_id);
                     $result = $re[$modul_id];
                     $result["verantwortlicher"] = $res["vorname"]." ".$res["name"];
                     // Übergebe ausgabefertige Daten an VO
-                    $lehrende_unchecked = $PM->getLehrende();
-                    $lehrende = $this->UM->checkManagerResults($lehrende_unchecked,"lehrende_id","Lehrendeabfrage");
                     $this->UM->VisualObject->showModulDetails($result,$lehrende);
                     die();
                 }
@@ -64,9 +64,7 @@
                     $re=$MM->getModuldetails(false,'modul',$modul_id);
                     $res=$this->UM->checkManagerResults($re,"aenderung_id","Änderungsdetailabfrage");
                     $result=$res[$aend_id];
-                    $lehrende_unchecked = $PM->getLehrende();
-                    $lehrende = $this->UM->checkManagerResults($lehrende_unchecked,"lehrende_id","Lehrendeabfrage");
-                    $this->UM->VisualObject->showChangeDetails($modul_id,$result,$lehrende);
+                    $this->UM->VisualObject->showChangeDetails($result,$lehrende);
                     die();                    
                 }
             }

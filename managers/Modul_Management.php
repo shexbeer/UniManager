@@ -294,10 +294,12 @@ class Modul_Management{
 		}
         //var_dump($arr);
 		// Überprüfen ob Änderungseintrag zum Modul vorhanden Anlegen eines neuen wenn nicht;
-		$sql = "SELECT `aenderung_id` FROM `aenderungen` WHERE `aenderung_mid` = '".$id."';";
+		
+        $sql = "SELECT `aenderung_id` FROM `aenderungen` WHERE `aenderung_mid` = '".$id."';";
 		//echo $sql;
 		$res = mysql_query($sql);
 		$aenderung_id;
+        //echo $res;
 		if($res)
 		{
 			$aeID = mysql_fetch_row($res);
@@ -306,7 +308,7 @@ class Modul_Management{
 			{
 				$aenderung_id = $aeID[0];
 				$sql = "UPDATE `aenderungen` SET `aenderung_status`='".$status."' WHERE `aenderung_id`='".$aenderung_id."';";
-				echo $sql;
+				//echo $sql;
 				if( !mysql_query($sql) ) return false; //Statusupdate fehlgeschalgen 
 			}
 			else
@@ -329,14 +331,13 @@ class Modul_Management{
 		
 		}
 		else return false; // Fehler im query
-		
 		// Setzen der Änderungen im Änderungseintrag
-		if( count($arr)!=0 )
+        if( count($arr)!=0 )
 		{
 			$sql = "UPDATE `aenderungen` SET ";
 			$sql = $sql.join(",",$arr);
 			$sql = $sql." WHERE `aenderung_id`='".$aenderung_id."';";
-			//echo $sql;
+			echo $sql;
 			//return $sql;
 			if( !mysql_query($sql) )
 				return false; // Fehler beim Update

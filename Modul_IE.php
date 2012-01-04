@@ -52,7 +52,7 @@ if($_GET["changemodul"] &&  $_GET["forid"] && $_POST)
 if($_GET["changechange"] && $_GET["forid"] && $_POST)
 {
      $fixes['status']=$_POST["aenderung_status"];
-     $fixes['person_id']=$_POST["lehrende"];
+     $fixes['pid']=$_POST["lehrende"];
      $fixes['duration']=$_POST["aenderung_duration"];
      $fixes['qualifytarget']=$_POST["aenderung_qualifytarget"];
      $fixes['institut']=$_POST["aenderung_institut"];
