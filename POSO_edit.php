@@ -30,11 +30,11 @@ if($_GET["editPOSO"] && $_POST) {
 }
 
 if($_GET["editModulaufstellung"] && $_GET["forid"]) {
-	$UM->ProcessObject->editModulaufstellung();
+	$UM->ProcessObject->editModulaufstellung($_GET["forid"]);
 }
 
 if($_GET["editModulaufstellung"] && $_POST) {
-	$UM->ProcessObject->setModullisteForSG();
+	$UM->ProcessObject->setModulaufstellung($_POST["sg_id"], $_POST["sg_typ"], $_POST["modulaufstellung"], $_POST["modul_ps"]);
 }
 if($_GET["editTemplate"] && $_POST["type"] && $_POST) {
 	$UM->ProcessObject->setTemplate($_POST["type"], $_POST["content"]);

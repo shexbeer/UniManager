@@ -21,7 +21,7 @@ W&auml;hlen sie einen Studiengang aus. zu dem die Studien- und Pr&uuml;fungsordn
     <td>{$var.sg_status}</td>
     <td>{$var.sg_dekan}</td>
     <td>
-    	<input type="button" value="neues Modulhandbuch erstellen">
+    	<input type="button" value="neues Modulhandbuch erstellen" onClick="window.location='{$rootDir}POSO_edit.php?editModulaufstellung=yes&forid={$var.sg_id}'">
     </td>
     <td>
     	{if ($var.sg_typ=="Bachelor" && $posot.0 == true) || ($var.sg_typ=="Master" && $posot.1 == true) || ($var.sg_typ=="Diplom" && $posot.2 == true)}

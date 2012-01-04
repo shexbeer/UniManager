@@ -135,7 +135,7 @@ class PDFCreator
 	{
 		$this->UM = $UniManagerReference;
 	}
-	function Modulhandbuch($id, $display="true")
+	function Modulhandbuch($id, $display="true", $show="false")
 	{
 		$sg_id = $id;
 		
@@ -209,11 +209,12 @@ class PDFCreator
 			$pdf->Output();
 		} else {
 			$name = "Modul_".$sg_id.".pdf";
-			$dest = "../".PDF_Modulhandbuch_DIR;
+			if (is_dir("../".PDF_Modulhandbuch_DIR)) $dest = "../".PDF_Modulhandbuch_DIR;
+			if (is_dir(PDF_Modulhandbuch_DIR)) $dest = PDF_Modulhandbuch_DIR;
 		
 			
 			$pdf->Output($dest.$name, "F");
-			header("Location: " . $UM->cwd["rootDir"] . $dest . $name . "?time=".time());
+			if($show=="true") header("Location: " . $UM->cwd["rootDir"] . $dest . $name . "?time=".time());
 		}
 	}
 	function POSO($id, $content, $display="true")
@@ -268,7 +269,7 @@ if($_GET["type"]=="Modulhb" && $_GET["forid"]) // Erstelle eine Modulhandbuch PD
 	$pdfc = new PDFCreator($UM);
 	
 	if($_GET["toFile"]) {
-		$pdfc->Modulhandbuch($_GET["forid"], false);
+		$pdfc->Modulhandbuch($_GET["forid"], false, true);
 	} else {
 		$pdfc->Modulhandbuch($_GET["forid"]);
 	}
