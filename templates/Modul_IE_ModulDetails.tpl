@@ -65,11 +65,13 @@ Die Details zum selektierten Modul werden angezeigt.
             <td>
             {if $status!='Genehmigt'}
                 <select name="modul_status" size="1">
+                    <option {if $mod.modul_status == "Erstellt"} selected{/if} disabled="true">Erstellt </option>
                     <option {if $mod.modul_status == "Bearbeitung"}selected{/if}>Bearbeitung</option>
                     <option {if $mod.modul_status == "Genehmigt"} selected{/if}>Genehmigt</option>
                 </select>
             {else}
                     <select name="modul_status" size="1" disabled="true">
+                    <option {if $mod.modul_status == "Erstellt"} selected{/if} disabled="true">Erstellt </option> 
                     <option {if $mod.modul_status == "Bearbeitung"}selected{/if}>Bearbeitung</option>
                     <option {if $mod.modul_status == "Genehmigt"} selected{/if}>Genehmigt</option>
                 </select>
@@ -253,7 +255,7 @@ Die Details zum selektierten Modul werden angezeigt.
     <br>
     Bestehende Änderungseinträge werden beim Erstellen überschrieben!!
 </form>
-{include file="footer.tpl" title=foo}
+
 
 
 

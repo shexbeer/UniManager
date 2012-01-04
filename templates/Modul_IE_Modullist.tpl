@@ -1,7 +1,9 @@
 {include file="header.tpl" title=foo}
 
 Die Liste aller Module zu denen &Auml;nderungen vorgenommen werden k&ouml;nnen
-<br><br>
+<br>
+<a href="{$rootDir}Modul_IE.php?new=true"}>Neues Modul erstellen</a>
+<br>
 
 <table>
 <tr>
@@ -28,4 +30,4 @@ Die Liste aller Module zu denen &Auml;nderungen vorgenommen werden k&ouml;nnen
 <br><br>
 Bereits genehmigte Module können nur angezeigt werden.
 
-{include file="footer.tpl" title=foo}
+

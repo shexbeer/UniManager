@@ -197,4 +197,3 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
 
 
 
-{include file="footer.tpl" title=foo}

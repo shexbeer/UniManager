@@ -13,8 +13,27 @@ class VO_Modul_IE
 		$this->UM->showfooter();
 		$this->UM->showheader($this->UM->seite);
 		$this->UM->tpl->display("Modul_IE_Result.tpl", session_id());
-}
-	function showModulList($mDetails,$a_list)	
+    }
+    function showaddResult($result, $extra_message)
+    {
+        $this->UM->tpl->assign("result", $result);
+        $this->UM->tpl->assign("extra_msg", $extra_message);
+        $this->UM->showfooter();
+        $this->UM->showheader($this->UM->seite);
+        $this->UM->tpl->display("Modul_IE_addResult.tpl", session_id());
+    }
+	function showCreateModul($list,$error=false)
+    {
+        //var_dump($error);
+        $this->UM->tpl->assign("list",$list);
+        if (isset($error)){
+            $this->UM->tpl->assign("error",$error);
+        }
+        $this->UM->showfooter();
+        $this->UM->showheader($this->UM->seite);
+        $this->UM->tpl->display("Modul_IE_ShowCreateModul.tpl", session_id());
+    }
+    function showModulList($mDetails,$a_list)	
 	{
 		// Setze Variablen für Footer und Header
 		$this->UM->showfooter();

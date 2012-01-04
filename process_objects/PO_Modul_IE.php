@@ -98,13 +98,22 @@
             $this->UM->VisualObject->showResult($result); 
         }
 
- function showCreateModul()
+ function showCreateModul($error=false)
       {
           //Manager initialisieren
-          $SG= new Modul_Management();
           $PM= new Person_Management();
-          $this->UM->VisualObject->ShowCreateModul();                     
-      }
+          $lehrende_unchecked = $PM->getLehrende();
+          $lehrende = $this->UM->checkManagerResults($lehrende_unchecked,"lehrende_id","Lehrendeabfrage");
+          if ($error==false){
+                              $this->UM->VisualObject->ShowCreateModul($lehrende);                     
+                              }
+          else{
+                                $this->UM->VisualObject->ShowCreateModul($lehrende,$error);
+          }
+          
+          
+      }                    
+       
       
 function enterList($list)
       {
@@ -124,13 +133,17 @@ function enterList($list)
 	 
       }
 
-function addmodul($newmodul)
+function addmodul($modul_name,$pid)
 
  {
         $MM= new Modul_Management();
-        $p_id= (int)$newmodul["v_id"];
-	    $result = $MM->addModul($newmodul["modul_name"],$p_id,0);
-        $this->UM->VisualObject->showResultadd($result); 
+	    $result = $MM->addModul($modul_name,$pid);
+        if(!$result){
+            $this->UM->VisualObject->showaddResult($result,"Es trat ein Fehler bei der Modulerstellung auf!");
+        }
+        else{
+            $this->UM->VisualObject->showaddResult($result,"Die Modulerstellung verlief erfolgreich!");
+        } 
  }
 
 

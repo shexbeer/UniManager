@@ -17,6 +17,33 @@ if(!$_GET && !$_POST)
 	$UM->ProcessObject->initForm();
 }
 
+if($_GET["new"] && !$_POST)
+{
+    $UM->ProcessObject->showCreateModul();
+    die();    
+}
+
+if($_GET["new"] && $_POST)
+{
+    $count=0;
+    $error;
+    if($_POST["lehrende"]=="" || !$_POST["lehrende"]){
+        $error[$count]="Sie haben vergessen den Lehrenden auszuwählen!";
+        $count=$count+1;
+    } 
+    if($_POST["modul_name"]=="" || !$_POST["modul_name"]){
+        $error[$count]="Sie haben vergessen den Modulnamen anzugeben!";
+        $count=$count+1;
+    }
+    if($count!=0)
+    {
+       $UM->ProcessObject->showCreateModul($error);
+    }
+    else{
+       $UM->ProcessObject->addModul($_POST["modul_name"],$_POST["lehrende"]); 
+    }
+}
+
 if($_GET["change"]==false && $_GET["forid"] && !$_POST)
 {//Moduldetails anzeigen
     $UM->ProcessObject->changemodul($_GET["forid"],true);
