@@ -146,7 +146,13 @@ function addmodul($modul_name,$pid)
         } 
  }
 
-
+function deletemodul($modul_id)
+{
+        $MM=new Modul_Management();
+        $re = $MM->getModuldetails(true,"modul",$modul_id);
+        $result = $re[$modul_id];
+        $this->UM->VisualObject->showdelete($result);
+}
 
 }
 ?>

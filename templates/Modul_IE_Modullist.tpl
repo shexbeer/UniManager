@@ -24,6 +24,7 @@ Die Liste aller Module zu denen &Auml;nderungen vorgenommen werden k&ouml;nnen
               <a href="{$rootDir}Modul_IE.php?change=true&forid={$vari.aenderung_id}">&Aumlnderung bearbeiten</a></td>
         {/if}
 {/foreach}
+<td><a href="{$rootDir}Modul_IE.php?delete=true&forid={$var.modul_id}" style="color: red;font-weight: bold;">X</a></td>
 </tr>
 {/foreach}
 </table>

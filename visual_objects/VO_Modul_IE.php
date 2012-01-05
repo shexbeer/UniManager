@@ -61,5 +61,15 @@ class VO_Modul_IE
         $this->UM->tpl->assign("lehrendelist",$lehrendelist);
         $this->UM->tpl->display("Modul_IE_ChangeDetails.tpl", session_id());
     }
+    function showdelete($details)
+    {
+        $this->showfooter();
+        $this->UM->showheader($this->UM->seite);
+        $name=$details["modul_name"];
+        $id=$details["modul_id"];
+        $this->UM->tpl->assign("name",$name);
+        $this->UM->tpl->assign("id",$id);
+        $this->UM->tpl->display("Modul_IE_ShowDelete.tpl", session_id());        
+    }
 }
 ?>

@@ -172,12 +172,14 @@ class Modul_Management{
 			}
 		}			
 		$sql = "DELETE FROM `modul` WHERE `modul_id`='".$id."';";
+        $sql2 = "DELETE FROM `aenderungen` WHERE `aenderung_mid`='".$id."';";
 		if( !$res = mysql_query($sql) )
 		{
 			$arr[0]=false;
 			$arr[1]="FAILURE";
 			return $arr;
 		}
+        $res2 = mysql_query($sql2);
 		if( mysql_affected_rows()==0 )
 		{
 			$arr[0]=false;
