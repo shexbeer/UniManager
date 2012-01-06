@@ -158,7 +158,7 @@ class Modul_Management{
 	* @return mixed array[0] = bool true wenn gelöscht und false wenn nicht
 	  array[1] = string Grund für false
 	*/
-	function deleteModul( $id,$warning=true )
+	function deleteModul( $id,$extended,$warning=true )
 	{
 		if( $warning )
 		{
@@ -172,14 +172,17 @@ class Modul_Management{
 			}
 		}			
 		$sql = "DELETE FROM `modul` WHERE `modul_id`='".$id."';";
-        $sql2 = "DELETE FROM `aenderungen` WHERE `aenderung_mid`='".$id."';";
+        if($extended==true){
+            $sql2 = "DELETE FROM `aenderungen` WHERE `aenderung_mid`='".$id."';";
+            $res2 = mysql_query($sql2);
+        }
 		if( !$res = mysql_query($sql) )
 		{
 			$arr[0]=false;
 			$arr[1]="FAILURE";
 			return $arr;
 		}
-        $res2 = mysql_query($sql2);
+        
 		if( mysql_affected_rows()==0 )
 		{
 			$arr[0]=false;

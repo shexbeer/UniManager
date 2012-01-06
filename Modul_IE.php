@@ -57,6 +57,23 @@ if($_GET["change"] && $_GET["forid"] && !$_POST)
     die();
     
 }
+//var_dump($_GET,$_POST);
+if($_GET["delete"] && $_GET["forid]"] && !$_POST)
+{
+    if ($_POST["a_id"]){
+        $UM->ProcessObject->deletemodul($_GET["forid"],true);
+    }
+    else{
+       $UM->ProcessObject->deletemodul($_GET["forid"],false);
+    }
+    die();
+}
+
+if($_GET["delete"] && $_GET["forid"] && $_POST)
+{
+    
+}
+
 
 if($_GET["changemodul"]  &&  $_GET["forid"] && $_POST)
 {
@@ -75,7 +92,6 @@ if($_GET["changemodul"]  &&  $_GET["forid"] && $_POST)
      $fixes['effort']=$_POST["modul_effort"];
      $UM->ProcessObject->changemodul($_GET["forid"],true,$_POST["modul_status"],$fixes);
 }
-
 if($_GET["changechange"]  && $_GET["forid"] && $_POST)
 {
      $fixes['status']=$_POST["aenderung_status"];
@@ -95,14 +111,5 @@ if($_GET["changechange"]  && $_GET["forid"] && $_POST)
      $UM->ProcessObject->changemodul($_GET["forid"],false,$_POST["aenderung_status"],$fixes);
 }
 
-if($_GET["delete"] && $_GET["forid]"] && !$_POST)
-{
-    $UM->ProcessObject->deletemodul($_GET["forid"]);
-    die();
-}
-
-if($_GET["delete"] && $_GET["forid"] && $_POST)
-{
-}
 
 ?>

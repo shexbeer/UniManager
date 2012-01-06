@@ -15,6 +15,11 @@
             <td align="right">
                 Modulname: <input name="modul_name" type="text" size="30" maxlength="30" value="{$name}" disabled="true">
             </td>
+            {if $aid}
+            Die mit diesem Modul verknüpften &Aumlndernungen werden automatisch mitgelöscht!!!<br>
+            <td align="right">
+                &Aumlnderungs-ID: <input name="a_id" type="text" size="30" maxlength="30" value="{$aid}" disabled="true">
+            </td>
                 
 </tr>
 <br>

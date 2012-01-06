@@ -146,13 +146,21 @@ function addmodul($modul_name,$pid)
         } 
  }
 
-function deletemodul($modul_id)
+function deletemodul($modul_id,$extended)
 {
+        echo(test);
         $MM=new Modul_Management();
         $re = $MM->getModuldetails(true,"modul",$modul_id);
         $result = $re[$modul_id];
-        $this->UM->VisualObject->showdelete($result);
+        if ($extended==true){
+            $re2=$MM->getModuldetails(false,'modul',$modul_id);
+            $res2=$this->UM->checkManagerResults($re,"aenderung_id","Änderungsdetailabfrage");
+            $result2=$res[$aend_id];
+            $this->UM->VisualObject->showdelete($result,false);
+        }
+        else{
+            $this->UM->VisualObject->showdelete($result,false); 
+        }
 }
-
 }
 ?>
