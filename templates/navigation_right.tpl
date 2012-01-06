@@ -15,7 +15,7 @@
 	<a href='{$rootDir}SG_edit.php'>Studiengangmanagement</a> <br>
 {/if}
 {if $user_roles.fakultaetsrat || $user_roles.studiendekan || $user_roles.lehrende}
-	<a href='{$rootDir}Modul_IE.php' style="color: red;">Modulinhalte erstellen (Sebastian)</a> <br>
+	<a href='{$rootDir}Modul_IE.php'>Modulinhalte erstellen</a> <br>
 {/if}
 {if $user_roles.studiendekan}
 	<a href='{$rootDir}POSO_edit.php'>PO/SO editieren</a> <br>
