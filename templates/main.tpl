@@ -13,7 +13,7 @@
 </table>
 -->
 <br><br>
-<h2><center>Willkommen Professor Jasper</center></h2>
+<h2><center>Willkommen {$user_vorname} {$user_nachname}</center></h2>
 <br><br>
 <table width="400" border="0" cellspacing="1" cellpadding="3" align="center">
 <tr>
