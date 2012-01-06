@@ -1,12 +1,14 @@
 <?php
-if ($_GET['page'] == 'about')
-{
-	echo "<h1>Impressum</h1>";
-	echo "Christian Seidel<br>";
-	echo "Daniel Rzehak<br>";
-	echo "Sebastian Gasch<br>";
-	echo "Fei Wang";
-	die();
+if ($_GET){
+    if ($_GET['page'] == 'about')
+    {
+	    echo "<h1>Impressum</h1>";
+	    echo "Christian Seidel<br>";
+	    echo "Daniel Rzehak<br>";
+	    echo "Sebastian Gasch<br>";
+	    echo "Fei Wang";
+	    die();
+    }
 }
 
 ?>

@@ -339,7 +339,7 @@ class Modul_Management{
 			$sql = "UPDATE `aenderungen` SET ";
 			$sql = $sql.join(",",$arr);
 			$sql = $sql." WHERE `aenderung_id`='".$aenderung_id."';";
-			echo $sql;
+			//echo $sql;
 			//return $sql;
 			if( !mysql_query($sql) )
 				return false; // Fehler beim Update
