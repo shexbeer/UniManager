@@ -22,6 +22,14 @@ class VO_Modul_IE
         $this->UM->showheader($this->UM->seite);
         $this->UM->tpl->display("Modul_IE_addResult.tpl", session_id());
     }
+    function showdelResult($result, $extra_message)
+    {
+        $this->UM->tpl->assign("result", $result);
+        $this->UM->tpl->assign("extra_msg", $extra_message);
+        $this->UM->showfooter();
+        $this->UM->showheader($this->UM->seite);
+        $this->UM->tpl->display("Modul_IE_delResult.tpl", session_id());
+    }
 	function showCreateModul($list,$error=false)
     {
         //var_dump($error);
@@ -63,11 +71,13 @@ class VO_Modul_IE
     }
     function showdelete($details,$changed)
     {
-        $this->showfooter();
+        $this->UM->showfooter();
         $this->UM->showheader($this->UM->seite);
         $this->UM->tpl->assign("name",$details["modul_name"]);
         $this->UM->tpl->assign("id",$details["modul_id"]);
-        $this->UM->tpl->assign("aid",$changed["aenderung_id"]);
+        if ($changed){
+            $this->UM->tpl->assign("aid",$changed["aenderung_id"]); 
+        }
         $this->UM->tpl->display("Modul_IE_ShowDelete.tpl", session_id());        
     }
 }

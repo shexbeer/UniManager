@@ -43,7 +43,7 @@ if($_GET["new"] && $_POST)
        $UM->ProcessObject->addModul($_POST["modul_name"],$_POST["lehrende"]); 
     }
 }
-
+//var_dump($_POST); 
 if($_GET["change"]==false && $_GET["delete"]==false && $_GET["forid"] && !$_POST)
 {//Moduldetails anzeigen
     $UM->ProcessObject->changemodul($_GET["forid"],true);
@@ -58,9 +58,9 @@ if($_GET["change"] && $_GET["forid"] && !$_POST)
     
 }
 //var_dump($_GET,$_POST);
-if($_GET["delete"] && $_GET["forid]"] && !$_POST)
+if($_GET["delete"] && $_GET["forid"] && !$_POST)
 {
-    if ($_POST["a_id"]){
+    if ($_GET["extended"]=="true"){
         $UM->ProcessObject->deletemodul($_GET["forid"],true);
     }
     else{
@@ -71,7 +71,12 @@ if($_GET["delete"] && $_GET["forid]"] && !$_POST)
 
 if($_GET["delete"] && $_GET["forid"] && $_POST)
 {
-    
+    if ($_POST["extended"]){
+        $UM->ProcessObject->deletemodul($_GET["forid"],true,true);
+    }
+    else{
+        $UM->ProcessObject->deletemodul($_GET["forid"],false,true);
+    }
 }
 
 

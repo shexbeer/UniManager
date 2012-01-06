@@ -255,7 +255,7 @@ Die Details zum selektierten Modul werden angezeigt.
     <br>
     Bestehende Änderungseinträge werden beim Erstellen überschrieben!!
 </form>
-
+{include file="footer.tpl" title=foo}
 
 
 

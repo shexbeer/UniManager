@@ -154,6 +154,7 @@ class Modul_Management{
 	* Löscht ein Modul nach ID ist warning gesetzt wird nur gelöscht wenn keine Fremdkeys mehr vorhanden
 	  ansonsten werden auch alle verknüpfungen gelöscht die mit dem modul zusammen hängen also VORSICHT!!!
 	* @param int $id Id des Moduls das gelöscht werden soll
+    * @param bool $extended gibt an ob eine mitzulöschende Änderung zum Modul existiert
 	* @param bool $warning ob gewarnt werden soll vor mitlöschen gebundener anderer Einträge
 	* @return mixed array[0] = bool true wenn gelöscht und false wenn nicht
 	  array[1] = string Grund für false

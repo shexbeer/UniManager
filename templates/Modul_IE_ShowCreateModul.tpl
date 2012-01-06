@@ -31,5 +31,5 @@
     <input type="reset" value=" Änderungen verwerfen">
     <input type="submit" value="Moduleintrag ändern" name="submit">
 </form>
-
+{include file="footer.tpl" title=foo}
    

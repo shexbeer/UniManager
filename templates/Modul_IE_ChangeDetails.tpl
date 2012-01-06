@@ -177,6 +177,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
     </table>
     <br>
 </form>
+{include file="footer.tpl" title=foo}
 
 
 

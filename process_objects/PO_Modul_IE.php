@@ -146,20 +146,30 @@ function addmodul($modul_name,$pid)
         } 
  }
 
-function deletemodul($modul_id,$extended)
+function deletemodul($modul_id,$extended,$start=false)
 {
-        echo(test);
         $MM=new Modul_Management();
-        $re = $MM->getModuldetails(true,"modul",$modul_id);
-        $result = $re[$modul_id];
-        if ($extended==true){
-            $re2=$MM->getModuldetails(false,'modul',$modul_id);
-            $res2=$this->UM->checkManagerResults($re,"aenderung_id","Änderungsdetailabfrage");
-            $result2=$res[$aend_id];
-            $this->UM->VisualObject->showdelete($result,false);
+        if ($start==false){
+            $re = $MM->getModuldetails(true,"modul",$modul_id);
+            $result = $re[$modul_id];
+            if ($extended==true){
+                $re2=$MM->getModuldetails(false,'modul',$modul_id);
+                $res2=$this->UM->checkManagerResults($re2,"aenderung_mid","Änderungsdetailabfrage");
+                $result2=$res2[$modul_id];
+                $this->UM->VisualObject->showdelete($result,$result2);
+            }
+            else{
+                $this->UM->VisualObject->showdelete($result,false); 
+            }
         }
         else{
-            $this->UM->VisualObject->showdelete($result,false); 
+            $result=$MM->deleteModul($modul_id,$extended);
+            if(!result){
+                      $this->UM->VisualObject->showdelResult($result,"Es trat ein Fehler beim L&oumlschen des Moduls auf");
+            }
+            else{
+                $this->UM->VisualObject->showdelResult($result,"Das Modul wurde erfolgreich entfernt!");
+            }
         }
 }
 }

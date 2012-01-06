@@ -34,9 +34,9 @@ Die Liste aller Module zu denen &Auml;nderungen vorgenommen werden k&ouml;nnen
         {/if}
 {/foreach}
 {if $check==true}
-<a href="{$rootDir}Modul_IE.php?delete=true&forid={$var.modul_id}&extendet=true" style="color: red;font-weight: bold;">X</a>
+<a href="{$rootDir}Modul_IE.php?delete=true&forid={$var.modul_id}&extended=true" style="color: red;font-weight: bold;">X</a>
 {else}
-        <a href="{$rootDir}Modul_IE.php?delete=true&forid={$var.modul_id}&extendet=false" style="color: red;font-weight: bold;">X</a>
+        <a href="{$rootDir}Modul_IE.php?delete=true&forid={$var.modul_id}&extended=false" style="color: red;font-weight: bold;">X</a>
 {/if}
 </td>
 </tr>
@@ -44,5 +44,6 @@ Die Liste aller Module zu denen &Auml;nderungen vorgenommen werden k&ouml;nnen
 </table>
 <br><br>
 Bereits genehmigte Module können nur angezeigt werden.
+{include file="footer.tpl" title=foo}
 
 
