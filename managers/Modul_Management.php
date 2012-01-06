@@ -277,7 +277,7 @@ class Modul_Management{
     */
    	function setModuldetails ($id, $moduldetails, $status='Bearbeitung')
 	{
-		$arr=array();
+        $arr=array();
 		//Prüfen ob modul_id vorhanden
 		if( isset($moduldetails['id']) ) 
 			unset($moduldetails['id']);
@@ -352,12 +352,15 @@ class Modul_Management{
 		
 		if($status=='Genehmigt')
 		{
-			$this->copyChangeToModul( $aenderung_id , 'Genehmigt' );
+			//$this->copyChangeToModul( $aenderung_id , 'Genehmigt' );
 			$sql = "DELETE FROM `aenderungen` WHERE `aenderung_mid`='".$id."';";
-			if( mysql_query($sql) )
-				return true;
-			else
-				return false; //alte Aenderung konnte nicht gelöscht werden
+            if( mysql_query($sql) )
+            {
+                 $sql2= "UPDATE `modul` SET `modul_status`='".$status."' WHERE `modul_id`='".$id."';";
+                 if (mysql_query($sql2)){
+                     return true;
+                 }
+            }
 		}
 		else
 		{
@@ -396,7 +399,8 @@ class Modul_Management{
 		$row = mysql_fetch_row($res);
 		if( !$row ) return false; //keine Änderung zum Kopieren vorhanden
 		$sql = "UPDATE `modul` SET `modul_person_id`='".$row[1]."', `modul_institut`='".$row[2]."', `modul_duration`='".$row[3]."', `modul_qualifytarget`='".$row[4]."', `modul_content`='".$row[5]."', `modul_literature`='".$row[6]."', `modul_teachform`='".$row[7]."', `modul_required`='".$row[8]."', `modul_usability`='".$row[9]."', `modul_frequency`='".$row[10]."', `modul_lp`='".$row[11]."', `modul_conditionforln`='".$row[12]."', `modul_effort`='".$row[13]."', `modul_note`='".$row[14]."', `modul_status`='".$status."', `modul_last_cha`=CURDATE() WHERE `modul_id`='".$row[0]."';";
-		if( !mysql_query($sql) ) return false; //Fehler beim updaten
+		echo($sql);
+        if( !mysql_query($sql) ) return false; //Fehler beim updaten
 		else 
         {
             $sql2 = "DELETE FROM `aenderungen` WHERE `aenderung_id`='".$changeId."';";
@@ -417,7 +421,7 @@ class Modul_Management{
 	function copyModulToChange($changedId, $modulId, $status)
 	{
 		$sql = "SELECT `modul_person_id`, `modul_institut`, `modul_duration`,  `modul_qualifytarget`, `modul_content`, `modul_literature`, `modul_teachform`, `modul_required`, `modul_usability`, `modul_frequency`, `modul_lp`, `modul_conditionforln`, `modul_effort`, `modul_note` FROM `modul` WHERE `modul_id`='".$modulId."';";
-		$res = mysql_query($sql);
+        $res = mysql_query($sql);
 		if( !$res ) return false; //Fehler beim lesen des Moduls
 		$row = mysql_fetch_row($res);
 		if( !$row ) return false; //keine Änderung zum Kopieren vorhanden

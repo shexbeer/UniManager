@@ -94,14 +94,27 @@
         {
             $MM = new Modul_Management();
             // Status und ModulID an Modulmanager schicken
-            $result=$MM->copyChangeToModul($modul_id,"Bearbeitung");
-            // Erfolg oder Misserfolg im VO melden
-            if ($result){
-                $this->UM->VisualObject->showResult($result,"Das Modul wurde aktualisiert!");
+            if(!$change){
+                $result=$MM->copyChangeToModul($modul_id,"Bearbeitung");
+                // Erfolg oder Misserfolg im VO melden
+                if ($result){
+                    $this->UM->VisualObject->showResult($result,"Das Modul wurde aktualisiert!");
+                }
+                else{
+                    $this->UM->VisualObject->showResult($result,"Fehler beim Aktualisieren des Moduls");
+                }
             }
             else{
-                $this->UM->VisualObject->showResult($result,"Fehler beim Aktualisieren des Moduls");
-            } 
+                $result=$MM->setModulStatus($modul_id,"Genehmigt");
+                if($result){
+                    $this->UM->VisualObject->showResult($result,"Das Modul wurde erfolgreich genehmigt!");
+                }
+                else{
+                    $this->UM->VisualObject->showResult($result,"Es ist ein Fehler beim Genehmigen aufgetreten");
+                }
+                
+            }
+                  
         }
 
  function showCreateModul($error=false)

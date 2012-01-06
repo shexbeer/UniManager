@@ -33,9 +33,9 @@ Die Details zum selektierten Modul werden angezeigt.
             {$counter = 1}
             {foreach from=$lehrendelist item=var}
                 {if $mod.modul_person_id == $var.lehrende_personenid}
-                    <input checked="checked" type="radio" name="lehrende" value="{$var.lehrende_id}"> {$var.person_vorname} {$var.person_name}
+                    <input checked="checked" type="radio" name="lehrende" value="{$var.lehrende_personenid}"> {$var.person_vorname} {$var.person_name}
                     {else}
-                        <input type="radio" name="lehrende" value="{$var.lehrende_id}"> {$var.person_vorname} {$var.person_name}
+                        <input type="radio" name="lehrende" value="{$var.lehrende_personenid}"> {$var.person_vorname} {$var.person_name}
                 {/if}
                 {if $counter % 4 == 0}
                     <br>
@@ -46,9 +46,9 @@ Die Details zum selektierten Modul werden angezeigt.
             {$counter = 1}
             {foreach from=$lehrendelist item=var}
                 {if $mod.modul_person_id == $var.lehrende_personenid}
-                    <input checked="checked" type="radio" name="lehrende" value="{$var.lehrende_id}" disabled="true"> {$var.person_vorname} {$var.person_name}
+                    <input checked="checked" type="radio" name="lehrende" value="{$var.lehrende_personenid}" disabled="true"> {$var.person_vorname} {$var.person_name}
                     {else}
-                        <input type="radio" name="lehrende" value="{$var.lehrende_id}" disabled="true"> {$var.person_vorname} {$var.person_name}
+                        <input type="radio" name="lehrende" value="{$var.lehrende_personenid}" disabled="true"> {$var.person_vorname} {$var.person_name}
                 {/if}
                 {if $counter % 4 == 0}
                     <br>
@@ -66,14 +66,14 @@ Die Details zum selektierten Modul werden angezeigt.
             {if $status!='Genehmigt'}
                 <select name="modul_status" size="1">
                     <option {if $mod.modul_status == "Erstellt"} selected{/if} disabled="true">Erstellt </option>
-                    <option {if $mod.modul_status == "Bearbeitung"}selected{/if}>Bearbeitung</option>
-                    <option {if $mod.modul_status == "Genehmigt"} selected{/if}>Genehmigt</option>
+                    <option {if $mod.modul_status == "Bearbeitung"}selected{/if} disabled="true">Bearbeitung</option>
+                    <option {if $mod.modul_status == "Genehmigt"} selected{/if} disabled="true">Genehmigt</option>
                 </select>
             {else}
                     <select name="modul_status" size="1" disabled="true">
                     <option {if $mod.modul_status == "Erstellt"} selected{/if} disabled="true">Erstellt </option> 
-                    <option {if $mod.modul_status == "Bearbeitung"}selected{/if}>Bearbeitung</option>
-                    <option {if $mod.modul_status == "Genehmigt"} selected{/if}>Genehmigt</option>
+                    <option {if $mod.modul_status == "Bearbeitung"}selected{/if} disabled="true">Bearbeitung</option>
+                    <option {if $mod.modul_status == "Genehmigt"} selected{/if} disabled="true">Genehmigt</option>
                 </select>
             {/if}        
             </td>

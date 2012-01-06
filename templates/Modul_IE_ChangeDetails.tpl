@@ -35,9 +35,9 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
             {$counter = 1}
             {foreach from=$lehrendelist item=var}
                 {if $list.aenderung_pid == $var.lehrende_personenid}
-                    <input checked="checked" type="radio" name="lehrende" value="{$var.lehrende_id}"> {$var.person_vorname} {$var.person_name}
+                    <input checked="checked" type="radio" name="lehrende" value="{$var.lehrende_personenid}"> {$var.person_vorname} {$var.person_name}
                     {else}
-                        <input type="radio" name="lehrende" value="{$var.lehrende_id}"> {$var.person_vorname} {$var.person_name}
+                        <input type="radio" name="lehrende" value="{$var.lehrende_personenid}"> {$var.person_vorname} {$var.person_name}
                 {/if}
                 {if $counter % 4 == 0}
                     <br>
