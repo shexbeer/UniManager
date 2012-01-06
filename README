@@ -7,3 +7,13 @@ Christian Seidel
 Daniel Rzehak
 Sebastian Gasch
 Fei Wang
+
+
+##Zur Installation
+
+-Es wird PHP 5 benötigt
+-die Ordner:
+templates_c/
+pdf/modul/
+pdf/poso/
+=>sollten vom Webbrowser beschreibbar sein

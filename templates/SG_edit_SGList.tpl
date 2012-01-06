@@ -2,7 +2,7 @@
 
 <b>Die Liste zeigt alle existierender Studiengaenge.</b><br><br>
 Einen Studiengang ausw&auml;hlen um ihn zu editieren, bzw. um ihn zu l&ouml;schen oder einen neuen anlegen:<br>
-	{if !$user_roles.rektorat}
+	{if $user_roles.fakultaetsrat || $user_roles.studiendekan}
 		<input type="button" value="Neuen Studiengang kreieren" onClick="window.location='{$rootDir}SG_edit.php?createnew=yes'">
 	{/if}
 	<!--<a href="SG_edit.php?createnew=yes">Neuen Studiengang kreieren</a>-->
