@@ -25,7 +25,7 @@ Die Liste aller Module zu denen &Auml;nderungen vorgenommen werden k&ouml;nnen
         {/if}
 {/foreach}
 
-<td>
+
 {$check=false}
 {foreach from=$a_list item=vari}
         
@@ -33,6 +33,16 @@ Die Liste aller Module zu denen &Auml;nderungen vorgenommen werden k&ouml;nnen
             {$check=true}  
         {/if}
 {/foreach}
+<td>
+   {if $check==true}
+   {foreach from=$a_list item=vari}
+        {if $vari.aenderung_mid==$var.modul_id}
+        <a href="{$rootDir}Modul_IE.php?apply=true&modul=false&forid={$vari.aenderung_id}">&Aumlnderung genehmigen</a>
+        {/if}
+{/foreach}
+   {/if} 
+</td>
+<td>
 {if $check==true}
 <a href="{$rootDir}Modul_IE.php?delete=true&forid={$var.modul_id}&extended=true" style="color: red;font-weight: bold;">X</a>
 {else}

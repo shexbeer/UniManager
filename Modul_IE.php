@@ -44,7 +44,7 @@ if($_GET["new"] && $_POST)
     }
 }
 //var_dump($_POST); 
-if($_GET["change"]==false && $_GET["delete"]==false && $_GET["forid"] && !$_POST)
+if($_GET["change"]==false && $_GET["delete"]==false && $_GET["apply"]==false && $_GET["forid"] && !$_POST)
 {//Moduldetails anzeigen
     $UM->ProcessObject->changemodul($_GET["forid"],true);
     die();
@@ -77,6 +77,11 @@ if($_GET["delete"] && $_GET["forid"] && $_POST)
     else{
         $UM->ProcessObject->deletemodul($_GET["forid"],false,true);
     }
+}
+
+if($_GET["apply"] && $_GET["modul"]=="false" && $_GET["forid"] && !$_POST)
+{
+    $UM->ProcessObject->setmodulStatus($_GET["forid"],false,"Genehmigt");
 }
 
 

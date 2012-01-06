@@ -87,15 +87,21 @@
         /**
         * Aendert den Status eines bestimmten Moduls
         * @param int $modul_id ID des Moduls dessen Status geaendert werden soll
+        * @param bool $change ob Änderung oder Modul
         * @param string $status zukuenftiger Status des Moduls laut Konventionen: Bearbeitet, Erstellt, Genehmigt
         */
-        function setmodulstatus($modul_id,$status)
+        function setmodulstatus($modul_id,$change,$status)
         {
             $MM = new Modul_Management();
             // Status und ModulID an Modulmanager schicken
-            $result = $MM->setModulStatus($modul_id,$status);
+            $result=$MM->copyChangeToModul($modul_id,"Bearbeitung");
             // Erfolg oder Misserfolg im VO melden
-            $this->UM->VisualObject->showResult($result); 
+            if ($result){
+                $this->UM->VisualObject->showResult($result,"Das Modul wurde aktualisiert!");
+            }
+            else{
+                $this->UM->VisualObject->showResult($result,"Fehler beim Aktualisieren des Moduls");
+            } 
         }
 
  function showCreateModul($error=false)

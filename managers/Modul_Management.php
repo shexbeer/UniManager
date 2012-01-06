@@ -323,7 +323,8 @@ class Modul_Management{
 				if( !$result['result'] )
 					return false; //DB-Fehler oder das Modul zur Id existiert nicht
 				$sql = "INSERT INTO  `UniManager`.`aenderungen` (`aenderung_mname` , `aenderung_mid`, `aenderung_last_cha`, `aenderung_status`, `aenderung_pid`) VALUES ('".$result[$id]['modul_name']."', '".$result[$id]['modul_id']."', NOW(), '".$status."', '".$result[$id]['modul_person_id']."');";
-				if(mysql_query($sql))
+				//echo($sql);
+                if(mysql_query($sql))
 				{
 					$sql = "SELECT LAST_INSERT_ID();"; //Aenderungs-ID für Rückgabe ermitteln
 					$res = mysql_query($sql);
@@ -388,14 +389,21 @@ class Modul_Management{
 	*/
 	function copyChangeToModul($changeId, $status)
 	{
-		$sql = "SELECT `aenderung_mid`, `aenderung_pid`, `aenderung_institut`, `aenderung_duration`,  `aenderung_qualifytarget`, `aenderung_content`, `aenderung_literature`, `aenderung_teachform`, `aenderung_required`, `aenderung_usability`, `aenderung_frequency`, `aenderung_lp`, `aenderung_conditionforln`, `aenderung_effort`, `aenderung_note` FROM `aenderungen` WHERE `aenderung_id`='".$changeId."';";
-		$res = mysql_query($sql);
+		$sql = "SELECT `aenderung_mid`, `aenderung_pid`, `aenderung_institut`, `aenderung_duration`,  `aenderung_qualifytarget`, `aenderung_content`, `aenderung_literature`, `aenderung_teachform`, `aenderung_required`, `aenderung_usability`, `aenderung_frequency`, `aenderung_lp`, `aenderung_conditionforln`, `aenderung_effort` FROM `aenderungen` WHERE `aenderung_id`='".$changeId."';";
+        //echo($sql);
+        $res = mysql_query($sql);
 		if( !$res ) return false; //Fehler beim lesen der Änderung
 		$row = mysql_fetch_row($res);
 		if( !$row ) return false; //keine Änderung zum Kopieren vorhanden
 		$sql = "UPDATE `modul` SET `modul_person_id`='".$row[1]."', `modul_institut`='".$row[2]."', `modul_duration`='".$row[3]."', `modul_qualifytarget`='".$row[4]."', `modul_content`='".$row[5]."', `modul_literature`='".$row[6]."', `modul_teachform`='".$row[7]."', `modul_required`='".$row[8]."', `modul_usability`='".$row[9]."', `modul_frequency`='".$row[10]."', `modul_lp`='".$row[11]."', `modul_conditionforln`='".$row[12]."', `modul_effort`='".$row[13]."', `modul_note`='".$row[14]."', `modul_status`='".$status."', `modul_last_cha`=CURDATE() WHERE `modul_id`='".$row[0]."';";
 		if( !mysql_query($sql) ) return false; //Fehler beim updaten
-		else return true;
+		else 
+        {
+            $sql2 = "DELETE FROM `aenderungen` WHERE `aenderung_id`='".$changeId."';";
+            //echo($sql2);
+            mysql_query($sql2);
+            return true; 
+        }
 	}
 	
 	/**
