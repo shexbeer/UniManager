@@ -13,7 +13,7 @@ Die Details zum selektierten Modul werden angezeigt.
                 Modulname:
             </td>
             <td>
-                <input name="modul_name" type="text" value="{$mod.modul_name}" size="30" maxlength="30" disabled="true" >
+                <input name="modul_name" type="text" value="{$mod.modul_name}" size="80" maxlength="45" disabled="true" >
             </td>
         </tr>
         <tr>
@@ -21,7 +21,7 @@ Die Details zum selektierten Modul werden angezeigt.
                 Modul-ID:
             </td>
             <td>
-                <input name="modul_id" type="text" value="{$mod.modul_id}" size="3" maxlength="3" disabled="true">
+                <input name="modul_id" type="text" value="{$mod.modul_id}" size="80" maxlength="3" disabled="true">
             </td>
         </tr>
         <tr>
@@ -84,7 +84,7 @@ Die Details zum selektierten Modul werden angezeigt.
                 Letzte &Aumlnderungen:
             </td>
             <td>
-                <input name="modul_last_cha" type="text" value="{$mod.modul_last_cha}" size="10" maxlength="25" disabled="true">
+                <input name="modul_last_cha" type="text" value="{$mod.modul_last_cha}" size="80" maxlength="25" disabled="true">
             </td>
         </tr>  
         <tr>
@@ -93,9 +93,9 @@ Die Details zum selektierten Modul werden angezeigt.
             </td>
             <td>
           {if $status!='Genehmigt'}      
-                <input name="modul_institut" type="text" value="{$mod.modul_institut}" size="30" maxlength="45">
+                <input name="modul_institut" type="text" value="{$mod.modul_institut}" size="80" maxlength="45">
           {else}
-              <input name="modul_institut" type="text" value="{$mod.modul_institut}" size="30" maxlength="45" disabled="true">
+              <input name="modul_institut" type="text" value="{$mod.modul_institut}" size="80" maxlength="45" disabled="true">
           {/if}             
           </td>
         </tr>
@@ -105,9 +105,9 @@ Die Details zum selektierten Modul werden angezeigt.
             </td>
             <td>
             {if $status!='Genehmigt'}
-                <input name="modul_duration" type="text" value="{$mod.modul_duration}" size="1" maxlength="1">
+                <input name="modul_duration" type="text" value="{$mod.modul_duration}" size="80" maxlength="1">
             {else}
-                 <input name="modul_duration" type="text" value="{$mod.modul_duration}" size="1" maxlength="1" disabled="true">    
+                 <input name="modul_duration" type="text" value="{$mod.modul_duration}" size="80" maxlength="1" disabled="true">    
             {/if} 
         </tr>
         <tr>
@@ -116,9 +116,9 @@ Die Details zum selektierten Modul werden angezeigt.
             </td>
             <td>
             {if $status!='Genehmigt'} 
-                <textarea cols="40" rows="5" name="modul_qualifytarget">{$mod.modul_qualifytarget}</textarea>
+                <textarea cols="80" rows="5" name="modul_qualifytarget">{$mod.modul_qualifytarget}</textarea>
             {else}
-                <textarea cols="40" rows="5" name="modul_qualifytarget" disabled="true">{$mod.modul_qualifytarget}</textarea>
+                <textarea cols="80" rows="5" name="modul_qualifytarget" disabled="true">{$mod.modul_qualifytarget}</textarea>
             {/if}
             </td>
         </tr>
@@ -140,9 +140,9 @@ Die Details zum selektierten Modul werden angezeigt.
             </td>
             <td>
             {if $status!='Genehmigt'} 
-                <textarea cols="40" rows="5" name="modul_literature">{$mod.modul_literature}</textarea>
+                <textarea cols="80" rows="5" name="modul_literature">{$mod.modul_literature}</textarea>
             {else}
-                 <textarea cols="40" rows="5" name="modul_literature" disabled="true">{$mod.modul_literature}</textarea>                                                                                             {/if}
+                 <textarea cols="80" rows="5" name="modul_literature" disabled="true">{$mod.modul_literature}</textarea>                                                                                             {/if}
             </td>
         </tr>
         <tr>
@@ -151,9 +151,9 @@ Die Details zum selektierten Modul werden angezeigt.
             </td>
             <td>
             {if $status!='Genehmigt'}
-                <textarea cols="30" rows="4" name="modul_teachform">{$mod.modul_teachform}</textarea>
+                <textarea cols="80" rows="4" name="modul_teachform">{$mod.modul_teachform}</textarea>
             {else}
-                  <textarea cols="30" rows="4" name="modul_teachform" disabled="true">{$mod.modul_teachform}</textarea>
+                  <textarea cols="80" rows="4" name="modul_teachform" disabled="true">{$mod.modul_teachform}</textarea>
             {/if}
             </td>
         </tr>
@@ -163,9 +163,9 @@ Die Details zum selektierten Modul werden angezeigt.
             </td>
             <td>
             {if $status!='Genehmigt'}
-                <textarea cols="40" rows="5" name="modul_required">{$mod.modul_required}</textarea>
+                <textarea cols="80" rows="5" name="modul_required">{$mod.modul_required}</textarea>
             {else}
-                 <textarea cols="40" rows="5" name="modul_required" disabled="true">{$mod.modul_required}</textarea>
+                 <textarea cols="80" rows="5" name="modul_required" disabled="true">{$mod.modul_required}</textarea>
             {/if}
             </td>
         </tr>
@@ -195,9 +195,9 @@ Die Details zum selektierten Modul werden angezeigt.
             </td>
             <td>
             {if $status!='Genehmigt'}
-                <input name="modul_usability" type="text" value="{$mod.modul_usability}" size="30" maxlength="200">
+                <input name="modul_usability" type="text" value="{$mod.modul_usability}" size="80" maxlength="200">
             {else}
-                <input name="modul_usability" type="text" value="{$mod.modul_usability}" size="30" maxlength="200" disabled="true"> 
+                <input name="modul_usability" type="text" value="{$mod.modul_usability}" size="80" maxlength="200" disabled="true"> 
             {/if}
             </td>
         </tr>
@@ -207,9 +207,9 @@ Die Details zum selektierten Modul werden angezeigt.
             </td>
             <td>
             {if $status!='Genehmigt'}
-                <input name="modul_lp" type="text" value="{$mod.modul_lp}" size="2" maxlength="2">
+                <input name="modul_lp" type="text" value="{$mod.modul_lp}" size="80" maxlength="2">
             {else}
-                 <input name="modul_lp" type="text" value="{$mod.modul_lp}" size="2" maxlength="2" disabled="true">
+                 <input name="modul_lp" type="text" value="{$mod.modul_lp}" size="80" maxlength="2" disabled="true">
             {/if}
             </td>
         </tr>
@@ -219,9 +219,9 @@ Die Details zum selektierten Modul werden angezeigt.
             </td>
             <td>
             {if $status!='Genehmigt'}
-                <textarea cols="30" rows="3" name="modul_conditionforln">{$mod.modul_conditionforln}</textarea>
+                <textarea cols="80" rows="3" name="modul_conditionforln">{$mod.modul_conditionforln}</textarea>
             {else}
-                <textarea cols="30" rows="3" name="modul_conditionforln" disabled="true">{$mod.modul_conditionforln}</textarea>
+                <textarea cols="80" rows="3" name="modul_conditionforln" disabled="true">{$mod.modul_conditionforln}</textarea>
             {/if}
             </td>
         </tr>
@@ -231,9 +231,9 @@ Die Details zum selektierten Modul werden angezeigt.
             </td>
             <td>
             {if $status!='Genehmigt'}
-                <textarea cols="50" rows="5" name="modul_effort">{$mod.modul_effort}</textarea>
+                <textarea cols="80" rows="5" name="modul_effort">{$mod.modul_effort}</textarea>
             {else}
-                 <textarea cols="50" rows="5" name="modul_effort" disabled="true">{$mod.modul_effort}</textarea>
+                 <textarea cols="80" rows="5" name="modul_effort" disabled="true">{$mod.modul_effort}</textarea>
             {/if} 
             </td>
         </tr>  
@@ -243,17 +243,16 @@ Die Details zum selektierten Modul werden angezeigt.
     <td align=left>
     {if $status!='Genehmigt'}
         <input type="reset" value=" Änderungen verwerfen">
-        <input type="submit" value="Moduleintrag ändern" name="submit">
+        <input type="submit" value="Änderungseintrag erstellen" name="submit">
         </form>
-    {else}
-        <input type="reset" value=" Änderungen verwerfen" disabled="true">
-        <input type="submit" value="Änderungseintrag erstellen" name="submit" disabled="true">
     {/if}
     </td>
 </tr>
     </table>
+    {if $status!='Genehmigt'}
     <br>
     Bestehende Änderungseinträge werden beim Erstellen überschrieben!!
+    {/if}
 </form>
 {include file="footer.tpl" title=foo}
 

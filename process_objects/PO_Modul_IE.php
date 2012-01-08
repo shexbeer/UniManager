@@ -182,7 +182,7 @@ function deletemodul($modul_id,$extended,$start=false)
             }
         }
         else{
-            $result=$MM->deleteModul($modul_id,$extended);
+            $result=$MM->deleteModul($modul_id,$extended,false);
             if(!result){
                       $this->UM->VisualObject->showdelResult($result,"Es trat ein Fehler beim L&oumlschen des Moduls auf");
             }

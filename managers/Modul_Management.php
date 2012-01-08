@@ -90,7 +90,6 @@ class Modul_Management{
 				case "modul":
                     if($id){
                         $sql = "SELECT ".$str." FROM ".$table." WHERE ".$attr[1]."=".$id;
-                        //var_dump($sql);
                     }
                     else{
                         $sql = "SELECT ".$str." FROM ".$table."";
@@ -135,7 +134,6 @@ class Modul_Management{
 	* @return  array ['result'] enth‰lt false bei DB-Fehler, array[modulID][attribut] das attribut heiﬂt gleich dem DB-fieldnamen
 	*/
 	private function buildResult($res,$key){
-	//var_dump($res);
 		if(!$res)$rows['result']=false;//Fehlererkennung
 		else{
 			$rows['result']=true;
@@ -146,7 +144,6 @@ class Modul_Management{
 					for($j=0;$j<$fnum;$j++) $rows[$mod_id][mysql_field_name($res,$j)]=mysql_result($res,$i,$j);
 			}
 		}
-        //var_dump($rows);
 		return $rows;
 	}
 	
@@ -298,23 +295,18 @@ class Modul_Management{
 		{	
 			$arr[]="`aenderung_".$k."`='".$v."'";
 		}
-        //var_dump($arr);
 		// ‹berpr¸fen ob ƒnderungseintrag zum Modul vorhanden Anlegen eines neuen wenn nicht;
 		
         $sql = "SELECT `aenderung_id` FROM `aenderungen` WHERE `aenderung_mid` = '".$id."';";
-		//echo $sql;
 		$res = mysql_query($sql);
 		$aenderung_id;
-        //echo $res;
 		if($res)
 		{
 			$aeID = mysql_fetch_row($res);
-            //var_dump($aeID);
 			if($aeID) 
 			{
 				$aenderung_id = $aeID[0];
 				$sql = "UPDATE `aenderungen` SET `aenderung_status`='".$status."' WHERE `aenderung_id`='".$aenderung_id."';";
-				//echo $sql;
 				if( !mysql_query($sql) ) return false; //Statusupdate fehlgeschalgen 
 			}
 			else
@@ -323,7 +315,6 @@ class Modul_Management{
 				if( !$result['result'] )
 					return false; //DB-Fehler oder das Modul zur Id existiert nicht
 				$sql = "INSERT INTO  `UniManager`.`aenderungen` (`aenderung_mname` , `aenderung_mid`, `aenderung_last_cha`, `aenderung_status`, `aenderung_pid`) VALUES ('".$result[$id]['modul_name']."', '".$result[$id]['modul_id']."', NOW(), '".$status."', '".$result[$id]['modul_person_id']."');";
-				//echo($sql);
                 if(mysql_query($sql))
 				{
 					$sql = "SELECT LAST_INSERT_ID();"; //Aenderungs-ID f¸r R¸ckgabe ermitteln
@@ -344,8 +335,6 @@ class Modul_Management{
 			$sql = "UPDATE `aenderungen` SET ";
 			$sql = $sql.join(",",$arr);
 			$sql = $sql." WHERE `aenderung_id`='".$aenderung_id."';";
-			//echo $sql;
-			//return $sql;
 			if( !mysql_query($sql) )
 				return false; // Fehler beim Update
 		}
@@ -393,13 +382,11 @@ class Modul_Management{
 	function copyChangeToModul($changeId, $status)
 	{
 		$sql = "SELECT `aenderung_mid`, `aenderung_pid`, `aenderung_institut`, `aenderung_duration`,  `aenderung_qualifytarget`, `aenderung_content`, `aenderung_literature`, `aenderung_teachform`, `aenderung_required`, `aenderung_usability`, `aenderung_frequency`, `aenderung_lp`, `aenderung_conditionforln`, `aenderung_effort` FROM `aenderungen` WHERE `aenderung_id`='".$changeId."';";
-        //echo($sql);
         $res = mysql_query($sql);
 		if( !$res ) return false; //Fehler beim lesen der ƒnderung
 		$row = mysql_fetch_row($res);
 		if( !$row ) return false; //keine ƒnderung zum Kopieren vorhanden
 		$sql = "UPDATE `modul` SET `modul_person_id`='".$row[1]."', `modul_institut`='".$row[2]."', `modul_duration`='".$row[3]."', `modul_qualifytarget`='".$row[4]."', `modul_content`='".$row[5]."', `modul_literature`='".$row[6]."', `modul_teachform`='".$row[7]."', `modul_required`='".$row[8]."', `modul_usability`='".$row[9]."', `modul_frequency`='".$row[10]."', `modul_lp`='".$row[11]."', `modul_conditionforln`='".$row[12]."', `modul_effort`='".$row[13]."', `modul_note`='".$row[14]."', `modul_status`='".$status."', `modul_last_cha`=CURDATE() WHERE `modul_id`='".$row[0]."';";
-		echo($sql);
         if( !mysql_query($sql) ) return false; //Fehler beim updaten
 		else 
         {
