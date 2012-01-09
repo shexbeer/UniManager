@@ -22,9 +22,9 @@ Die Liste aller Module zu denen &Auml;nderungen vorgenommen werden k&ouml;nnen
 <td style="text-align: center;">{$var.verantwortlicher}</td>
 <td style="text-align: center;">{$var.modul_status}</td>
 {if $var.modul_status=="Genehmigt"}
-<td style="text-align: center;"><input type="button" onclick="window.location ='{$rootDir}Modul_IE.php?forid={$var.modul_id}'" value="Modul anzeigen"></a>
+<td style="text-align: left;"><input type="button" onclick="window.location ='{$rootDir}Modul_IE.php?forid={$var.modul_id}'" value="Modul anzeigen" style="width: 100;"></a>
 {else}
-<td style="text-align: center;"><input type="button" onclick="window.location ='{$rootDir}Modul_IE.php?forid={$var.modul_id}'" value="Modul öffnen"></a>
+<td style="text-align: left;"><input type="button" onclick="window.location ='{$rootDir}Modul_IE.php?forid={$var.modul_id}'" value="Modul öffnen" style="width: 100;"></a>
 {/if}
 {foreach from=$a_list item=vari}
         {if $vari.aenderung_mid==$var.modul_id}
