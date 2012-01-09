@@ -2,17 +2,17 @@
 
 Die Liste aller Module zu denen &Auml;nderungen vorgenommen werden k&ouml;nnen
 <br>
-<a href="{$rootDir}Modul_IE.php?new=true"}>Neues Modul erstellen</a>
+<input type="button" onclick="window.location='{$rootDir}Modul_IE.php?new=true'" value="Modul erstellen" style="color: green;"></a>
 <br>
 
-<table border="1" cellpadding="0" cellspacing="4">
+<table border="1" cellpadding="1" rules="cols">
 <tr>
-<th>Modulname</th>
-<th>Verantwortlicher</th>
-<th>Modulstatus</th>
-<th>Modul modifizieren</th>
-<th>Bestätigungsaktionen</th>
-<th>Modul löschen</th>
+<th> Modulname </th>
+<th> Verantwortlicher </th>
+<th> Status </th>
+<th> Modul modifizieren </th>
+<th> Genehmigen </th>
+<th></th>
 
 </tr>
 
@@ -22,13 +22,13 @@ Die Liste aller Module zu denen &Auml;nderungen vorgenommen werden k&ouml;nnen
 <td style="text-align: center;">{$var.verantwortlicher}</td>
 <td style="text-align: center;">{$var.modul_status}</td>
 {if $var.modul_status=="Genehmigt"}
-<td style="text-align: center;"><a href="{$rootDir}Modul_IE.php?forid={$var.modul_id}">Modul anzeigen</a>
+<td style="text-align: center;"><input type="button" onclick="window.location ='{$rootDir}Modul_IE.php?forid={$var.modul_id}'" value="Modul anzeigen"></a>
 {else}
-<td style="text-align: center;"><a href="{$rootDir}Modul_IE.php?forid={$var.modul_id}">&Aumlnderung erstellen</a>
+<td style="text-align: center;"><input type="button" onclick="window.location ='{$rootDir}Modul_IE.php?forid={$var.modul_id}'" value="Modul öffnen"></a>
 {/if}
 {foreach from=$a_list item=vari}
         {if $vari.aenderung_mid==$var.modul_id}
-              <a href="{$rootDir}Modul_IE.php?change=true&forid={$vari.aenderung_id}">&Aumlnderung bearbeiten</a>
+              <input type="button" onclick="window.location ='{$rootDir}Modul_IE.php?change=true&forid={$vari.aenderung_id}'" value="Änderung bearbeiten"></a>
         {/if}
 {/foreach}
 </td>
@@ -43,12 +43,12 @@ Die Liste aller Module zu denen &Auml;nderungen vorgenommen werden k&ouml;nnen
    {if $check==true}
         {foreach from=$a_list item=vari}
             {if $vari.aenderung_mid==$var.modul_id}
-                <a href="{$rootDir}Modul_IE.php?apply=true&modul=false&forid={$vari.aenderung_id}">&Aumlnderung genehmigen</a>
+                <input type="button" onclick="window.location ='{$rootDir}Modul_IE.php?apply=true&modul=false&forid={$vari.aenderung_id}'" value="Änderung"></a>
             {/if}
         {/foreach}
    {/if}
    {if $var.modul_status=="Bearbeitung"}
-        <a href="{$rootDir}Modul_IE.php?apply=true&modul=true&forid={$var.modul_id}">Modul genehmigen</a>
+        <input type="button" onclick="window.location ='{$rootDir}Modul_IE.php?apply=true&modul=true&forid={$var.modul_id}'" value="Modul"></a>
    {/if}
 </td>
 <td style="text-align: center;">
@@ -63,7 +63,7 @@ Die Liste aller Module zu denen &Auml;nderungen vorgenommen werden k&ouml;nnen
 </table>
 <br><br>
 Genehmigte Änderungen werden automatisch in das zugehörige Modul kopiert.<br>
-Beim genehmigen eines Moduls werden nichtgenehmigte Änderungen automatisch gelöscht. >br>
+Beim genehmigen eines Moduls werden nichtgenehmigte Änderungen automatisch gelöscht. <br>
 Bereits genehmigte Module können nur angezeigt und nicht mehr verändert werden .<br>
 {include file="footer.tpl" title=foo}
 

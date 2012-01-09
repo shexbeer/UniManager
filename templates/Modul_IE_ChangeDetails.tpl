@@ -8,7 +8,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Änderungs-ID:
             </td>
             <td>
-                <input name="aenderung_id" type="text" value="{$list.aenderung_id}" size="3" maxlength="3" disabled="true">
+                <input name="aenderung_id" type="text" value="{$list.aenderung_id}" size="80" maxlength="3" disabled="true">
             </td>
         </tr>
         <tr>
@@ -16,7 +16,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Modulname:
             </td>
             <td>
-                <input name="aenderung_name" type="text" value="{$list.aenderung_mname}" size="30" maxlength="30" disabled="true" >
+                <input name="aenderung_name" type="text" value="{$list.aenderung_mname}" size="80" maxlength="45" disabled="true" >
             </td>
         </tr>
         <tr>
@@ -24,7 +24,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Modul-ID:
             </td>
             <td>
-                <input name="aenderung_id" type="text" value="{$list.aenderung_mid}" size="3" maxlength="3" disabled="true">
+                <input name="aenderung_id" type="text" value="{$list.aenderung_mid}" size="80" maxlength="3" disabled="true">
             </td>
         </tr>
         <tr>
@@ -63,7 +63,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Letzte &Aumlnderungen:
             </td>
             <td>
-                <input name="aenderung_last_cha" type="text" value="{$list.aenderung_last_cha}" size="10" maxlength="25" disabled="true">
+                <input name="aenderung_last_cha" type="text" value="{$list.aenderung_last_cha}" size="80" maxlength="25" disabled="true">
             </td>
         </tr>  
         <tr>
@@ -71,7 +71,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Institut:
             </td>
             <td>
-                <input name="aenderung_institut" type="text" value="{$list.aenderung_institut}" size="30" maxlength="45">
+                <input name="aenderung_institut" type="text" value="{$list.aenderung_institut}" size="80" maxlength="45">
           </td>
         </tr>
         <tr>
@@ -79,14 +79,14 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Dauer:
             </td>
             <td>
-                <input name="aenderung_duration" type="text" value="{$list.aenderung_duration}" size="1" maxlength="1">
+                <input name="aenderung_duration" type="text" value="{$list.aenderung_duration}" size="80" maxlength="1">
         </tr>
         <tr>
             <td align="right">
                 Qualifikationsziel:
             </td>
             <td>
-                <textarea cols="40" rows="5" name="aenderung_qualifytarget">{$list.aenderung_qualifytarget}</textarea>
+                <textarea cols="80" rows="5" name="aenderung_qualifytarget">{$list.aenderung_qualifytarget}</textarea>
             </td>
         </tr>
         <tr>
@@ -102,7 +102,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Fachliteratur:
             </td>
             <td>
-                <textarea cols="40" rows="5" name="aenderung_literature">{$list.aenderung_literature}</textarea>
+                <textarea cols="80" rows="5" name="aenderung_literature">{$list.aenderung_literature}</textarea>
             </td>
         </tr>
         <tr>
@@ -110,7 +110,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Lehrformen:
             </td>
             <td>
-                <textarea cols="30" rows="4" name="aenderung_teachform">{$list.aenderung_teachform}</textarea>
+                <textarea cols="80" rows="4" name="aenderung_teachform">{$list.aenderung_teachform}</textarea>
             </td>
         </tr>
         <tr>
@@ -118,7 +118,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Vorraussetzungen:
             </td>
             <td>
-                <textarea cols="40" rows="5" name="aenderung_required">{$list.aenderung_required}</textarea>
+                <textarea cols="80" rows="5" name="aenderung_required">{$list.aenderung_required}</textarea>
             </td>
         </tr>
         <tr>
@@ -138,7 +138,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Verwendbarkeit:
             </td>
             <td>
-                <input name="aenderung_usability" type="text" value="{$list.aenderung_usability}" size="30" maxlength="200">
+                <input name="aenderung_usability" type="text" value="{$list.aenderung_usability}" size="80" maxlength="200">
             </td>
         </tr>
         <tr>
@@ -146,7 +146,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Leistungspunkte:
             </td>
             <td>
-                <input name="aenderung_lp" type="text" value="{$list.aenderung_lp}" size="2" maxlength="2">
+                <input name="aenderung_lp" type="text" value="{$list.aenderung_lp}" size="80" maxlength="2">
             </td>
         </tr>
         <tr>
@@ -154,7 +154,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Vorraussetzung f&uuml;r Leistungsnachweis:
             </td>
             <td>
-                <textarea cols="30" rows="3" name="aenderung_conditionforln">{$list.aenderung_conditionforln}</textarea>
+                <textarea cols="80" rows="3" name="aenderung_conditionforln">{$list.aenderung_conditionforln}</textarea>
             </td>
         </tr>
         <tr>
@@ -162,7 +162,7 @@ Die Details zur selektierten &Aumlnderung werden angezeigt<br>
                 Arbeitsaufwand:
             </td>
             <td>
-                <textarea cols="50" rows="5" name="aenderung_effort">{$list.aenderung_effort}</textarea>
+                <textarea cols="80" rows="5" name="aenderung_effort">{$list.aenderung_effort}</textarea>
             </td>
         </tr>  
     </table>
