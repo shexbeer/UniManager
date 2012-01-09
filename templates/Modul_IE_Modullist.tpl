@@ -39,7 +39,7 @@ Die Liste aller Module zu denen &Auml;nderungen vorgenommen werden k&ouml;nnen
             {$check=true}  
         {/if}
 {/foreach}
-<td style="text-align: center;">
+<td style="text-align: right;">
    {if $check==true}
         {foreach from=$a_list item=vari}
             {if $vari.aenderung_mid==$var.modul_id}
