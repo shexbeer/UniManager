@@ -13,20 +13,16 @@
 </table>
 -->
 <br><br>
-<h2><center>Willkommen {$user_vorname} {$user_nachname}</center></h2>
+<h2><center>Willkommen {$user_vorname} {$user_nachname},<br>
+im UniManager (Alpha)
+</center></h2>
 <br><br>
-<table width="400" border="0" cellspacing="1" cellpadding="3" align="center">
+<table width="500" border="0" cellspacing="1" cellpadding="3" align="center">
 <tr>
-
-<td valign="top" width="50%" bgcolor="#F0F0F0">
-Inhalt
+<td>
+	Mit der linken Navigationsleiste k&ouml;nnen Sie, entsprechend Ihrer Berechtigung,<br>
+	verschiedene Funktionen ausf&uuml;hren.
 </td>
-
-<td valign="top" bgcolor="#F0F0F0">
-sehr guter Inhalt
-</td>
-
-
 </tr>
 </table>
 {include file="footer.tpl" title=foo}

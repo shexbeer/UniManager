@@ -154,6 +154,12 @@
     		// Modulliste Aktualisieren
     		$result2 = $SG->setModullisteForSG($sgid, $sgtyp, $new_mods);
     		
+    		// DEBUG last minute
+    		include_once("pdf/pdf_create.php");
+    		$pdfc = new PDFCreator($UM);
+    		$pdfc->Modulhandbuch($sgid, false, false);
+    		// DEBUG END
+    		
         	$this->UM->VisualObject->showResult($result&&$result2,"&Auml;nderung des Studiengangs nicht erfolgreich.");
       }
       /**
