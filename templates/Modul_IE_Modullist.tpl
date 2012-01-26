@@ -24,11 +24,11 @@ Die Liste aller Module zu denen &Auml;nderungen vorgenommen werden k&ouml;nnen
 {if $var.modul_status=="Genehmigt"}
 <td style="text-align: left;"><input type="button" onclick="window.location ='{$rootDir}Modul_IE.php?forid={$var.modul_id}'" value="Modul anzeigen" style="width: 100;"></a>
 {else}
-<td style="text-align: left;"><input type="button" onclick="window.location ='{$rootDir}Modul_IE.php?forid={$var.modul_id}'" value="Modul öffnen" style="width: 100;"></a>
+<td style="text-align: left;"><input type="button" onclick="window.location ='{$rootDir}Modul_IE.php?forid={$var.modul_id}'" value="Modul &Ouml;ffnen" style="width: 100;"></a>
 {/if}
 {foreach from=$a_list item=vari}
         {if $vari.aenderung_mid==$var.modul_id}
-              <input type="button" onclick="window.location ='{$rootDir}Modul_IE.php?change=true&forid={$vari.aenderung_id}'" value="Änderung bearbeiten"></a>
+              <input type="button" onclick="window.location ='{$rootDir}Modul_IE.php?change=true&forid={$vari.aenderung_id}'" value="&Auml;nderung bearbeiten"></a>
         {/if}
 {/foreach}
 </td>
@@ -43,7 +43,7 @@ Die Liste aller Module zu denen &Auml;nderungen vorgenommen werden k&ouml;nnen
    {if $check==true}
         {foreach from=$a_list item=vari}
             {if $vari.aenderung_mid==$var.modul_id}
-                <input type="button" onclick="window.location ='{$rootDir}Modul_IE.php?apply=true&modul=false&forid={$vari.aenderung_id}'" value="Änderung"></a>
+                <input type="button" onclick="window.location ='{$rootDir}Modul_IE.php?apply=true&modul=false&forid={$vari.aenderung_id}'" value="&Auml;nderung"></a>
             {/if}
         {/foreach}
    {/if}
@@ -62,9 +62,9 @@ Die Liste aller Module zu denen &Auml;nderungen vorgenommen werden k&ouml;nnen
 {/foreach}
 </table>
 <br><br>
-Genehmigte Änderungen werden automatisch in das zugehörige Modul kopiert.<br>
-Beim genehmigen eines Moduls werden nichtgenehmigte Änderungen automatisch gelöscht. <br>
-Bereits genehmigte Module können nur angezeigt und nicht mehr verändert werden .<br>
+Genehmigte &Auml;nderungen werden automatisch in das zugeh&ouml;rige Modul kopiert.<br>
+Beim genehmigen eines Moduls werden nichtgenehmigte &Auml;nderungen automatisch gel&ouml;scht. <br>
+Bereits genehmigte Module k&ouml;nnen nur angezeigt und nicht mehr ver&auml;ndert werden .<br>
 {include file="footer.tpl" title=foo}
 
 

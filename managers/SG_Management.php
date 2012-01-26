@@ -18,7 +18,7 @@ class SG_Management {
 		if(mysql_fetch_row($res))return false; //false falls der Namen schon vorhanden
 		//Einfügen einer Zeile mit dem neuen Studiengang
 		$sql = "INSERT INTO  `UniManager`.`studiengang` (`sg_name` ,`sg_dekan`, `sg_createdate`, `sg_status` , `sg_typ`) VALUES ('".$sgname."', '".$sgdekan."', CURDATE(), 'kreiert', '".$sgtyp."');";
-		echo $sql;
+		//echo $sql;
 		if(mysql_query($sql)){
 			$sql = "SELECT LAST_INSERT_ID();"; //SG-ID für Rückgabe ermitteln
 			$res = mysql_query($sql);
